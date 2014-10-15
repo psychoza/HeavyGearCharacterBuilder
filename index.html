@@ -1,6 +1,7 @@
 <!DOCTYPE>
 <html>
 <head>
+    <title>Heavy Gear Character Builder</title>
     <meta name="author" content="Jesse Hutchison" />
     <link rel="stylesheet" type="text/css" href="styles/guild.css">
     <script src="scripts/jquery.min.js"></script>
@@ -9,206 +10,67 @@
     <script src='scripts/character.js'></script>
 </head>
 <body>
-    <img src='images/logo.jpg' style='width: 50%;' />
+    <h1>---WORK IN PROGRESS---</h1>
+    <br/>
     <h1>Character Builder</h1>
     <a href='tests.html'>Test Runner</a>
-    <br />
-
-    <div data-bind="visible: window.localStorage !== undefined" style="display: none">
-        <button data-bind="click: saveCharacter">Save</button>
-        <button data-bind="click: loadCharacter">Load</button>
-        <button data-bind="click: exportCharacter">Export</button>
-    </div>
-    <br />
-    <input type="file" id="file" name="file" enctype="multipart/form-data" />
-
+    <br />    
+    <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
     <div id="descriptions">
         <h3>Character Details</h3>
-        Name: <input type="text" data-bind="value: characterName" /><br />
-        Class: <select data-bind="options: availableClasses, value: characterClass, optionsCaption: 'Choose...'"></select><br />
-        Alignment: <select data-bind="options: availableAlignments, value: characterAlignment, optionsCaption: 'Choose...'"></select><br />
-        Background: <input type="text" data-bind="value: characterBackground" /><br />
-        Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />
-        Level: <input type="text" data-bind="value: characterLevel, valueUpdate:'afterkeydown'" /><br />
+        Name: <input type="text" data-bind="value: characterName" /><br />        
+        Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
     </div>
     <br />
-    <div id="abilityScores">
-        <h3>Abilities</h3>
-        Strength: <input type="text" data-bind="value: abilityStrength, valueUpdate:'afterkeydown'" />
-        Modifier: <span data-bind="text: abilityStrengthModifier"></span><br />
-        Dexterity: <input type="text" data-bind="value: abilityDexterity, valueUpdate:'afterkeydown'" />
-        Modifier: <span data-bind="text: abilityDexterityModifier"></span><br />
-        Constitution: <input type="text" data-bind="value: abilityConstitution, valueUpdate:'afterkeydown'" />
-        Modifier: <span data-bind="text: abilityConstitutionModifier"></span><br />
-        Intelligence: <input type="text" data-bind="value: abilityIntelligence, valueUpdate:'afterkeydown'" />
-        Modifier: <span data-bind="text: abilityIntelligenceModifier"></span><br />
-        Wisdom: <input type="text" data-bind="value: abilityWisdom, valueUpdate:'afterkeydown'" />
-        Modifier: <span data-bind="text: abilityWisdomModifier"></span><br />
-        Charisma: <input type="text" data-bind="value: abilityCharisma, valueUpdate:'afterkeydown'" />
-        Modifier: <span data-bind="text: abilityCharismaModifier"></span><br />
-    </div>
-    <br />
-    <div id="skills">
-        <h3>Skills</h3>
-        <table>
+    <div id="attributesDiv">
+        <h3>Attributes</h3>
+        <table id="attributesTable">
             <tr>
-                <th>Proficient</th>
-                <th>Modifier Bonus</th>
-                <th>Skill</th>
-                <th>Ability Modifier</th>
+                <th>AGI</th>
+                <th>APP</th>
+                <th>BLD</th>
+                <th>CRE</th>
+                <th>FIT</th>
             </tr>
             <tr>
-                <td><input type="checkbox" data-bind='checked: skillAcrobatics.proficient' /></td>
-                <td><span data-bind="text: skillAcrobatics.bonus"></span></td>
-                <td>Acrobatics</td>
-                <td>Dexterity</td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
             </tr>
             <tr>
-                <td><input type="checkbox" data-bind='checked: skillAnimalHandling.proficient' /></td>
-                <td><span data-bind="text: skillAnimalHandling.bonus"></span></td>
-                <td>Animal Handling</td>
-                <td>Wisdom</td>
+                <th>INF</th>
+                <th>KNO</th>
+                <th>PER</th>
+                <th>PSY</th>
+                <th>WIL</th>
             </tr>
             <tr>
-                <td><input type="checkbox" data-bind='checked: skillArcana.proficient' /></td>
-                <td><span data-bind="text: skillArcana.bonus"></span></td>
-                <td>Arcana</td>
-                <td>Intelligence</td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
+                <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
             </tr>
             <tr>
-                <td><input type="checkbox" data-bind='checked: skillAthletics.proficient' /></td>
-                <td><span data-bind="text: skillAthletics.bonus"></span></td>
-                <td>Athletics</td>
-                <td>Strength</td>
+                <th>STR</th>
+                <th>HEA</th>
+                <th>STA</th>
+                <th>UD</th>
+                <th>AD</th>
             </tr>
             <tr>
-                <td><input type="checkbox" data-bind='checked: skillDeception.proficient' /></td>
-                <td><span data-bind="text: skillDeception.bonus"></span></td>
-                <td>Deception</td>
-                <td>Charisma</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillHistory.proficient' /></td>
-                <td><span data-bind="text: skillHistory.bonus"></span></td>
-                <td>History</td>
-                <td>Intelligence</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillInsight.proficient' /></td>
-                <td><span data-bind="text: skillInsight.bonus"></span></td>
-                <td>Insight</td>
-                <td>Wisdom</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillIntimidation.proficient' /></td>
-                <td><span data-bind="text: skillIntimidation.bonus"></span></td>
-                <td>Intimidation</td>
-                <td>Charisma</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillInvestigation.proficient' /></td>
-                <td><span data-bind="text: skillInvestigation.bonus"></span></td>
-                <td>Investigation </td>
-                <td>Intelligence</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillMedicine.proficient' /></td>
-                <td><span data-bind="text: skillMedicine.bonus"></span></td>
-                <td>Medicine</td>
-                <td>Wisdom</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillNature.proficient' /></td>
-                <td><span data-bind="text: skillNature.bonus"></span></td>
-                <td>Nature</td>
-                <td>Intelligence</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillPerception.proficient' /></td>
-                <td><span data-bind="text: skillPerception.bonus"></span></td>
-                <td>Perception</td>
-                <td>Wisdom</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillPerformance.proficient' /></td>
-                <td><span data-bind="text: skillPerformance.bonus"></span></td>
-                <td>Performance</td>
-                <td>Charisma</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillPersuasion.proficient' /></td>
-                <td><span data-bind="text: skillPersuasion.bonus"></span></td>
-                <td>Persuasion</td>
-                <td>Charisma</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillReligion.proficient' /></td>
-                <td><span data-bind="text: skillReligion.bonus"></span></td>
-                <td>Religion</td>
-                <td>Intelligence</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillSleightOfHand.proficient' /></td>
-                <td><span data-bind="text: skillSleightOfHand.bonus"></span></td>
-                <td>Sleight of Hand</td>
-                <td>Dexterity</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillStealth.proficient' /></td>
-                <td><span data-bind="text: skillStealth.bonus"></span></td>
-                <td>Stealth</td>
-                <td>Dexterity</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: skillSurvival.proficient' /></td>
-                <td><span data-bind="text: skillSurvival.bonus"></span></td>
-                <td>Survival</td>
-                <td>Wisdom</td>
+                <td><span data-bind="text: secondaryTraitStrength"></span></td>
+                <td><span data-bind="text: secondaryTraitHealth"></span></td>
+                <td><span data-bind="text: secondaryTraitStamina"></span></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </div>
     <br />
-    <div id="skills">
-        <h3>Saving Throws</h3>
-        <table>
-            <tr>
-                <th>Proficient</th>
-                <th>Modifier Bonus</th>
-                <th>Saving Throw</th>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: savingThrowStrength.proficient' /></td>
-                <td><span data-bind="text: savingThrowStrength.bonus"></span></td>
-                <td>Strength</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: savingThrowDexterity.proficient' /></td>
-                <td><span data-bind="text: savingThrowDexterity.bonus"></span></td>
-                <td>Dexterity</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: savingThrowConstitution.proficient' /></td>
-                <td><span data-bind="text: savingThrowConstitution.bonus"></span></td>
-                <td>Constitution</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: savingThrowIntelligence.proficient' /></td>
-                <td><span data-bind="text: savingThrowIntelligence.bonus"></span></td>
-                <td>Intelligence</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: savingThrowWisdom.proficient' /></td>
-                <td><span data-bind="text: savingThrowWisdom.bonus"></span></td>
-                <td>Wisdom</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" data-bind='checked: savingThrowCharisma.proficient' /></td>
-                <td><span data-bind="text: savingThrowCharisma.bonus"></span></td>
-                <td>Charisma</td>
-            </tr>
-        </table>
-    </div>
-
+    
     <script>
         var character = new window.CharacterBuilder.Character();
         ko.applyBindings(character, $('body').get(0));
