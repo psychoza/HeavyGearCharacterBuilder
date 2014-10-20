@@ -71,6 +71,12 @@
     </div>
     <br />
     
+    <!-- ko foreach: skills -->
+    <div>
+        Name: <span data-bind="text: name"></span> | Bonus: <span data-bind="text: bonus"></span> | Level: <span data-bind="text: level"></span> | 
+    </div>
+    <!-- /ko -->
+
     <script>
         var character = new window.CharacterBuilder.Character();
         ko.applyBindings(character, $('body').get(0));

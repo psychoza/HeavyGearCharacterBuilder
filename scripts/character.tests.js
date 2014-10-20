@@ -1,13 +1,13 @@
 window.CharacterBuilder = window.CharacterBuilder || {};
 
-describe('character', function () {
+describe('character - ', function () {
     var character = new window.CharacterBuilder.Character();
 
-	it('must exist', function(){
+	it('must exist - ', function(){
 		expect(character !== undefined).toBe(true);
 	});
     
-	describe('required properties', function(){
+	describe('required properties -', function(){
 		beforeEach(function() {
 	        character = new CharacterBuilder.Character();
 	    });
@@ -101,5 +101,39 @@ describe('character', function () {
 		    character.attributeWillpower(3);
 		    expect(character.secondaryTraitUnarmedDamage() == 35).toBe(true);
 		});*/
-	});	
+	});
+
+	describe('character skills', function() {
+		beforeEach(function() {
+	        character = new CharacterBuilder.Character();
+	    });
+
+		it('- must have skills', function(){
+			expect(character.skills !== undefined).toBe(true);
+        	expect(typeof (character.skills)).toEqual('function');
+        	expect(character.skills()[0] !== undefined).toBe(true);
+        	expect(character.skills()[0].name === "Athletics").toBe(true);
+        	expect(character.skills()[0].level() === 0).toBe(true);
+        	expect(character.skills()[0].bonus() === -1).toBe(true);
+		});		
+	});
+});
+
+describe('skillsObject', function () {
+    var character = new window.CharacterBuilder.Character();
+
+    describe('- skill object', function() {
+    	character.attributeAgility(2);
+        var randomSkill = new skillObject("skill", 0, character.attributeAgility);        
+        it('- must be a skillObject', function () {
+            expect(skillObject).toBeDefined();
+            expect(randomSkill.name).toBeDefined();
+            expect(randomSkill.name).toBe("skill");
+            expect(randomSkill.level).toBeDefined();
+            expect(randomSkill.level()).toBe(0);
+            expect(randomSkill.bonus).toBeDefined();
+            expect(randomSkill.bonus()).toBe(2);
+            expect(typeof (randomSkill)).toEqual('object');
+        });
+    });
 });
