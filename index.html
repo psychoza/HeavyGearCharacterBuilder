@@ -12,18 +12,21 @@
 <body>
     <h1>---WORK IN PROGRESS---</h1>
     <br/>
+
     <h1>Character Builder</h1>
     <a href='tests.html'>Test Runner</a>
-    <br />    
+    <br />   
+
     <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
     <div id="descriptions">
-        <h3>Character Details</h3>
+        <h2>Character Details</h2>
         Name: <input type="text" data-bind="value: characterName" /><br />        
         Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
     </div>
     <br />
+
     <div id="attributesDiv">
-        <h3>Attributes</h3>
+        <h2>Attributes</h2>
         <table id="attributesTable">
             <tr>
                 <th>AGI</th>
@@ -71,11 +74,41 @@
     </div>
     <br />
     
-    <!-- ko foreach: skills -->
-    <div>
-        Name: <span data-bind="text: name"></span> | Bonus: <span data-bind="text: bonus"></span> | Level: <span data-bind="text: level"></span> | 
+    <div id="skillsDiv">
+        <h2>Skills</h2>
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Complex
+                </th>
+                <th>
+                    Level
+                </th>
+                <th>
+                    +/-
+                </th>
+            </tr>
+            <!-- ko foreach: skills -->
+            <tr>
+                <td>
+                    <span data-bind="text: name"></span>
+                </td>
+                <td>
+                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                </td>
+                <td>
+                    <span data-bind="text: level"></span> <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill($data)"></img> <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill($data)"></img>
+                </td>
+                <td>
+                    <span data-bind="text: bonus"></span>
+                </td>
+            </tr>
+            <!-- /ko -->
+        </table>
     </div>
-    <!-- /ko -->
 
     <script>
         var character = new window.CharacterBuilder.Character();

@@ -112,10 +112,22 @@ describe('character - ', function () {
 			expect(character.skills !== undefined).toBe(true);
         	expect(typeof (character.skills)).toEqual('function');
         	expect(character.skills()[0] !== undefined).toBe(true);
-        	expect(character.skills()[0].name === "Athletics").toBe(true);
+        	expect(character.skills()[0].name === "Acrobatics").toBe(true);
         	expect(character.skills()[0].level() === 0).toBe(true);
         	expect(character.skills()[0].bonus() === -1).toBe(true);
-		});		
+		});
+
+		it('- must be able to modify skills', function(){
+			expect(character.incrementSkill !== undefined).toBe(true);
+        	expect(typeof (character.incrementSkill)).toEqual('function');
+        	expect(character.decrementSkill !== undefined).toBe(true);
+        	expect(typeof (character.decrementSkill)).toEqual('function');
+        	expect(character.skills()[0].level() === 0).toBe(true);
+        	character.incrementSkill(character.skills()[0]);
+        	expect(character.skills()[0].level() === 1).toBe(true);
+        	character.decrementSkill(character.skills()[0]);
+        	expect(character.skills()[0].level() === 0).toBe(true);
+		});
 	});
 });
 
@@ -124,7 +136,7 @@ describe('skillsObject', function () {
 
     describe('- skill object', function() {
     	character.attributeAgility(2);
-        var randomSkill = new skillObject("skill", 0, character.attributeAgility);        
+        var randomSkill = new skillObject("skill", 0, character.attributeAgility, false);
         it('- must be a skillObject', function () {
             expect(skillObject).toBeDefined();
             expect(randomSkill.name).toBeDefined();
@@ -134,6 +146,8 @@ describe('skillsObject', function () {
             expect(randomSkill.bonus).toBeDefined();
             expect(randomSkill.bonus()).toBe(2);
             expect(typeof (randomSkill)).toEqual('object');
+            expect(randomSkill.isComplex).toBeDefined();
+            expect(randomSkill.isComplex).toBe(false);
         });
     });
 });

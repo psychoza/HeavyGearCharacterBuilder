@@ -1,5 +1,5 @@
 span, td, th {
-    font-size: 0.6875em;
+    font-size: 0.9em;
 	color: #000000;
 }
 h1 {
@@ -11,7 +11,7 @@ h1 {
 }
 h2 {
 	color:#2E75B5;
-	text-align: center;
+	text-align: left;
 	font-size: 0.875em;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
@@ -34,5 +34,7 @@ table, th, td {
 }
 
 .attributeInput {
-    
+	font-size: 0.9em;
+	text-align: center;
+    width: 65px;
 }
