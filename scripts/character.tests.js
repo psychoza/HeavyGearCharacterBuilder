@@ -130,11 +130,13 @@ describe('character - ', function () {
 		});
 
 		it('- must be able to insert skills', function(){
-			
+			expect(character.insertSkill !== undefined).toBe(true);
+        	expect(typeof (character.insertSkill)).toEqual('function');        	
 		});
 
 		it('- must be able to remove skills', function(){
-			
+			expect(character.removeSkill !== undefined).toBe(true);
+        	expect(typeof (character.removeSkill)).toEqual('function');
 		});
 	});
 });

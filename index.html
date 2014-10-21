@@ -122,7 +122,7 @@
                     </select>
                 </td>
                 <td>
-                    <img src='images/plus.png'></img>
+                    <img src='images/plus.png' data-bind="click: function(){insertSkill();}"></img>
                 </td>
             </tr>
             <!-- ko foreach: skills -->
@@ -134,14 +134,16 @@
                     <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
                 </td>
                 <td>
-                    <span data-bind="text: level"></span> <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill($data)"></img> <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill($data)"></img>
+                    <span data-bind="text: level"></span>
+                    <img src='images/arrow_up.png' data-bind="click: function(){$root.incrementSkill($data);}"></img>
+                    <img src='images/arrow_down.png' data-bind="click: function(){$root.decrementSkill($data);}"></img>
                 </td>
                 <td>
                     <span data-bind="text: bonus"></span>
                 </td>
                 <td>
-                    <!--<img src='images/minus.png' data-bind="click: $root.removeSkill($data)"></img>-->
-                    <img src='images/minus.png'></img>
+                    <img src='images/minus.png' data-bind="click: function(){$root.removeSkill($data);}"></img>
+                    
                 </td>
             </tr>
             <!-- /ko -->
