@@ -128,6 +128,14 @@ describe('character - ', function () {
         	character.decrementSkill(character.skills()[0]);
         	expect(character.skills()[0].level() === 0).toBe(true);
 		});
+
+		it('- must be able to insert skills', function(){
+			
+		});
+
+		it('- must be able to remove skills', function(){
+			
+		});
 	});
 });
 

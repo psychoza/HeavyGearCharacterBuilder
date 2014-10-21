@@ -78,6 +78,7 @@
     
     <div id="skillsDiv">
         <h2>Skills</h2>
+
         <table>
             <tr>
                 <th>
@@ -92,6 +93,37 @@
                 <th>
                     +/-
                 </th>
+                <th>                    
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="inputSkillName" type="text" />
+                </td>
+                <td>
+                    <input id="inputComplex" type="radio" value"true" name="radioIsComplex">Yes</input>
+                    <input id="inputComplex" type="radio" value"false" name="radioIsComplex" checked>No</input>
+                </td>
+                <td>
+                    <input id="inputLevel" type="text" />
+                </td>
+                <td>
+                    <select id="inputAttribute">
+                        <option value="agility">Agility</option>
+                        <option value="appearance">Appearance</option>
+                        <option value="build">Build</option>
+                        <option value="creativity">Creativity</option>
+                        <option value="fitness">Fitness</option>
+                        <option value="influence">Influence</option>
+                        <option value="knowledge">Knowledge</option>
+                        <option value="perception">Perception</option>                        
+                        <option value="psyche">Psyche</option>
+                        <option value="willpower">Willpower</option>
+                    </select>
+                </td>
+                <td>
+                    <img src='images/plus.png'></img>
+                </td>
             </tr>
             <!-- ko foreach: skills -->
             <tr>
@@ -106,6 +138,10 @@
                 </td>
                 <td>
                     <span data-bind="text: bonus"></span>
+                </td>
+                <td>
+                    <!--<img src='images/minus.png' data-bind="click: $root.removeSkill($data)"></img>-->
+                    <img src='images/minus.png'></img>
                 </td>
             </tr>
             <!-- /ko -->
