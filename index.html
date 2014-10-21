@@ -1,13 +1,15 @@
 <!DOCTYPE>
 <html>
 <head>
-    <title>Heavy Gear Character Builder</title>
+    <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
     <meta name="author" content="Jesse Hutchison" />
     <link rel="stylesheet" type="text/css" href="styles/guild.css">
+    <link rel="icon" type="image/png" href="images/favicon.png" />
     <script src="scripts/jquery.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
     <script src='scripts/character.core.js'></script>
     <script src='scripts/character.js'></script>
+    <script src="scripts/title.js"></script>
 </head>
 <body>
     <h1>---WORK IN PROGRESS---</h1>
@@ -19,8 +21,13 @@
 
     <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
     <div id="descriptions">
+<<<<<<< HEAD
         <h2>Character Details</h2>
         Name: <input type="text" data-bind="value: characterName" /><br />        
+=======
+        <h3>Character Details</h3>
+        Name: <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
+>>>>>>> origin/master
         Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
     </div>
     <br />
@@ -111,8 +118,12 @@
     </div>
 
     <script>
-        var character = new window.CharacterBuilder.Character();
-        ko.applyBindings(character, $('body').get(0));
+        $(function(){
+            var character = new window.CharacterBuilder.Character();
+            ko.applyBindings(character, $('body').get(0));
+            Title.watchCharacterName(character.characterName);
+            ko.applyBindings(Title, $('#title').get(0));
+        });
     </script>
 </body>
 </html>
