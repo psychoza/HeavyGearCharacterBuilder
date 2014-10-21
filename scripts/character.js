@@ -96,7 +96,7 @@
         }
 
         self.insertSkill = function(){
-            var skillName = $("#inputSkillName")[0].value;            
+            var skillName = $("#inputSkillName")[0].value;
             var level = $("#inputLevel")[0].value;
             var attribute = self.attributeSelector($("#inputAttribute")[0].selectedOptions[0].value);
             var isComplex = $("#inputComplex")[0].checked;
@@ -110,7 +110,7 @@
                 self.skills.splice(i, 1);
             }            
         };
-        
+
         return this;
     };
 })(window.CharacterBuilder = window.CharacterBuilder || {});
