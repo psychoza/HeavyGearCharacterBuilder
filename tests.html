@@ -9,16 +9,19 @@
         <script type="text/javascript" src="lib/jasmine-2.0.0/boot.js"></script>
         <script type='text/javascript' src='scripts/knockout-3.1.0.js'></script>
 
-        <!-- include source files here... -->
+        <!-- globals -->
         <script src="scripts/global/redirect.js"></script>
-        <script type='text/javascript' src='scripts/character.core.js'></script>
-        <script type='text/javascript' src='scripts/character.js'></script>
-        <script src="scripts/title.js"></script>
+        <script src="scripts/global/prototypeString.js"></script>
+        <script src="scripts/global/prototypeArray.js"></script>
+
+        <!-- include source files here... -->
+        <script type='text/javascript' src='scripts/viewModels/character.js'></script>
+        <script src="scripts/viewModels/title.js"></script>
         <script src="scripts/viewModels/characterList.js"></script>
 
         <!-- include spec files here... -->
-        <script type='text/javascript' src='scripts/character.tests.js'></script>
-        <script src="scripts/title.tests.js"></script>
+        <script type='text/javascript' src='scripts/tests/character.tests.js'></script>
+        <script src="scripts/tests/title.tests.js"></script>
         <script src="scripts/tests/characterList.tests.js"></script>
     </head>
     <body>
