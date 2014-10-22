@@ -37,4 +37,5 @@ Icon
 .Trashes
 
 #JetBrains IDE
-.idea/*.*
+.idea
+.idea/*
