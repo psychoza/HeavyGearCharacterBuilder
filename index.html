@@ -3,6 +3,7 @@
 <head>
     <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
     <meta name="author" content="Jesse Hutchison" />
+    <link rel="stylesheet" type="text/css" href="styles/reset.css">
     <link rel="stylesheet" type="text/css" href="styles/guild.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
@@ -18,142 +19,143 @@
 
 </head>
 <body>
-    <h1>Heavy Gear</h1>    
-    <h1>Character Builder</h1>
-    <a href='tests.html'>Test Runner</a>
-    <br />   
+    <div class="rightBorder" id="rightBorder">
+        <h1>Heavy Gear</h1>    
+        <h1>Character Builder</h1>
+        <a href='tests.html'>Test Runner</a>
+        <br />   
 
-    <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
-    <div id="descriptions">        
-        <h2>Character Details</h2>
-        Name: <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
-        Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
+        <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
+        <div id="descriptions">        
+            <h2>Character Details</h2>
+            Name: <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
+            Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
+        </div>
+        <br />
+
+        <div id="attributesDiv">
+            <h2>Attributes</h2>
+            <table id="attributesTable">
+                <tr>
+                    <th>AGI</th>
+                    <th>APP</th>
+                    <th>BLD</th>
+                    <th>CRE</th>
+                    <th>FIT</th>
+                </tr>
+                <tr>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th>INF</th>
+                    <th>KNO</th>
+                    <th>PER</th>
+                    <th>PSY</th>
+                    <th>WIL</th>
+                </tr>
+                <tr>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
+                    <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th>STR</th>
+                    <th>HEA</th>
+                    <th>STA</th>
+                    <th>UD</th>
+                    <th>AD</th>
+                </tr>
+                <tr>
+                    <td><span data-bind="text: secondaryTraitStrength"></span></td>
+                    <td><span data-bind="text: secondaryTraitHealth"></span></td>
+                    <td><span data-bind="text: secondaryTraitStamina"></span></td>
+                    <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        
+        <div id="skillsDiv">
+            <h2>Skills</h2>
+
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Complex
+                    </th>
+                    <th>
+                        Level
+                    </th>
+                    <th>
+                        +/-
+                    </th>
+                    <th>                    
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="inputSkillName" type="text" />
+                    </td>
+                    <td>
+                        <input id="inputComplex" type="radio" value"true" name="radioIsComplex">Yes</input>
+                        <input id="inputComplex" type="radio" value"false" name="radioIsComplex" checked>No</input>
+                    </td>
+                    <td>
+                        <input id="inputLevel" type="text" />
+                    </td>
+                    <td>
+                        <select id="inputAttribute">
+                            <option value="agility">Agility</option>
+                            <option value="appearance">Appearance</option>
+                            <option value="build">Build</option>
+                            <option value="creativity">Creativity</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="influence">Influence</option>
+                            <option value="knowledge">Knowledge</option>
+                            <option value="perception">Perception</option>                        
+                            <option value="psyche">Psyche</option>
+                            <option value="willpower">Willpower</option>
+                        </select>
+                    </td>
+                    <td>
+                        <img src='images/plus.png' data-bind="click: function(){insertSkill();}"></img>
+                    </td>
+                </tr>
+                <!-- ko foreach: skills -->
+                <tr>
+                    <td>
+                        <span data-bind="text: name"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: level"></span>
+                        <img src='images/arrow_up.png' data-bind="click: function(){$root.incrementSkill($data);}"></img>
+                        <img src='images/arrow_down.png' data-bind="click: function(){$root.decrementSkill($data);}"></img>
+                    </td>
+                    <td>
+                        <span data-bind="text: bonus"></span>
+                    </td>
+                    <td>
+                        <img src='images/minus.png' data-bind="click: function(){$root.removeSkill($data);}"></img>
+                        
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </table>
+        </div>
     </div>
-    <br />
-
-    <div id="attributesDiv">
-        <h2>Attributes</h2>
-        <table id="attributesTable">
-            <tr>
-                <th>AGI</th>
-                <th>APP</th>
-                <th>BLD</th>
-                <th>CRE</th>
-                <th>FIT</th>
-            </tr>
-            <tr>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
-            </tr>
-            <tr>
-                <th>INF</th>
-                <th>KNO</th>
-                <th>PER</th>
-                <th>PSY</th>
-                <th>WIL</th>
-            </tr>
-            <tr>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
-                <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
-            </tr>
-            <tr>
-                <th>STR</th>
-                <th>HEA</th>
-                <th>STA</th>
-                <th>UD</th>
-                <th>AD</th>
-            </tr>
-            <tr>
-                <td><span data-bind="text: secondaryTraitStrength"></span></td>
-                <td><span data-bind="text: secondaryTraitHealth"></span></td>
-                <td><span data-bind="text: secondaryTraitStamina"></span></td>
-                <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-    <br />
-    
-    <div id="skillsDiv">
-        <h2>Skills</h2>
-
-        <table>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Complex
-                </th>
-                <th>
-                    Level
-                </th>
-                <th>
-                    +/-
-                </th>
-                <th>                    
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    <input id="inputSkillName" type="text" />
-                </td>
-                <td>
-                    <input id="inputComplex" type="radio" value"true" name="radioIsComplex">Yes</input>
-                    <input id="inputComplex" type="radio" value"false" name="radioIsComplex" checked>No</input>
-                </td>
-                <td>
-                    <input id="inputLevel" type="text" />
-                </td>
-                <td>
-                    <select id="inputAttribute">
-                        <option value="agility">Agility</option>
-                        <option value="appearance">Appearance</option>
-                        <option value="build">Build</option>
-                        <option value="creativity">Creativity</option>
-                        <option value="fitness">Fitness</option>
-                        <option value="influence">Influence</option>
-                        <option value="knowledge">Knowledge</option>
-                        <option value="perception">Perception</option>                        
-                        <option value="psyche">Psyche</option>
-                        <option value="willpower">Willpower</option>
-                    </select>
-                </td>
-                <td>
-                    <img src='images/plus.png' data-bind="click: function(){insertSkill();}"></img>
-                </td>
-            </tr>
-            <!-- ko foreach: skills -->
-            <tr>
-                <td>
-                    <span data-bind="text: name"></span>
-                </td>
-                <td>
-                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
-                </td>
-                <td>
-                    <span data-bind="text: level"></span>
-                    <img src='images/arrow_up.png' data-bind="click: function(){$root.incrementSkill($data);}"></img>
-                    <img src='images/arrow_down.png' data-bind="click: function(){$root.decrementSkill($data);}"></img>
-                </td>
-                <td>
-                    <span data-bind="text: bonus"></span>
-                </td>
-                <td>
-                    <img src='images/minus.png' data-bind="click: function(){$root.removeSkill($data);}"></img>
-                    
-                </td>
-            </tr>
-            <!-- /ko -->
-        </table>
-    </div>
-
     <script>
         $(function(){
             var character = new window.CharacterBuilder.Character();

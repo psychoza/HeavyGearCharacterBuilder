@@ -1,23 +1,37 @@
+body {
+	background-color: #21201E;
+	color: #FEEB0B;
+}
+.rightBorder {
+	background-image: url('../images/caution.png');
+    background-repeat: repeat-y;
+    background-position: right;    
+    height: 100%;    
+}
+
 span, td, th {
     font-size: 0.9em;
-	color: #000000;
+	color: #FEEB0B;
 }
 h1 {
 	color: #1E4E79;
 	text-align: center;
 	font-size: 1.5em;
 	font-family: gearhead;
-	background: -webkit-linear-gradient(#E1562D, #F7B717);
+	background: -webkit-linear-gradient(#E1562D, #FEEB0B);
   	-webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;
-}
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 }
 h2 {
 	color:#2E75B5;
 	text-align: left;
-	font-size: 0.875em;
+	font-size: 1em;
+	font-family: gearhead;
+	background: -webkit-linear-gradient(#E1562D, #FEEB0B);
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 }
@@ -29,11 +43,11 @@ h3 {
 	margin: 0 0 0 0;
 }
 th {
-	border-bottom: solid 1px black;
+	border-bottom: solid 1px #FEEB0B;;
 }
 table, th, td {
 	text-align: center;
-	border: 1px solid black;
+	border: 1px solid #FEEB0B;;
 	border-collapse: collapse;
 	padding: 0px 5px 0px 5px;
 }
