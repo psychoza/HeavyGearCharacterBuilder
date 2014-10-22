@@ -1,6 +1,8 @@
 (function(cb) {
     cb.Character = function() {
         var self = this;
+        self.skills = ko.observableArray();
+
         self.characterName = ko.observable('');        
         self.characterExperience = ko.observable(0);
         self.attributeAgility = ko.observable(-1);
@@ -30,8 +32,19 @@
                     return value;
             }            
         });
+        self.secondaryTraitUnarmedDamage = ko.computed({
+            read: function() {
+                var handToHandSkill = 0;//$.grep(self.skills, function(e){ return e.name.toLowerCase() === "hand-to-hand"; });
+                alert(handToHandSkill);
+                var value = (3 + 0 + parseInt(self.attributeBuild()) + parseInt(self.secondaryTraitStrength()));
 
-        self.skills = ko.observableArray();
+                if (value < 1)
+                    return 1;
+                else
+                    return value;
+            }            
+        });
+
         self.skills.push(new skillObject("Acrobatics", 0, self.attributeAgility, false));
         self.skills.push(new skillObject("Aircraft Pilot", 0, self.attributeAgility, true));
         self.skills.push(new skillObject("Animal Handling", 0, self.attributeCreativity, false));

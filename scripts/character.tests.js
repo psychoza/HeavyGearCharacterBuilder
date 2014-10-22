@@ -90,17 +90,18 @@ describe('character - ', function () {
 		    character.attributeWillpower(3);
 		    expect(character.secondaryTraitStamina() == 35).toBe(true);
 		});
-		/*it('must have secondaryTraitUnarmedDamage', function(){
+		it('must have secondaryTraitUnarmedDamage', function(){
 		    expect(character.secondaryTraitUnarmedDamage !== undefined).toBe(true);		    
-		    expect(character.secondaryTraitUnarmedDamage() === 15).toBe(true);
+		    expect(character.secondaryTraitUnarmedDamage() === 1).toBe(true);
 			character.attributeBuild(0);
-			character.attributeFitness(2);
-		    expect(character.secondaryTraitUnarmedDamage() == 25).toBe(true);
-		    character.attributePsyche(2);
-		    expect(character.secondaryTraitUnarmedDamage() == 30).toBe(true);
-		    character.attributeWillpower(3);
-		    expect(character.secondaryTraitUnarmedDamage() == 35).toBe(true);
-		});*/
+			character.attributeFitness(0);
+			expect(character.secondaryTraitUnarmedDamage() === 3).toBe(true);
+		    //expect(character.secondaryTraitUnarmedDamage() == 25).toBe(true);
+		    //character.attributePsyche(2);
+		    //expect(character.secondaryTraitUnarmedDamage() == 30).toBe(true);
+		    //character.attributeWillpower(3);
+		    //expect(character.secondaryTraitUnarmedDamage() == 35).toBe(true);
+		});
 	});
 
 	describe('character skills', function() {
