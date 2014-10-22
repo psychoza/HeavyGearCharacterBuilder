@@ -1,0 +1,36 @@
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+/*ul label {*/
+    /*display:inline-block;*/
+    /*width: 100px;*/
+    /*font-weight: bold;*/
+/*}*/
+
+ul li {
+    padding: 10px;
+}
+
+ul li:hover {
+    background-color: darkseagreen;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+#characterList {
+    border:3px solid;
+    border-color: darkslategray;
+    box-shadow: 5px 5px 5px #888888;
+    max-height: 300px;
+    max-width: 250px;
+    width: 250px;
+    overflow: auto;
+    margin: 10px;
+    float: left;
+    clear: left;
+}
