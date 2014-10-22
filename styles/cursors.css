@@ -1,0 +1,15 @@
+.cursorAlias{
+    cursor: alias;
+}
+
+.cursorNotAllowed{
+    cursor: not-allowed;
+}
+
+.cursorProgress{
+    cursor: progress;
+}
+
+.cursorCell{
+    cursor: progress;
+}

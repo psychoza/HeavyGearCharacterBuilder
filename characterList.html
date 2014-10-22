@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character List :: Heavy Gear Character Builder</title>
+    <link rel="stylesheet" type="text/css" href="styles/characterList.css">
+    <link rel="stylesheet" type="text/css" href="styles/cursors.css">
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <script src="scripts/jquery.min.js"></script>
+    <script src='scripts/knockout-3.1.0.js'></script>
+    <script src='scripts/global/redirect.js'></script>
+    <script src='scripts/character.core.js'></script>
+    <script src='scripts/character.js'></script>
+    <script src='scripts/models/character.js'></script>
+    <script src='scripts/viewModels/characterList.js'></script>
+</head>
+<body>
+<h1>Character List</h1>
+
+<div id="characterList">
+    <ul>
+        <!-- ko foreach: characters -->
+        <li data-bind="click: $root.showCharacter" class="cursorAlias">
+            <span data-bind="text: name"></span>
+        </li>
+        <!-- /ko -->
+        <li data-bind="click: createNewCharacter" class="cursorPointer">
+            <span>Create new character</span>
+        </li>
+    </ul>
+</div>
+
+
+<script>
+    $(function(){
+        ko.applyBindings(CharacterList, $('characterList').get(0));
+
+        //Dummy data
+        CharacterList.characters.push(new Models.Character({name:'Jack', experience:'10'}));
+        CharacterList.characters.push(new Models.Character({name:'Jill', experience:'20'}));
+    });
+</script>
+</body>
+</html>
