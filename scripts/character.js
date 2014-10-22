@@ -1,6 +1,8 @@
 (function(cb) {
     cb.Character = function() {
         var self = this;
+        self.skills = ko.observableArray();
+
         self.characterName = ko.observable('');        
         self.characterExperience = ko.observable(0);
         self.attributeAgility = ko.observable(-1);
@@ -30,26 +32,18 @@
                     return value;
             }            
         });
+        self.secondaryTraitUnarmedDamage = ko.computed({
+            read: function() {
+                var handToHandSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "hand-to-hand"; }).firstOrNull();
+                var handToHandSkillLevel = handToHandSkill === null ? 0 : parseInt(handToHandSkill.level());
+                var value = (3 + handToHandSkillLevel + parseInt(self.attributeBuild()) + parseInt(self.secondaryTraitStrength()));
 
-        self.skills = ko.observableArray();
-        self.skills.push(new skillObject("Acrobatics", 0, self.attributeAgility, false));
-        self.skills.push(new skillObject("Aircraft Pilot", 0, self.attributeAgility, true));
-        self.skills.push(new skillObject("Animal Handling", 0, self.attributeCreativity, false));
-        self.skills.push(new skillObject("Archery", 0, self.attributeAgility, false));
-        self.skills.push(new skillObject("Athletics", 0, self.attributeFitness, false));
-        self.skills.push(new skillObject("Bureaucracy", 0, self.attributeKnowledge, true));
-        self.skills.push(new skillObject("Business", 0, self.attributeKnowledge, true));
-        self.skills.push(new skillObject("Camouflage", 0, self.attributeCreativity, false));
-        self.skills.push(new skillObject("Combat Sense", 0, self.attributePerception, false));
-        self.skills.push(new skillObject("Communications", 0, self.attributeKnowledge, true));
-        self.skills.push(new skillObject("Computer", 0, self.attributeKnowledge, true));
-        self.skills.push(new skillObject("Cooking", 0, self.attributeCreativity, false));
-        self.skills.push(new skillObject("Craft (Specific)", 0, self.attributeCreativity, false));
-        self.skills.push(new skillObject("Dance", 0, self.attributeAgility, false));
-        self.skills.push(new skillObject("Demolition", 0, self.attributeKnowledge, true));
-        self.skills.push(new skillObject("Disguise", 0, self.attributeCreativity, false));
-        self.skills.push(new skillObject("Deodge", 0, self.attributeAgility, false));
-        self.skills.push(new skillObject("Small Arms", 0, self.attributeAgility, false));
+                if (value < 1)
+                    return 1;
+                else
+                    return value;
+            }            
+        });
 
         self.incrementSkill = function(incomingSkill){            
             incomingSkill.level(parseInt(incomingSkill.level()) + 1);

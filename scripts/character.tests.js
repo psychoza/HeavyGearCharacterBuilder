@@ -90,29 +90,28 @@ describe('character - ', function () {
 		    character.attributeWillpower(3);
 		    expect(character.secondaryTraitStamina() == 35).toBe(true);
 		});
-		/*it('must have secondaryTraitUnarmedDamage', function(){
+		it('must have secondaryTraitUnarmedDamage', function(){
 		    expect(character.secondaryTraitUnarmedDamage !== undefined).toBe(true);		    
-		    expect(character.secondaryTraitUnarmedDamage() === 15).toBe(true);
+		    expect(character.secondaryTraitUnarmedDamage() === 1).toBe(true);
 			character.attributeBuild(0);
-			character.attributeFitness(2);
-		    expect(character.secondaryTraitUnarmedDamage() == 25).toBe(true);
-		    character.attributePsyche(2);
-		    expect(character.secondaryTraitUnarmedDamage() == 30).toBe(true);
-		    character.attributeWillpower(3);
-		    expect(character.secondaryTraitUnarmedDamage() == 35).toBe(true);
-		});*/
+			character.attributeFitness(0);
+			expect(character.secondaryTraitUnarmedDamage() === 3).toBe(true);
+			character.skills.push(new skillObject("Hand-to-Hand", 2, self.attributeAgility, false));
+			expect(character.secondaryTraitUnarmedDamage() === 5).toBe(true);
+		});		
 	});
 
 	describe('character skills', function() {
 		beforeEach(function() {
 	        character = new CharacterBuilder.Character();
+	        character.skills.push(new skillObject("Hand-to-Hand", 0, character.attributeAgility, false));
 	    });
 
 		it('- must have skills', function(){
 			expect(character.skills !== undefined).toBe(true);
         	expect(typeof (character.skills)).toEqual('function');
         	expect(character.skills()[0] !== undefined).toBe(true);
-        	expect(character.skills()[0].name === "Acrobatics").toBe(true);
+        	expect(character.skills()[0].name === "Hand-to-Hand").toBe(true);
         	expect(character.skills()[0].level() === 0).toBe(true);
         	expect(character.skills()[0].bonus() === -1).toBe(true);
 		});
