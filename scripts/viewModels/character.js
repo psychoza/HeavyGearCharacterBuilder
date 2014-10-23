@@ -105,6 +105,19 @@
             }            
         };
 
+        self.saveToLocalStorage = function(){
+            var modelData = {
+                name: self.characterName(),
+                experience: self.characterExperience()
+                //profession: ?
+            };
+            var charactersRaw = window.localStorage.getItem(CharacterLocalStorage) || [];
+            if(!Array.isArray(charactersRaw))
+                charactersRaw = [];
+            charactersRaw.push( new Models.Character(modelData) );
+            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify(charactersRaw));
+        };
+
         return this;
     };
 })(window.CharacterBuilder = window.CharacterBuilder || {});

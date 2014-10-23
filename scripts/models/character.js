@@ -5,8 +5,9 @@ var Models = Models || {};
         var self = this;
         data=data||{};
 
-        self.name = ko.observable(data.name || '');
-        self.experience = ko.observable(data.experience || '0');
+        self.name = data.name || '';
+        self.experience = data.experience || '0';
+        self.profession = data.profession || '';
 
         return self;
     };

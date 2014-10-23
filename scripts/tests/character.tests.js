@@ -98,7 +98,10 @@ describe('character - ', function () {
 			expect(character.secondaryTraitUnarmedDamage() === 3).toBe(true);
 			character.skills.push(new skillObject("Hand-to-Hand", 2, self.attributeAgility, false));
 			expect(character.secondaryTraitUnarmedDamage() === 5).toBe(true);
-		});		
+		});
+        it('must have saveToLocalStorage function', function(){
+            expect(typeof(character.saveToLocalStorage)).toEqual("function");
+        });
 	});
 
 	describe('character skills', function() {
@@ -138,6 +141,23 @@ describe('character - ', function () {
         	expect(typeof (character.removeSkill)).toEqual('function');
 		});
 	});
+
+    describe('saveToLocalStorage - ', function(){
+        beforeEach(function(){character = new CharacterBuilder.Character(); });
+        it('can save to local storage', function(){
+            //Arrange
+            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify([]));
+            var model = new Models.Character({name: 'jim bob'});
+            character.characterName(model.name);
+
+            //Act
+            character.saveToLocalStorage();
+            var resultCharacter = JSON.parse(window.localStorage.getItem(CharacterLocalStorage))[0];
+
+            //Assert
+            expect(JSON.stringify(resultCharacter)).toEqual(JSON.stringify(model));
+        });
+    });
 });
 
 describe('skillsObject', function () {

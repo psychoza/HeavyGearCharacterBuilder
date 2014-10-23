@@ -18,6 +18,8 @@ ul li:hover {
     background-color: darkseagreen;
 }
 
+ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
+
 .cursorPointer {
     cursor: pointer;
 }
@@ -33,4 +35,16 @@ ul li:hover {
     margin: 10px;
     float: left;
     clear: left;
+}
+
+#characterView {
+    border:3px solid;
+    border-color: darkslategray;
+    box-shadow: 5px 5px 5px #888888;
+    max-width: 500px;
+    width: 500px;
+    overflow: auto;
+    margin: 10px;
+    float: left;
+    /*clear: right;*/
 }

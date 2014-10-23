@@ -9,6 +9,7 @@
     <script src="scripts/global/prototypeString.js"></script>
     <script src="scripts/global/prototypeArray.js"></script>
     <script src='scripts/global/redirect.js'></script>
+    <script src='scripts/global/config.js'></script>
     <!-- libraries -->
     <script src="scripts/jquery.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
@@ -25,24 +26,32 @@
 <div id="characterList">
     <ul>
         <!-- ko foreach: characters -->
-        <li data-bind="click: $root.showCharacter" class="cursorAlias">
-            <span data-bind="text: name"></span>
+        <li data-bind="click: $root.showCharacter">
+            <span class="cursorAlias expanded" data-bind="text: name"></span>
         </li>
         <!-- /ko -->
-        <li data-bind="click: createNewCharacter" class="cursorPointer">
-            <span>Create new character</span>
+        <li>
+        <!--<li data-bind="click: createNewCharacter" class="cursorPointer">-->
+            <a href="index.html" class="expanded">Create new character</a>
+            <!--<span>Create new character</span>-->
         </li>
     </ul>
+</div>
+
+<div id="characterView" data-bind="visible: isSelectedCharacterVisible()">
+    <div data-bind="with: selectedCharacter">
+        Name: <span data-bind="text: name"></span><br>
+        Profession: <span data-bind="text: profession"></span><br>
+        Experience: <span data-bind="text: experience"></span><br>
+    </div>
 </div>
 
 
 <script>
     $(function(){
-        ko.applyBindings(CharacterList, $('characterList').get(0));
-
-        //Dummy data
-        CharacterList.characters.push(new Models.Character({name:'Jack', experience:'10'}));
-        CharacterList.characters.push(new Models.Character({name:'Jill', experience:'20'}));
+        ko.applyBindings(CharacterList, $('#characterList').get(0));
+        ko.applyBindings(CharacterList, $('#characterView').get(0));
+        CharacterList.fetchCharacters();
     });
 </script>
 </body>

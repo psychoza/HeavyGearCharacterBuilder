@@ -10,9 +10,12 @@
     <!-- globals -->
     <script src="scripts/global/prototypeString.js"></script>
     <script src="scripts/global/prototypeArray.js"></script>
+    <script src="scripts/global/config.js"></script>
     <!-- libraries -->
     <script src="scripts/jquery.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
+    <!-- models -->
+    <script src='scripts/models/character.js'></script>
     <!-- viewModels -->
     <script src='scripts/viewModels/character.js'></script>
     <script src="scripts/viewModels/title.js"></script>
@@ -154,6 +157,13 @@
                 </tr>
                 <!-- /ko -->
             </table>
+        </div>
+        <br />
+
+        <div id="exportOptions">
+            <form>
+                <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
+            </form>
         </div>
     </div>
     <script>
