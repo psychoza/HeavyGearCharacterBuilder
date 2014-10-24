@@ -141,6 +141,10 @@
             var isComplex = $("#inputComplex")[0].checked;
 
             self.skills.push(new skillObject(skillName, level, attribute, isComplex));
+            $("#inputSkillName")[0].value = "";
+            $("#inputLevel")[0].value = "";
+            //self.attributeSelector($("#inputAttribute")[0].selectedOptions[0].value);
+            //$("#inputComplex")[0].checked;
         };
 
         self.removeSkill = function(incomingSkill){

@@ -29,19 +29,19 @@
         <br />   
 
         <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
-        <div id="descriptions">        
-            <h2>Character Details</h2>
-            Name: <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
-            Profession: <input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
-            Rank: <input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
-            Nationality: <input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
-            Unit: <input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
-            Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
+        <h2>Character Details</h2>
+        <div id="descriptionsDiv">
+                <label>Name:</label><input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
+                <label>Profession:</label><input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
+                <label>Rank:</label><input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
+                <label>Nationality:</label><input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
+                <label>Unit:</label><input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
+                <label>Experience:</label><input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />
         </div>
         <br />
 
-        <div id="attributesDiv">
-            <h2>Attributes</h2>
+        <h2>Attributes</h2>
+        <div id="attributesDiv">            
             <table id="attributesTable">
                 <tr>
                     <th>AGI</th>
@@ -74,9 +74,9 @@
             </table>
         </div>
         <br />
-        
-        <div id="secondaryTraitsDiv">
-            <h2>Secondary Traits</h2>
+
+        <h2>Secondary Traits</h2>
+        <div id="secondaryTraitsDiv">            
             <table id="secondaryTraitsTable">               
                 <tr>
                     <th>STR</th>
@@ -96,8 +96,8 @@
         </div>
         <br />
         
-        <div id="physicalStatusDiv">
-            <h2>Physical Status</h2>
+        <h2>Physical Status</h2>
+        <div id="physicalStatusDiv">            
             <table id="physicalStatusTable">
                 <tr>
                     <th>INJURY</th>
@@ -131,9 +131,8 @@
         </div>
         <br />
 
+        <h2>Skills</h2>
         <div id="skillsDiv">
-            <h2>Skills</h2>
-
             <table>
                 <tr>
                     <th>
@@ -160,7 +159,7 @@
                         <input id="inputComplex" type="radio" value"false" name="radioIsComplex" checked>No</input>
                     </td>
                     <td>
-                        <input id="inputLevel" type="text" />
+                        <input class="attributeInput" id="inputLevel" type="text" />
                     </td>
                     <td>
                         <select id="inputAttribute">
@@ -190,7 +189,7 @@
                     </td>
                     <td>
                         <span data-bind="text: level"></span>
-                        <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill("></img>
+                        <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill"></img>
                         <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill"></img>
                     </td>
                     <td>
