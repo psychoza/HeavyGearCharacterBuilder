@@ -3,6 +3,9 @@
 <head>
     <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
     <meta name="author" content="Jesse Hutchison" />
+    <meta name="coauthor" content="Sean Carnes">
+    <meta name="keywords" content="heavy, gear, character, builder">
+    <meta name="description" content="A web toll using the 2nd edition rule book from 1997 to generate a character">
     <link rel="stylesheet" type="text/css" href="styles/reset.css">
     <link rel="stylesheet" type="text/css" href="styles/guild.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
@@ -29,6 +32,10 @@
         <div id="descriptions">        
             <h2>Character Details</h2>
             Name: <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
+            Profession: <input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
+            Rank: <input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
+            Nationality: <input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
+            Unit: <input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
             Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
         </div>
         <br />
@@ -64,6 +71,13 @@
                     <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
                     <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
                 </tr>
+            </table>
+        </div>
+        <br />
+        
+        <div id="secondaryTraitsDiv">
+            <h2>Secondary Traits</h2>
+            <table id="secondaryTraitsTable">               
                 <tr>
                     <th>STR</th>
                     <th>HEA</th>
@@ -76,12 +90,47 @@
                     <td><span data-bind="text: secondaryTraitHealth"></span></td>
                     <td><span data-bind="text: secondaryTraitStamina"></span></td>
                     <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
-                    <td></td>
+                    <td><span data-bind="text: secondaryTraitArmedDamage"></span></td>
                 </tr>
             </table>
         </div>
         <br />
         
+        <div id="physicalStatusDiv">
+            <h2>Physical Status</h2>
+            <table id="physicalStatusTable">
+                <tr>
+                    <th>INJURY</th>
+                    <th>SCORE</th>
+                    <th>ARMOR</th>
+                    <th>PENALTY</th>
+                    <th>#</th>
+                </tr>
+                <tr>
+                    <th>FLESH WOUND</th>
+                    <td><span data-bind="text: injuryThresholdFlesh"></span></td>
+                    <td></td>
+                    <th>-1</th>
+                    <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th>DEEP WOUND</th>
+                    <td><span data-bind="text: injuryThresholdDeep"></span></td>
+                    <td></td>
+                    <th>-2</th>
+                    <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th>INSTANT DEATH</th>
+                    <td><span data-bind="text: injuryThresholdInstant"></span></td>
+                    <td></td>
+                    <th>DEAD</th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
         <div id="skillsDiv">
             <h2>Skills</h2>
 
@@ -141,20 +190,23 @@
                     </td>
                     <td>
                         <span data-bind="text: level"></span>
-                        <img src='images/arrow_up.png' data-bind="click: function(){$root.incrementSkill($data);}"></img>
-                        <img src='images/arrow_down.png' data-bind="click: function(){$root.decrementSkill($data);}"></img>
+                        <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill("></img>
+                        <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill"></img>
                     </td>
                     <td>
                         <span data-bind="text: bonus"></span>
                     </td>
                     <td>
-                        <img src='images/minus.png' data-bind="click: function(){$root.removeSkill($data);}"></img>
+                        <img src='images/minus.png' data-bind="click: $root.removeSkill"></img>
                         
                     </td>
                 </tr>
                 <!-- /ko -->
             </table>
         </div>
+        <br />
+
+        
     </div>
     <script>
         $(function(){

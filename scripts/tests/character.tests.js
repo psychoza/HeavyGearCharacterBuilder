@@ -15,6 +15,18 @@ describe('character - ', function () {
 		it('must have characterName', function(){
 			expect(character.characterName !== undefined).toBe(true);
 		});
+		it('must have characterProfession', function(){
+			expect(character.characterProfession !== undefined).toBe(true);
+		});
+		it('must have characterRank', function(){
+			expect(character.characterRank !== undefined).toBe(true);
+		});
+		it('must have characterNationality', function(){
+			expect(character.characterNationality !== undefined).toBe(true);
+		});
+		it('must have characterUnit', function(){
+			expect(character.characterUnit !== undefined).toBe(true);
+		});
 		it('must have characterExperience', function(){
 		    expect(character.characterExperience !== undefined).toBe(true);
 		    expect(character.characterExperience() === 0).toBe(true);
@@ -98,7 +110,57 @@ describe('character - ', function () {
 			expect(character.secondaryTraitUnarmedDamage() === 3).toBe(true);
 			character.skills.push(new skillObject("Hand-to-Hand", 2, self.attributeAgility, false));
 			expect(character.secondaryTraitUnarmedDamage() === 5).toBe(true);
-		});		
+		});
+		it('must have secondaryTraitArmedDamage', function(){
+		    expect(character.secondaryTraitArmedDamage !== undefined).toBe(true);		    
+		    expect(character.secondaryTraitArmedDamage() === 1).toBe(true);
+			character.attributeBuild(0);
+			character.attributeFitness(0);
+			expect(character.secondaryTraitArmedDamage() === 3).toBe(true);
+			character.skills.push(new skillObject("Melee", 2, self.attributeAgility, false));
+			expect(character.secondaryTraitArmedDamage() === 5).toBe(true);
+		});
+		it('must have injuryThresholdFlesh', function(){
+		    expect(character.injuryThresholdFlesh !== undefined).toBe(true);		    
+		    expect(character.injuryThresholdFlesh() === 8).toBe(true);
+		    character.attributeBuild(0);
+			character.attributeFitness(2);
+		    expect(character.injuryThresholdFlesh() == 13).toBe(true);
+		});
+		it('must have injuryCountFlesh', function(){
+		    expect(character.injuryCountFlesh !== undefined).toBe(true);		    
+		    expect(character.injuryCountFlesh() === 0).toBe(true);
+		});
+		it('must have injuryThresholdDeep', function(){
+		    expect(character.injuryThresholdDeep !== undefined).toBe(true);		    
+		    expect(character.injuryThresholdDeep() === 15).toBe(true);
+		    character.attributeBuild(0);
+			character.attributeFitness(2);
+		    expect(character.injuryThresholdDeep() == 25).toBe(true);
+		});
+		it('must have injuryCountDeep', function(){
+		    expect(character.injuryCountDeep !== undefined).toBe(true);		    
+		    expect(character.injuryCountDeep() === 0).toBe(true);
+		});
+		it('must have injuryThresholdInstant', function(){
+		    expect(character.injuryThresholdInstant !== undefined).toBe(true);		    
+		    expect(character.injuryThresholdInstant() === 30).toBe(true);
+		    character.attributeBuild(0);
+			character.attributeFitness(2);
+		    expect(character.injuryThresholdInstant() == 50).toBe(true);
+		});
+		it('must have systemShockThreshold', function(){
+		    expect(character.systemShockThreshold !== undefined).toBe(true);		    
+		    expect(character.systemShockThreshold() === 4).toBe(true);
+		    character.attributeFitness(2);
+		    expect(character.systemShockThreshold() == 5).toBe(true);
+		    character.attributePsyche(2);
+		    expect(character.systemShockThreshold() == 6).toBe(true);
+		    character.attributeFitness(-5);		    
+		    character.attributePsyche(-5);
+		    character.attributeWillpower(-5);
+		    expect(character.systemShockThreshold() == 1).toBe(true);
+		});
 	});
 
 	describe('character skills', function() {
