@@ -78,7 +78,6 @@
                 return self.secondaryTraitStamina() * 2;
             }
         });
-    
         self.systemShockThreshold = ko.computed({
             read: function() {                            
                 var value = (5 + parseInt(self.secondaryTraitHealth()));
@@ -90,6 +89,32 @@
             }
         });
 
+        self.movementSpeedSprint = ko.computed({
+            read: function() {
+                var athleticsSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "athletics"; }).firstOrNull();
+                var athleticsSkillLevel = athleticsSkill === null ? 0 : parseInt(athleticsSkill.level());
+                var value = (25 + (5 * athleticsSkillLevel + parseInt(self.attributeFitness()) ));
+                return value;
+            }
+        });
+
+        self.movementSpeedRun = ko.computed({
+            read: function() {                
+                return Math.round(self.movementSpeedSprint() * 0.6666666);
+            }
+        });
+
+        self.movementSpeedJog = ko.computed({
+            read: function() {                
+                return Math.round(self.movementSpeedSprint() * 0.5);
+            }
+        });
+
+        self.movementSpeedWalk = ko.computed({
+            read: function() {                
+                return Math.round(self.movementSpeedSprint() * 0.3333333);
+            }
+        });
         self.incrementSkill = function(incomingSkill){            
             incomingSkill.level(parseInt(incomingSkill.level()) + 1);
         };

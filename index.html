@@ -131,6 +131,49 @@
         </div>
         <br />
 
+        <h2>Movement</h2>
+        <div id="movementSpeedDiv">            
+            <table id="movementSpeedTable">
+                <tr>
+                    <th></th>
+                    <th>SPEED (m/round)</th>
+                    <th>ATTACK MOD</th>
+                    <th>DEFENCE MOD</th>                    
+                </tr>
+                <tr>
+                    <th>SPRINT</th>
+                    <td><span data-bind="text: movementSpeedSprint"></span></td>
+                    <td>?</td>
+                    <td>+2</td>                    
+                </tr>
+                <tr>
+                    <th>RUN</th>
+                    <td><span data-bind="text: movementSpeedRun"></span></td>
+                    <td>-3</td>
+                    <td>+2</td>
+                </tr>
+                <tr>
+                    <th>JOG</th>
+                    <td><span data-bind="text: movementSpeedJog"></span></td>
+                    <td>-2</td>
+                    <td>+1</td>
+                </tr>
+                <tr>
+                    <th>WALK</th>
+                    <td><span data-bind="text: movementSpeedWalk"></span></td>
+                    <td>-1</td>
+                    <td>+0</td>
+                </tr>
+                <tr>
+                    <th>STATIONARY</th>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
         <h2>Skills</h2>
         <div id="skillsDiv">
             <table>
