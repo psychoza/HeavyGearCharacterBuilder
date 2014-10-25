@@ -13,8 +13,27 @@ var CharacterList = (function(){
         Redirect('index.html');
     };
 
-    self.removeCharacter = function(){
-        throw "Not implemented";
+    self.removeCharacter = function(characterToRemove){
+        var c = self.characters();
+        c.remove(characterToRemove);
+        self.characters(c);
+
+        var charactersJSON = window.localStorage.getItem(CharacterLocalStorage) || JSON.stringify([]);
+        var charactersRaw = JSON.parse(charactersJSON);
+        if(!Array.isArray(charactersRaw))
+            charactersRaw = [];
+        var index;
+        var found = false;
+        for(index = 0; index<charactersRaw.length; index++)
+            if(charactersRaw[index].uuid == characterToRemove.uuid)
+            {found = true; break;}
+        if(found)
+            charactersRaw.splice(index,1);
+        window.localStorage.setItem(CharacterLocalStorage, JSON.stringify(charactersRaw));
+    };
+
+    self.editCharacter = function(character){
+        Redirect('index.html?loadFromUUID='+character.uuid);
     };
 
     self.showCharacter = function(character){

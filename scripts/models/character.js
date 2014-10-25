@@ -8,6 +8,7 @@ var Models = Models || {};
         self.name = data.name || '';
         self.experience = data.experience || '0';
         self.profession = data.profession || '';
+        self.uuid = data.uuid || null;
 
         return self;
     };

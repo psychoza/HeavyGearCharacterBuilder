@@ -24,6 +24,9 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
     cursor: pointer;
 }
 
+.right {float: right;}
+.left {float: left;}
+
 #characterList {
     border:3px solid;
     border-color: darkslategray;

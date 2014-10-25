@@ -13,3 +13,7 @@
 .cursorCell{
     cursor: progress;
 }
+
+.cursorDefault{
+    cursor: default;
+}

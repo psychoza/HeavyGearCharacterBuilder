@@ -27,6 +27,7 @@
     <ul>
         <!-- ko foreach: characters -->
         <li data-bind="click: $root.showCharacter">
+            <span class="right cursorDefault" data-bind="click: $root.removeCharacter">X</span>
             <span class="cursorAlias expanded" data-bind="text: name"></span>
         </li>
         <!-- /ko -->
@@ -40,6 +41,7 @@
 
 <div id="characterView" data-bind="visible: isSelectedCharacterVisible()">
     <div data-bind="with: selectedCharacter">
+        <span style="float:right;" data-bind="click: $root.editCharacter">Edit</span>
         Name: <span data-bind="text: name"></span><br>
         Profession: <span data-bind="text: profession"></span><br>
         Experience: <span data-bind="text: experience"></span><br>

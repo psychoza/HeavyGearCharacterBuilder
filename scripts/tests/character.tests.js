@@ -164,6 +164,12 @@ describe('character - ', function () {
 		    character.attributeWillpower(-5);
 		    expect(character.systemShockThreshold() == 1).toBe(true);
 		});
+        it('must have uuid', function(){
+            expect(character.uuid).toBeDefined();
+        });
+        it('must have loadFromLocalStorage', function(){
+            expect(typeof(character.loadFromLocalStorage)).toEqual("function");
+        });
 	});
 
 	describe('character skills', function() {
@@ -215,9 +221,52 @@ describe('character - ', function () {
             //Act
             character.saveToLocalStorage();
             var resultCharacter = JSON.parse(window.localStorage.getItem(CharacterLocalStorage))[0];
+            model.uuid = resultCharacter.uuid;
 
             //Assert
             expect(JSON.stringify(resultCharacter)).toEqual(JSON.stringify(model));
+        });
+
+        it('it overwrites previous version', function(){
+            //Arrange
+            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify([]));
+            var model = new Models.Character({name: 'jim bob'});
+            character.characterName(model.name);
+
+            //Act
+            character.saveToLocalStorage();
+            character.saveToLocalStorage();
+            var characters = JSON.parse(window.localStorage.getItem(CharacterLocalStorage));
+            var resultCharacter = characters[0];
+            model.uuid = resultCharacter.uuid;
+
+            //Assert
+            expect(JSON.stringify(resultCharacter)).toEqual(JSON.stringify(model));
+            expect(characters.length).toEqual(1);
+        });
+    });
+
+    describe('loadFromLocalStorage - ', function(){
+        beforeEach(function(){character = new CharacterBuilder.Character(); });
+        it('can load from local storage', function(){
+            //Arrange
+            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify([]));
+            var model = new Models.Character({
+                name: 'jim bob',
+                experience: '3'
+            });
+            character.loadFromData(model);
+            //character.characterName(model.name);
+            character.saveToLocalStorage();
+            var uuid = character.uuid;
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterName()).toEqual(model.name);
+            expect(character.characterExperience()).toEqual(model.experience);
         });
     });
 });

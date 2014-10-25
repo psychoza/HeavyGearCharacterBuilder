@@ -28,6 +28,28 @@ describe('characterList - ', function(){
         it('has removeCharacter', function(){
             expect(typeof(CharacterList.removeCharacter)).toEqual("function");
         });
+
+        it('has editCharacter', function(){
+            expect(typeof(CharacterList.editCharacter)).toEqual("function");
+        })
+    });
+
+    describe('editCharacter - ', function(){
+        var navSpy;
+        beforeEach(function(){
+            navSpy = spyOn(window,'Redirect').and.callFake(function(){});
+        });
+
+        it('navigates to edit w/ correct uuid', function(){
+            //Arrange
+            var fakeChar = {uuid:'stuff'};
+
+            //Act
+            CharacterList.editCharacter(fakeChar);
+
+            //Assert
+            expect(navSpy).toHaveBeenCalledWith('index.html?loadFromUUID='+fakeChar.uuid);
+        });
     });
 
     describe('createNewCharacter - ', function(){
@@ -40,7 +62,7 @@ describe('characterList - ', function(){
             CharacterList.createNewCharacter();
 
             //Assert
-            expect(navSpy).toHaveBeenCalled();
+            expect(navSpy).toHaveBeenCalledWith('index.html');
         });
     });
 
@@ -85,6 +107,27 @@ describe('characterList - ', function(){
 
             //Assert
             expect(CharacterList.selectedCharacter()).toEqual(dummyChar);
+        });
+    });
+
+    describe('removeCharacter - ', function(){
+        it('can remove a character', function(){
+            //Arrange
+            var charModels = [
+                new Models.Character({name:'joe'}),
+                new Models.Character({name:'bob'}),
+                new Models.Character({name:'sue'}),
+            ];
+            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify(charModels));
+            CharacterList.fetchCharacters();
+
+            //Act
+            CharacterList.removeCharacter(CharacterList.characters()[1]);
+            var rawCharacterStorage = JSON.parse(window.localStorage.getItem(CharacterLocalStorage));
+
+            //Assert
+            expect(CharacterList.characters().length).toEqual(2);
+            expect(rawCharacterStorage.length).toEqual(2);
         });
     });
 });

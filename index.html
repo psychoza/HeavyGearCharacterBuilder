@@ -14,6 +14,8 @@
     <script src="scripts/global/prototypeString.js"></script>
     <script src="scripts/global/prototypeArray.js"></script>
     <script src="scripts/global/config.js"></script>
+    <script src="scripts/global/getQueryParams.js"></script>
+    <script src="scripts/global/uuid.js"></script>
     <!-- libraries -->
     <script src="scripts/jquery.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
@@ -28,8 +30,8 @@
     <div class="rightBorder" id="rightBorder">
         <h1>Heavy Gear</h1>    
         <h1>Character Builder</h1>
-        <a href='tests.html'>Test Runner</a>
-        <br />   
+        <a href='tests.html'>Test Runner</a><br />
+        <a href='characterList.html'>Character List</a><br />
 
         <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
         <h2>Character Details</h2>
@@ -261,6 +263,10 @@
     <script>
         $(function(){
             var character = new window.CharacterBuilder.Character();
+            var urlParams = GetQueryParams(window.location.href);
+            if(urlParams.loadFromUUID)
+                character.loadFromLocalStorage(urlParams.loadFromUUID);
+
             ko.applyBindings(character, $('body').get(0));
             Title.watchCharacterName(character.characterName);
             ko.applyBindings(Title, $('#title').get(0));
