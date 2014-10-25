@@ -3,6 +3,9 @@
 <head>
     <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
     <meta name="author" content="Jesse Hutchison" />
+    <meta name="coauthor" content="Sean Carnes">
+    <meta name="keywords" content="heavy, gear, character, builder">
+    <meta name="description" content="A web toll using the 2nd edition rule book from 1997 to generate a character">
     <link rel="stylesheet" type="text/css" href="styles/reset.css">
     <link rel="stylesheet" type="text/css" href="styles/guild.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
@@ -29,15 +32,19 @@
         <br />   
 
         <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
-        <div id="descriptions">        
-            <h2>Character Details</h2>
-            Name: <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
-            Experience: <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />        
+        <h2>Character Details</h2>
+        <div id="descriptionsDiv">
+                <label>Name:</label><input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
+                <label>Profession:</label><input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
+                <label>Rank:</label><input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
+                <label>Nationality:</label><input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
+                <label>Unit:</label><input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
+                <label>Experience:</label><input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />
         </div>
         <br />
 
-        <div id="attributesDiv">
-            <h2>Attributes</h2>
+        <h2>Attributes</h2>
+        <div id="attributesDiv">            
             <table id="attributesTable">
                 <tr>
                     <th>AGI</th>
@@ -67,6 +74,13 @@
                     <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
                     <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
                 </tr>
+            </table>
+        </div>
+        <br />
+
+        <h2>Secondary Traits</h2>
+        <div id="secondaryTraitsDiv">            
+            <table id="secondaryTraitsTable">               
                 <tr>
                     <th>STR</th>
                     <th>HEA</th>
@@ -79,15 +93,92 @@
                     <td><span data-bind="text: secondaryTraitHealth"></span></td>
                     <td><span data-bind="text: secondaryTraitStamina"></span></td>
                     <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
-                    <td></td>
+                    <td><span data-bind="text: secondaryTraitArmedDamage"></span></td>
                 </tr>
             </table>
         </div>
         <br />
         
-        <div id="skillsDiv">
-            <h2>Skills</h2>
+        <h2>Physical Status</h2>
+        <div id="physicalStatusDiv">            
+            <table id="physicalStatusTable">
+                <tr>
+                    <th>INJURY</th>
+                    <th>SCORE</th>
+                    <th>ARMOR</th>
+                    <th>PENALTY</th>
+                    <th>#</th>
+                </tr>
+                <tr>
+                    <th>FLESH WOUND</th>
+                    <td><span data-bind="text: injuryThresholdFlesh"></span></td>
+                    <td></td>
+                    <th>-1</th>
+                    <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th>DEEP WOUND</th>
+                    <td><span data-bind="text: injuryThresholdDeep"></span></td>
+                    <td></td>
+                    <th>-2</th>
+                    <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th>INSTANT DEATH</th>
+                    <td><span data-bind="text: injuryThresholdInstant"></span></td>
+                    <td></td>
+                    <th>DEAD</th>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br />
 
+        <h2>Movement</h2>
+        <div id="movementSpeedDiv">            
+            <table id="movementSpeedTable">
+                <tr>
+                    <th></th>
+                    <th>SPEED (m/round)</th>
+                    <th>ATTACK MOD</th>
+                    <th>DEFENCE MOD</th>                    
+                </tr>
+                <tr>
+                    <th>SPRINT</th>
+                    <td><span data-bind="text: movementSpeedSprint"></span></td>
+                    <td>?</td>
+                    <td>+2</td>                    
+                </tr>
+                <tr>
+                    <th>RUN</th>
+                    <td><span data-bind="text: movementSpeedRun"></span></td>
+                    <td>-3</td>
+                    <td>+2</td>
+                </tr>
+                <tr>
+                    <th>JOG</th>
+                    <td><span data-bind="text: movementSpeedJog"></span></td>
+                    <td>-2</td>
+                    <td>+1</td>
+                </tr>
+                <tr>
+                    <th>WALK</th>
+                    <td><span data-bind="text: movementSpeedWalk"></span></td>
+                    <td>-1</td>
+                    <td>+0</td>
+                </tr>
+                <tr>
+                    <th>STATIONARY</th>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>-1</td>
+                </tr>
+            </table>
+        </div>
+        <br />
+
+        <h2>Skills</h2>
+        <div id="skillsDiv">
             <table>
                 <tr>
                     <th>
@@ -110,11 +201,11 @@
                         <input id="inputSkillName" type="text" />
                     </td>
                     <td>
-                        <input id="inputComplex" type="radio" value"true" name="radioIsComplex">Yes</input>
-                        <input id="inputComplex" type="radio" value"false" name="radioIsComplex" checked>No</input>
+                        <input id="inputComplexT" type="radio" value="true" name="radioIsComplex">Yes</input>
+                        <input id="inputComplexF" type="radio" value="false" name="radioIsComplex" checked>No</input>
                     </td>
                     <td>
-                        <input id="inputLevel" type="text" />
+                        <input class="attributeInput" id="inputLevel" type="text" />
                     </td>
                     <td>
                         <select id="inputAttribute">
@@ -131,7 +222,7 @@
                         </select>
                     </td>
                     <td>
-                        <img src='images/plus.png' data-bind="click: function(){insertSkill();}"></img>
+                        <img src='images/plus.png' data-bind="click: function(){insertSkill();}" />
                     </td>
                 </tr>
                 <!-- ko foreach: skills -->
@@ -144,14 +235,14 @@
                     </td>
                     <td>
                         <span data-bind="text: level"></span>
-                        <img src='images/arrow_up.png' data-bind="click: function(){$root.incrementSkill($data);}"></img>
-                        <img src='images/arrow_down.png' data-bind="click: function(){$root.decrementSkill($data);}"></img>
+                        <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
+                        <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
                     </td>
                     <td>
                         <span data-bind="text: bonus"></span>
                     </td>
                     <td>
-                        <img src='images/minus.png' data-bind="click: function(){$root.removeSkill($data);}"></img>
+                        <img src='images/minus.png' data-bind="click: $root.removeSkill" />
                         
                     </td>
                 </tr>
@@ -165,6 +256,7 @@
                 <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
             </form>
         </div>
+
     </div>
     <script>
         $(function(){

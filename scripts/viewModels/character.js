@@ -3,7 +3,11 @@
         var self = this;
         self.skills = ko.observableArray();
 
-        self.characterName = ko.observable('');        
+        self.characterName = ko.observable('');
+        self.characterProfession = ko.observable('');
+        self.characterRank = ko.observable('');
+        self.characterNationality = ko.observable('');
+        self.characterUnit = ko.observable('');
         self.characterExperience = ko.observable(0);
         self.attributeAgility = ko.observable(-1);
         self.attributeAppearance = ko.observable(-1);
@@ -44,7 +48,73 @@
                     return value;
             }            
         });
+        self.secondaryTraitArmedDamage = ko.computed({
+            read: function() {
+                var meleeSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "melee"; }).firstOrNull();
+                var meleeSkillLevel = meleeSkill === null ? 0 : parseInt(meleeSkill.level());
+                var value = (3 + meleeSkillLevel + parseInt(self.attributeBuild()) + parseInt(self.secondaryTraitStrength()));
 
+                if (value < 1)
+                    return 1;
+                else
+                    return value;
+            }
+        });
+
+        self.injuryThresholdFlesh = ko.computed({
+            read: function() {                
+                return Math.round(self.secondaryTraitStamina() / 2);
+            }
+        });
+        self.injuryCountFlesh = ko.observable(0);
+        self.injuryThresholdDeep = ko.computed({
+            read: function() {                
+                return self.secondaryTraitStamina();
+            }
+        });
+        self.injuryCountDeep = ko.observable(0);
+        self.injuryThresholdInstant = ko.computed({
+            read: function() {                
+                return self.secondaryTraitStamina() * 2;
+            }
+        });
+        self.systemShockThreshold = ko.computed({
+            read: function() {                            
+                var value = (5 + parseInt(self.secondaryTraitHealth()));
+
+                if (value < 1)
+                    return 1;
+                else
+                    return value;
+            }
+        });
+
+        self.movementSpeedSprint = ko.computed({
+            read: function() {
+                var athleticsSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "athletics"; }).firstOrNull();
+                var athleticsSkillLevel = athleticsSkill === null ? 0 : parseInt(athleticsSkill.level());
+                var value = (25 + (5 * athleticsSkillLevel + parseInt(self.attributeFitness()) ));
+                return value;
+            }
+        });
+
+        self.movementSpeedRun = ko.computed({
+            read: function() {                
+                return Math.round(self.movementSpeedSprint() * 0.6666666);
+            }
+        });
+
+        self.movementSpeedJog = ko.computed({
+            read: function() {                
+                return Math.round(self.movementSpeedSprint() * 0.5);
+            }
+        });
+
+        self.movementSpeedWalk = ko.computed({
+            read: function() {                
+                return Math.round(self.movementSpeedSprint() * 0.3333333);
+            }
+        });
         self.incrementSkill = function(incomingSkill){            
             incomingSkill.level(parseInt(incomingSkill.level()) + 1);
         };
@@ -96,6 +166,10 @@
             var isComplex = $("#inputComplex")[0].checked;
 
             self.skills.push(new skillObject(skillName, level, attribute, isComplex));
+            $("#inputSkillName")[0].value = "";
+            $("#inputLevel")[0].value = "";
+            //self.attributeSelector($("#inputAttribute")[0].selectedOptions[0].value);
+            //$("#inputComplex")[0].checked;
         };
 
         self.removeSkill = function(incomingSkill){
