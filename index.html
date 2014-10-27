@@ -203,8 +203,8 @@
                         <input id="inputSkillName" type="text" />
                     </td>
                     <td>
-                        <input id="inputComplexT" type="radio" value="true" name="radioIsComplex">Yes</input>
-                        <input id="inputComplexF" type="radio" value="false" name="radioIsComplex" checked>No</input>
+                        <input id="inputComplex" type="radio" value="true" name="radioIsComplex">Yes</input>
+                        <input id="inputComplex" type="radio" value="false" name="radioIsComplex" checked>No</input>
                     </td>
                     <td>
                         <input class="attributeInput" id="inputLevel" type="text" />
@@ -224,7 +224,7 @@
                         </select>
                     </td>
                     <td>
-                        <img src='images/plus.png' data-bind="click: function(){insertSkill();}" />
+                        <img src='images/plus.png' data-bind="click: insertSkill" />
                     </td>
                 </tr>
                 <!-- ko foreach: skills -->

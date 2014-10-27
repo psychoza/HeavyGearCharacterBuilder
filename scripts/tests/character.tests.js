@@ -164,6 +164,38 @@ describe('character - ', function () {
 		    character.attributeWillpower(-5);
 		    expect(character.systemShockThreshold() == 1).toBe(true);
 		});
+		it('must have movementSpeedSprint', function(){
+			expect(character.movementSpeedSprint !== undefined).toBe(true);		    
+		    expect(character.movementSpeedSprint() === 20).toBe(true);
+		    character.attributeFitness(0);
+		    expect(character.movementSpeedSprint() === 25).toBe(true);
+		    character.skills.push(new skillObject("Athletics", 1, character.attributeFitness, false));
+		    expect(character.movementSpeedSprint() === 30).toBe(true);
+		});
+		it('must have movementSpeedRun', function(){
+			expect(character.movementSpeedRun !== undefined).toBe(true);
+		    expect(character.movementSpeedRun() === 13).toBe(true);
+		    character.attributeFitness(0);
+		    expect(character.movementSpeedRun() === 17).toBe(true);
+		    character.skills.push(new skillObject("Athletics", 1, character.attributeFitness, false));
+		    expect(character.movementSpeedRun() === 20).toBe(true);
+		});
+		it('must have movementSpeedJog', function(){
+			expect(character.movementSpeedJog !== undefined).toBe(true);
+		    expect(character.movementSpeedJog() === 10).toBe(true);
+		    character.attributeFitness(0);
+		    expect(character.movementSpeedJog() === 13).toBe(true);
+		    character.skills.push(new skillObject("Athletics", 1, character.attributeFitness, false));
+		    expect(character.movementSpeedJog() === 15).toBe(true);
+		});
+		it('must have movementSpeedWalk', function(){
+			expect(character.movementSpeedWalk !== undefined).toBe(true);
+		    expect(character.movementSpeedWalk() === 7).toBe(true);
+		    character.attributeFitness(0);
+		    expect(character.movementSpeedWalk() === 8).toBe(true);
+		    character.skills.push(new skillObject("Athletics", 1, character.attributeFitness, false));
+		    expect(character.movementSpeedWalk() === 10).toBe(true);
+		});
         it('must have uuid', function(){
             expect(character.uuid).toBeDefined();
         });

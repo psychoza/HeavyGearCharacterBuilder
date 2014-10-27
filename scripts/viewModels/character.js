@@ -1,14 +1,16 @@
 (function(cb) {
     cb.Character = function() {
         var self = this;
-        self.skills = ko.observableArray();
-
+        
+        /* Descriptions */
         self.characterName = ko.observable('');
         self.characterProfession = ko.observable('');
         self.characterRank = ko.observable('');
         self.characterNationality = ko.observable('');
         self.characterUnit = ko.observable('');
         self.characterExperience = ko.observable(0);
+
+        /* Attributes */
         self.attributeAgility = ko.observable(-1);
         self.attributeAppearance = ko.observable(-1);
         self.attributeBuild = ko.observable(-1);
@@ -19,8 +21,10 @@
         self.attributePerception = ko.observable(-1);
         self.attributePsyche = ko.observable(-1);
         self.attributeWillpower = ko.observable(-1);
+        self.skills = ko.observableArray();
         self.uuid = null;
         
+        /* Secondary Traits */
         self.secondaryTraitStrength = ko.computed({
             read: function() { return Math.floor((parseInt(self.attributeBuild()) + parseInt(self.attributeFitness())) / 2 );}
         });
@@ -62,6 +66,7 @@
             }
         });
 
+        /* Physical Status */
         self.injuryThresholdFlesh = ko.computed({
             read: function() {                
                 return Math.round(self.secondaryTraitStamina() / 2);
@@ -90,32 +95,32 @@
             }
         });
 
+        /* Movement Speed */
         self.movementSpeedSprint = ko.computed({
             read: function() {
                 var athleticsSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "athletics"; }).firstOrNull();
                 var athleticsSkillLevel = athleticsSkill === null ? 0 : parseInt(athleticsSkill.level());
-                var value = (25 + (5 * athleticsSkillLevel + parseInt(self.attributeFitness()) ));
+                var value = (25 + (5 * (athleticsSkillLevel + parseInt(self.attributeFitness())) ));
                 return value;
             }
         });
-
         self.movementSpeedRun = ko.computed({
             read: function() {                
                 return Math.round(self.movementSpeedSprint() * 0.6666666);
             }
         });
-
         self.movementSpeedJog = ko.computed({
             read: function() {                
                 return Math.round(self.movementSpeedSprint() * 0.5);
             }
         });
-
         self.movementSpeedWalk = ko.computed({
             read: function() {                
                 return Math.round(self.movementSpeedSprint() * 0.3333333);
             }
         });
+
+        /* Character Functions */
         self.incrementSkill = function(incomingSkill){            
             incomingSkill.level(parseInt(incomingSkill.level()) + 1);
         };
