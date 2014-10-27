@@ -112,3 +112,32 @@ input[type="text"].focus {
 #movementSpeedDiv {
 	padding-left: 50px;	
 }
+
+.leftColumn {
+	float: left;
+	padding-left: 10px;
+	margin-left: 10px;
+}
+
+.rightColumn {
+	float: right;
+	padding-right: 10px;
+	margin-right: 10px;
+}
+
+.center {    
+	background-color: #777;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+	-moz-border-radius: 15px; /* Old Firefox */
+	/*box-shadow: 5px 5px 5px #777;*/
+	font-size: 100%;
+	height: 715px;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 13px;
+    overflow-x: none;
+    overflow-y: auto;
+    padding: 4px;    
+    width: 985px;
+}
