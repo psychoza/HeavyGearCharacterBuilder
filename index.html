@@ -28,245 +28,247 @@
 </head>
 <body>
     <div class="rightBorder" id="rightBorder">
-        <div class="center">
-            <h1>Heavy Gear</h1>    
-            <h1>Character Builder</h1>
-            <a href='tests.html'>Test Runner</a><br />
-            <a href='characterList.html'>Character List</a><br />
-            <div id="exportOptions">
-                <form>
-                    <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
-                </form>
-            </div>
-            <div class="leftColumn">
-                <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
-                <h2>Character Details</h2>
-                <div id="descriptionsDiv">
-                        <label>Name:</label><input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
-                        <label>Profession:</label><input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
-                        <label>Rank:</label><input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
-                        <label>Nationality:</label><input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
-                        <label>Unit:</label><input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
-                        <label>Experience:</label><input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />
+        <div class="leftBorder" id="leftBorder">
+            <div class="center">
+                <h1>Heavy Gear</h1>    
+                <h1>Character Builder</h1>
+                <a href='tests.html'>Test Runner</a><br />
+                <a href='characterList.html'>Character List</a><br />
+                <div id="exportOptions">
+                    <form>
+                        <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
+                    </form>
                 </div>
-                <br />
+                <div class="leftColumn">
+                    <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
+                    <h2>Character Details</h2>
+                    <div id="descriptionsDiv">
+                            <label>Name:</label><input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
+                            <label>Profession:</label><input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
+                            <label>Rank:</label><input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
+                            <label>Nationality:</label><input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
+                            <label>Unit:</label><input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
+                            <label>Experience:</label><input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />
+                    </div>
+                    <br />
 
-                <h2>Attributes</h2>
-                <div id="attributesDiv">            
-                    <table id="attributesTable">
-                        <tr>
-                            <th>AGI</th>
-                            <th>APP</th>
-                            <th>BLD</th>
-                            <th>CRE</th>
-                            <th>FIT</th>
-                        </tr>
-                        <tr>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
-                        </tr>
-                        <tr>
-                            <th>INF</th>
-                            <th>KNO</th>
-                            <th>PER</th>
-                            <th>PSY</th>
-                            <th>WIL</th>
-                        </tr>
-                        <tr>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
-                            <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
-                        </tr>
-                    </table>
-                </div>
-                <br />
+                    <h2>Attributes</h2>
+                    <div id="attributesDiv">            
+                        <table id="attributesTable">
+                            <tr>
+                                <th>AGI</th>
+                                <th>APP</th>
+                                <th>BLD</th>
+                                <th>CRE</th>
+                                <th>FIT</th>
+                            </tr>
+                            <tr>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
+                            </tr>
+                            <tr>
+                                <th>INF</th>
+                                <th>KNO</th>
+                                <th>PER</th>
+                                <th>PSY</th>
+                                <th>WIL</th>
+                            </tr>
+                            <tr>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
 
-                <h2>Secondary Traits</h2>
-                <div id="secondaryTraitsDiv">            
-                    <table id="secondaryTraitsTable">               
-                        <tr>
-                            <th>STR</th>
-                            <th>HEA</th>
-                            <th>STA</th>
-                            <th>UD</th>
-                            <th>AD</th>
-                        </tr>
-                        <tr>
-                            <td><span data-bind="text: secondaryTraitStrength"></span></td>
-                            <td><span data-bind="text: secondaryTraitHealth"></span></td>
-                            <td><span data-bind="text: secondaryTraitStamina"></span></td>
-                            <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
-                            <td><span data-bind="text: secondaryTraitArmedDamage"></span></td>
-                        </tr>
-                    </table>
-                </div>
-                <br />
-                
-                <h2>Physical Status</h2>
-                <div id="physicalStatusDiv">            
-                    <table id="physicalStatusTable">
-                        <tr>
-                            <th>INJURY</th>
-                            <th>SCORE</th>
-                            <th>ARMOR</th>
-                            <th>PENALTY</th>
-                            <th>#</th>
-                        </tr>
-                        <tr>
-                            <th>FLESH WOUND</th>
-                            <td><span data-bind="text: injuryThresholdFlesh"></span></td>
-                            <td></td>
-                            <th>-1</th>
-                            <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
-                        </tr>
-                        <tr>
-                            <th>DEEP WOUND</th>
-                            <td><span data-bind="text: injuryThresholdDeep"></span></td>
-                            <td></td>
-                            <th>-2</th>
-                            <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
-                        </tr>
-                        <tr>
-                            <th>INSTANT DEATH</th>
-                            <td><span data-bind="text: injuryThresholdInstant"></span></td>
-                            <td></td>
-                            <th>DEAD</th>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-                <br />
+                    <h2>Secondary Traits</h2>
+                    <div id="secondaryTraitsDiv">            
+                        <table id="secondaryTraitsTable">               
+                            <tr>
+                                <th>STR</th>
+                                <th>HEA</th>
+                                <th>STA</th>
+                                <th>UD</th>
+                                <th>AD</th>
+                            </tr>
+                            <tr>
+                                <td><span data-bind="text: secondaryTraitStrength"></span></td>
+                                <td><span data-bind="text: secondaryTraitHealth"></span></td>
+                                <td><span data-bind="text: secondaryTraitStamina"></span></td>
+                                <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
+                                <td><span data-bind="text: secondaryTraitArmedDamage"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
+                    
+                    <h2>Physical Status</h2>
+                    <div id="physicalStatusDiv">            
+                        <table id="physicalStatusTable">
+                            <tr>
+                                <th>INJURY</th>
+                                <th>SCORE</th>
+                                <th>ARMOR</th>
+                                <th>PENALTY</th>
+                                <th>#</th>
+                            </tr>
+                            <tr>
+                                <th>FLESH WOUND</th>
+                                <td><span data-bind="text: injuryThresholdFlesh"></span></td>
+                                <td></td>
+                                <th>-1</th>
+                                <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                            </tr>
+                            <tr>
+                                <th>DEEP WOUND</th>
+                                <td><span data-bind="text: injuryThresholdDeep"></span></td>
+                                <td></td>
+                                <th>-2</th>
+                                <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                            </tr>
+                            <tr>
+                                <th>INSTANT DEATH</th>
+                                <td><span data-bind="text: injuryThresholdInstant"></span></td>
+                                <td></td>
+                                <th>DEAD</th>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
 
-                <h2>Movement</h2>
-                <div id="movementSpeedDiv">            
-                    <table id="movementSpeedTable">
-                        <tr>
-                            <th></th>
-                            <th>SPEED (m/round)</th>
-                            <th>ATTACK MOD</th>
-                            <th>DEFENCE MOD</th>                    
-                        </tr>
-                        <tr>
-                            <th>SPRINT</th>
-                            <td><span data-bind="text: movementSpeedSprint"></span></td>
-                            <td>?</td>
-                            <td>+2</td>                    
-                        </tr>
-                        <tr>
-                            <th>RUN</th>
-                            <td><span data-bind="text: movementSpeedRun"></span></td>
-                            <td>-3</td>
-                            <td>+2</td>
-                        </tr>
-                        <tr>
-                            <th>JOG</th>
-                            <td><span data-bind="text: movementSpeedJog"></span></td>
-                            <td>-2</td>
-                            <td>+1</td>
-                        </tr>
-                        <tr>
-                            <th>WALK</th>
-                            <td><span data-bind="text: movementSpeedWalk"></span></td>
-                            <td>-1</td>
-                            <td>+0</td>
-                        </tr>
-                        <tr>
-                            <th>STATIONARY</th>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>-1</td>
-                        </tr>
-                    </table>
+                    <h2>Movement</h2>
+                    <div id="movementSpeedDiv">            
+                        <table id="movementSpeedTable">
+                            <tr>
+                                <th></th>
+                                <th>SPEED (m/round)</th>
+                                <th>ATTACK MOD</th>
+                                <th>DEFENCE MOD</th>                    
+                            </tr>
+                            <tr>
+                                <th>SPRINT</th>
+                                <td><span data-bind="text: movementSpeedSprint"></span></td>
+                                <td>?</td>
+                                <td>+2</td>                    
+                            </tr>
+                            <tr>
+                                <th>RUN</th>
+                                <td><span data-bind="text: movementSpeedRun"></span></td>
+                                <td>-3</td>
+                                <td>+2</td>
+                            </tr>
+                            <tr>
+                                <th>JOG</th>
+                                <td><span data-bind="text: movementSpeedJog"></span></td>
+                                <td>-2</td>
+                                <td>+1</td>
+                            </tr>
+                            <tr>
+                                <th>WALK</th>
+                                <td><span data-bind="text: movementSpeedWalk"></span></td>
+                                <td>-1</td>
+                                <td>+0</td>
+                            </tr>
+                            <tr>
+                                <th>STATIONARY</th>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>-1</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
                 </div>
-                <br />
-            </div>
-            <div class="rightColumn">
-                <h2>Weapons</h2>
-                <div id="weaponsDiv">
+                <div class="rightColumn">
+                    <h2>Weapons</h2>
+                    <div id="weaponsDiv">
+                    </div>
+                    <br/>
+                    <h2>Skills</h2>
+                    <div id="skillsDiv">
+                        <table>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Complex
+                                </th>
+                                <th>
+                                    Level
+                                </th>
+                                <th>
+                                    +/-
+                                </th>
+                                <th>                    
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="inputSkillName" type="text" />
+                                </td>
+                                <td>
+                                    <input id="inputComplex" type="radio" value="true" name="radioIsComplex">Yes</input>
+                                    <input id="inputComplex" type="radio" value="false" name="radioIsComplex" checked>No</input>
+                                </td>
+                                <td>
+                                    <input class="attributeInput" id="inputLevel" type="text" />
+                                </td>
+                                <td>
+                                    <select id="inputAttribute">
+                                        <option value="agility">Agility</option>
+                                        <option value="appearance">Appearance</option>
+                                        <option value="build">Build</option>
+                                        <option value="creativity">Creativity</option>
+                                        <option value="fitness">Fitness</option>
+                                        <option value="influence">Influence</option>
+                                        <option value="knowledge">Knowledge</option>
+                                        <option value="perception">Perception</option>                        
+                                        <option value="psyche">Psyche</option>
+                                        <option value="willpower">Willpower</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertSkill" />
+                                </td>
+                            </tr>
+                            <!-- ko foreach: skills -->
+                            <tr>
+                                <td>
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: level"></span>
+                                    <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
+                                    <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
+                                </td>
+                                <td>
+                                    <span data-bind="text: bonus"></span>
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />
+                                    
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </table>
+                    </div>
+                    <br />                
+                    <h2>Equipment</h2>
+                    <div id="equipmentDiv">
+                    </div>
+                    <br/>
                 </div>
-                <br/>
-                <h2>Skills</h2>
-                <div id="skillsDiv">
-                    <table>
-                        <tr>
-                            <th>
-                                Name
-                            </th>
-                            <th>
-                                Complex
-                            </th>
-                            <th>
-                                Level
-                            </th>
-                            <th>
-                                +/-
-                            </th>
-                            <th>                    
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input id="inputSkillName" type="text" />
-                            </td>
-                            <td>
-                                <input id="inputComplex" type="radio" value="true" name="radioIsComplex">Yes</input>
-                                <input id="inputComplex" type="radio" value="false" name="radioIsComplex" checked>No</input>
-                            </td>
-                            <td>
-                                <input class="attributeInput" id="inputLevel" type="text" />
-                            </td>
-                            <td>
-                                <select id="inputAttribute">
-                                    <option value="agility">Agility</option>
-                                    <option value="appearance">Appearance</option>
-                                    <option value="build">Build</option>
-                                    <option value="creativity">Creativity</option>
-                                    <option value="fitness">Fitness</option>
-                                    <option value="influence">Influence</option>
-                                    <option value="knowledge">Knowledge</option>
-                                    <option value="perception">Perception</option>                        
-                                    <option value="psyche">Psyche</option>
-                                    <option value="willpower">Willpower</option>
-                                </select>
-                            </td>
-                            <td>
-                                <img src='images/plus.png' data-bind="click: insertSkill" />
-                            </td>
-                        </tr>
-                        <!-- ko foreach: skills -->
-                        <tr>
-                            <td>
-                                <span data-bind="text: name"></span>
-                            </td>
-                            <td>
-                                <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
-                            </td>
-                            <td>
-                                <span data-bind="text: level"></span>
-                                <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
-                                <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
-                            </td>
-                            <td>
-                                <span data-bind="text: bonus"></span>
-                            </td>
-                            <td>
-                                <img src='images/minus.png' data-bind="click: $root.removeSkill" />
-                                
-                            </td>
-                        </tr>
-                        <!-- /ko -->
-                    </table>
-                </div>
-                <br />                
-                <h2>Equipment</h2>
-                <div id="equipmentDiv">
-                </div>
-                <br/>
             </div>
         </div>
     </div>

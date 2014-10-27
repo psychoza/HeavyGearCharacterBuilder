@@ -2,8 +2,14 @@ body {
 	background-color: #21201E;
 	color: #FEEB0B;
 }
+.leftBorder {
+    background-image: url('../images/cautionLeft.png');
+    background-repeat: repeat-y;
+    background-position: left;    
+    height: 100%;
+}
 .rightBorder {
-	background-image: url('../images/caution.png');
+    background-image: url('../images/cautionRight.png');
     background-repeat: repeat-y;
     background-position: right;    
     height: 100%;
