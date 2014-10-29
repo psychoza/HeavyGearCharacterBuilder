@@ -17,7 +17,7 @@ body {
 
 span, td, th {
     font-size: 0.9em;
-	color: #FEEB0B;
+	color: #FEEB0B;	
 }
 h1 {
 	color: #1E4E79;
@@ -31,13 +31,17 @@ h1 {
 	margin: 0 0 0 0;
 }
 h2 {
-	color:#2E75B5;
+	color:#eee;
 	text-align: left;
 	font-size: 1em;
 	font-family: gearhead;
 	background: -webkit-linear-gradient(#E1562D, #FEEB0B);
   	-webkit-background-clip: text;
   	-webkit-text-fill-color: transparent;
+	/*background: linear-gradient(#E1562D, #FEEB0B);
+  	background-clip: text;
+  	text-fill-color: transparent;*/
+
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 }

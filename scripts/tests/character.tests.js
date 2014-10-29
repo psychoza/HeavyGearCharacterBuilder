@@ -90,6 +90,10 @@ describe('character - ', function () {
 		    expect(character.secondaryTraitHealth() === 1).toBe(true);
 		    character.attributeWillpower(3);
 		    expect(character.secondaryTraitHealth() === 2).toBe(true);
+		    character.attributeFitness(2);
+		    character.attributePsyche(0);
+		    character.attributeWillpower(0);
+		    expect(character.secondaryTraitHealth() === 1).toBe(true);
 		});		
 		it('must have secondaryTraitStamina', function(){
 		    expect(character.secondaryTraitStamina !== undefined).toBe(true);		    
