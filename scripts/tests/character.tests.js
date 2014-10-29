@@ -300,6 +300,272 @@ describe('character - ', function () {
             expect(character.characterName()).toEqual(model.name);
             expect(character.characterExperience()).toEqual(model.experience);
         });
+
+        it('can load characterName', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 'testy tester';
+            character.characterName(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterName()).toEqual(value)
+        });
+
+        it('can load characterExperience', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = '5';
+            character.characterExperience(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterExperience()).toEqual(value)
+        });
+
+        it('can load characterProfession', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 'cleaner';
+            character.characterProfession(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterProfession()).toEqual(value)
+        });
+
+        it('can load characterRank', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 'MSG';
+            character.characterRank(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterRank()).toEqual(value)
+        });
+
+        it('can load characterNationality', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 'Belter';
+            character.characterNationality(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterNationality()).toEqual(value)
+        });
+
+        it('can load characterUnit', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = '2nd Plt Delta Troop 1/16 Cav Rgmt';
+            character.characterUnit(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.characterUnit()).toEqual(value)
+        });
+
+        it('can load attributeAgility', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeAgility(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeAgility()).toEqual(value)
+        });
+
+        it('can load attributeAppearance', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeAppearance(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeAppearance()).toEqual(value)
+        });
+
+        it('can load attributeBuild', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeBuild(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeBuild()).toEqual(value)
+        });
+
+        it('can load attributeCreativity', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeCreativity(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeCreativity()).toEqual(value)
+        });
+
+        it('can load attributeFitness', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeFitness(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeFitness()).toEqual(value)
+        });
+
+        it('can load attributeInfluence', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeInfluence(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeInfluence()).toEqual(value)
+        });
+
+        it('can load attributeKnowledge', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeKnowledge(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeKnowledge()).toEqual(value)
+        });
+
+        it('can load attributePerception', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributePerception(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributePerception()).toEqual(value)
+        });
+
+        it('can load attributePsyche', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributePsyche(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributePsyche()).toEqual(value)
+        });
+
+        it('can load attributeWillpower', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3;
+            character.attributeWillpower(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.attributeWillpower()).toEqual(value)
+        });
+
+        it('can load skills', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var walkSkill = new skillObject('walk', 1, 'fitness', false);
+            var talkSkill = new skillObject('talk', 1, 'knowledge', true);
+            character.skills.push(walkSkill);
+            character.skills.push(talkSkill);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+            var loadedWalkSkill = character.skills().where(function(skill){return skill.name == walkSkill.name;})[0];
+            var loadedTalkSkill = character.skills().where(function(skill){return skill.name == talkSkill.name;})[0];
+
+            //Assert
+            expect(loadedTalkSkill.name).toEqual(talkSkill.name);
+            expect(loadedTalkSkill.level()).toEqual(talkSkill.level());
+            expect(loadedTalkSkill.attribute).toEqual(talkSkill.attribute);
+            expect(loadedTalkSkill.isComplex).toEqual(talkSkill.isComplex);
+            expect(loadedWalkSkill.name).toEqual(walkSkill.name);
+            expect(loadedWalkSkill.level()).toEqual(walkSkill.level());
+            expect(loadedWalkSkill.attribute).toEqual(walkSkill.attribute);
+            expect(loadedWalkSkill.isComplex).toEqual(walkSkill.isComplex);
+        });
     });
 });
 

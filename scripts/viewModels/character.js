@@ -1,7 +1,9 @@
 (function(cb) {
     cb.Character = function() {
         var self = this;
-        
+
+        self.uuid = UUID.generate();
+
         /* Descriptions */
         self.characterName = ko.observable('');
         self.characterProfession = ko.observable('');
@@ -22,8 +24,7 @@
         self.attributePsyche = ko.observable(-1);
         self.attributeWillpower = ko.observable(-1);
         self.skills = ko.observableArray();
-        self.uuid = UUID.generate();
-        
+
         /* Secondary Traits */
         self.secondaryTraitStrength = ko.computed({
             read: function() { return Math.floor((parseInt(self.attributeBuild()) + parseInt(self.attributeFitness())) / 2 );}
@@ -190,15 +191,53 @@
             if(data.uuid) self.uuid = data.uuid;
             if(data.name) self.characterName(data.name);
             if(data.experience) self.characterExperience(data.experience);
+            if(data.profession) self.characterProfession(data.profession);
+            if(data.rank) self.characterRank(data.rank);
+            if(data.nationality) self.characterNationality(data.nationality);
+            if(data.unit) self.characterUnit(data.unit);
+            if(data.agility) self.attributeAgility(data.agility);
+            if(data.appearance) self.attributeAppearance(data.appearance);
+            if(data.build) self.attributeBuild(data.build);
+            if(data.creativity) self.attributeCreativity(data.creativity);
+            if(data.fitness) self.attributeFitness(data.fitness);
+            if(data.influence) self.attributeInfluence(data.influence);
+            if(data.knowledge) self.attributeKnowledge(data.knowledge);
+            if(data.perception) self.attributePerception(data.perception);
+            if(data.psyche) self.attributePsyche(data.psyche);
+            if(data.willpower) self.attributeWillpower(data.willpower);
+            if(Array.isArray(data.skills))
+                data.skills.forEach(function(skill){
+                    self.skills.push(new skillObject(skill.name, skill.level, skill.attribute, skill.isComplex));
+                });
+
         }
 
         self.getModelData = function()
         {
+            var modelSkills = [];
+            self.skills().forEach(function(skill){
+                modelSkills.push({name: skill.name, level: skill.level(), attribute: skill.bonus, isComplex: skill.isComplex});
+            });
+            self.skills
             var modelData = {
                 uuid: self.uuid,
                 name: self.characterName(),
-                experience: self.characterExperience()
-                //profession: ?
+                experience: self.characterExperience(),
+                profession: self.characterProfession(),
+                rank: self.characterRank(),
+                nationality: self.characterNationality(),
+                unit: self.characterUnit(),
+                agility: self.attributeAgility(),
+                appearance: self.attributeAppearance(),
+                build: self.attributeBuild(),
+                creativity: self.attributeCreativity(),
+                fitness: self.attributeFitness(),
+                influence: self.attributeInfluence(),
+                knowledge: self.attributeKnowledge(),
+                perception: self.attributePerception(),
+                psyche: self.attributePsyche(),
+                willpower: self.attributeWillpower(),
+                skills: modelSkills
             };
             return modelData;
         }
