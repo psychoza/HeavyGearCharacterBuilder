@@ -211,16 +211,16 @@ describe('character - ', function () {
 	describe('character skills', function() {
 		beforeEach(function() {
 	        character = new CharacterBuilder.Character();
-	        character.skills.push(new skillObject("Hand-to-Hand", 0, character.attributeAgility, false));
+	        character.skills.push(new skillObject("Hand-to-Hand", 0, 'agility', false));
 	    });
 
 		it('- must have skills', function(){
 			expect(character.skills !== undefined).toBe(true);
         	expect(typeof (character.skills)).toEqual('function');
-        	expect(character.skills()[0] !== undefined).toBe(true);
-        	expect(character.skills()[0].name === "Hand-to-Hand").toBe(true);
-        	expect(character.skills()[0].level() === 0).toBe(true);
-        	expect(character.skills()[0].bonus() === -1).toBe(true);
+        	expect(character.skills()[0]).not.toEqual(undefined);
+        	expect(character.skills()[0].name).toEqual("Hand-to-Hand");
+        	expect(character.skills()[0].level()).toEqual(0);
+        	expect(character.attributeSelector(character.skills()[0].bonus)).toEqual(-1);
 		});
 
 		it('- must be able to modify skills', function(){
@@ -590,6 +590,19 @@ describe('skillsObject', function () {
             expect(typeof (randomSkill)).toEqual('object');
             expect(randomSkill.isComplex).toBeDefined();
             expect(randomSkill.isComplex).toBe(false);
+        });
+    });
+});
+
+describe('equipmentObject', function () {
+    var character = new window.CharacterBuilder.Character();
+
+    describe('- equipment object', function() {    	
+        var randomItem = new equipmentObject("item");
+        it('- must be an equipmentObject', function () {
+            expect(equipmentObject).toBeDefined();
+            expect(randomItem.name).toBeDefined();
+            expect(randomItem.name).toBe("item");            
         });
     });
 });

@@ -4,6 +4,14 @@
 
         self.uuid = UUID.generate();
 
+
+        /* UI Needed Items */        
+        self.inputSkillName = ko.observable('');
+        self.inputLevel = ko.observable(0);
+        self.inputAttributes = ko.observableArray(['Agility','Appearance','Build','Creativity','Fitness','Influence','Knowledge','Perception','Psyche','Willpower']);
+        self.inputAttribute = ko.observable();
+        self.inputComplex = ko.observable(false);
+
         /* Descriptions */
         self.characterName = ko.observable('');
         self.characterProfession = ko.observable('');
@@ -131,59 +139,56 @@
         };
 
         self.attributeSelector = function(attribute){
-            switch(attribute) {
+            switch(attribute.toLowerCase()) {
                 case "agility":
-                    return self.attributeAgility;
+                    return self.attributeAgility();
                     break;
                 case "appearance":
-                    return self.attributeAppearance;
+                    return self.attributeAppearance();
                     break;
                 case "build":
-                    return self.attributeBuild;
+                    return self.attributeBuild();
                     break;
                 case "creativity":
-                    return self.attributeCreativity;
+                    return self.attributeCreativity();
                     break;
                 case "fitness":
-                    return self.attributeFitness;
+                    return self.attributeFitness();
                     break;
                 case "influence":
-                    return self.attributeInfluence;
+                    return self.attributeInfluence();
                     break;
                 case "knowledge":
-                    return self.attributeKnowledge;
+                    return self.attributeKnowledge();
                     break;
                 case "perception":
-                    return self.attributePerception;
+                    return self.attributePerception();
                     break;
                 case "psyche":
-                    return self.attributePsyche;
+                    return self.attributePsyche();
                     break;
                 case "willpower":
-                    return self.attributeWillpower;
+                    return self.attributeWillpower();
                     break;
             }
             return null;
         }
 
-        self.insertSkill = function(){
-            var skillName = $("#inputSkillName")[0].value;
-            var level = $("#inputLevel")[0].value;
-            var attribute = self.attributeSelector($("#inputAttribute")[0].selectedOptions[0].value);
-            var isComplex = $("#inputComplex")[0].checked;
-
-            self.skills.push(new skillObject(skillName, level, attribute, isComplex));
-            $("#inputSkillName")[0].value = "";
-            $("#inputLevel")[0].value = "";
-            //self.attributeSelector($("#inputAttribute")[0].selectedOptions[0].value);
-            //$("#inputComplex")[0].checked;
+        self.insertSkill = function(){            
+            var attribute = $("#inputAttribute")[0].selectedOptions[0].value;
+            self.skills.push(new skillObject(self.inputSkillName(), self.inputLevel(), attribute, self.inputComplex()));
+            self.skills.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.inputSkillName('');
+            self.inputLevel(0);
+            self.inputComplex(false);
         };
 
         self.removeSkill = function(incomingSkill){
             var i = self.skills.indexOf(incomingSkill);
             if(i != -1) {
                 self.skills.splice(i, 1);
-            }            
+            }
+            self.skills.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
         };
 
         self.loadFromData = function(data)
@@ -259,8 +264,16 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     
     self.name = incomingName;
     self.level = ko.observable(incomingLevel);    
-    self.bonus = affectingAttribute;
+    self.bonus = affectingAttribute;    
     self.isComplex = isComplex;
+
+    return self;
+}
+
+var equipmentObject = function(incomingName) {
+    var self = this;
+    
+    self.name = incomingName;
 
     return self;
 }

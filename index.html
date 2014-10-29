@@ -31,6 +31,7 @@
 <body>
     <div class="rightBorder" id="rightBorder">
         <div class="leftBorder" id="leftBorder">
+            <br/>
             <div class="center">
                 <h1>Heavy Gear</h1>    
                 <h1>Character Builder</h1>
@@ -191,6 +192,53 @@
                 <div class="rightColumn">
                     <h2>Weapons</h2>
                     <div id="weaponsDiv">
+                        <table>
+                            <tr>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    ACC
+                                </th>
+                                <th>
+                                    DAM
+                                </th>
+                                <th>
+                                    RANGE
+                                </th>
+                                <th>
+                                    AMMO
+                                </th>
+                                <th>
+                                    ROF
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="inputWeaponName" type="text" />
+                                </td>
+                                <td>
+                                    <input id="inputWeaponAccuracy" type="text" style="width: 50px;" />
+                                </td>
+                                <td>
+                                    <input id="inputWeaponDamage" type="text" style="width: 50px;" />
+                                </td>
+                                <td>
+                                    <input id="inputWeaponRange" type="text" style="width: 50px;" />
+                                </td>
+                                <td>
+                                    <input id="inputWeaponAmmo" type="text" style="width: 50px;" />
+                                </td>
+                                <td>
+                                    <input id="inputWeaponRateOfFire" type="text" style="width: 50px;" />
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' />
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <br/>
                     <h2>Skills</h2>
@@ -214,28 +262,18 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input id="inputSkillName" type="text" />
+                                    <input id="inputSkillName" type="text" data-bind="value: inputSkillName" />
                                 </td>
                                 <td>
-                                    <input id="inputComplex" type="radio" value="true" name="radioIsComplex">Yes</input>
-                                    <input id="inputComplex" type="radio" value="false" name="radioIsComplex" checked>No</input>
+                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex">
+                                        <!--<span data-bind="text: (inputComplex()) ? 'Yes' : 'No'" style="width: 25px"></span>-->
+                                    </input>
                                 </td>
                                 <td>
-                                    <input class="attributeInput" id="inputLevel" type="text" />
+                                    <input class="attributeInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
                                 </td>
                                 <td>
-                                    <select id="inputAttribute">
-                                        <option value="agility">Agility</option>
-                                        <option value="appearance">Appearance</option>
-                                        <option value="build">Build</option>
-                                        <option value="creativity">Creativity</option>
-                                        <option value="fitness">Fitness</option>
-                                        <option value="influence">Influence</option>
-                                        <option value="knowledge">Knowledge</option>
-                                        <option value="perception">Perception</option>                        
-                                        <option value="psyche">Psyche</option>
-                                        <option value="willpower">Willpower</option>
-                                    </select>
+                                    <select id="inputAttribute" data-bind="options: inputAttributes"></select>
                                 </td>
                                 <td>
                                     <img src='images/plus.png' data-bind="click: insertSkill" />
@@ -255,7 +293,7 @@
                                     <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
                                 </td>
                                 <td>
-                                    <span data-bind="text: bonus"></span>
+                                    <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
                                 </td>
                                 <td>
                                     <img src='images/minus.png' data-bind="click: $root.removeSkill" />
