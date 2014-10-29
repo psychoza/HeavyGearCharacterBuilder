@@ -22,7 +22,7 @@
         self.attributePsyche = ko.observable(-1);
         self.attributeWillpower = ko.observable(-1);
         self.skills = ko.observableArray();
-        self.uuid = null;
+        self.uuid = UUID.generate();
         
         /* Secondary Traits */
         self.secondaryTraitStrength = ko.computed({
@@ -185,31 +185,6 @@
             }            
         };
 
-        self.saveToLocalStorage = function(){
-            if(!(self.uuid))
-                self.uuid = UUID.generate();
-            var modelData = {
-                uuid: self.uuid,
-                name: self.characterName(),
-                experience: self.characterExperience()
-                //profession: ?
-            };
-            var charactersJSON = window.localStorage.getItem(CharacterLocalStorage) || JSON.stringify([]);
-            var charactersRaw = JSON.parse(charactersJSON);
-            if(!Array.isArray(charactersRaw))
-                charactersRaw = [];
-            var index;
-            var found = false;
-            for(index = 0; index<charactersRaw.length; index++)
-                if(charactersRaw[index].uuid == self.uuid)
-                    {found = true; break;}
-            if(!found)
-                charactersRaw.push( new Models.Character(modelData) );
-            else
-                charactersRaw[index] = new Models.Character(modelData)
-            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify(charactersRaw));
-        };
-
         self.loadFromData = function(data)
         {
             if(data.uuid) self.uuid = data.uuid;
@@ -217,15 +192,23 @@
             if(data.experience) self.characterExperience(data.experience);
         }
 
+        self.getModelData = function()
+        {
+            var modelData = {
+                uuid: self.uuid,
+                name: self.characterName(),
+                experience: self.characterExperience()
+                //profession: ?
+            };
+            return modelData;
+        }
+
+        self.saveToLocalStorage = function(){
+            LocalStorage.saveCharacter(self.getModelData());
+        };
+
         self.loadFromLocalStorage = function(uuid){
-            var charactersJSON = window.localStorage.getItem(CharacterLocalStorage) || JSON.stringify([]);
-            var charactersRaw = JSON.parse(charactersJSON);
-            if(!Array.isArray(charactersRaw))
-                charactersRaw = [];
-            charactersRaw.forEach(function(c){
-                if(c.uuid == uuid)
-                    self.loadFromData(c);
-            });
+            self.loadFromData(LocalStorage.getCharacter(uuid));
         };
 
         return this;
