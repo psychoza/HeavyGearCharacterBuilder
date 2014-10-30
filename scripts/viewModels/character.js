@@ -188,9 +188,13 @@
             return null;
         }
 
+        self.sortSkills = function() {
+            self.skills.sort(function(left, right) { return left.name.toLowerCase() == right.name ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
+        }
+
         self.insertSkill = function(){            
             self.skills.push(new skillObject(self.inputSkillName(), self.inputLevel(), self.inputAttribute(), self.inputComplex()));
-            self.skills.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.sortSkills();
             self.inputSkillName('');
             self.inputLevel(0);
             self.inputComplex(false);
@@ -201,7 +205,7 @@
             if(i != -1) {
                 self.skills.splice(i, 1);
             }
-            self.skills.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.sortSkills();
         };
 
         self.loadFromData = function(data)
@@ -268,15 +272,19 @@
             self.loadFromData(LocalStorage.getCharacter(uuid));
         };
 
+        self.sortEquipment = function() {
+            self.equipment.sort(function(left, right) { return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
+        }
+
         self.insertWeapon = function(){            
             self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass()));
-            self.equipment.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.sortEquipment();
             self.inputEquipmentName('');
         };
 
         self.insertEquipment = function(){            
             self.equipment.push(new equipmentObject(self.inputEquipmentName(), 'Other', self.inputEquipmentMass()));
-            self.equipment.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.sortEquipment();
             self.inputEquipmentName('');
         };
 
@@ -285,7 +293,7 @@
             if(i != -1) {
                 self.equipment.splice(i, 1);
             }
-            self.equipment.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.sortEquipment();
         };
 
         return this;
