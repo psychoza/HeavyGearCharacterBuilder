@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 0.8.1')
+        self.versionNumber = ko.observable('v 0.8.2')
 
         self.uuid = UUID.generate();
 
@@ -13,6 +13,12 @@
         self.inputAttributes = ko.observableArray(['Agility','Appearance','Build','Creativity','Fitness','Influence','Knowledge','Perception','Psyche','Willpower']);
         self.inputAttribute = ko.observable();
         self.inputComplex = ko.observable(false);        
+
+        self.inputEquipmentName = ko.observable('');
+        self.inputEquipmentMass = ko.observable(0);
+
+        self.inputWeaponName = ko.observable('');
+        self.inputWeaponMass = ko.observable(0);
 
         /* Descriptions */
         self.characterName = ko.observable('');
@@ -34,6 +40,12 @@
         self.attributePsyche = ko.observable(-1);
         self.attributeWillpower = ko.observable(-1);
         self.skills = ko.observableArray();
+        self.equipment = ko.observableArray();
+        self.weapons = ko.computed({
+            read: function(){
+                return self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "weapon"; });
+            }
+        });
 
         /* Secondary Traits */
         self.secondaryTraitStrength = ko.computed({
@@ -177,8 +189,7 @@
         }
 
         self.insertSkill = function(){            
-            var attribute = $("#inputAttribute")[0].selectedOptions[0].value;
-            self.skills.push(new skillObject(self.inputSkillName(), self.inputLevel(), attribute, self.inputComplex()));
+            self.skills.push(new skillObject(self.inputSkillName(), self.inputLevel(), self.inputAttribute(), self.inputComplex()));
             self.skills.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
             self.inputSkillName('');
             self.inputLevel(0);
@@ -257,6 +268,26 @@
             self.loadFromData(LocalStorage.getCharacter(uuid));
         };
 
+        self.insertWeapon = function(){            
+            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass()));
+            self.equipment.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.inputEquipmentName('');
+        };
+
+        self.insertEquipment = function(){            
+            self.equipment.push(new equipmentObject(self.inputEquipmentName(), 'Other', self.inputEquipmentMass()));
+            self.equipment.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+            self.inputEquipmentName('');
+        };
+
+        self.removeEquipment = function(incomingEquipment){
+            var i = self.equipment.indexOf(incomingEquipment);
+            if(i != -1) {
+                self.equipment.splice(i, 1);
+            }
+            self.equipment.sort(function(left, right) { return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1) });
+        };
+
         return this;
     };
 })(window.CharacterBuilder = window.CharacterBuilder || {});
@@ -272,10 +303,50 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     return self;
 }
 
-var equipmentObject = function(incomingName) {
+var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire) {
     var self = this;
     
     self.name = incomingName;
+
+    // W for Weapons, A for Armor, H for Helmet, and O for Other?
+    if(incomingType)
+        self.type = incomingType;
+    else
+        self.type = 'Other';
+
+    if(incomingMass)
+        self.mass = incomingMass;
+    else
+        self.mass = 0;
+
+    if(incomingAccuracy)
+        self.accuracy = incomingAccuracy;
+    else
+        self.accuracy = 0;
+
+    if(incomingDamage)
+        self.damage = incomingDamage;
+    else
+        self.damage = 0;
+
+    if(incomingRange)
+        self.range = incomingRange;
+    else
+        self.range = 0;
+
+    self.mediumRange = self.range * 2;
+    self.longRange = self.mediumRange * 2;
+    self.extremeRange = self.longRange * 2;
+
+    if(incomingAmmoMax)
+        self.ammoMax = incomingAmmoMax;
+    else
+        self.ammoMax = 0;
+
+    if(incomingRateOfFire)
+        self.rateOfFire = incomingRateOfFire;
+    else
+        self.rateOfFire = 0;
 
     return self;
 }

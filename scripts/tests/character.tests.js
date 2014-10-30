@@ -571,6 +571,30 @@ describe('character - ', function () {
             expect(loadedWalkSkill.isComplex).toEqual(walkSkill.isComplex);
         });
     });
+
+	describe('equipment - ', function() {
+		beforeEach(function() {
+	        character = new CharacterBuilder.Character();
+	        character.equipment.push(new equipmentObject("Sig 552"));
+	    });
+
+		it('must have equipment', function(){
+			expect(character.equipment).not.toBe(undefined);
+        	expect(typeof (character.equipment)).toEqual('function');
+        	expect(character.equipment()[0]).not.toEqual(undefined);
+        	expect(character.equipment()[0].name).toEqual("Sig 552");
+		});
+
+		it('- must be able to insert skills', function(){
+			expect(character.insertEquipment).not.toBe(undefined);
+        	expect(typeof (character.insertEquipment)).toEqual('function');
+		});
+
+		it('- must be able to remove skills', function(){
+			expect(character.removeEquipment).not.toBe(undefined);
+        	expect(typeof (character.removeEquipment)).toEqual('function');
+		});
+	});
 });
 
 describe('skillsObject', function () {
@@ -598,11 +622,31 @@ describe('equipmentObject', function () {
     var character = new window.CharacterBuilder.Character();
 
     describe('- equipment object', function() {    	
-        var randomItem = new equipmentObject("item");
+        var randomItem = new equipmentObject("item", 'Weapon', 1, 1, 22, 50, 30, 1);
         it('- must be an equipmentObject', function () {
             expect(equipmentObject).toBeDefined();
-            expect(randomItem.name).toBeDefined();
-            expect(randomItem.name).toBe("item");            
+            expect(randomItem.name).toBeDefined();            
+            expect(randomItem.name).toBe("item");
+            expect(randomItem.type).toBeDefined();
+            expect(randomItem.type).toBe('Weapon');
+            expect(randomItem.mass).toBeDefined();
+            expect(randomItem.mass).toBe(1);
+            expect(randomItem.accuracy).toBeDefined();
+            expect(randomItem.accuracy).toBe(1);
+            expect(randomItem.damage).toBeDefined();
+            expect(randomItem.damage).toBe(22);
+            expect(randomItem.range).toBeDefined();
+            expect(randomItem.range).toBe(50);
+            expect(randomItem.mediumRange).toBeDefined();
+            expect(randomItem.mediumRange).toBe(100);
+            expect(randomItem.longRange).toBeDefined();
+            expect(randomItem.longRange).toBe(200);
+            expect(randomItem.extremeRange).toBeDefined();
+            expect(randomItem.extremeRange).toBe(400);
+            expect(randomItem.ammoMax).toBeDefined();
+            expect(randomItem.ammoMax).toBe(30);
+            expect(randomItem.rateOfFire).toBeDefined();
+            expect(randomItem.rateOfFire).toBe(1);
         });
     });
 });

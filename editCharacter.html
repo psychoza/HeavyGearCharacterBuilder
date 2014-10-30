@@ -200,6 +200,9 @@
                                     NAME
                                 </th>
                                 <th>
+                                    MASS
+                                </th>
+                                <th>
                                     ACC
                                 </th>
                                 <th>
@@ -219,27 +222,53 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input id="inputWeaponName" type="text" />
+                                    <input id="inputWeaponName" type="text" data-bind="value: inputWeaponName" />
                                 </td>
                                 <td>
-                                    <input id="inputWeaponAccuracy" type="text" style="width: 50px;" />
+                                    <input id="inputWeaponMass" type="text" data-bind="value: inputWeaponMass" />
                                 </td>
                                 <td>
-                                    <input id="inputWeaponDamage" type="text" style="width: 50px;" />
                                 </td>
                                 <td>
-                                    <input id="inputWeaponRange" type="text" style="width: 50px;" />
                                 </td>
                                 <td>
-                                    <input id="inputWeaponAmmo" type="text" style="width: 50px;" />
                                 </td>
                                 <td>
-                                    <input id="inputWeaponRateOfFire" type="text" style="width: 50px;" />
                                 </td>
                                 <td>
-                                    <img src='images/plus.png' />
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertWeapon" />
                                 </td>
                             </tr>
+                            <!-- ko foreach: weapons -->
+                            <tr>
+                                <td>
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: mass"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: accuracy"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: damage"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: range + '/' + mediumRange + '/' + longRange + '/' + extremeRange"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: ammoMax"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: rateOfFire"></span>
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
+                                </td>
+                            </tr>
+                            <!-- /ko -->
                         </table>
                     </div>
                     <br/>
@@ -275,7 +304,7 @@
                                     <input class="attributeInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
                                 </td>
                                 <td>
-                                    <select id="inputAttribute" data-bind="options: inputAttributes"></select>
+                                    <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
                                 </td>
                                 <td>
                                     <img src='images/plus.png' data-bind="click: insertSkill" />
@@ -298,8 +327,7 @@
                                     <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
                                 </td>
                                 <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />
-                                    
+                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
                                 </td>
                             </tr>
                             <!-- /ko -->
@@ -307,8 +335,52 @@
                     </div>
                     <br />                
                     <h2>Equipment</h2>
-                    <div id="equipmentDiv">
-                    </div>
+                        <div id="equipmentDiv">
+                            <table>
+                            <tr>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    MASS (kg)
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
+                                </td>
+                                <td>
+                                    <input id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertEquipment" />
+                                </td>
+                            </tr>
+                            <!-- ko foreach: equipment -->
+                            <tr>
+                                <td>
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: mass"></span>
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <tr>
+                                <td>
+                                    <span data-bind="text: 'TOTAL'"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass);})"></span>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
                     <br/>
                 </div>
             </div>
