@@ -1,8 +1,0 @@
-X - Finish Details (Name, profession, rank, nationality, unit, description)
-X - Finish Secondary Traits (unarmed/armed damage)
-X - Physical Status (wound thresholds)
-O - Weapons (table displaying weapon data)
-O - Equipment (equipment table with item & weight with sum of weight at the end)
-O - Save/Load HTML Storage (ability to keep character and not have to keep retyping everything)
-O - Export to TXT (output a file to send to someone)
-O - Import Optional (ability to use an exported file that someone could send you)

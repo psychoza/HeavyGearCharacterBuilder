@@ -1,1 +1,0 @@
-On character load from characterList, the editCharacter page "title" does not update to the loaded character's name without updating it.
