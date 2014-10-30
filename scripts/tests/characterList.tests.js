@@ -48,7 +48,7 @@ describe('characterList - ', function(){
             CharacterList.editCharacter(fakeChar);
 
             //Assert
-            expect(navSpy).toHaveBeenCalledWith('index.html?loadFromUUID='+fakeChar.uuid);
+            expect(navSpy).toHaveBeenCalledWith('editCharacter.html?loadFromUUID='+fakeChar.uuid);
         });
     });
 
@@ -57,12 +57,12 @@ describe('characterList - ', function(){
         beforeEach(function(){
             navSpy = spyOn(window,'Redirect').and.callFake(function(){});
         });
-        it('navigates to index.html', function(){
+        it('navigates to editCharacter.html', function(){
             //Arrange/Act
             CharacterList.createNewCharacter();
 
             //Assert
-            expect(navSpy).toHaveBeenCalledWith('index.html');
+            expect(navSpy).toHaveBeenCalledWith('editCharacter.html');
         });
     });
 

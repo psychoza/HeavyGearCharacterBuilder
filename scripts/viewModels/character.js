@@ -2,6 +2,8 @@
     cb.Character = function() {
         var self = this;
 
+        self.versionNumber = ko.observable('v 0.8.1')
+
         self.uuid = UUID.generate();
 
 
@@ -10,7 +12,7 @@
         self.inputLevel = ko.observable(0);
         self.inputAttributes = ko.observableArray(['Agility','Appearance','Build','Creativity','Fitness','Influence','Knowledge','Perception','Psyche','Willpower']);
         self.inputAttribute = ko.observable();
-        self.inputComplex = ko.observable(false);
+        self.inputComplex = ko.observable(false);        
 
         /* Descriptions */
         self.characterName = ko.observable('');
