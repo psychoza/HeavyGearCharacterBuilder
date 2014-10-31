@@ -2,10 +2,8 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 0.8.2')
-
+        self.versionNumber = ko.observable('v 0.8.3')
         self.uuid = UUID.generate();
-
 
         /* UI Needed Items */        
         self.inputSkillName = ko.observable('');
@@ -19,6 +17,11 @@
 
         self.inputWeaponName = ko.observable('');
         self.inputWeaponMass = ko.observable(0);
+        self.inputWeaponAccuracy = ko.observable(0);
+        self.inputWeaponDamage = ko.observable(0);
+        self.inputWeaponRange = ko.observable(0);
+        self.inputWeaponAmmo = ko.observable(0);
+        self.inputWeaponRateOfFire = ko.observable(0);
 
         /* Descriptions */
         self.characterName = ko.observable('');
@@ -277,15 +280,23 @@
         }
 
         self.insertWeapon = function(){            
-            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass()));
+            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire()));
+
             self.sortEquipment();
             self.inputEquipmentName('');
+            self.inputWeaponMass(0);
+            self.inputWeaponAccuracy(0);
+            self.inputWeaponDamage(0);
+            self.inputWeaponRange(0);
+            self.inputWeaponAmmo(0);
+            self.inputWeaponRateOfFire(0);
         };
 
         self.insertEquipment = function(){            
             self.equipment.push(new equipmentObject(self.inputEquipmentName(), 'Other', self.inputEquipmentMass()));
             self.sortEquipment();
             self.inputEquipmentName('');
+            self.inputEquipmentMass(0);
         };
 
         self.removeEquipment = function(incomingEquipment){

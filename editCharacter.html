@@ -158,31 +158,31 @@
                                 <th>DEFENCE MOD</th>                    
                             </tr>
                             <tr>
-                                <th>SPRINT</th>
+                                <th class="stringColumn">SPRINT</th>
                                 <td><span data-bind="text: movementSpeedSprint"></span></td>
                                 <td>?</td>
                                 <td>+2</td>                    
                             </tr>
                             <tr>
-                                <th>RUN</th>
+                                <th class="stringColumn">RUN</th>
                                 <td><span data-bind="text: movementSpeedRun"></span></td>
                                 <td>-3</td>
                                 <td>+2</td>
                             </tr>
                             <tr>
-                                <th>JOG</th>
+                                <th class="stringColumn">JOG</th>
                                 <td><span data-bind="text: movementSpeedJog"></span></td>
                                 <td>-2</td>
                                 <td>+1</td>
                             </tr>
                             <tr>
-                                <th>WALK</th>
+                                <th class="stringColumn">WALK</th>
                                 <td><span data-bind="text: movementSpeedWalk"></span></td>
                                 <td>-1</td>
                                 <td>+0</td>
                             </tr>
                             <tr>
-                                <th>STATIONARY</th>
+                                <th class="stringColumn">STATIONARY</th>
                                 <td>0</td>
                                 <td>0</td>
                                 <td>-1</td>
@@ -197,13 +197,13 @@
                         <table>
                             <tr>
                                 <th>
-                                    Name
+                                    NAME
                                 </th>
                                 <th>
-                                    Complex
+                                    CPLX
                                 </th>
                                 <th>
-                                    Level
+                                    LVL
                                 </th>
                                 <th>
                                     +/-
@@ -213,7 +213,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input id="inputSkillName" type="text" data-bind="value: inputSkillName" />
+                                    <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
                                 </td>
                                 <td>
                                     <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex">
@@ -221,7 +221,7 @@
                                     </input>
                                 </td>
                                 <td>
-                                    <input class="attributeInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
+                                    <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
                                 </td>
                                 <td>
                                     <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
@@ -232,7 +232,7 @@
                             </tr>
                             <!-- ko foreach: skills -->
                             <tr>
-                                <td>
+                                <td class="stringColumn">
                                     <span data-bind="text: name"></span>
                                 </td>
                                 <td>
@@ -284,20 +284,25 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input id="inputWeaponName" type="text" data-bind="value: inputWeaponName" />
+                                    <input class="stringInput" id="inputWeaponName" type="text" data-bind="value: inputWeaponName" />
                                 </td>
                                 <td>
-                                    <input id="inputWeaponMass" type="text" data-bind="value: inputWeaponMass" />
+                                    <input class="numericInput" id="inputWeaponMass" type="text" data-bind="value: inputWeaponMass" />
                                 </td>
                                 <td>
+                                    <input class="numericInput" id="inputWeaponAccuracy" type="text" data-bind="value: inputWeaponAccuracy" />
                                 </td>
                                 <td>
+                                    <input class="numericInput" id="inputWeaponDamage" type="text" data-bind="value: inputWeaponDamage" />
                                 </td>
                                 <td>
+                                    <input class="numericInput" id="inputWeaponRange" type="text" data-bind="value: inputWeaponRange" />
                                 </td>
                                 <td>
+                                    <input class="numericInput" id="inputWeaponAmmo" type="text" data-bind="value: inputWeaponAmmo" />
                                 </td>
                                 <td>
+                                    <input class="numericInput" id="inputWeaponRateOfFire" type="text" data-bind="value: inputWeaponRateOfFire" />
                                 </td>
                                 <td>
                                     <img src='images/plus.png' data-bind="click: insertWeapon" />
@@ -305,7 +310,7 @@
                             </tr>
                             <!-- ko foreach: weapons -->
                             <tr>
-                                <td>
+                                <td class="stringColumn">
                                     <span data-bind="text: name"></span>
                                 </td>
                                 <td>
@@ -349,10 +354,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
+                                    <input class="stringInput" id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
                                 </td>
                                 <td>
-                                    <input id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
+                                    <input class="numericInput" id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
                                 </td>
                                 <td>
                                     <img src='images/plus.png' data-bind="click: insertEquipment" />
@@ -360,7 +365,7 @@
                             </tr>
                             <!-- ko foreach: equipment -->
                             <tr>
-                                <td>
+                                <td class="stringColumn">
                                     <span data-bind="text: name"></span>
                                 </td>
                                 <td>
@@ -372,7 +377,7 @@
                             </tr>
                             <!-- /ko -->
                             <tr>
-                                <td>
+                                <td class="stringColumn">
                                     <span data-bind="text: 'TOTAL'"></span>
                                 </td>
                                 <td>
