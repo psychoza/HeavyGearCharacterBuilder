@@ -37,7 +37,7 @@
                 <h1>Heavy Gear</h1>    
                 <h1>Character Builder</h1>
                 <h6 data-bind="text: versionNumber"></h6>
-                <a href='tests.html'>Test Runner</a><br />
+                <a href='tests.html'>TestRunner</a><br />
                 <a href='characterList.html'>Character List</a><br />
                 <div id="exportOptions">
                     <form>
@@ -192,6 +192,68 @@
                     <br />
                 </div>
                 <div class="rightColumn">
+                    <h2>Skills</h2>
+                    <div id="skillsDiv">
+                        <table>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Complex
+                                </th>
+                                <th>
+                                    Level
+                                </th>
+                                <th>
+                                    +/-
+                                </th>
+                                <th>                    
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="inputSkillName" type="text" data-bind="value: inputSkillName" />
+                                </td>
+                                <td>
+                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex">
+                                        <!--<span data-bind="text: (inputComplex()) ? 'Yes' : 'No'" style="width: 25px"></span>-->
+                                    </input>
+                                </td>
+                                <td>
+                                    <input class="attributeInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
+                                </td>
+                                <td>
+                                    <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertSkill" />
+                                </td>
+                            </tr>
+                            <!-- ko foreach: skills -->
+                            <tr>
+                                <td>
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: level"></span>
+                                    <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
+                                    <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
+                                </td>
+                                <td>
+                                    <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </table>
+                    </div>
+                    <br />
                     <h2>Weapons</h2>
                     <div id="weaponsDiv">
                         <table>
@@ -200,7 +262,7 @@
                                     NAME
                                 </th>
                                 <th>
-                                    MASS
+                                    MASS (kg)
                                 </th>
                                 <th>
                                     ACC
@@ -271,69 +333,7 @@
                             <!-- /ko -->
                         </table>
                     </div>
-                    <br/>
-                    <h2>Skills</h2>
-                    <div id="skillsDiv">
-                        <table>
-                            <tr>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Complex
-                                </th>
-                                <th>
-                                    Level
-                                </th>
-                                <th>
-                                    +/-
-                                </th>
-                                <th>                    
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input id="inputSkillName" type="text" data-bind="value: inputSkillName" />
-                                </td>
-                                <td>
-                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex">
-                                        <!--<span data-bind="text: (inputComplex()) ? 'Yes' : 'No'" style="width: 25px"></span>-->
-                                    </input>
-                                </td>
-                                <td>
-                                    <input class="attributeInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
-                                </td>
-                                <td>
-                                    <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
-                                </td>
-                                <td>
-                                    <img src='images/plus.png' data-bind="click: insertSkill" />
-                                </td>
-                            </tr>
-                            <!-- ko foreach: skills -->
-                            <tr>
-                                <td>
-                                    <span data-bind="text: name"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: level"></span>
-                                    <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
-                                    <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
-                                </td>
-                                <td>
-                                    <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
-                                </td>
-                                <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
-                                </td>
-                            </tr>
-                            <!-- /ko -->
-                        </table>
-                    </div>
-                    <br />                
+                    <br/>                    
                     <h2>Equipment</h2>
                         <div id="equipmentDiv">
                             <table>

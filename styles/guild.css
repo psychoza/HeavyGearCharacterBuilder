@@ -21,7 +21,7 @@ body {
 }
 
 span, td, th {
-    font-size: 0.9em;
+    font-size: 0.8em;
 	color: #FEEB0B;	
 }
 h1 {
@@ -58,9 +58,6 @@ h6 {
 	text-align: center;
 	font-size: 0.75em;
 	font-family: 'Oswald', sans-serif;
-	/*background: -webkit-linear-gradient(#E1562D, #FEEB0B);
-  	-webkit-background-clip: text;
-  	-webkit-text-fill-color: transparent;*/
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 }
@@ -98,51 +95,39 @@ input[type="text"].focus {
     width: 85px;
 }
 
-#descriptionsDiv {
-	padding-left: 50px;
-}
-
-#attributesDiv {
-	padding-left: 50px;
+#descriptionsDiv, 
+#attributesDiv, 
+#equipmentDiv, 
+#secondaryTraitsDiv,
+#physicalStatusDiv,
+#skillsDiv,
+#movementSpeedDiv,
+#weaponsDiv
+{
+	padding-left: 30px;
 }
 
 #attributesTable {
 	width: 200px;	
 }
 
-#secondaryTraitsDiv {
-	padding-left: 50px;	
-}
-
 #secondaryTraitsTable {
 	width: 200px;	
-}
-
-#physicalStatusDiv {
-	padding-left: 50px;		
-}
-
-#skillsDiv {
-	padding-left: 50px;			
-}
-
-#movementSpeedDiv {
-	padding-left: 50px;	
-}
-
-#weaponsDiv {
-	padding-left: 50px;
 }
 
 .leftColumn {
 	float: left;
 	padding-left: 10px;
+	padding-right: 10px;
 	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .rightColumn {
 	float: left;
+	padding-left: 10px;
 	padding-right: 10px;
+	margin-left: 10px;
 	margin-right: 10px;
 }
 
@@ -155,7 +140,6 @@ input[type="text"].focus {
 	height: 715px;
 	margin-left: auto;
     margin-right: auto;
-    /*margin-top: 13px;*/
     overflow-x: none;
     overflow-y: auto;
     padding: 4px;    
