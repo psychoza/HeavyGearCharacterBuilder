@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 0.8.3')
+        self.versionNumber = ko.observable('v 0.8.4')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
@@ -22,6 +22,11 @@
         self.inputWeaponRange = ko.observable(0);
         self.inputWeaponAmmo = ko.observable(0);
         self.inputWeaponRateOfFire = ko.observable(0);
+
+        self.inputArmorName = ko.observable('')
+        self.inputIsHelmet = ko.observable(false);
+        self.inputArmorMass = ko.observable(0);
+        self.inputArmor = ko.observable(0);
 
         /* Descriptions */
         self.characterName = ko.observable('');
@@ -47,6 +52,11 @@
         self.weapons = ko.computed({
             read: function(){
                 return self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "weapon"; });
+            }
+        });
+        self.armor = ko.computed({
+            read: function(){
+                return self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "armor" || data.type.toLowerCase().trim() === "helmet"; });
             }
         });
 
@@ -118,6 +128,26 @@
                     return 1;
                 else
                     return value;
+            }
+        });
+        self.armorRating = ko.computed({
+            read: function() {                
+                var armorArray = self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "armor"; });
+                armorArray.sort(function(left, right) { return parseInt(left.armor) == parseInt(right.armor) ? 0 : (parseInt(left.armor) > parseInt(right.armor) ? -1 : 1) });                
+                if (armorArray.length > 0)
+                    return armorArray[0].armor;
+                else
+                    return 0;
+            }
+        });
+        self.helmetRating = ko.computed({
+            read: function() {                            
+                var helmetArray = self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "helmet"; });
+                helmetArray.sort(function(left, right) { return parseInt(left.armor) == parseInt(right.armor) ? 0 : (parseInt(left.armor) > parseInt(right.armor) ? -1 : 1) });                
+                if (helmetArray.length > 0)
+                    return helmetArray[0].armor;
+                else
+                    return 0;
             }
         });
 
@@ -192,7 +222,7 @@
         }
 
         self.sortSkills = function() {
-            self.skills.sort(function(left, right) { return left.name.toLowerCase() == right.name ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
+            self.skills.sort(function(left, right) { return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
         }
 
         self.insertSkill = function(){            
@@ -283,13 +313,26 @@
             self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire()));
 
             self.sortEquipment();
-            self.inputEquipmentName('');
+            self.inputWeaponName('');
             self.inputWeaponMass(0);
             self.inputWeaponAccuracy(0);
             self.inputWeaponDamage(0);
             self.inputWeaponRange(0);
             self.inputWeaponAmmo(0);
             self.inputWeaponRateOfFire(0);
+        };
+
+        self.insertArmor = function(){
+            if (self.inputIsHelmet())
+                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Helmet', self.inputArmorMass(), 0, 0, 0, 0, 0, self.inputArmor()));
+            else
+                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Armor', self.inputArmorMass(), 0, 0, 0, 0, 0, self.inputArmor()));
+
+            self.sortEquipment();
+            self.inputArmorName('')
+            self.inputIsHelmet(false);
+            self.inputArmorMass(0);
+            self.inputArmor(0);
         };
 
         self.insertEquipment = function(){            
@@ -322,12 +365,11 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     return self;
 }
 
-var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire) {
+var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingArmor) {
     var self = this;
     
     self.name = incomingName;
 
-    // W for Weapons, A for Armor, H for Helmet, and O for Other?
     if(incomingType)
         self.type = incomingType;
     else
@@ -366,6 +408,11 @@ var equipmentObject = function(incomingName, incomingType, incomingMass, incomin
         self.rateOfFire = incomingRateOfFire;
     else
         self.rateOfFire = 0;
+
+    if(incomingArmor)
+        self.armor = incomingArmor;
+    else
+        self.armor = 0;
 
     return self;
 }

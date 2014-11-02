@@ -112,7 +112,8 @@ input[type="text"].focus {
 #physicalStatusDiv,
 #skillsDiv,
 #movementSpeedDiv,
-#weaponsDiv
+#weaponsDiv,
+#armorDiv
 {
 	padding-left: 30px;
 }

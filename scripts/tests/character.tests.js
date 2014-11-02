@@ -595,6 +595,48 @@ describe('character - ', function () {
         	expect(typeof (character.removeEquipment)).toEqual('function');
 		});
 	});
+
+	describe('armor rating - ', function() {
+		beforeEach(function() {
+	        character = new CharacterBuilder.Character();
+	        character.equipment.push(new equipmentObject("Light Armor", "Armor", 2, 0, 0, 0, 0, 0, 20));
+	    });
+
+		it('must exist', function(){
+			expect(character.armorRating).not.toBe(undefined);
+        	expect(typeof (character.armorRating)).toEqual('function');        	
+		});
+
+		it('must return armor value', function(){
+			expect(character.armorRating()).toEqual(20);			
+		});
+
+		it('must return the greatest armor value', function(){
+			character.equipment.push(new equipmentObject("Medium Armor", "Armor", 2, 0, 0, 0, 0, 0, 30));
+    		expect(character.armorRating()).toEqual(30);
+		});
+	});
+
+	describe('helmet rating - ', function() {
+		beforeEach(function() {
+	        character = new CharacterBuilder.Character();
+	        character.equipment.push(new equipmentObject("Helmet", "Helmet", 2, 0, 0, 0, 0, 0, 10));
+	    });
+
+		it('must exist', function(){
+			expect(character.helmetRating).not.toBe(undefined);
+        	expect(typeof (character.helmetRating)).toEqual('function');        	
+		});
+
+		it('must return armor value', function(){
+			expect(character.helmetRating()).toEqual(10);
+		});
+
+		it('must return the greatest armor value', function(){
+			character.equipment.push(new equipmentObject("Heavy Helmet", "Helmet", 2, 0, 0, 0, 0, 0, 15));
+    		expect(character.helmetRating()).toEqual(15);
+		});
+	});
 });
 
 describe('skillsObject', function () {
@@ -647,6 +689,8 @@ describe('equipmentObject', function () {
             expect(randomItem.ammoMax).toBe(30);
             expect(randomItem.rateOfFire).toBeDefined();
             expect(randomItem.rateOfFire).toBe(1);
+            expect(randomItem.armor).toBeDefined();
+            expect(randomItem.armor).toBe(0);
         });
     });
 });

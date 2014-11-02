@@ -126,21 +126,21 @@
                             <tr>
                                 <th>FLESH WOUND</th>
                                 <td><span data-bind="text: injuryThresholdFlesh"></span></td>
-                                <td></td>
+                                <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>-1</th>
                                 <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
                             </tr>
                             <tr>
                                 <th>DEEP WOUND</th>
                                 <td><span data-bind="text: injuryThresholdDeep"></span></td>
-                                <td></td>
+                                <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>-2</th>
                                 <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
                             </tr>
                             <tr>
                                 <th>INSTANT DEATH</th>
                                 <td><span data-bind="text: injuryThresholdInstant"></span></td>
-                                <td></td>
+                                <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>DEAD</th>
                                 <td></td>
                             </tr>
@@ -216,9 +216,7 @@
                                     <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
                                 </td>
                                 <td>
-                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex">
-                                        <!--<span data-bind="text: (inputComplex()) ? 'Yes' : 'No'" style="width: 25px"></span>-->
-                                    </input>
+                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex"></input>
                                 </td>
                                 <td>
                                     <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
@@ -338,7 +336,65 @@
                             <!-- /ko -->
                         </table>
                     </div>
-                    <br/>                    
+                    <br/>
+                    <h2>Armor</h2>
+                    <div id="armorDiv">
+                        <table>
+                            <tr>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    MASS (kg)
+                                </th>
+                                <th>
+                                    HELMET?
+                                </th>
+                                <th>
+                                    ARMOR
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="stringInput" id="inputArmorName" type="text" data-bind="value: inputArmorName" />
+                                </td>
+                                <td>
+                                    <input class="numericInput" id="inputArmorMass" type="text" data-bind="value: inputArmorMass" />
+                                </td>
+                                <td>
+                                    <input id="inputIsHelmet" type="checkbox" data-bind="checked: inputIsHelmet"></input>
+                                </td>
+                                <td>
+                                    <input class="numericInput" id="inputArmor" type="text" data-bind="value: inputArmor" />
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertArmor" />
+                                </td>
+                            </tr>
+                            <!-- ko foreach: armor -->
+                            <tr>
+                                <td class="stringColumn">
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: mass"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: (type.toLowerCase() == 'helmet') ? 'Yes' : 'No'"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: armor"></span>
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </table>
+                    </div>
+                    <br/>
                     <h2>Equipment</h2>
                         <div id="equipmentDiv">
                             <table>
