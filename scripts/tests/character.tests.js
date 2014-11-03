@@ -637,6 +637,41 @@ describe('character - ', function () {
     		expect(character.helmetRating()).toEqual(15);
 		});
 	});
+
+	describe('character points - ', function() {
+		beforeEach(function() {
+	        character = new CharacterBuilder.Character();	        
+	    });
+
+		it('must exist', function(){
+			expect(character.characterPoints).not.toBe(undefined);
+        	expect(typeof (character.characterPoints)).toEqual('function');        	
+		});
+
+		it('must equal 0 when all attributes are -1', function(){
+			expect(character.characterPoints()).toEqual(0);
+		});
+
+		it('must equal 1 when an attribute is 0', function(){
+			character.attributeCreativity(0);
+    		expect(character.characterPoints()).toEqual(1);
+		});
+
+		it('must equal 4 when an attribute is 1', function(){
+			character.attributeCreativity(1);
+    		expect(character.characterPoints()).toEqual(4);
+		});
+
+		it('must equal -1 when an attribute is -2', function(){
+			character.attributeInfluence(-2);			
+    		expect(character.characterPoints()).toEqual(-1);
+		});
+
+		it('must equal -4 when an attribute is -3', function(){
+			character.attributeInfluence(-3);			
+    		expect(character.characterPoints()).toEqual(-4);
+		});
+	});
 });
 
 describe('skillsObject', function () {

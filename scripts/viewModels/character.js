@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 0.8.4')
+        self.versionNumber = ko.observable('v 0.9.1')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
@@ -47,6 +47,31 @@
         self.attributePerception = ko.observable(-1);
         self.attributePsyche = ko.observable(-1);
         self.attributeWillpower = ko.observable(-1);
+
+        var calculatePoints = function(attribute){
+
+            if (attribute < -1)
+                return  ((parseInt(attribute) + 1) * (parseInt(attribute) + 1)) * (-1);
+            else    
+                return (parseInt(attribute) + 1) * (parseInt(attribute) + 1);
+        };
+
+        self.characterPoints = ko.computed({
+            read: function(){
+                var agility = calculatePoints(self.attributeAgility());
+                var appearance = calculatePoints(self.attributeAppearance());
+                var build = calculatePoints(self.attributeBuild());
+                var creativity = calculatePoints(self.attributeCreativity());
+                var fitness = calculatePoints(self.attributeFitness());
+                var influence = calculatePoints(self.attributeInfluence());
+                var knowledge = calculatePoints(self.attributeKnowledge());
+                var perception = calculatePoints(self.attributePerception());
+                var psyche = calculatePoints(self.attributePsyche());
+                var willpower = calculatePoints(self.attributeWillpower());
+                return agility + appearance + build + creativity + fitness + influence + knowledge + perception + psyche + willpower;                
+            }
+        });
+
         self.skills = ko.observableArray();
         self.equipment = ko.observableArray();
         self.weapons = ko.computed({
