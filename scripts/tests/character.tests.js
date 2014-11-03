@@ -672,6 +672,36 @@ describe('character - ', function () {
     		expect(character.characterPoints()).toEqual(-4);
 		});
 	});
+
+	describe('skill points - ', function() {
+		beforeEach(function() {
+	        character = new CharacterBuilder.Character();	        
+	    });
+
+		it('must exist', function(){
+			expect(character.skillPoints).not.toBe(undefined);
+        	expect(typeof (character.skillPoints)).toEqual('function');        	
+		});
+
+		it('must equal 0 when all skills are 0 or there are none', function(){
+			expect(character.skillPoints()).toEqual(0);
+		});
+
+		it('must equal 1 when a skill is level 1', function(){
+			character.skills.push(new skillObject("Hand-to-Hand", 1, 'agility', false));
+    		expect(character.skillPoints()).toEqual(1);
+		});
+
+		it('must equal 4 when a skill is level 2', function(){
+			character.skills.push(new skillObject("Hand-to-Hand", 2, 'agility', false));
+    		expect(character.skillPoints()).toEqual(4);
+		});
+
+		it('must equal 8 when a skill is level 2 and complex', function(){
+			character.skills.push(new skillObject("Stealth", 2, 'agility', true));
+    		expect(character.skillPoints()).toEqual(8);
+		});		
+	});
 });
 
 describe('skillsObject', function () {
