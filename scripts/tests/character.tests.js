@@ -585,14 +585,30 @@ describe('character - ', function () {
         	expect(character.equipment()[0].name).toEqual("Sig 552");
 		});
 
-		it('- must be able to insert skills', function(){
+		it('- must be able to insert equipment', function(){
 			expect(character.insertEquipment).not.toBe(undefined);
         	expect(typeof (character.insertEquipment)).toEqual('function');
 		});
 
-		it('- must be able to remove skills', function(){
+		it('- must be able to remove equipment', function(){
 			expect(character.removeEquipment).not.toBe(undefined);
         	expect(typeof (character.removeEquipment)).toEqual('function');
+		});
+
+		it('- must be able to increase quantity', function(){
+			expect(character.increaseQuantity).not.toBe(undefined);
+        	expect(typeof (character.increaseQuantity)).toEqual('function');
+        	expect(character.equipment()[0].quantity()).toEqual(1);
+        	character.increaseQuantity(character.equipment()[0]);
+        	expect(character.equipment()[0].quantity()).toEqual(2);
+		});
+
+		it('- must be able to decrease quantity', function(){
+			expect(character.decreaseQuantity).not.toBe(undefined);
+        	expect(typeof (character.decreaseQuantity)).toEqual('function');
+        	expect(character.equipment()[0].quantity()).toEqual(1);
+        	character.decreaseQuantity(character.equipment()[0]);
+        	expect(character.equipment()[0].quantity()).toEqual(0);
 		});
 	});
 
@@ -756,6 +772,8 @@ describe('equipmentObject', function () {
             expect(randomItem.rateOfFire).toBe(1);
             expect(randomItem.armor).toBeDefined();
             expect(randomItem.armor).toBe(0);
+            expect(randomItem.quantity).toBeDefined();
+            expect(randomItem.quantity()).toBe(1);
         });
     });
 });

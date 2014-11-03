@@ -396,6 +396,14 @@
             self.sortEquipment();
         };
 
+        self.increaseQuantity = function(incomingEquipment){
+            incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) + 1);
+        };
+
+        self.decreaseQuantity = function(incomingEquipment){
+            incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
+        };
+
         return this;
     };
 })(window.CharacterBuilder = window.CharacterBuilder || {});
@@ -411,7 +419,7 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     return self;
 }
 
-var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingArmor) {
+var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingArmor, incomingQuantity) {
     var self = this;
     
     self.name = incomingName;
@@ -459,6 +467,11 @@ var equipmentObject = function(incomingName, incomingType, incomingMass, incomin
         self.armor = incomingArmor;
     else
         self.armor = 0;
+
+    if (incomingQuantity)
+        self.quantity = ko.observable(incomingQuantity);
+    else
+        self.quantity = ko.observable(1);
 
     return self;
 }

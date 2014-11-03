@@ -408,6 +408,9 @@
                                     MASS (kg)
                                 </th>
                                 <th>
+                                    #
+                                </th>
+                                <th>
                                 </th>
                             </tr>
                             <tr>
@@ -416,6 +419,8 @@
                                 </td>
                                 <td>
                                     <input class="numericInput" id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
+                                </td>
+                                <td>
                                 </td>
                                 <td>
                                     <img src='images/plus.png' data-bind="click: insertEquipment" />
@@ -430,6 +435,11 @@
                                     <span data-bind="text: mass"></span>
                                 </td>
                                 <td>
+                                    <span data-bind="text: quantity"></span>
+                                    <img src='images/arrow_up.png' data-bind="click: $root.increaseQuantity" />
+                                    <img src='images/arrow_down.png' data-bind="click: $root.decreaseQuantity" />
+                                </td>
+                                <td>
                                     <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
                                 </td>
                             </tr>
@@ -439,7 +449,7 @@
                                     <span data-bind="text: 'TOTAL'"></span>
                                 </td>
                                 <td>
-                                    <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass);})"></span>
+                                    <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
                                 </td>
                             </tr>
                         </table>
