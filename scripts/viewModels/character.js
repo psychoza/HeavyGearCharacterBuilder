@@ -310,7 +310,6 @@
                 data.skills.forEach(function(skill){
                     self.skills.push(new skillObject(skill.name, skill.level, skill.attribute, skill.isComplex));
                 });
-
         }
 
         self.getModelData = function()
@@ -403,6 +402,202 @@
         self.decreaseQuantity = function(incomingEquipment){
             incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
         };
+
+        self.standardSkills = ko.observableArray([
+            new skillObject("Acrobatics", 0, 'Agility', false),
+            new skillObject("Aircraft Pilot", 0, 'Agility', true),
+            new skillObject("Animal Handling", 0, 'creativity', false),
+            new skillObject("Archery", 0, 'Agility', false),
+            new skillObject("Athletics", 0, 'Fitness', false),
+            new skillObject("Bureaucracy", 0, 'Knowledge', true),
+            new skillObject("Business", 0, 'Knowledge', true),
+            new skillObject("Camouflage", 0, 'Creativity', false),
+            new skillObject("Combat Sense", 0, 'Perception', false),
+            new skillObject("Communications", 0, 'Knowledge', true),
+            new skillObject("Computer", 0, 'Knowledge', true),
+            new skillObject("Cooking", 0, 'Creativity', false),
+            new skillObject("Craft (jewelry)", 0, 'Creativity', false),
+            new skillObject("Craft (metalwork)", 0, 'Creativity', false),
+            new skillObject("Craft (woodcraft)", 0, 'Creativity', false),
+            new skillObject("Craft (weaving)", 0, 'Creativity', false),
+            new skillObject("Dance", 0, 'Agility', false),
+            new skillObject("Demolition", 0, 'Knowledge', true),
+            new skillObject("Disguise", 0, 'Creativity', false),
+            new skillObject("Dodge", 0, 'Agility', false),
+            new skillObject("Drive", 0, 'Agility', false),
+            new skillObject("Earth Sciences", 0, 'Knowledge', true),
+            new skillObject("Electronic Design", 0, 'Knowledge', true),
+            new skillObject("Electronic Warfare", 0, 'Creativity', true),
+            new skillObject("Electronics", 0, 'Knowledge', true),
+            new skillObject("Etiquette", 0, 'Influence', false),
+            new skillObject("First Aid", 0, 'Knowledge', false),
+            new skillObject("Foreign Language ", 0, 'Knowledge', false),
+            new skillObject("Forgery", 0, 'Creativity', true),
+            new skillObject("Forward Observing", 0, 'Perception', false),
+            new skillObject("G-Handling", 0, 'Fitness', false),
+            new skillObject("Gambling", 0, 'Perception', false),
+            new skillObject("Gunnery (air)", 0, 'Perception', true),
+            new skillObject("Gunnery (ground)", 0, 'Perception', true),
+            new skillObject("Gunnery (heavy gear)", 0, 'Perception', true),
+            new skillObject("Gunnery (naval)", 0, 'Perception', true),
+            new skillObject("Gunnery (space)", 0, 'Perception', true),
+            new skillObject("Haggling", 0, 'Influence', false),
+            new skillObject("Hand-to-Hand", 0, 'Agility', false),
+            new skillObject("Heavy Gear Architecture", 0, 'Knowledge', true),
+            new skillObject("Heavy Gear Pilot", 0, 'Agility', true),
+            new skillObject("Heavy Weapons", 0, 'Agility', false),
+            new skillObject("Human Perception", 0, 'Psyche', false),
+            new skillObject("Interrogation", 0, 'Creativity', false),
+            new skillObject("Intimidate", 0, 'Build', false),
+            new skillObject("Investigation", 0, 'Perception', true),
+            new skillObject("Law", 0, 'Knowledge', true),
+            new skillObject("Leadership", 0, 'Influence', false),
+            new skillObject("Life Sciences", 0, 'Knowledge', true),
+            new skillObject("Literature", 0, 'Creativity', false),
+            new skillObject("Mechanical Design", 0, 'Knowledge', true),
+            new skillObject("Mechanics", 0, 'Knowledge', false),
+            new skillObject("Medicine", 0, 'Knowledge', true),
+            new skillObject("Melee", 0, 'Agility', false),
+            new skillObject("Music", 0, 'Creativity', false),
+            new skillObject("Naval Pilot", 0, 'Perception', true),
+            new skillObject("Navigation (air)", 0, 'Knowledge', true),
+            new skillObject("Navigation (land)", 0, 'Knowledge', true),
+            new skillObject("Navigation (sea)", 0, 'Knowledge', true),
+            new skillObject("Navigation (space)", 0, 'Knowledge', true),
+            new skillObject("Notice", 0, 'Perception', false),
+            new skillObject("Parachuting", 0, 'Agility', false),
+            new skillObject("Physical Sciences", 0, 'Knowledge', true),
+            new skillObject("Psychology", 0, 'Knowledge', true),
+            new skillObject("Riding", 0, 'Agility', false),
+            new skillObject("Security", 0, 'Knowledge', true),
+            new skillObject("Sleight-of-Hand", 0, 'Agility', false),
+            new skillObject("Small Arms", 0, 'Agility', false),
+            new skillObject("Sniping", 0, 'Perception', false),
+            new skillObject("Social Sciences", 0, 'Knowledge', true),
+            new skillObject("Space Pilot", 0, 'Creativity', true),
+            new skillObject("Stealth", 0, 'Agility', true),
+            new skillObject("Streetwise", 0, 'Influence', false),
+            new skillObject("Strider Pilot", 0, 'Agility', true),
+            new skillObject("Survival", 0, 'Creativity', false),
+            new skillObject("Swimming", 0, 'Fitness', false),
+            new skillObject("Tactics", 0, 'Creativity', false),
+            new skillObject("Teaching", 0, 'Creativity', false),
+            new skillObject("Theatrics", 0, 'Influence', false),
+            new skillObject("Throwing", 0, 'Agility', false),
+            new skillObject("Tinker", 0, 'Creativity', true),
+            new skillObject("Visual Art", 0, 'Creativity', false),
+            new skillObject("Zero-G", 0, 'Agility', false)
+        ]);
+
+        self.skillsSuggestions = ko.observableArray([
+            "Acrobatics",
+            "Aircraft Pilot", 
+            "Animal Handling", 
+            "Archery", 
+            "Athletics", 
+            "Bureaucracy", 
+            "Business", 
+            "Camouflage", 
+            "Combat Sense", 
+            "Communications", 
+            "Computer", 
+            "Cooking", 
+            "Craft (jewelry)", 
+            "Craft (metalwork)", 
+            "Craft (woodcraft)", 
+            "Craft (weaving)", 
+            "Dance", 
+            "Demolition", 
+            "Disguise", 
+            "Dodge", 
+            "Drive", 
+            "Earth Sciences", 
+            "Electronic Design", 
+            "Electronic Warfare", 
+            "Electronics", 
+            "Etiquette", 
+            "First Aid", 
+            "Foreign Language ", 
+            "Forgery", 
+            "Forward Observing", 
+            "G-Handling", 
+            "Gambling", 
+            "Gunnery (air)", 
+            "Gunnery (ground)", 
+            "Gunnery (heavy gear)", 
+            "Gunnery (naval)", 
+            "Gunnery (space)", 
+            "Haggling", 
+            "Hand-to-Hand", 
+            "Heavy Gear Architecture", 
+            "Heavy Gear Pilot", 
+            "Heavy Weapons", 
+            "Human Perception", 
+            "Interrogation", 
+            "Intimidate", 
+            "Investigation", 
+            "Law", 
+            "Leadership", 
+            "Life Sciences", 
+            "Literature", 
+            "Mechanical Design", 
+            "Mechanics", 
+            "Medicine", 
+            "Melee", 
+            "Music", 
+            "Naval Pilot", 
+            "Navigation (air)", 
+            "Navigation (land)", 
+            "Navigation (sea)", 
+            "Navigation (space)", 
+            "Notice", 
+            "Parachuting", 
+            "Physical Sciences", 
+            "Psychology", 
+            "Riding", 
+            "Security", 
+            "Sleight-of-Hand", 
+            "Small Arms", 
+            "Sniping", 
+            "Social Sciences", 
+            "Space Pilot", 
+            "Stealth", 
+            "Streetwise", 
+            "Strider Pilot", 
+            "Survival", 
+            "Swimming", 
+            "Tactics", 
+            "Teaching", 
+            "Theatrics", 
+            "Throwing", 
+            "Tinker", 
+            "Visual Art", 
+            "Zero-G"
+        ]);
+
+        self.selectedSuggestion = ko.observable(null);
+        self.selectedSuggestion.subscribe(function () { 
+            self.tesing(); 
+        });
+
+        $('#inputSkillName').devbridgeAutocomplete({
+            lookup: self.skillsSuggestions(),
+            onSelect: function (suggestion) { self.selectedSuggestion(suggestion.value); }
+        });
+
+        self.tesing = function() {
+            if (self.selectedSuggestion())
+            {
+                var skill = self.standardSkills().where(function (data) { return data.name.toLowerCase().trim() === self.selectedSuggestion().toLowerCase().trim(); });
+                if (skill)
+                {
+                    self.inputSkillName(skill[0].name);
+                    self.inputLevel(skill[0].level());
+                    self.inputAttribute(skill[0].bonus);
+                    self.inputComplex(skill[0].isComplex);
+                }
+            }
+        }                
 
         return this;
     };

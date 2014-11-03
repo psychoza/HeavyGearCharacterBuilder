@@ -3,8 +3,8 @@
 	src: url('gearhead.ttf');
 }
 
-body {
-	background-color: #21201E;
+body {	
+	background: #21201E url('../images/HEAVYGEARUNIVERSE.jpeg') no-repeat fixed center;	
 	color: #FEEB0B;
 }
 .leftBorder {

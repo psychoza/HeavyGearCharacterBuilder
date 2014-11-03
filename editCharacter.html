@@ -8,6 +8,7 @@
     <meta name="description" content="A web toll using the 2nd edition rule book from 1997 to generate a character">
     <link rel="stylesheet" type="text/css" href="styles/reset.css">
     <link rel="stylesheet" type="text/css" href="styles/guild.css">
+    <link rel="stylesheet" type="text/css" href="styles/autocomplete.css">
     <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
@@ -20,6 +21,7 @@
     <script src="scripts/global/localStorage.js"></script>
     <!-- libraries -->
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.autocomplete.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
     <!-- models -->
     <script src='scripts/models/skill.js'></script>
@@ -125,21 +127,21 @@
                                 <th>#</th>
                             </tr>
                             <tr>
-                                <th>FLESH WOUND</th>
+                                <th class="stringColumn">FLESH WOUND</th>
                                 <td><span data-bind="text: injuryThresholdFlesh"></span></td>
                                 <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>-1</th>
                                 <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
                             </tr>
                             <tr>
-                                <th>DEEP WOUND</th>
+                                <th class="stringColumn">DEEP WOUND</th>
                                 <td><span data-bind="text: injuryThresholdDeep"></span></td>
                                 <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>-2</th>
                                 <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
                             </tr>
                             <tr>
-                                <th>INSTANT DEATH</th>
+                                <th class="stringColumn">INSTANT DEATH</th>
                                 <td><span data-bind="text: injuryThresholdInstant"></span></td>
                                 <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>DEAD</th>
@@ -191,6 +193,11 @@
                         </table>
                     </div>
                     <br />
+                    <div style="margin: auto !important; clear: both;">
+                        <a href="https://github.com/psychoza/HeavyGearCharacterBuilder">
+                            <input type="image" src="images/github.png" alt="Github" width="25px" height="25px">
+                        </a>
+                    </div>
                 </div>
                 <div class="rightColumn">
                     <h2>Skills</h2>
@@ -456,9 +463,10 @@
                         </div>
                     <br/>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
+
     <script>
         $(function(){
             var character = new window.CharacterBuilder.Character();
