@@ -310,6 +310,12 @@
                 data.skills.forEach(function(skill){
                     self.skills.push(new skillObject(skill.name, skill.level, skill.attribute, skill.isComplex));
                 });
+            if(Array.isArray(data.equipment))
+                data.equipment.forEach(function(equipment){
+                    self.equipment.push(new equipmentObject(equipment.name, equipment.type, 
+                        equipment.mass, equipment.accuracy, equipment.damage, equipment.range, 
+                        equipment.ammoMax, equipment.rateOfFire, equipment.armor, equipment.quantity));
+                });
         }
 
         self.getModelData = function()
@@ -318,7 +324,12 @@
             self.skills().forEach(function(skill){
                 modelSkills.push({name: skill.name, level: skill.level(), attribute: skill.bonus, isComplex: skill.isComplex});
             });
-            self.skills
+            var modelEquipment = [];
+            self.equipment().forEach(function(equipment){
+                modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass, 
+                    accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
+                    rateOfFire: equipment.rateOfFire, armor: equipment.armor, quantity: equipment.quantity});
+            });
             var modelData = {
                 uuid: self.uuid,
                 name: self.characterName(),
@@ -337,7 +348,8 @@
                 perception: self.attributePerception(),
                 psyche: self.attributePsyche(),
                 willpower: self.attributeWillpower(),
-                skills: modelSkills
+                skills: modelSkills,
+                equipment: modelEquipment
             };
             return modelData;
         }
@@ -578,11 +590,6 @@
         self.selectedSuggestion = ko.observable(null);
         self.selectedSuggestion.subscribe(function () { 
             self.tesing(); 
-        });
-
-        $('#inputSkillName').devbridgeAutocomplete({
-            lookup: self.skillsSuggestions(),
-            onSelect: function (suggestion) { self.selectedSuggestion(suggestion.value); }
         });
 
         self.tesing = function() {

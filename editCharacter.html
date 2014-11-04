@@ -473,7 +473,10 @@
             var urlParams = GetQueryParams(window.location.href);
             if(urlParams.loadFromUUID)
                 character.loadFromLocalStorage(urlParams.loadFromUUID);
-
+            $('#inputSkillName').devbridgeAutocomplete({
+                lookup: character.skillsSuggestions(),
+                onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
+            });
             ko.applyBindings(character, $('body').get(0));
             Title.watchCharacterName(character.characterName);
             ko.applyBindings(Title, $('#title').get(0));
