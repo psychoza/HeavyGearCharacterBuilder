@@ -328,7 +328,7 @@
             self.equipment().forEach(function(equipment){
                 modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass, 
                     accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
-                    rateOfFire: equipment.rateOfFire, armor: equipment.armor, quantity: equipment.quantity});
+                    rateOfFire: equipment.rateOfFire, armor: equipment.armor, quantity: equipment.quantity()});
             });
             var modelData = {
                 uuid: self.uuid,

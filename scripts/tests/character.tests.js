@@ -596,7 +596,8 @@ describe('character - ', function () {
             expect(loadedGunEquipment.ammoMax).toEqual(gunEquipment.ammoMax);
             expect(loadedGunEquipment.rateOfFire).toEqual(gunEquipment.rateOfFire);
             expect(loadedGunEquipment.armor).toEqual(gunEquipment.armor);
-            expect(loadedGunEquipment.quantity).toEqual(gunEquipment.quantity);
+            expect(loadedGunEquipment.quantity()).toEqual(gunEquipment.quantity());
+
             expect(loadedArmorEquipment.name).toEqual(armorEquipment.name);
             expect(loadedArmorEquipment.type).toEqual(armorEquipment.type);
             expect(loadedArmorEquipment.mass).toEqual(armorEquipment.mass);
@@ -606,7 +607,7 @@ describe('character - ', function () {
             expect(loadedArmorEquipment.ammoMax).toEqual(armorEquipment.ammoMax);
             expect(loadedArmorEquipment.rateOfFire).toEqual(armorEquipment.rateOfFire);
             expect(loadedArmorEquipment.armor).toEqual(armorEquipment.armor);
-            expect(loadedArmorEquipment.quantity).toEqual(armorEquipment.quantity);
+            expect(loadedArmorEquipment.quantity()).toEqual(armorEquipment.quantity());
         });
     });
 
