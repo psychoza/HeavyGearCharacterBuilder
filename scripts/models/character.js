@@ -25,9 +25,9 @@ var Models = Models || {};
         self.skills = [];
         self.equipment = [];
         if(Array.isArray(data.skills))
-            data.skills.forEach(function(skill){ self.skills.push(new Models.Skill(skill)); });
+            data.skills.foreach(function(skill){ self.skills.push(new Models.Skill(skill)); });
         if(Array.isArray(data.equipment))
-            data.equipment.forEach(function(item){self.equipment.push(new Models.Equipment(item)); });
+            data.equipment.foreach(function(item){self.equipment.push(new Models.Equipment(item)); });
         return self;
     };
 

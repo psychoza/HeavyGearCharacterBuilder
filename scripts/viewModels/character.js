@@ -307,11 +307,11 @@
             if(data.psyche) self.attributePsyche(data.psyche);
             if(data.willpower) self.attributeWillpower(data.willpower);
             if(Array.isArray(data.skills))
-                data.skills.forEach(function(skill){
+                data.skills.foreach(function(skill){
                     self.skills.push(new skillObject(skill.name, skill.level, skill.attribute, skill.isComplex));
                 });
             if(Array.isArray(data.equipment))
-                data.equipment.forEach(function(equipment){
+                data.equipment.foreach(function(equipment){
                     self.equipment.push(new equipmentObject(equipment.name, equipment.type, 
                         equipment.mass, equipment.accuracy, equipment.damage, equipment.range, 
                         equipment.ammoMax, equipment.rateOfFire, equipment.armor, equipment.quantity));
@@ -321,11 +321,11 @@
         self.getModelData = function()
         {
             var modelSkills = [];
-            self.skills().forEach(function(skill){
+            self.skills().foreach(function(skill){
                 modelSkills.push({name: skill.name, level: skill.level(), attribute: skill.bonus, isComplex: skill.isComplex});
             });
             var modelEquipment = [];
-            self.equipment().forEach(function(equipment){
+            self.equipment().foreach(function(equipment){
                 modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass, 
                     accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
                     rateOfFire: equipment.rateOfFire, armor: equipment.armor, quantity: equipment.quantity()});

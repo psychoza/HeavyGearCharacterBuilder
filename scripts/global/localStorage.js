@@ -30,7 +30,7 @@ var LocalStorage = (function(){
         if(!Array.isArray(charactersRaw))
             charactersRaw = [];
         var characterToReturn = null;
-        charactersRaw.forEach(function(c){
+        charactersRaw.foreach(function(c){
             if(c.uuid == uuid)
                 characterToReturn = c;
         });
