@@ -139,7 +139,7 @@
                                 <td><span data-bind="text: injuryThresholdDeep"></span></td>
                                 <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>-2</th>
-                                <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                                <td><input class="attributeInput" type="text" data-bind="value: injuryCountDeep, valueUpdate:'afterkeydown'" /></td>
                             </tr>
                             <tr>
                                 <th class="stringColumn">INSTANT DEATH</th>
@@ -147,6 +147,13 @@
                                 <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
                                 <th>DEAD</th>
                                 <td></td>
+                            </tr>
+                            <tr>
+                                <th class="stringColumn">SYSTEM SHOCK</th>
+                                <td><span data-bind="text: systemShockThreshold"></span></td>
+                                <td></td>
+                                <th>DEAD</th>
+                                <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></td>
                             </tr>
                         </table>
                     </div>
