@@ -570,6 +570,45 @@ describe('character - ', function () {
             expect(loadedWalkSkill.attribute).toEqual(walkSkill.attribute);
             expect(loadedWalkSkill.isComplex).toEqual(walkSkill.isComplex);
         });
+
+		it('can load equipment', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var gunEquipment =  new equipmentObject("gun", 'Weapon', 1, 1, 22, 50, 30, 1);
+            var armorEquipment = new equipmentObject("armor", "Armor", 2, 0, 0, 0, 0, 0, 20);
+            character.equipment.push(gunEquipment);
+            character.equipment.push(armorEquipment);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+            var loadedGunEquipment = character.equipment().where(function(equipment){return equipment.name == gunEquipment.name;})[0];
+            var loadedArmorEquipment = character.equipment().where(function(equipment){return equipment.name == armorEquipment.name;})[0];
+
+            //Assert
+            expect(loadedGunEquipment.name).toEqual(gunEquipment.name);
+            expect(loadedGunEquipment.type).toEqual(gunEquipment.type);
+            expect(loadedGunEquipment.mass).toEqual(gunEquipment.mass);
+            expect(loadedGunEquipment.accuracy).toEqual(gunEquipment.accuracy);
+            expect(loadedGunEquipment.damage).toEqual(gunEquipment.damage);
+            expect(loadedGunEquipment.range).toEqual(gunEquipment.range);
+            expect(loadedGunEquipment.ammoMax).toEqual(gunEquipment.ammoMax);
+            expect(loadedGunEquipment.rateOfFire).toEqual(gunEquipment.rateOfFire);
+            expect(loadedGunEquipment.armor).toEqual(gunEquipment.armor);
+            expect(loadedGunEquipment.quantity()).toEqual(gunEquipment.quantity());
+
+            expect(loadedArmorEquipment.name).toEqual(armorEquipment.name);
+            expect(loadedArmorEquipment.type).toEqual(armorEquipment.type);
+            expect(loadedArmorEquipment.mass).toEqual(armorEquipment.mass);
+            expect(loadedArmorEquipment.accuracy).toEqual(armorEquipment.accuracy);
+            expect(loadedArmorEquipment.damage).toEqual(armorEquipment.damage);
+            expect(loadedArmorEquipment.range).toEqual(armorEquipment.range);
+            expect(loadedArmorEquipment.ammoMax).toEqual(armorEquipment.ammoMax);
+            expect(loadedArmorEquipment.rateOfFire).toEqual(armorEquipment.rateOfFire);
+            expect(loadedArmorEquipment.armor).toEqual(armorEquipment.armor);
+            expect(loadedArmorEquipment.quantity()).toEqual(armorEquipment.quantity());
+        });
     });
 
 	describe('equipment - ', function() {

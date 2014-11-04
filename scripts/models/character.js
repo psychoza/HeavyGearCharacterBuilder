@@ -23,9 +23,11 @@ var Models = Models || {};
         self.psyche = data.psyche || -1;
         self.willpower = data.willpower || -1;
         self.skills = [];
+        self.equipment = [];
         if(Array.isArray(data.skills))
             data.skills.forEach(function(skill){ self.skills.push(new Models.Skill(skill)); });
-
+        if(Array.isArray(data.equipment))
+            data.equipment.forEach(function(item){self.equipment.push(new Models.Equipment(item)); });
         return self;
     };
 

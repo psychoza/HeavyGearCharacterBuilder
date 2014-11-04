@@ -24,6 +24,7 @@
     <script src="scripts/jquery.autocomplete.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
     <!-- models -->
+    <script src="scripts/models/equipment.js"></script>
     <script src='scripts/models/skill.js'></script>
     <script src='scripts/models/character.js'></script>
     <!-- viewModels -->
@@ -473,7 +474,10 @@
             var urlParams = GetQueryParams(window.location.href);
             if(urlParams.loadFromUUID)
                 character.loadFromLocalStorage(urlParams.loadFromUUID);
-
+            $('#inputSkillName').devbridgeAutocomplete({
+                lookup: character.skillsSuggestions(),
+                onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
+            });
             ko.applyBindings(character, $('body').get(0));
             Title.watchCharacterName(character.characterName);
             ko.applyBindings(Title, $('#title').get(0));
