@@ -206,6 +206,12 @@ describe('character - ', function () {
         it('must have loadFromLocalStorage', function(){
             expect(typeof(character.loadFromLocalStorage)).toEqual("function");
         });
+        it('must have currency', function(){
+        	expect(character.currency !== undefined).toBe(true);
+        });
+        it('must have currencyOnHand', function(){
+        	expect(character.currencyOnHand !== undefined).toBe(true);
+        });
 	});
 
 	describe('character skills', function() {
@@ -608,6 +614,36 @@ describe('character - ', function () {
             expect(loadedArmorEquipment.rateOfFire).toEqual(armorEquipment.rateOfFire);
             expect(loadedArmorEquipment.armor).toEqual(armorEquipment.armor);
             expect(loadedArmorEquipment.quantity()).toEqual(armorEquipment.quantity());
+        });
+
+		it('can load currency', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3000;
+            character.currency(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.currency()).toEqual(value)
+        });
+
+        it('can load currencyOnHand', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 3000;
+            character.currencyOnHand(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.currencyOnHand()).toEqual(value)
         });
     });
 

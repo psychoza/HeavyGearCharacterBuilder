@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.0')
+        self.versionNumber = ko.observable('v 1.0.1')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
@@ -35,6 +35,8 @@
         self.characterNationality = ko.observable('');
         self.characterUnit = ko.observable('');
         self.characterExperience = ko.observable(0);
+        self.currency = ko.observable(0);
+        self.currencyOnHand = ko.observable(0);
 
         /* Attributes */
         self.attributeAgility = ko.observable(-1);
@@ -316,6 +318,8 @@
                         equipment.mass, equipment.accuracy, equipment.damage, equipment.range, 
                         equipment.ammoMax, equipment.rateOfFire, equipment.armor, equipment.quantity));
                 });
+            if(data.currency) self.currency(data.currency);
+            if(data.currencyOnHand) self.currencyOnHand(data.currencyOnHand);
         }
 
         self.getModelData = function()
@@ -349,7 +353,9 @@
                 psyche: self.attributePsyche(),
                 willpower: self.attributeWillpower(),
                 skills: modelSkills,
-                equipment: modelEquipment
+                equipment: modelEquipment,
+                currency: self.currency(),
+                currencyOnHand: self.currencyOnHand(),
             };
             return modelData;
         }
