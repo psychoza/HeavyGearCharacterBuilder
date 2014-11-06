@@ -40,11 +40,11 @@
             <h6 data-bind="text: versionNumber"></h6>
             <br/>
             <div class="center">                
-                <a href='tests.html'>TestRunner</a><br />
                 <a href='characterList.html'>Character List</a><br />
                 <div id="exportOptions">
                     <form>
                         <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
+                        <input type="button" value="Download to ASCII format" data-bind="click: exportToASCII, visible: canExport()===true" style="display: none;" />
                     </form>
                 </div>
                 <div class="leftColumn">

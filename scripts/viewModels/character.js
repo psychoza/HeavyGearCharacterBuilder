@@ -415,6 +415,27 @@
             incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
         };
 
+        self.canExportValue = ko.observable(null);
+        self.canExport = ko.computed({read: function(){
+            var canExport = self.canExportValue();
+
+            if(canExport==null) {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://tageverything.org/za/server/isAlive.php',
+                    contentType: "application/json; charset=utf-8"
+                })
+                    .done(function(){self.canExportValue(true);})
+                    .fail(function(){self.canExportValue(false);});
+                return false;
+            }
+            return canExport;
+        }});
+
+        self.exportToASCII = function(){
+            alert('not implemented');
+        };
+
         self.standardSkills = ko.observableArray([
             new skillObject("Acrobatics", 0, 'Agility', false),
             new skillObject("Aircraft Pilot", 0, 'Agility', true),
