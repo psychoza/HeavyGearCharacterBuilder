@@ -417,29 +417,6 @@
 
         self.debugme = function(){debugger;};
 
-        self.canExportValue = ko.observable(null);
-        self.canExport = ko.computed({read: function(){
-            var canExport = self.canExportValue();
-
-            if(canExport==null) {
-                $.support.cors = true;
-                canExport = false;
-                self.canExportValue(canExport);
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://tageverything.org/za/server/isAlive.php',
-                    dataType: 'jsonp',
-                    contentType: 'application/json; charset=utf-8'
-                })
-                    .done(function(data){self.canExportValue(true);})
-                    .fail(function(){
-                        //Intentionally ignored.  This just means we cannot reach the API server
-                    });
-                return false;
-            }
-            return canExport;
-        }});
-
         self.exportToASCII = function(){
             alert('not implemented');
         };

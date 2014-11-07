@@ -12,6 +12,10 @@
     <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
+    <!-- libraries -->
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.autocomplete.min.js"></script>
+    <script src='scripts/knockout-3.1.0.js'></script>
     <!-- globals -->
     <script src="scripts/global/prototypeString.js"></script>
     <script src="scripts/global/prototypeArray.js"></script>
@@ -19,10 +23,7 @@
     <script src="scripts/global/getQueryParams.js"></script>
     <script src="scripts/global/uuid.js"></script>
     <script src="scripts/global/localStorage.js"></script>
-    <!-- libraries -->
-    <script src="scripts/jquery.min.js"></script>
-    <script src="scripts/jquery.autocomplete.min.js"></script>
-    <script src='scripts/knockout-3.1.0.js'></script>
+    <script src="scripts/global/export.js"></script>
     <!-- models -->
     <script src="scripts/models/equipment.js"></script>
     <script src='scripts/models/skill.js'></script>
@@ -44,7 +45,7 @@
                 <div id="exportOptions">
                     <form>
                         <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
-                        <input type="button" value="Download to ASCII format" data-bind="click: exportToASCII, visible: canExport()===true" style="display: none;" />
+                        <input type="button" value="Download to ASCII format" data-bind="click: exportToASCII, visible: Export.isEnabled()===true" style="display: none;" />
                     </form>
                 </div>
                 <div class="leftColumn">
