@@ -38,11 +38,11 @@
             <h1>Heavy Gear</h1>
             <h1>Character Builder</h1>
             <h6 data-bind="text: versionNumber"></h6>
-            <div style="margin-left: auto;margin-right: auto;display: block;text-align: -webkit-center;">
+            <!--<div style="margin-left: auto;margin-right: auto;display: block;text-align: -webkit-center;">
                 <iframe width="178" height="100" src="https://www.youtube.com/embed/mV7bND-_KdI?autoplay=1&showinfo=0&iv_load_policy=3&controls=0" frameborder="0" allowfullscreen></iframe>
-            </div>
+            </div>-->
             <br/>
-            <div class="center">                
+            <div class="center">
                 <a href='tests.html'>TestRunner</a><br />
                 <a href='characterList.html'>Character List</a><br />
                 <div id="exportOptions">
@@ -177,7 +177,7 @@
                             <tr>
                                 <th class="stringColumn">SPRINT</th>
                                 <td><span data-bind="text: movementSpeedSprint"></span></td>
-                                <td>?</td>
+                                <td>n/a</td>
                                 <td>+2</td>                    
                             </tr>
                             <tr>
@@ -207,11 +207,11 @@
                         </table>
                     </div>
                     <br />
-                    <div style="margin: auto !important; clear: both;">
+                    <!--<div style="margin: auto !important; clear: both;">
                         <a href="https://github.com/psychoza/HeavyGearCharacterBuilder">
                             <input type="image" src="images/github.png" alt="Github" width="25px" height="25px">
                         </a>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="rightColumn">
                     <h2>Skills</h2>
@@ -301,6 +301,9 @@
                                     ROF
                                 </th>
                                 <th>
+                                    RADIUS
+                                </th>
+                                <th>
                                 </th>
                             </tr>
                             <tr>
@@ -324,6 +327,9 @@
                                 </td>
                                 <td>
                                     <input class="numericInput" id="inputWeaponRateOfFire" type="text" data-bind="value: inputWeaponRateOfFire" />
+                                </td>
+                                <td>
+                                    <input class="numericInput" id="inputWeaponRadius" type="text" data-bind="value: inputWeaponRadius" />
                                 </td>
                                 <td>
                                     <img src='images/plus.png' data-bind="click: insertWeapon" />
@@ -351,6 +357,9 @@
                                 </td>
                                 <td>
                                     <span data-bind="text: rateOfFire"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: radius"></span>
                                 </td>
                                 <td>
                                     <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    

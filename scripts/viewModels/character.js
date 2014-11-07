@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.1')
+        self.versionNumber = ko.observable('v 1.0.2')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
@@ -22,6 +22,7 @@
         self.inputWeaponRange = ko.observable(0);
         self.inputWeaponAmmo = ko.observable(0);
         self.inputWeaponRateOfFire = ko.observable(0);
+        self.inputWeaponRadius = ko.observable(0);
 
         self.inputArmorName = ko.observable('')
         self.inputIsHelmet = ko.observable(false);
@@ -317,7 +318,7 @@
                 data.equipment.forEach(function(equipment){
                     self.equipment.push(new equipmentObject(equipment.name, equipment.type, 
                         equipment.mass, equipment.accuracy, equipment.damage, equipment.range, 
-                        equipment.ammoMax, equipment.rateOfFire, equipment.armor, equipment.quantity));
+                        equipment.ammoMax, equipment.rateOfFire, equipment.radius, equipment.armor, equipment.quantity));
                 });
             if(data.currency) self.currency(data.currency);
             if(data.currencyOnHand) self.currencyOnHand(data.currencyOnHand);
@@ -334,7 +335,7 @@
             self.equipment().forEach(function(equipment){
                 modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass, 
                     accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
-                    rateOfFire: equipment.rateOfFire, armor: equipment.armor, quantity: equipment.quantity()});
+                    rateOfFire: equipment.rateOfFire, radius: equipment.radius, armor: equipment.armor, quantity: equipment.quantity()});
             });
             var modelData = {
                 uuid: self.uuid,
@@ -376,7 +377,7 @@
         }
 
         self.insertWeapon = function(){            
-            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire()));
+            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire(),self.inputWeaponRadius()));
 
             self.sortEquipment();
             self.inputWeaponName('');
@@ -386,13 +387,14 @@
             self.inputWeaponRange(0);
             self.inputWeaponAmmo(0);
             self.inputWeaponRateOfFire(0);
+            self.inputWeaponRadius(0);
         };
 
         self.insertArmor = function(){
             if (self.inputIsHelmet())
-                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Helmet', self.inputArmorMass(), 0, 0, 0, 0, 0, self.inputArmor()));
+                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Helmet', self.inputArmorMass(), 0, 0, 0, 0, 0, 0, self.inputArmor()));
             else
-                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Armor', self.inputArmorMass(), 0, 0, 0, 0, 0, self.inputArmor()));
+                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Armor', self.inputArmorMass(), 0, 0, 0, 0, 0, 0, self.inputArmor()));
 
             self.sortEquipment();
             self.inputArmorName('')
@@ -630,7 +632,7 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     return self;
 }
 
-var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingArmor, incomingQuantity) {
+var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingRadius, incomingArmor, incomingQuantity) {
     var self = this;
     
     self.name = incomingName;
@@ -673,6 +675,11 @@ var equipmentObject = function(incomingName, incomingType, incomingMass, incomin
         self.rateOfFire = incomingRateOfFire;
     else
         self.rateOfFire = 0;
+
+    if(incomingRadius)
+        self.radius = incomingRadius;
+    else
+        self.radius = 0;
 
     if(incomingArmor)
         self.armor = incomingArmor;
