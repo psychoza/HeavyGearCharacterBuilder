@@ -37,6 +37,7 @@
         self.characterExperience = ko.observable(0);
         self.currency = ko.observable(0);
         self.currencyOnHand = ko.observable(0);
+        self.emergencyDice = ko.observable(0);
 
         /* Attributes */
         self.attributeAgility = ko.observable(-1);
@@ -320,6 +321,7 @@
                 });
             if(data.currency) self.currency(data.currency);
             if(data.currencyOnHand) self.currencyOnHand(data.currencyOnHand);
+            if(data.emergencyDice) self.emergencyDice(data.emergencyDice);
         }
 
         self.getModelData = function()
@@ -356,6 +358,7 @@
                 equipment: modelEquipment,
                 currency: self.currency(),
                 currencyOnHand: self.currencyOnHand(),
+                emergencyDice: self.emergencyDice(),
             };
             return modelData;
         }

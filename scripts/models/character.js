@@ -30,6 +30,7 @@ var Models = Models || {};
             data.equipment.forEach(function(item){self.equipment.push(new Models.Equipment(item)); });
         self.currency = data.currency || 0;
         self.currencyOnHand = data.currencyOnHand || 0;
+        self.emergencyDice = data.emergencyDice || 0;
         return self;
     };
 

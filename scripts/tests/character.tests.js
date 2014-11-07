@@ -212,6 +212,9 @@ describe('character - ', function () {
         it('must have currencyOnHand', function(){
         	expect(character.currencyOnHand !== undefined).toBe(true);
         });
+        it('must have emergencyDice', function(){
+        	expect(character.emergencyDice !== undefined).toBe(true);
+        });
 	});
 
 	describe('character skills', function() {
@@ -644,6 +647,21 @@ describe('character - ', function () {
 
             //Assert
             expect(character.currencyOnHand()).toEqual(value)
+        });
+
+        it('can load emergencyDice', function(){
+            //Arrange
+            var uuid = character.uuid;
+            var value = 1;
+            character.emergencyDice(value);
+            character.saveToLocalStorage();
+            character = new CharacterBuilder.Character();
+
+            //Act
+            character.loadFromLocalStorage(uuid);
+
+            //Assert
+            expect(character.emergencyDice()).toEqual(value)
         });
     });
 
