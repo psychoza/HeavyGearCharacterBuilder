@@ -1,3 +1,5 @@
 <?php
-$isAlive = true;
-echo json_encode($isAlive);
+$isAlive = ["isAlive"=>"true"];
+header("Access-Control-Allow-Origin: *");
+header('Content-Type: application/json');
+echo $_GET['callback'] . "(" . json_encode($isAlive) . ")";

@@ -415,18 +415,26 @@
             incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
         };
 
+        self.debugme = function(){debugger;};
+
         self.canExportValue = ko.observable(null);
         self.canExport = ko.computed({read: function(){
             var canExport = self.canExportValue();
 
             if(canExport==null) {
+                $.support.cors = true;
+                canExport = false;
+                self.canExportValue(canExport);
                 $.ajax({
                     type: 'GET',
                     url: 'http://tageverything.org/za/server/isAlive.php',
-                    contentType: "application/json; charset=utf-8"
+                    dataType: 'jsonp',
+                    contentType: 'application/json; charset=utf-8'
                 })
-                    .done(function(){self.canExportValue(true);})
-                    .fail(function(){self.canExportValue(false);});
+                    .done(function(data){self.canExportValue(true);})
+                    .fail(function(){
+                        //Intentionally ignored.  This just means we cannot reach the API server
+                    });
                 return false;
             }
             return canExport;
