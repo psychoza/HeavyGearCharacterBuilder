@@ -1,0 +1,21 @@
+/* Chrome, Safari, Opera */
+@-webkit-keyframes openLeft {
+    from {left: 100%;}
+    to {left: 0%;}
+}
+
+@keyframes openLeft {
+    from {left: 100%;}
+    to {left: 0%;}
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes openRight {
+    from {right: 50%;}
+    to {right: 0%;}
+}
+
+@keyframes openRight {
+    from {right: 50%;}
+    to {right: 0%;}
+}

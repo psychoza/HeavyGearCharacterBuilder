@@ -6,9 +6,7 @@
     <meta name="coauthor" content="Sean Carnes">
     <meta name="keywords" content="heavy, gear, character, builder">
     <meta name="description" content="A web toll using the 2nd edition rule book from 1997 to generate a character">
-    <link rel="stylesheet" type="text/css" href="styles/reset.css">
-    <link rel="stylesheet" type="text/css" href="styles/guild.css">
-    <link rel="stylesheet" type="text/css" href="styles/autocomplete.css">
+    <link rel="stylesheet" type="text/css" href="styles/master.css">
     <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
@@ -32,28 +30,34 @@
     <script src="scripts/viewModels/title.js"></script>
 
 </head>
-<body>    
+<body>
+    <div class="test"></div>
     <div class="rightBorder" id="rightBorder">
         <div class="leftBorder" id="leftBorder">
-            <h1>Heavy Gear</h1>
-            <h1>Character Builder</h1>
-            <h6 data-bind="text: versionNumber"></h6>
-            <!--<div style="margin-left: auto;margin-right: auto;display: block;text-align: -webkit-center;">
-                <iframe width="178" height="100" src="https://www.youtube.com/embed/mV7bND-_KdI?autoplay=1&showinfo=0&iv_load_policy=3&controls=0" frameborder="0" allowfullscreen></iframe>
-            </div>-->
+            <header>
+                <h1>Heavy Gear</h1>
+                <h1>Character Builder</h1>
+                <h6 data-bind="text: versionNumber"></h6>
+                <!--<div style="margin: auto !important; clear: both; display: block;">
+                    <a href="https://github.com/psychoza/HeavyGearCharacterBuilder">
+                        <input type="image" src="images/github.png" alt="Github" width="25px" height="25px">
+                    </a>
+                </div>-->
+            </header>                    
             <br/>
             <div class="center">
-                <a href='tests.html'>TestRunner</a><br />
-                <a href='characterList.html'>Character List</a><br />
-                <div id="exportOptions">
-                    <form>
+                <nav>
+                    <div id="buttons">
+                        <a href='tests.html'><input type="button" value="TEST RUNNER"/></a>
+                        <a href="characterList.html"><input type="button" value="Character List"/></a>
                         <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
-                    </form>
-                </div>
-                <div class="leftColumn">
-                    <!--<input type="file" id="file" name="file" enctype="multipart/form-data" />-->
-                    <h2>Character Details</h2>
+                    </div>
+                </nav>
+                <br/>
+                <br/>
+                <section>
                     <div id="descriptionsDiv">
+                        <h2>Character Details</h2>
                             <label>Name:</label><input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
                             <label>Profession:</label><input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
                             <label>Rank:</label><input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
@@ -64,10 +68,10 @@
                             <label>Currency On Hand:</label><input type="text" data-bind="value: currencyOnHand, valueUpdate:'afterkeydown'" /><br />
                             <label>Emergency Dice:</label><input type="text" data-bind="value: emergencyDice, valueUpdate:'afterkeydown'" /><br />
                     </div>
-                    <br />
-
-                    <h2>Attributes</h2>
+                </section>
+                <section>
                     <div id="attributesDiv">
+                        <h2>Attributes</h2>
                         CPs: <span data-bind="text: characterPoints"></span>
                         <table id="attributesTable">
                             <tr>
@@ -100,10 +104,8 @@
                             </tr>
                         </table>
                     </div>
-                    <br />
-
-                    <h2>Secondary Traits</h2>
-                    <div id="secondaryTraitsDiv">            
+                    <div id="secondaryTraitsDiv">
+                        <h2>Secondary Traits</h2>
                         <table id="secondaryTraitsTable">               
                             <tr>
                                 <th>STR</th>
@@ -121,10 +123,8 @@
                             </tr>
                         </table>
                     </div>
-                    <br />
-                    
-                    <h2>Physical Status</h2>
-                    <div id="physicalStatusDiv">            
+                    <div id="physicalStatusDiv">
+                        <h2>Physical Status</h2>
                         <table id="physicalStatusTable">
                             <tr>
                                 <th>INJURY</th>
@@ -163,120 +163,113 @@
                             </tr>
                         </table>
                     </div>
-                    <br />
-
+                    <div id="movementSpeedDiv">
                     <h2>Movement</h2>
-                    <div id="movementSpeedDiv">            
-                        <table id="movementSpeedTable">
-                            <tr>
-                                <th></th>
-                                <th>SPEED (m/round)</th>
-                                <th>ATTACK MOD</th>
-                                <th>DEFENCE MOD</th>                    
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">SPRINT</th>
-                                <td><span data-bind="text: movementSpeedSprint"></span></td>
-                                <td>n/a</td>
-                                <td>+2</td>                    
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">RUN</th>
-                                <td><span data-bind="text: movementSpeedRun"></span></td>
-                                <td>-3</td>
-                                <td>+2</td>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">JOG</th>
-                                <td><span data-bind="text: movementSpeedJog"></span></td>
-                                <td>-2</td>
-                                <td>+1</td>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">WALK</th>
-                                <td><span data-bind="text: movementSpeedWalk"></span></td>
-                                <td>-1</td>
-                                <td>+0</td>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">STATIONARY</th>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>-1</td>
-                            </tr>
-                        </table>
+                    <table id="movementSpeedTable">
+                        <tr>
+                            <th></th>
+                            <th>SPEED (m/round)</th>
+                            <th>ATTACK MOD</th>
+                            <th>DEFENCE MOD</th>                    
+                        </tr>
+                        <tr>
+                            <th class="stringColumn">SPRINT</th>
+                            <td><span data-bind="text: movementSpeedSprint"></span></td>
+                            <td>n/a</td>
+                            <td>+2</td>                    
+                        </tr>
+                        <tr>
+                            <th class="stringColumn">RUN</th>
+                            <td><span data-bind="text: movementSpeedRun"></span></td>
+                            <td>-3</td>
+                            <td>+2</td>
+                        </tr>
+                        <tr>
+                            <th class="stringColumn">JOG</th>
+                            <td><span data-bind="text: movementSpeedJog"></span></td>
+                            <td>-2</td>
+                            <td>+1</td>
+                        </tr>
+                        <tr>
+                            <th class="stringColumn">WALK</th>
+                            <td><span data-bind="text: movementSpeedWalk"></span></td>
+                            <td>-1</td>
+                            <td>+0</td>
+                        </tr>
+                        <tr>
+                            <th class="stringColumn">STATIONARY</th>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>-1</td>
+                        </tr>
+                    </table>
                     </div>
-                    <br />
-                    <!--<div style="margin: auto !important; clear: both;">
-                        <a href="https://github.com/psychoza/HeavyGearCharacterBuilder">
-                            <input type="image" src="images/github.png" alt="Github" width="25px" height="25px">
-                        </a>
-                    </div>-->
-                </div>
-                <div class="rightColumn">
-                    <h2>Skills</h2>
+                </section>
+                <section>
                     <div id="skillsDiv">
-                        SPs: <span data-bind="text: skillPoints"></span>
-                        <table>
-                            <tr>
-                                <th>
-                                    NAME
-                                </th>
-                                <th>
-                                    CPLX
-                                </th>
-                                <th>
-                                    LVL
-                                </th>
-                                <th>
-                                    +/-
-                                </th>
-                                <th>                    
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
-                                </td>
-                                <td>
-                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex"></input>
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
-                                </td>
-                                <td>
-                                    <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
-                                </td>
-                                <td>
-                                    <img src='images/plus.png' data-bind="click: insertSkill" />
-                                </td>
-                            </tr>
-                            <!-- ko foreach: skills -->
-                            <tr>
-                                <td class="stringColumn">
-                                    <span data-bind="text: name"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: level"></span>
-                                    <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
-                                    <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
-                                </td>
-                                <td>
-                                    <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
-                                </td>
-                                <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
-                                </td>
-                            </tr>
-                            <!-- /ko -->
-                        </table>
+                    <h2>Skills</h2>
+                    SPs: <span data-bind="text: skillPoints"></span>
+                    <table>
+                        <tr>
+                            <th>
+                                NAME
+                            </th>
+                            <th>
+                                CPLX
+                            </th>
+                            <th>
+                                LVL
+                            </th>
+                            <th>
+                                +/-
+                            </th>
+                            <th>                    
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
+                            </td>
+                            <td>
+                                <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex"></input>
+                            </td>
+                            <td>
+                                <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
+                            </td>
+                            <td>
+                                <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
+                            </td>
+                            <td>
+                                <img src='images/plus.png' data-bind="click: insertSkill" />
+                            </td>
+                        </tr>
+                        <!-- ko foreach: skills -->
+                        <tr>
+                            <td class="stringColumn">
+                                <span data-bind="text: name"></span>
+                            </td>
+                            <td>
+                                <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                            </td>
+                            <td>
+                                <span data-bind="text: level"></span>
+                                <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
+                                <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
+                            </td>
+                            <td>
+                                <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
+                            </td>
+                            <td>
+                                <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    </table>
                     </div>
-                    <br />
-                    <h2>Weapons</h2>
+                </section>
+                <section>
                     <div id="weaponsDiv">
+                        <h2>Weapons</h2>
                         <table>
                             <tr>
                                 <th>
@@ -368,9 +361,8 @@
                             <!-- /ko -->
                         </table>
                     </div>
-                    <br/>
-                    <h2>Armor</h2>
                     <div id="armorDiv">
+                        <h2>Armor</h2>
                         <table>
                             <tr>
                                 <th>
@@ -426,69 +418,70 @@
                             <!-- /ko -->
                         </table>
                     </div>
-                    <br/>
-                    <h2>Equipment</h2>
-                        <div id="equipmentDiv">
+                    <div id="equipmentDiv">
+                            <h2>Equipment</h2>
                             <table>
-                            <tr>
-                                <th>
-                                    NAME
-                                </th>
-                                <th>
-                                    MASS (kg)
-                                </th>
-                                <th>
-                                    #
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input class="stringInput" id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <img src='images/plus.png' data-bind="click: insertEquipment" />
-                                </td>
-                            </tr>
-                            <!-- ko foreach: equipment -->
-                            <tr>
-                                <td class="stringColumn">
-                                    <span data-bind="text: name"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: mass"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: quantity"></span>
-                                    <img src='images/arrow_up.png' data-bind="click: $root.increaseQuantity" />
-                                    <img src='images/arrow_down.png' data-bind="click: $root.decreaseQuantity" />
-                                </td>
-                                <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
-                                </td>
-                            </tr>
-                            <!-- /ko -->
-                            <tr>
-                                <td class="stringColumn">
-                                    <span data-bind="text: 'TOTAL'"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
-                                </td>
-                            </tr>
-                        </table>
-                        </div>
-                    <br/>
-                </div>
+                                <tr>
+                                    <th>
+                                        NAME
+                                    </th>
+                                    <th>
+                                        MASS (kg)
+                                    </th>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="stringInput" id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <img src='images/plus.png' data-bind="click: insertEquipment" />
+                                    </td>
+                                </tr>
+                                <!-- ko foreach: equipment -->
+                                <tr>
+                                    <td class="stringColumn">
+                                        <span data-bind="text: name"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: mass"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: quantity"></span>
+                                        <img src='images/arrow_up.png' data-bind="click: $root.increaseQuantity" />
+                                        <img src='images/arrow_down.png' data-bind="click: $root.decreaseQuantity" />
+                                    </td>
+                                    <td>
+                                        <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                                <tr>
+                                    <td class="stringColumn">
+                                        <span data-bind="text: 'TOTAL'"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
+                </section>
             </div>            
         </div>
     </div>
+
+    <footer>        
+    </footer>
 
     <script>
         $(function(){

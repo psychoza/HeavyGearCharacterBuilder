@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.4')
+        self.versionNumber = ko.observable('v 1.0.5')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
