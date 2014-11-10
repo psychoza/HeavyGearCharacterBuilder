@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.2')
+        self.versionNumber = ko.observable('v 1.0.4')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
@@ -25,7 +25,7 @@
         self.inputWeaponRadius = ko.observable(0);
 
         self.inputArmorName = ko.observable('')
-        self.inputIsHelmet = ko.observable(false);
+        self.inputArmorType = ko.observable('Armor');
         self.inputArmorMass = ko.observable(0);
         self.inputArmor = ko.observable(0);
 
@@ -391,14 +391,10 @@
         };
 
         self.insertArmor = function(){
-            if (self.inputIsHelmet())
-                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Helmet', self.inputArmorMass(), 0, 0, 0, 0, 0, 0, self.inputArmor()));
-            else
-                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Armor', self.inputArmorMass(), 0, 0, 0, 0, 0, 0, self.inputArmor()));
-
+            self.equipment.push(new equipmentObject(self.inputArmorName(), self.inputArmorType(), self.inputArmorMass(), 0, 0, 0, 0, 0, 0, self.inputArmor()));
             self.sortEquipment();
             self.inputArmorName('')
-            self.inputIsHelmet(false);
+            self.inputArmorType('Armor');
             self.inputArmorMass(0);
             self.inputArmor(0);
         };

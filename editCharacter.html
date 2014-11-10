@@ -380,7 +380,7 @@
                                     MASS (kg)
                                 </th>
                                 <th>
-                                    HELMET?
+                                    TYPE
                                 </th>
                                 <th>
                                     ARMOR
@@ -396,7 +396,7 @@
                                     <input class="numericInput" id="inputArmorMass" type="text" data-bind="value: inputArmorMass" />
                                 </td>
                                 <td>
-                                    <input id="inputIsHelmet" type="checkbox" data-bind="checked: inputIsHelmet"></input>
+                                    <select id="inputArmorType" data-bind="options: ['Armor', 'Helmet'], value: inputArmorType"></select>
                                 </td>
                                 <td>
                                     <input class="numericInput" id="inputArmor" type="text" data-bind="value: inputArmor" />
@@ -414,7 +414,7 @@
                                     <span data-bind="text: mass"></span>
                                 </td>
                                 <td>
-                                    <span data-bind="text: (type.toLowerCase() == 'helmet') ? 'Yes' : 'No'"></span>
+                                    <span data-bind="text: type"></span>
                                 </td>
                                 <td>
                                     <span data-bind="text: armor"></span>

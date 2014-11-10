@@ -4,7 +4,8 @@
 }
 
 body {	
-	background: #21201E url('../images/HEAVYGEARUNIVERSE.jpeg') no-repeat fixed center;	
+	/*background: #21201E url('../images/HEAVYGEARUNIVERSE.jpeg') no-repeat fixed center;	*/
+	background-color: black;
 	color: #FEEB0B;
 }
 .leftBorder {
