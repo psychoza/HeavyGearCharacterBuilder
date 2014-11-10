@@ -232,6 +232,7 @@
         };
 
         self.attributeSelector = function(attribute){
+            if(typeof(attribute)!="string") return;
             switch(attribute.toLowerCase()) {
                 case "agility":
                     return self.attributeAgility();
@@ -621,7 +622,7 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     
     self.name = incomingName;
     self.level = ko.observable(incomingLevel);    
-    self.bonus = affectingAttribute;    
+    self.bonus = affectingAttribute;
     self.isComplex = isComplex;
 
     return self;
