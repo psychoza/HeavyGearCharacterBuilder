@@ -37,17 +37,46 @@ describe('UI ASCII - ', function(){
 
         it('renders a string with text widget', function(){
             //Arrange
-            ui.addWidget( new WidgetText('test'));
+            ui.addWidget( new Widget.Text('test'));
 
             //Assert
             expect(ui.render()).toEqual('test\n');
         });
 
-        it('renders a border correctly', function(){
+        it('renders an empty border', function(){
             //Arrange
-            var expectedText = '/----\\\n|test|\n\\----/';
-            var borderWidget = ui.addWidget(WidgetBorder());
-            var textWidget = borderWidget.addWidget(new WidgetText('test'));
+            var expectedText =  '/-\\\n'+
+                                '|?|\n'+
+                                '\\-/\n';
+            var borderWidget = ui.addWidget(new Widget.Border());
+
+            //Assert
+            expect(ui.render()).toEqual(expectedText);
+        });
+
+        it('renders a border around text', function(){
+            //Arrange
+            var expectedText = '/----\\\n|test|\n\\----/\n';
+            var borderWidget = ui.addWidget(new Widget.Border());
+            var textWidget = borderWidget.addWidget(new Widget.Text('test'));
+
+            //Assert
+            expect(ui.render()).toEqual(expectedText);
+        });
+
+        it('renders a double border correctly', function(){
+            //Arrange
+            var expectedText = '/------\\\n'+
+                               '|/----\\|\n'+
+                               '||blah||\n'+
+                               '|\\----/|\n'+
+                              '\\------/\n';
+            var outerBorderWidget = new Widget.Border();
+            var innerBorderWidget = new Widget.Border();
+            var textWidget = new Widget.Text('blah');
+            innerBorderWidget.addWidget(textWidget);
+            outerBorderWidget.addWidget(innerBorderWidget);
+            ui.addWidget(outerBorderWidget);
 
             //Assert
             expect(ui.render()).toEqual(expectedText);
