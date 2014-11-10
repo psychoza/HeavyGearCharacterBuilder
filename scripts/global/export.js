@@ -24,5 +24,27 @@ var Export = (function(){
         return canExport;
     }});
 
+    self.characterToEcho = function(fileData, fileName){
+        var data = {
+            fileName: fileName,
+            fileData: fileData
+        };
+        $.support.cors = true;
+        $.ajax({
+            type: 'POST',
+            url: 'http://tageverything.org/za/server/characterExport/toEcho.php',
+            //dataType: 'json',
+            data: data,
+            contentType: 'application/json; charset=utf-8'
+        })
+            .done(function(){
+                location.assign('http://tageverything.org/za/server/characterExport/fetchTxt.php?fileName='+fileName);
+            })
+            .fail(function(){
+                console.log('fail echo');
+            });
+
+    };
+
     return self;
 })();

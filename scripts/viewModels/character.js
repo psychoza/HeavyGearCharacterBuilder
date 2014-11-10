@@ -419,7 +419,8 @@
         self.debugme = function(){debugger;};
 
         self.exportToASCII = function(){
-            alert('not implemented');
+            //alert('not yet implemented');
+            Export.characterToEcho(JSON.stringify(self.getModelData()),'someRandomFile.txt');
         };
 
         self.standardSkills = ko.observableArray([
