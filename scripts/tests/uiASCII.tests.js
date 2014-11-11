@@ -82,6 +82,23 @@ describe('UI ASCII - ', function(){
             expect(ui.render()).toEqual(expectedText);
         });
 
-        
+        it('renders a 2x2 empty grid', function(){
+            //Arrange
+            var expectedText =  'a  |bb  \n'+
+                                '---+----\n'+
+                                'ccc|dddd\n';
+            var grid = new Widget.Grid();
+            grid.addWidget(new Widget.Text('a'),0,0);
+            grid.addWidget(new Widget.Text('bb'),0,1);
+            grid.addWidget(new Widget.Text('ccc'),1,0);
+            grid.addWidget(new Widget.Text('dddd'),1,1);
+            ui.addWidget(grid);
+
+            //Act
+            var output = ui.render();
+
+            //Assert
+            expect(output).toEqual(expectedText);
+        });
     });
 });
