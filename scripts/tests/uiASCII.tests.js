@@ -43,6 +43,14 @@ describe('UI ASCII - ', function(){
             expect(ui.render()).toEqual('test\n');
         });
 
+        it('renders text widget with undefined parameter', function(){
+            //Arrange
+            ui.addWidget( new Widget.Text(undefined));
+
+            //Assert
+            expect(ui.render()).toEqual('\n');
+        });
+
         it('renders an empty border', function(){
             //Arrange
             var expectedText =  '/-\\\n'+
@@ -82,7 +90,7 @@ describe('UI ASCII - ', function(){
             expect(ui.render()).toEqual(expectedText);
         });
 
-        it('renders a 2x2 empty grid', function(){
+        it('renders a 2x2 grid', function(){
             //Arrange
             var expectedText =  'a  |bb  \n'+
                                 '---+----\n'+
@@ -92,6 +100,42 @@ describe('UI ASCII - ', function(){
             grid.addWidget(new Widget.Text('bb'),0,1);
             grid.addWidget(new Widget.Text('ccc'),1,0);
             grid.addWidget(new Widget.Text('dddd'),1,1);
+            ui.addWidget(grid);
+
+            //Act
+            var output = ui.render();
+
+            //Assert
+            expect(output).toEqual(expectedText);
+        });
+
+        it('renders a 1x3 grid', function(){
+            //Arrange
+            var expectedText =  'a  \n'+
+                '---\n'+
+                'bb \n'+
+                '---\n'+
+                'ccc\n';
+            var grid = new Widget.Grid();
+            grid.addWidget(new Widget.Text('a'),0,0);
+            grid.addWidget(new Widget.Text('bb'),1,0);
+            grid.addWidget(new Widget.Text('ccc'),2,0);
+            ui.addWidget(grid);
+
+            //Act
+            var output = ui.render();
+
+            //Assert
+            expect(output).toEqual(expectedText);
+        });
+
+        it('renders a 3x1 grid', function(){
+            //Arrange
+            var expectedText =  'a|bb|ccc\n';
+            var grid = new Widget.Grid();
+            grid.addWidget(new Widget.Text('a'),0,0);
+            grid.addWidget(new Widget.Text('bb'),0,1);
+            grid.addWidget(new Widget.Text('ccc'),0,2);
             ui.addWidget(grid);
 
             //Act

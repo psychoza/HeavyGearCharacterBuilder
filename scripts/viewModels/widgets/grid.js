@@ -5,31 +5,66 @@ window.Widget = window.Widget || {};
         var self = this;
         self.childWidget = [];
 
+        var getChildWidgetRenders = function(){
+            var rowOutput = [];
+
+            self.childWidget.foreach(function(row){
+                var colOutput = [];
+                row.foreach(function(widget){
+                    colOutput.push(widget.render());
+                });
+                rowOutput.push(colOutput);
+            });
+            return rowOutput;
+        };
+
+        var getMaxWidths = function(rows){
+            var widths = [];
+            rows.forEach(function(row){
+                for(var x = 0; x< row.length; x++) {
+                    var widget = row[x][0];
+                    if(!widths[x])
+                        widths[x] = widget.length;
+                    else
+                        if(widths[x] < widget.length)
+                            widths[x] = widget.length;
+                }
+            })
+            return widths;
+        };
+
+        var getRowBorderFromWidths = function(widths){
+            var border = '';
+            for(var i = 0; i< widths.length; i++) {
+                if(i>0)
+                    border+='+';
+                border+=''.pad(widths[i],'-',2);
+            }
+            return border;
+        };
+
         self.render = function(){
             var output = [];
-            for(var y = 0; y< self.childWidget.length; y++)
-            {
+            var widgetOutputs = getChildWidgetRenders();
+            var colWidths = getMaxWidths(widgetOutputs);
+            var rowSeparator = getRowBorderFromWidths(colWidths);
+            var x = 0;
+            widgetOutputs.foreach(function(row){
                 var rowOutput = '';
-                for(var x=0; x<self.childWidget[y].length; x++)
-                {
-                    if(x>0)
-                        rowOutput+='|'
-                    rowOutput+=self.childWidget[y][x].render();
-                }
-                if(y>0)
-                {
-                    var borderOutput = '';
-                    for(var x=0; x<self.childWidget[y].length; x++)
-                    {
-                        if(x>0)
-                            borderOutput+='+'
-                        for(var dash=0; dash<(self.childWidget[y][x].render()).length; dash++);
-                            borderOutput+='-';
+                for(var y = 0; y<row.length; y++){
+                    var item = row[y][0];
+                    if(item.length < colWidths[y]){
+                        item = item.pad(colWidths[y], ' ', 2);
                     }
-                    output.push(borderOutput);
+                    if(y>0)
+                        rowOutput+='|';
+                    rowOutput += item;
                 }
+                if(x>0)
+                    output.push(rowSeparator);
                 output.push(rowOutput);
-            }
+                x++;
+            });
             return output;
         };
 

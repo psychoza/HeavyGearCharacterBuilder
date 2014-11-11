@@ -426,7 +426,6 @@
         self.debugme = function(){debugger;};
 
         self.exportToASCII = function(){
-            //alert('not yet implemented');
             Export.characterToEcho(JSON.stringify(self.getModelData()),'someRandomFile.txt');
         };
 
