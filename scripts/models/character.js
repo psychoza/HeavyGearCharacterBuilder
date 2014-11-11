@@ -28,6 +28,9 @@ var Models = Models || {};
             data.skills.foreach(function(skill){ self.skills.push(new Models.Skill(skill)); });
         if(Array.isArray(data.equipment))
             data.equipment.foreach(function(item){self.equipment.push(new Models.Equipment(item)); });
+        self.currency = data.currency || 0;
+        self.currencyOnHand = data.currencyOnHand || 0;
+        self.emergencyDice = data.emergencyDice || 0;
         return self;
     };
 
