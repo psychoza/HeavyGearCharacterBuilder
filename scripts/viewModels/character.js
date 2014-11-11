@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.0')
+        self.versionNumber = ko.observable('v 1.0.5')
         self.uuid = UUID.generate();
 
         /* UI Needed Items */        
@@ -22,9 +22,10 @@
         self.inputWeaponRange = ko.observable(0);
         self.inputWeaponAmmo = ko.observable(0);
         self.inputWeaponRateOfFire = ko.observable(0);
+        self.inputWeaponRadius = ko.observable(0);
 
         self.inputArmorName = ko.observable('')
-        self.inputIsHelmet = ko.observable(false);
+        self.inputArmorType = ko.observable('Armor');
         self.inputArmorMass = ko.observable(0);
         self.inputArmor = ko.observable(0);
 
@@ -35,6 +36,9 @@
         self.characterNationality = ko.observable('');
         self.characterUnit = ko.observable('');
         self.characterExperience = ko.observable(0);
+        self.currency = ko.observable(0);
+        self.currencyOnHand = ko.observable(0);
+        self.emergencyDice = ko.observable(0);
 
         /* Attributes */
         self.attributeAgility = ko.observable(-1);
@@ -315,8 +319,11 @@
                 data.equipment.foreach(function(equipment){
                     self.equipment.push(new equipmentObject(equipment.name, equipment.type, 
                         equipment.mass, equipment.accuracy, equipment.damage, equipment.range, 
-                        equipment.ammoMax, equipment.rateOfFire, equipment.armor, equipment.quantity));
+                        equipment.ammoMax, equipment.rateOfFire, equipment.radius, equipment.armor, equipment.quantity));
                 });
+            if(data.currency) self.currency(data.currency);
+            if(data.currencyOnHand) self.currencyOnHand(data.currencyOnHand);
+            if(data.emergencyDice) self.emergencyDice(data.emergencyDice);
         }
 
         self.getModelData = function()
@@ -329,7 +336,7 @@
             self.equipment().foreach(function(equipment){
                 modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass, 
                     accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
-                    rateOfFire: equipment.rateOfFire, armor: equipment.armor, quantity: equipment.quantity()});
+                    rateOfFire: equipment.rateOfFire, radius: equipment.radius, armor: equipment.armor, quantity: equipment.quantity()});
             });
             var modelData = {
                 uuid: self.uuid,
@@ -350,7 +357,10 @@
                 psyche: self.attributePsyche(),
                 willpower: self.attributeWillpower(),
                 skills: modelSkills,
-                equipment: modelEquipment
+                equipment: modelEquipment,
+                currency: self.currency(),
+                currencyOnHand: self.currencyOnHand(),
+                emergencyDice: self.emergencyDice(),
             };
             return modelData;
         }
@@ -368,7 +378,7 @@
         }
 
         self.insertWeapon = function(){            
-            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire()));
+            self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire(),self.inputWeaponRadius()));
 
             self.sortEquipment();
             self.inputWeaponName('');
@@ -378,17 +388,14 @@
             self.inputWeaponRange(0);
             self.inputWeaponAmmo(0);
             self.inputWeaponRateOfFire(0);
+            self.inputWeaponRadius(0);
         };
 
         self.insertArmor = function(){
-            if (self.inputIsHelmet())
-                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Helmet', self.inputArmorMass(), 0, 0, 0, 0, 0, self.inputArmor()));
-            else
-                self.equipment.push(new equipmentObject(self.inputArmorName(), 'Armor', self.inputArmorMass(), 0, 0, 0, 0, 0, self.inputArmor()));
-
+            self.equipment.push(new equipmentObject(self.inputArmorName(), self.inputArmorType(), self.inputArmorMass(), 0, 0, 0, 0, 0, 0, self.inputArmor()));
             self.sortEquipment();
             self.inputArmorName('')
-            self.inputIsHelmet(false);
+            self.inputArmorType('Armor');
             self.inputArmorMass(0);
             self.inputArmor(0);
         };
@@ -629,7 +636,7 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
     return self;
 }
 
-var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingArmor, incomingQuantity) {
+var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingRadius, incomingArmor, incomingQuantity) {
     var self = this;
     
     self.name = incomingName;
@@ -672,6 +679,11 @@ var equipmentObject = function(incomingName, incomingType, incomingMass, incomin
         self.rateOfFire = incomingRateOfFire;
     else
         self.rateOfFire = 0;
+
+    if(incomingRadius)
+        self.radius = incomingRadius;
+    else
+        self.radius = 0;
 
     if(incomingArmor)
         self.armor = incomingArmor;

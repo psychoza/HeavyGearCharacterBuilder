@@ -15,7 +15,7 @@ ul li {
 }
 
 ul li:hover {
-    background-color: darkseagreen;
+    background-color: #444;
 }
 
 ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
@@ -29,8 +29,9 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
 
 #characterList {
     border:3px solid;
-    border-color: darkslategray;
-    box-shadow: 5px 5px 5px #888888;
+    border-color: #FEEB0B;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #E1562D;
     max-height: 300px;
     max-width: 250px;
     width: 250px;
@@ -42,8 +43,9 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
 
 #characterView {
     border:3px solid;
-    border-color: darkslategray;
-    box-shadow: 5px 5px 5px #888888;
+    border-color: #FEEB0B;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #E1562D;
     max-width: 500px;
     width: 500px;
     overflow: auto;

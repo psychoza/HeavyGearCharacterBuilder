@@ -13,6 +13,7 @@ var Models = Models || {};
         self.range = data.range || 0;
         self.ammoMax = data.ammoMax || 0;
         self.rateOfFire = data.rateOfFire || 0;
+        self.radius = data.radius || 0;
         self.armor = data.armor || 0;
         self.quantity = data.quantity || 0;
 
