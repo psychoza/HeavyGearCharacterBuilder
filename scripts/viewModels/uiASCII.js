@@ -16,7 +16,7 @@ var UIASCII = (function(){
             widgets.foreach(function(w){
                 var rows = w.render();
                 rows.foreach(function(line){
-                    str+=line+'\n';
+                    str+=line+'\r\n';
                 });
             });
             return str;

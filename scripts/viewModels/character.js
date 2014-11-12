@@ -426,7 +426,7 @@
         self.debugme = function(){debugger;};
 
         self.exportToASCII = function(){
-            Export.characterToEcho(JSON.stringify(self.getModelData()),'someRandomFile.txt');
+            Export.characterToEcho(self.getModelData(),'someRandomFile.txt');
         };
 
         self.standardSkills = ko.observableArray([

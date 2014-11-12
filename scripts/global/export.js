@@ -25,17 +25,11 @@ var Export = (function(){
     }});
 
     self.dataToEcho = function(fileData, fileName){
-        var data = {
-            fileName: fileName,
-            fileData: fileData
-        };
         $.support.cors = true;
         $.ajax({
             type: 'POST',
             url: 'http://tageverything.org/za/server/characterExport/toEcho.php',
-            //dataType: 'json',
-            data: data,
-            contentType: 'application/json; charset=utf-8'
+            data: { fileName: fileName, fileData: fileData }
         })
             .done(function(){
                 location.assign('http://tageverything.org/za/server/characterExport/fetchTxt.php?fileName='+fileName);
@@ -50,28 +44,28 @@ var Export = (function(){
 
         var attrib = new Widget.Grid();
         attrib.addWidget(new Widget.Text('AGI'),0,0);
-        attrib.addWidget(new Widget.Text('APP'),1,0);
-        attrib.addWidget(new Widget.Text('BLD'),2,0);
-        attrib.addWidget(new Widget.Text('CRE'),3,0);
-        attrib.addWidget(new Widget.Text('FIT'),4,0);
+        attrib.addWidget(new Widget.Text('APP'),0,1);
+        attrib.addWidget(new Widget.Text('BLD'),0,2);
+        attrib.addWidget(new Widget.Text('CRE'),0,3);
+        attrib.addWidget(new Widget.Text('FIT'),0,4);
 
-        attrib.addWidget(new Widget.Text(character.agility),0,1);
+        attrib.addWidget(new Widget.Text(character.agility),1,0);
         attrib.addWidget(new Widget.Text(character.appearance),1,1);
-        attrib.addWidget(new Widget.Text(character.build),2,1);
-        attrib.addWidget(new Widget.Text(character.creativity),3,1);
-        attrib.addWidget(new Widget.Text(character.fitness),4,1);
+        attrib.addWidget(new Widget.Text(character.build),1,2);
+        attrib.addWidget(new Widget.Text(character.creativity),1,3);
+        attrib.addWidget(new Widget.Text(character.fitness),1,4);
 
-        attrib.addWidget(new Widget.Text('INF'),0,2);
-        attrib.addWidget(new Widget.Text('KNO'),1,2);
+        attrib.addWidget(new Widget.Text('INF'),2,0);
+        attrib.addWidget(new Widget.Text('KNO'),2,1);
         attrib.addWidget(new Widget.Text('PER'),2,2);
-        attrib.addWidget(new Widget.Text('PSY'),3,2);
-        attrib.addWidget(new Widget.Text('WIL'),4,2);
+        attrib.addWidget(new Widget.Text('PSY'),2,3);
+        attrib.addWidget(new Widget.Text('WIL'),2,4);
 
-        attrib.addWidget(new Widget.Text(character.influence),0,1);
-        attrib.addWidget(new Widget.Text(character.knowledge),1,1);
-        attrib.addWidget(new Widget.Text(character.perception),2,1);
-        attrib.addWidget(new Widget.Text(character.psyche),3,1);
-        attrib.addWidget(new Widget.Text(character.willpower),4,1);
+        attrib.addWidget(new Widget.Text(character.influence),3,0);
+        attrib.addWidget(new Widget.Text(character.knowledge),3,1);
+        attrib.addWidget(new Widget.Text(character.perception),3,2);
+        attrib.addWidget(new Widget.Text(character.psyche),3,3);
+        attrib.addWidget(new Widget.Text(character.willpower),3,4);
 
         ui.addWidget(attrib);
 

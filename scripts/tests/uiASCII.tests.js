@@ -40,7 +40,7 @@ describe('UI ASCII - ', function(){
             ui.addWidget( new Widget.Text('test'));
 
             //Assert
-            expect(ui.render()).toEqual('test\n');
+            expect(ui.render()).toEqual('test\r\n');
         });
 
         it('renders text widget with undefined parameter', function(){
@@ -48,14 +48,14 @@ describe('UI ASCII - ', function(){
             ui.addWidget( new Widget.Text(undefined));
 
             //Assert
-            expect(ui.render()).toEqual('\n');
+            expect(ui.render()).toEqual('\r\n');
         });
 
         it('renders an empty border', function(){
             //Arrange
-            var expectedText =  '/-\\\n'+
-                                '|?|\n'+
-                                '\\-/\n';
+            var expectedText =  '/-\\\r\n'+
+                                '|?|\r\n'+
+                                '\\-/\r\n';
             var borderWidget = ui.addWidget(new Widget.Border());
 
             //Assert
@@ -64,7 +64,7 @@ describe('UI ASCII - ', function(){
 
         it('renders a border around text', function(){
             //Arrange
-            var expectedText = '/----\\\n|test|\n\\----/\n';
+            var expectedText = '/----\\\r\n|test|\r\n\\----/\r\n';
             var borderWidget = ui.addWidget(new Widget.Border());
             var textWidget = borderWidget.addWidget(new Widget.Text('test'));
 
@@ -74,11 +74,11 @@ describe('UI ASCII - ', function(){
 
         it('renders a double border correctly', function(){
             //Arrange
-            var expectedText = '/------\\\n'+
-                               '|/----\\|\n'+
-                               '||blah||\n'+
-                               '|\\----/|\n'+
-                              '\\------/\n';
+            var expectedText = '/------\\\r\n'+
+                               '|/----\\|\r\n'+
+                               '||blah||\r\n'+
+                               '|\\----/|\r\n'+
+                              '\\------/\r\n';
             var outerBorderWidget = new Widget.Border();
             var innerBorderWidget = new Widget.Border();
             var textWidget = new Widget.Text('blah');
@@ -89,12 +89,12 @@ describe('UI ASCII - ', function(){
             //Assert
             expect(ui.render()).toEqual(expectedText);
         });
-        
+
         it('renders a 2x2 grid', function(){
             //Arrange
-            var expectedText =  'a  |bb  \n'+
-                                '---+----\n'+
-                                'ccc|dddd\n';
+            var expectedText =  'a  |bb  \r\n'+
+                                '---+----\r\n'+
+                                'ccc|dddd\r\n';
             var grid = new Widget.Grid();
             grid.addWidget(new Widget.Text('a'),0,0);
             grid.addWidget(new Widget.Text('bb'),0,1);
@@ -111,11 +111,11 @@ describe('UI ASCII - ', function(){
 
         it('renders a 1x3 grid', function(){
             //Arrange
-            var expectedText =  'a  \n'+
-                '---\n'+
-                'bb \n'+
-                '---\n'+
-                'ccc\n';
+            var expectedText =  'a  \r\n'+
+                '---\r\n'+
+                'bb \r\n'+
+                '---\r\n'+
+                'ccc\r\n';
             var grid = new Widget.Grid();
             grid.addWidget(new Widget.Text('a'),0,0);
             grid.addWidget(new Widget.Text('bb'),1,0);
@@ -131,7 +131,7 @@ describe('UI ASCII - ', function(){
 
         it('renders a 3x1 grid', function(){
             //Arrange
-            var expectedText =  'a|bb|ccc\n';
+            var expectedText =  'a|bb|ccc\r\n';
             var grid = new Widget.Grid();
             grid.addWidget(new Widget.Text('a'),0,0);
             grid.addWidget(new Widget.Text('bb'),0,1);
