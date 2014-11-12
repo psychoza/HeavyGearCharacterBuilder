@@ -5,7 +5,7 @@ window.Widget = window.Widget || {};
         var self = this;
 
         self.render = function(){
-            return [text];
+            return [text || ''];
         };
 
         self.addWidget = function(widget){
