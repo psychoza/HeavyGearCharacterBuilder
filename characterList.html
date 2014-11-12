@@ -4,6 +4,7 @@
     <title>Character List :: Heavy Gear Character Builder</title>
     <link rel="stylesheet" type="text/css" href="styles/characterList.css">
     <link rel="stylesheet" type="text/css" href="styles/cursors.css">
+    <link rel="stylesheet" type="text/css" href="styles/master.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <!-- globals -->
     <script src="scripts/global/prototypeString.js"></script>
@@ -27,20 +28,20 @@
 <div id="characterList">
     <ul>
         <!-- ko foreach: characters -->
-        <li data-bind="click: $root.showCharacter">
+        <li class="cursorAlias" data-bind="click: $root.showCharacter">
             <span class="right cursorDefault" data-bind="click: $root.removeCharacter">X</span>
-            <span class="cursorAlias expanded" data-bind="text: name"></span>
+            <span class="expanded" data-bind="text: name"></span>
         </li>
         <!-- /ko -->
         <li>
-            <a href="editCharacter.html" class="expanded">Create new character</a>
+            <a href="editCharacter.html" class="expanded"><input type="button" value="Create new character" /></a>
         </li>
     </ul>
 </div>
 
 <div id="characterView" data-bind="visible: isSelectedCharacterVisible()">
     <div data-bind="with: selectedCharacter">
-        <span style="float:right;" data-bind="click: $root.editCharacter">Edit</span>
+        <span style="float:right; cursor: pointer;" data-bind="click: $root.editCharacter"><input type="button" value="Edit" /></span>        
         Name: <span data-bind="text: name"></span><br>
         Profession: <span data-bind="text: profession"></span><br>
         Experience: <span data-bind="text: experience"></span><br>

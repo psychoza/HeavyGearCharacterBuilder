@@ -82,6 +82,6 @@ describe('UI ASCII - ', function(){
             expect(ui.render()).toEqual(expectedText);
         });
 
-        
+
     });
 });
