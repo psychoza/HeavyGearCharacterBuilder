@@ -1,5 +1,5 @@
 <!DOCTYPE>
-<html>
+<html style="height: 100%;">
 <head>
     <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
     <meta name="author" content="Jesse Hutchison" />
@@ -29,7 +29,7 @@
     <script src="scripts/viewModels/title.js"></script>
 
 </head>
-<body>
+<body style="height: 100%;">
     <div class="rightBorder" id="rightBorder">
         <div class="leftBorder" id="leftBorder">
             <h1>Heavy Gear</h1>    
@@ -42,5 +42,41 @@
             </div>
         </div>
     </div>
+
+    <div id="a.expand" class="a.expand">
+        TEST
+    </div>
+
+<a href="">TEST</a>
+    <style>
+    a.expand {
+    transition:all .8s; 
+    -moz-transition:all .8s; /* FIREFOX */
+    -webkit-transition:all .8s; /* SAFARI and CHROME */
+    -o-transition:all .8s; /* OPERA */
+
+
+    color: #fff;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 2em;
+    width: 250px; /* 2x WIDTH HERE */
+    height: 250px;  /* 2x HEIGHT HERE */
+
+    transform: scale(0.80);
+    -webkit-transform: scale(0.80);
+    -moz-transform: scale(0.80);
+    -o-transform: scale(0.80);
+    -ms-transform: scale(0.80);
+}
+
+a.expand:hover {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+}
+    </style>
 </body>
 </html>

@@ -611,7 +611,7 @@
                     self.inputComplex(skill[0].isComplex);
                 }
             }
-        }                
+        }
 
         return this;
     };

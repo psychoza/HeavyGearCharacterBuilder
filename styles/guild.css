@@ -1,7 +1,13 @@
 /*----------------------------*/
 /*------->>> GLOBAL <<<-------*/
 /*----------------------------*/
+html {
+	height: 100%;
+	width: 100%;
+}
 body {
+	width: 100%;
+	height: 100%;
 	background-color: #222;
 	color: #FEEB0B;
 	font-size: 85%;
@@ -107,8 +113,9 @@ input[type="button"].hover {
 }
 
 header {
-    
+    min-height: 6%;
 }
+
 nav {
 
 }
@@ -127,7 +134,7 @@ footer {
     background-position: left;    
     height: 100%;
     position: relative;
-    -webkit-animation: openLeft 1s 1; /* Chrome, Safari, Opera */
+    -webkit-animation: openLeft 1s 1;
     animation: openLeft 1s 1;
 }
 .rightBorder {
@@ -136,8 +143,6 @@ footer {
     background-position: right;    
     height: 100%;
     position: relative;
-    /*-webkit-animation: openRight 3s infinite;
-    animation: openRight 3s infinite;*/
 }
 .attributeInput {	
 	text-align: center;
@@ -200,13 +205,14 @@ footer {
 	border: 1px solid #FEEB0B;
 	border-radius: 15px;
 	-moz-border-radius: 15px;
-	font-size: 100%;
-	height: 715px;
+	font-size: 100%;	
 	margin-left: auto;
     margin-right: auto;
     overflow-x: none;
     overflow-y: auto;
-    padding: 4px;    
+    padding: 4px;
+    min-height: 85%;
+    max-height: 85%;
     max-width: 90%;
     box-shadow: 5px 5px 15px #E1562D;
 }
