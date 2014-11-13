@@ -19,10 +19,10 @@ describe('UI ASCII - ', function(){
         beforeEach(function(){
             ui = new UIASCII();
         });
-//        it('throws if a non-Widget type is added', function(){
-//            var act = function(){ui.addWidget('blah')};
-//            expect(act).toThrow("addWidget must take a widgetType");
-//        });
+        it('throws if a non-Widget type is added', function(){
+            var act = function(){ui.addWidget('blah')};
+            expect(act).toThrow("addWidget must take a Widget");
+        });
     });
 
     describe('render - ', function(){

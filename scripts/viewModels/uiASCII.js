@@ -7,6 +7,8 @@ var UIASCII = (function(){
         var widgets = [];
 
         self.addWidget = function(widget){
+            if(!(widget instanceof Widget.Base))
+                throw "addWidget must take a Widget";
             widgets.push(widget);
             return widget;
         };
