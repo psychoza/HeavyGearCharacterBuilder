@@ -3,9 +3,10 @@ window.Widget = window.Widget || {};
 (function(ns){
     ns.Text = function(text){
         var self = this;
+        text = (text || '').toString();
 
         self.render = function(){
-            return [text || ''];
+            return [text];
         };
 
         self.addWidget = function(widget){

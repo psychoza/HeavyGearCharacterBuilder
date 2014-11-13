@@ -92,7 +92,7 @@ describe('UI ASCII - ', function(){
 
         it('renders a 2x2 grid', function(){
             //Arrange
-            var expectedText =  'a  |bb  \r\n'+
+            var expectedText =  ' a | bb \r\n'+
                                 '---+----\r\n'+
                                 'ccc|dddd\r\n';
             var grid = new Widget.Grid();
@@ -111,7 +111,7 @@ describe('UI ASCII - ', function(){
 
         it('renders a 1x3 grid', function(){
             //Arrange
-            var expectedText =  'a  \r\n'+
+            var expectedText =  ' a \r\n'+
                 '---\r\n'+
                 'bb \r\n'+
                 '---\r\n'+

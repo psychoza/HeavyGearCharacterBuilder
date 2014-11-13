@@ -54,7 +54,7 @@ window.Widget = window.Widget || {};
                 for(var y = 0; y<row.length; y++){
                     var item = row[y][0];
                     if(item.length < colWidths[y]){
-                        item = item.pad(colWidths[y], ' ', 2);
+                        item = item.pad(colWidths[y], ' ', 3);
                     }
                     if(y>0)
                         rowOutput+='|';

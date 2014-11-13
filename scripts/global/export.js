@@ -42,6 +42,8 @@ var Export = (function(){
     self.characterToEcho = function(character, fileName){
         var ui = new UIASCII();
 
+
+
         var attrib = new Widget.Grid();
         attrib.addWidget(new Widget.Text('AGI'),0,0);
         attrib.addWidget(new Widget.Text('APP'),0,1);
