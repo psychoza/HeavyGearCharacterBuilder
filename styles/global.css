@@ -1,0 +1,48 @@
+/*
+	*** Global ***
+*/
+body {
+	background-color: #222;
+	color: #ddd;
+	font-size: 62.5%;	
+}
+h1 {
+	color: orange;
+	font-family: gearhead;
+	font-size: 3em;
+	text-align: center;
+	text-shadow: -2px -2px red;
+	text-transform: uppercase;
+}
+h2 {
+	font-family: gearhead;
+	font-size: 2.75em;
+	text-transform: uppercase;
+}
+h3 {
+	font-family: gearhead;
+	font-size: 2.5em;
+	text-transform: uppercase;
+}
+h4 {
+	font-family: gearhead;
+	font-size: 2.25em;
+	text-transform: uppercase;
+}
+h5 {
+	font-family: gearhead;
+	font-size: 2em;
+	text-transform: uppercase;
+}
+h6 {
+	font-family: gearhead;
+	font-size: 1.75em;
+	text-transform: uppercase;
+}
+
+.rightBorder {
+    background-image: url('../images/cautionRight.png');
+    background-repeat: repeat-y;
+    background-position: right;    
+    height: 100%;
+}
