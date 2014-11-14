@@ -3,7 +3,7 @@ window.Widget = window.Widget || {};
 (function(ns){
     ns.Text = function(text){
         var self = this;
-        text = (text || '').toString();
+        text = (text == undefined ? '' : text).toString();
 
         self.render = function(){
             return [text];

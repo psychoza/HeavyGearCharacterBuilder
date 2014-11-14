@@ -22,6 +22,12 @@ var Models = Models || {};
         self.perception = data.perception || -1;
         self.psyche = data.psyche || -1;
         self.willpower = data.willpower || -1;
+        self.strength = data.strength || -1;
+        self.health = data.health || -1;
+        self.stamina = data.stamina || 15;
+        self.unarmedDamage = data.unarmedDamage || 1;
+        self.armedDamage = data.armedDamage || 1;
+
         self.skills = [];
         self.equipment = [];
         if(Array.isArray(data.skills))

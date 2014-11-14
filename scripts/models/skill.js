@@ -9,6 +9,7 @@ var Models = Models || {};
         self.level = data.level || 0;
         self.attribute = data.attribute || '';
         self.isComplex = data.isComplex || false;
+        self.bonus = data.bonus || -1;
 
         return self;
     };

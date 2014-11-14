@@ -1,9 +1,10 @@
 window.Widget = window.Widget || {};
 
 (function(ns){
-    ns.Grid = function(text){
+    ns.Grid = function(options){
         var self = this;
         self.childWidget = [];
+        self.padDirection = 2;
 
         var getChildWidgetRenders = function(){
             var rowOutput = [];
@@ -29,7 +30,7 @@ window.Widget = window.Widget || {};
                         if(widths[x] < widget.length)
                             widths[x] = widget.length;
                 }
-            })
+            });
             return widths;
         };
 
@@ -54,7 +55,7 @@ window.Widget = window.Widget || {};
                 for(var y = 0; y<row.length; y++){
                     var item = row[y][0];
                     if(item.length < colWidths[y]){
-                        item = item.pad(colWidths[y], ' ', 3);
+                        item = item.pad(colWidths[y], ' ', self.padDirection);
                     }
                     if(y>0)
                         rowOutput+='|';
@@ -73,6 +74,18 @@ window.Widget = window.Widget || {};
                 self.childWidget[row] = [];
             self.childWidget[row][col] = widget;
         };
+
+        var setupOptions = function(){
+            options = options || {};
+            if(options.align)
+                if(options.align=='left')
+                    self.padDirection = 2;
+                else if (options.align=='right')
+                    self.padDirection = 1;
+                else if (options.align=='center')
+                    self.padDirection = 3;
+        };
+        setupOptions();
 
         return self;
     };

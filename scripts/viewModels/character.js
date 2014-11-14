@@ -330,7 +330,7 @@
         {
             var modelSkills = [];
             self.skills().foreach(function(skill){
-                modelSkills.push({name: skill.name, level: skill.level(), attribute: skill.bonus, isComplex: skill.isComplex});
+                modelSkills.push({name: skill.name, level: skill.level(), attribute: skill.bonus, isComplex: skill.isComplex, bonus: self.attributeSelector(skill.bonus)});
             });
             var modelEquipment = [];
             self.equipment().foreach(function(equipment){
@@ -361,6 +361,11 @@
                 currency: self.currency(),
                 currencyOnHand: self.currencyOnHand(),
                 emergencyDice: self.emergencyDice(),
+                strength: self.secondaryTraitStrength(),
+                health: self.secondaryTraitHealth(),
+                stamina: self.secondaryTraitStamina(),
+                unarmedDamage: self.secondaryTraitUnarmedDamage(),
+                armedDamage: self.secondaryTraitArmedDamage()
             };
             return modelData;
         }
