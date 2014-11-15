@@ -5,7 +5,9 @@ window.Widget = window.Widget || {};
         var self = this;
 
         options = options || {};
+        options.border = options.border || {};
         options.columns = options.columns || [];
+        options.rows = options.rows || [];
 
         self.childWidget = [];
         self.padDirection = 2;
@@ -57,6 +59,17 @@ window.Widget = window.Widget || {};
                 return 3;
         };
 
+        var isBorderVisible = function(rowNum){
+            if (rowNum == 0) return false;
+            if (options.rows[rowNum] && options.rows[rowNum].border){
+                if (typeof(options.rows[rowNum].border.top) == "boolean")
+                    return options.rows[rowNum].border.top;
+            }
+            if (typeof(options.border.top) == "boolean")
+                return options.border.top;
+            return true;
+        };
+
         self.render = function(){
             var output = [];
             var widgetOutputs = getChildWidgetRenders();
@@ -77,7 +90,7 @@ window.Widget = window.Widget || {};
                         rowOutput+='|';
                     rowOutput += item;
                 }
-                if(x>0)
+                if(isBorderVisible(x))
                     output.push(rowSeparator);
                 output.push(rowOutput);
                 x++;

@@ -296,6 +296,49 @@ describe('UI ASCII - ', function(){
                 //Assert
                 expect(output).toEqual(expectedText);
             });
+
+            it('renders a2x2 grid without middle dividers', function(){
+                //Arrange
+                var expectedText =  'col1|col2\r\n'+
+                    'a   |b   \r\n';
+                var grid = new Widget.Grid({border:{top:false}});
+                grid.addWidget(new Widget.Text('col1'),0,0);
+                grid.addWidget(new Widget.Text('col2'),0,1);
+                grid.addWidget(new Widget.Text('a'),1,0);
+                grid.addWidget(new Widget.Text('b'),1,1);
+                ui.addWidget(grid);
+
+                //Act
+                var output = ui.render();
+
+                //Assert
+                expect(output).toEqual(expectedText);
+            });
+
+            it('renders a2x2 grid without middle dividers but one row divider', function(){
+                //Arrange
+                var expectedText =  'col1|col2\r\n'+
+                    '----+----\r\n'+
+                    'a   |b   \r\n'+
+                    'c   |d   \r\n'+
+                    'e   |f   \r\n';
+                var grid = new Widget.Grid({border:{top:false},rows:[,{border:{top:true}}]});
+                grid.addWidget(new Widget.Text('col1'),0,0);
+                grid.addWidget(new Widget.Text('col2'),0,1);
+                grid.addWidget(new Widget.Text('a'),1,0);
+                grid.addWidget(new Widget.Text('b'),1,1);
+                grid.addWidget(new Widget.Text('c'),2,0);
+                grid.addWidget(new Widget.Text('d'),2,1);
+                grid.addWidget(new Widget.Text('e'),3,0);
+                grid.addWidget(new Widget.Text('f'),3,1);
+                ui.addWidget(grid);
+
+                //Act
+                var output = ui.render();
+
+                //Assert
+                expect(output).toEqual(expectedText);
+            });
         });
 
         describe('horizontal container - ', function(){
