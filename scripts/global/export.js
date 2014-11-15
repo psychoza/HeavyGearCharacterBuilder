@@ -174,9 +174,37 @@ var Export = (function(){
             skills.addWidget(new Widget.Text(skill.bonus),i+1,4);
         }
 
-        ui.addWidget(skills);
+        var skillContainer = new Widget.VerticalContainer();
+        var skillHeader = new Widget.Text('Skills');
+        var skillWithBorder = new Widget.Border({left:false, right: false});
+        skillWithBorder.addWidget(skills);
+        skillContainer.addTopWidget(skillHeader);
+        skillContainer.addBottomWidget(skillWithBorder);
+
+        ui.addWidget(skillContainer);
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
+
+//        //Physical Status
+//        var phyStatus = new Widget.Grid({align:'center'});
+//        phyStatus.addWidget(new Widget.Text('STR'),0,0);
+//        phyStatus.addWidget(new Widget.Text('HEA'),0,1);
+//        phyStatus.addWidget(new Widget.Text('STA'),0,2);
+//        phyStatus.addWidget(new Widget.Text('UD '),0,3);
+//        phyStatus.addWidget(new Widget.Text('AD '),0,4);
+//        phyStatus.addWidget(new Widget.Text(character.strength),1,0);
+//        phyStatus.addWidget(new Widget.Text(character.health),1,1);
+//        phyStatus.addWidget(new Widget.Text(character.stamina),1,2);
+//        phyStatus.addWidget(new Widget.Text(character.unarmedDamage),1,3);
+//        phyStatus.addWidget(new Widget.Text(character.armedDamage),1,4);
+//        ui.addWidget(emptyRow);
+//        ui.addWidget(emptyRow);
+//
+//
+//        //Movement
+//
+//        ui.addWidget(emptyRow);
+//        ui.addWidget(emptyRow);
 
         var txt = ui.render();
         self.dataToEcho(txt, fileName);
