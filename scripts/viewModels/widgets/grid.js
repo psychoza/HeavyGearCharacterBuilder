@@ -68,7 +68,7 @@ window.Widget = window.Widget || {};
                 for(var y = 0; y<row.length; y++){
                     var item = row[y][0];
                     if(item.length < colWidths[y]){
-                        if(options.columns[y])
+                        if(options.columns[y] && options.columns[y].align)
                             item = item.pad(colWidths[y], ' ', alignPad(options.columns[y].align));
                         else
                             item = item.pad(colWidths[y], ' ', alignPad(options.align));
@@ -90,18 +90,6 @@ window.Widget = window.Widget || {};
                 self.childWidget[row] = [];
             self.childWidget[row][col] = widget;
         };
-
-//        var setupOptions = function(){
-//            options = options || {};
-//            if(options.align)
-//                if(options.align=='left')
-//                    self.padDirection = 2;
-//                else if (options.align=='right')
-//                    self.padDirection = 1;
-//                else if (options.align=='center')
-//                    self.padDirection = 3;
-//        };
-//        setupOptions();
 
         return self;
     };
