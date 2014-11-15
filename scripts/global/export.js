@@ -39,7 +39,7 @@ var Export = (function(){
             });
     };
 
-    self.characterToEcho = function(character, fileName){
+    self.convertCharacterToASCII = function(character){
         var ui = new UIASCII();
         var emptyRow = new Widget.Text('');
 
@@ -207,6 +207,11 @@ var Export = (function(){
 //        ui.addWidget(emptyRow);
 
         var txt = ui.render();
+        return txt;
+    };
+
+    self.characterToEcho = function(character, fileName){
+        var txt = self.convertCharacterToASCII(character);
         self.dataToEcho(txt, fileName);
     };
 

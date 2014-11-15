@@ -6,45 +6,53 @@
     <link rel="stylesheet" type="text/css" href="styles/cursors.css">
     <link rel="stylesheet" type="text/css" href="styles/master.css">
     <link rel="icon" type="image/png" href="images/favicon.png" />
+    <!-- libraries -->
+    <script src="scripts/jquery.min.js"></script>
+    <script src='scripts/knockout-3.1.0.js'></script>
     <!-- globals -->
     <script src="scripts/global/prototypeString.js"></script>
     <script src="scripts/global/prototypeArray.js"></script>
     <script src='scripts/global/redirect.js'></script>
     <script src='scripts/global/config.js'></script>
-    <!-- libraries -->
-    <script src="scripts/jquery.min.js"></script>
-    <script src='scripts/knockout-3.1.0.js'></script>
     <!-- models -->
     <script src="scripts/models/equipment.js"></script>
     <script src='scripts/models/skill.js'></script>
     <script src='scripts/models/character.js'></script>
     <!-- viewModels -->
+    <script src="scripts/viewModels/widgets/base.js"></script>
+    <script src="scripts/viewModels/widgets/text.js"></script>
+    <script src="scripts/viewModels/widgets/border.js"></script>
+    <script src="scripts/viewModels/widgets/grid.js"></script>
+    <script src="scripts/viewModels/widgets/horizontalContainer.js"></script>
+    <script src="scripts/viewModels/widgets/verticalContainer.js"></script>
+    <script src="scripts/viewModels/uiASCII.js"></script>
+    <script src="scripts/global/export.js"></script>
     <script src='scripts/viewModels/characterList.js'></script>
+
 
 </head>
 <body>
-<h1>Character List</h1>
+<div id="centeredMainDiv">
+    <h1>Character List</h1>
+    <div id="characterList">
+        <ul>
+            <!-- ko foreach: characters -->
+            <li class="cursorAlias" data-bind="click: $root.showCharacter">
+                <span class="right cursorDefault" data-bind="click: $root.removeCharacter">X</span>
+                <span class="expanded" data-bind="text: name"></span>
+            </li>
+            <!-- /ko -->
+            <li>
+                <a href="editCharacter.html" class="expanded"><input type="button" value="Create new character" /></a>
+            </li>
+        </ul>
+    </div>
 
-<div id="characterList">
-    <ul>
-        <!-- ko foreach: characters -->
-        <li class="cursorAlias" data-bind="click: $root.showCharacter">
-            <span class="right cursorDefault" data-bind="click: $root.removeCharacter">X</span>
-            <span class="expanded" data-bind="text: name"></span>
-        </li>
-        <!-- /ko -->
-        <li>
-            <a href="editCharacter.html" class="expanded"><input type="button" value="Create new character" /></a>
-        </li>
-    </ul>
-</div>
-
-<div id="characterView" data-bind="visible: isSelectedCharacterVisible()">
-    <div data-bind="with: selectedCharacter">
-        <span style="float:right; cursor: pointer;" data-bind="click: $root.editCharacter"><input type="button" value="Edit" /></span>        
-        Name: <span data-bind="text: name"></span><br>
-        Profession: <span data-bind="text: profession"></span><br>
-        Experience: <span data-bind="text: experience"></span><br>
+    <div id="characterView" data-bind="visible: isSelectedCharacterVisible()">
+        <div data-bind="with: selectedCharacter">
+            <span style="float:right; cursor: pointer;" data-bind="click: $root.editCharacter"><input type="button" value="Edit" /></span>
+            <blockquote class="monospace" data-bind="text: $root.selectedCharacterASCII"></blockquote>
+        </div>
     </div>
 </div>
 

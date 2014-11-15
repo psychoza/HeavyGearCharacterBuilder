@@ -3,6 +3,14 @@ var CharacterList = (function(){
 
     self.characters = ko.observableArray();
     self.selectedCharacter = ko.observable(null);
+    self.selectedCharacterASCII = ko.computed({read:function(){
+            var char = self.selectedCharacter();
+            if(!char)
+                return '';
+            var txt = Export.convertCharacterToASCII(char);
+            return txt;
+        }
+    });
     self.isSelectedCharacterVisible = ko.computed({
         read: function(){
             return self.selectedCharacter()!=null;

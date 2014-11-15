@@ -53,3 +53,14 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
     float: left;
     /*clear: right;*/
 }
+
+.monospace {
+    font-family:'Lucida Console', monospace;
+    white-space: pre-wrap;
+}
+
+#centeredMainDiv {
+    margin: 0 auto;
+    text-align: left;
+    width: 850px;
+}
