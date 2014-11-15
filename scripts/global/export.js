@@ -158,7 +158,7 @@ var Export = (function(){
         ui.addWidget(emptyRow);
 
         //Skills
-        var skills = new Widget.Grid();
+        var skills = new Widget.Grid({columns:[,,{align:'center'},,{align:'center'}]});
         skills.addWidget(new Widget.Text('Name'),0,0);
         skills.addWidget(new Widget.Text('Complexity'),0,1);
         skills.addWidget(new Widget.Text('Level'),0,2);

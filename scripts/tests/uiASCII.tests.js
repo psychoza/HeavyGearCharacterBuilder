@@ -277,6 +277,25 @@ describe('UI ASCII - ', function(){
                 //Assert
                 expect(output).toEqual(expectedText);
             });
+
+            it('renders a left aligned 2x2 grid with second column centered', function(){
+                //Arrange
+                var expectedText =  'col1|col2\r\n'+
+                    '----+----\r\n'+
+                    'c   | d  \r\n';
+                var grid = new Widget.Grid({align: 'left', columns: [,{align: 'center'}]});
+                grid.addWidget(new Widget.Text('col1'),0,0);
+                grid.addWidget(new Widget.Text('col2'),0,1);
+                grid.addWidget(new Widget.Text('c'),1,0);
+                grid.addWidget(new Widget.Text('d'),1,1);
+                ui.addWidget(grid);
+
+                //Act
+                var output = ui.render();
+
+                //Assert
+                expect(output).toEqual(expectedText);
+            });
         });
 
         describe('horizontal container - ', function(){

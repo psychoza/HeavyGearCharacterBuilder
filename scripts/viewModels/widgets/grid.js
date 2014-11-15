@@ -3,6 +3,10 @@ window.Widget = window.Widget || {};
 (function(ns){
     ns.Grid = function(options){
         var self = this;
+
+        options = options || {};
+        options.columns = options.columns || [];
+
         self.childWidget = [];
         self.padDirection = 2;
 
@@ -44,6 +48,15 @@ window.Widget = window.Widget || {};
             return border;
         };
 
+        var alignPad = function(str){
+            if(str==undefined || str=='left')
+                return 2;
+            else if (str=='right')
+                return 1;
+            else if (str=='center')
+                return 3;
+        };
+
         self.render = function(){
             var output = [];
             var widgetOutputs = getChildWidgetRenders();
@@ -55,7 +68,10 @@ window.Widget = window.Widget || {};
                 for(var y = 0; y<row.length; y++){
                     var item = row[y][0];
                     if(item.length < colWidths[y]){
-                        item = item.pad(colWidths[y], ' ', self.padDirection);
+                        if(options.columns[y])
+                            item = item.pad(colWidths[y], ' ', alignPad(options.columns[y].align));
+                        else
+                            item = item.pad(colWidths[y], ' ', alignPad(options.align));
                     }
                     if(y>0)
                         rowOutput+='|';
@@ -75,17 +91,17 @@ window.Widget = window.Widget || {};
             self.childWidget[row][col] = widget;
         };
 
-        var setupOptions = function(){
-            options = options || {};
-            if(options.align)
-                if(options.align=='left')
-                    self.padDirection = 2;
-                else if (options.align=='right')
-                    self.padDirection = 1;
-                else if (options.align=='center')
-                    self.padDirection = 3;
-        };
-        setupOptions();
+//        var setupOptions = function(){
+//            options = options || {};
+//            if(options.align)
+//                if(options.align=='left')
+//                    self.padDirection = 2;
+//                else if (options.align=='right')
+//                    self.padDirection = 1;
+//                else if (options.align=='center')
+//                    self.padDirection = 3;
+//        };
+//        setupOptions();
 
         return self;
     };
