@@ -32,14 +32,14 @@
 
 </head>
 <body>
+<h1>Character List</h1>
 <div id="centeredMainDiv">
-    <h1>Character List</h1>
     <div id="characterList">
         <ul>
             <!-- ko foreach: characters -->
-            <li class="cursorAlias" data-bind="click: $root.showCharacter">
-                <span class="right cursorDefault" data-bind="click: $root.removeCharacter">X</span>
-                <span class="expanded" data-bind="text: name"></span>
+            <li class="cursorAlias" data-bind="click: $root.showCharacter, css: {'selected': $data == $root.selectedCharacter()}">
+                <span class="right cursorDefault" data-bind="click: $root.removeCharacter, css: {'selected': $data == $root.selectedCharacter()}">X</span>
+                <span class="expanded" data-bind="text: name, css: {'selected': $data == $root.selectedCharacter()}"></span>
             </li>
             <!-- /ko -->
             <li>
@@ -48,10 +48,15 @@
         </ul>
     </div>
 
-    <div id="characterView" data-bind="visible: isSelectedCharacterVisible()">
-        <div data-bind="with: selectedCharacter">
-            <span style="float:right; cursor: pointer;" data-bind="click: $root.editCharacter"><input type="button" value="Edit" /></span>
-            <blockquote class="monospace" data-bind="text: $root.selectedCharacterASCII"></blockquote>
+    <div id="characterView">
+        <div data-bind="visible: isSelectedCharacterVisible()===true">
+            <div data-bind="with: selectedCharacter">
+                <span style="float:right; cursor: pointer;" data-bind="click: $root.editCharacter"><input type="button" value="Edit" /></span>
+                <blockquote class="monospace" data-bind="text: $root.selectedCharacterASCII"></blockquote>
+            </div>
+        </div>
+        <div class="centerText" data-bind="visible: isSelectedCharacterVisible()===false">
+            <span style="display:inline-block; padding-top:200px; padding-bottom:200px;">Please select or create a new character.</span>
         </div>
     </div>
 </div>

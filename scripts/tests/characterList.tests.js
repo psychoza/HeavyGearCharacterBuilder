@@ -91,7 +91,7 @@ describe('characterList - ', function(){
             expect(CharacterList.isSelectedCharacterVisible()).toEqual(false);
         });
         it('returns true when character selected', function(){
-            CharacterList.selectedCharacter({});
+            CharacterList.selectedCharacter( new Models.Character() );
             expect(CharacterList.isSelectedCharacterVisible()).toEqual(true);
         });
     });
@@ -100,7 +100,7 @@ describe('characterList - ', function(){
         it('puts selected character in selectedCharacter', function(){
             //Arrange
             CharacterList.selectedCharacter(null);
-            var dummyChar = {};
+            var dummyChar = new Models.Character();
 
             //Act
             CharacterList.showCharacter(dummyChar);
@@ -128,6 +128,25 @@ describe('characterList - ', function(){
             //Assert
             expect(CharacterList.characters().length).toEqual(2);
             expect(rawCharacterStorage.length).toEqual(2);
+        });
+
+        it('sets selected to null if deleting selected', function(){
+            //Arrange
+            var charModels = [
+                new Models.Character({name:'joe'}),
+                new Models.Character({name:'bob'}),
+                new Models.Character({name:'sue'}),
+            ];
+            window.localStorage.setItem(CharacterLocalStorage, JSON.stringify(charModels));
+            CharacterList.fetchCharacters();
+            CharacterList.selectedCharacter(CharacterList.characters()[1]);
+
+            //Act
+            CharacterList.removeCharacter(CharacterList.characters()[1]);
+            var rawCharacterStorage = JSON.parse(window.localStorage.getItem(CharacterLocalStorage));
+
+            //Assert
+            expect(CharacterList.selectedCharacter()).toEqual(null);
         });
     });
 });

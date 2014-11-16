@@ -15,7 +15,14 @@ ul li {
 }
 
 ul li:hover {
-    background-color: #444;
+    background-color: #444444;
+    color: #FEEB0B;
+}
+
+ul li .selected,
+ul li.selected {
+    background-color: #FEEB0B;
+    color: #444444;
 }
 
 ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
@@ -28,10 +35,8 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
 .left {float: left;}
 
 #characterList {
-    border:3px solid;
-    border-color: #FEEB0B;
+    border: 2px solid #222222;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px #E1562D;
     max-height: 300px;
     max-width: 250px;
     width: 250px;
@@ -39,18 +44,18 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
     margin: 10px;
     float: left;
     clear: left;
+    padding: 5px;
 }
 
 #characterView {
-    border:3px solid;
-    border-color: #FEEB0B;
+    border: 2px solid #222222;
     border-radius: 5px;
-    box-shadow: 5px 5px 5px #E1562D;
     max-width: 500px;
     width: 500px;
     overflow: auto;
     margin: 10px;
     float: left;
+    padding: 5px;
     /*clear: right;*/
 }
 
@@ -60,7 +65,25 @@ ul li .expanded { margin: 0px; display: block; width: 100%; height: 100%; }
 }
 
 #centeredMainDiv {
-    margin: 0 auto;
     text-align: left;
-    width: 850px;
+    background-color: #777;
+    border: 1px solid #FEEB0B;
+    border-radius: 15px;
+    font-size: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    padding: 4px;
+    max-width: 820px;
+    box-shadow: 5px 5px 15px #E1562D;
+    padding: 8px;
 }
+
+.centerText {
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+

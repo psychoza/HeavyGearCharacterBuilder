@@ -1,6 +1,6 @@
 var CharacterList = (function(){
     var self = {};
-
+    self.debugme = function(){debugger;};
     self.characters = ko.observableArray();
     self.selectedCharacter = ko.observable(null);
     self.selectedCharacterASCII = ko.computed({read:function(){
@@ -25,6 +25,8 @@ var CharacterList = (function(){
         var c = self.characters();
         c.remove(characterToRemove);
         self.characters(c);
+        if(self.selectedCharacter()==characterToRemove)
+            self.selectedCharacter(null);
 
         var charactersJSON = window.localStorage.getItem(CharacterLocalStorage) || JSON.stringify([]);
         var charactersRaw = JSON.parse(charactersJSON);
@@ -53,6 +55,8 @@ var CharacterList = (function(){
         var charRaw = charJSON==undefined ? []: JSON.parse(charJSON);
         var charModels = charRaw.select(function(data){ return new Models.Character(data); });
         self.characters(charModels);
+        if(charModels.length>0)
+            self.selectedCharacter(charModels[0]);
     };
 
     return self;
