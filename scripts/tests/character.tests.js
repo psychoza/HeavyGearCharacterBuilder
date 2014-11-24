@@ -267,6 +267,7 @@ describe('character - ', function () {
             character.saveToLocalStorage();
             var resultCharacter = JSON.parse(window.localStorage.getItem(CharacterLocalStorage))[0];
             model.uuid = resultCharacter.uuid;
+            resultCharacter.physicalStatuses = []; //ignored on purpose
 
             //Assert
             expect(JSON.stringify(resultCharacter)).toEqual(JSON.stringify(model));
@@ -284,6 +285,7 @@ describe('character - ', function () {
             var characters = JSON.parse(window.localStorage.getItem(CharacterLocalStorage));
             var resultCharacter = characters[0];
             model.uuid = resultCharacter.uuid;
+            resultCharacter.physicalStatuses = []; //ignored on purpose
 
             //Assert
             expect(JSON.stringify(resultCharacter)).toEqual(JSON.stringify(model));

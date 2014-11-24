@@ -27,16 +27,19 @@ var Models = Models || {};
         self.stamina = data.stamina || 15;
         self.unarmedDamage = data.unarmedDamage || 1;
         self.armedDamage = data.armedDamage || 1;
+        self.currency = data.currency || 0;
+        self.currencyOnHand = data.currencyOnHand || 0;
+        self.emergencyDice = data.emergencyDice || 0;
 
         self.skills = [];
         self.equipment = [];
+        self.physicalStatuses = [];
         if(Array.isArray(data.skills))
             data.skills.foreach(function(skill){ self.skills.push(new Models.Skill(skill)); });
         if(Array.isArray(data.equipment))
             data.equipment.foreach(function(item){self.equipment.push(new Models.Equipment(item)); });
-        self.currency = data.currency || 0;
-        self.currencyOnHand = data.currencyOnHand || 0;
-        self.emergencyDice = data.emergencyDice || 0;
+        if(Array.isArray(data.physicalStatuses))
+            data.physicalStatuses.foreach(function(status){ self.physicalStatuses.push(new Models.PhysicalStatus(status));});
         return self;
     };
 

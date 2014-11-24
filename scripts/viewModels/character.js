@@ -338,6 +338,12 @@
                     accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
                     rateOfFire: equipment.rateOfFire, radius: equipment.radius, armor: equipment.armor, quantity: equipment.quantity()});
             });
+            var modelPhysicalStatuses = [];
+            modelPhysicalStatuses.push({ injuryName: 'Flesh Wound', score: self.injuryThresholdFlesh(), armor:self.armorRating() + '/' + self.helmetRating(), penalty:'-1' });
+            modelPhysicalStatuses.push({ injuryName: 'Deep Wound', score: self.injuryThresholdDeep(), armor:self.armorRating() + '/' + self.helmetRating(), penalty:'-2' });
+            modelPhysicalStatuses.push({ injuryName: 'Instant Death', score: self.injuryThresholdInstant(), armor:self.armorRating() + '/' + self.helmetRating(), penalty:'Dead' });
+            modelPhysicalStatuses.push({ injuryName: 'System Shock', score: self.systemShockThreshold(), armor:'', penalty:'Dead' });
+
             var modelData = {
                 uuid: self.uuid,
                 name: self.characterName(),
@@ -356,8 +362,6 @@
                 perception: self.attributePerception(),
                 psyche: self.attributePsyche(),
                 willpower: self.attributeWillpower(),
-                skills: modelSkills,
-                equipment: modelEquipment,
                 currency: self.currency(),
                 currencyOnHand: self.currencyOnHand(),
                 emergencyDice: self.emergencyDice(),
@@ -365,7 +369,10 @@
                 health: self.secondaryTraitHealth(),
                 stamina: self.secondaryTraitStamina(),
                 unarmedDamage: self.secondaryTraitUnarmedDamage(),
-                armedDamage: self.secondaryTraitArmedDamage()
+                armedDamage: self.secondaryTraitArmedDamage(),
+                skills: modelSkills,
+                equipment: modelEquipment,
+                physicalStatuses: modelPhysicalStatuses
             };
             return modelData;
         }

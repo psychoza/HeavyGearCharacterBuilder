@@ -26,6 +26,7 @@
     <script src="scripts/models/equipment.js"></script>
     <script src='scripts/models/skill.js'></script>
     <script src='scripts/models/character.js'></script>
+    <script src="scripts/models/physicalStatus.js"></script>
     <!-- viewModels -->
     <script src="scripts/viewModels/widgets/base.js"></script>
     <script src="scripts/viewModels/widgets/text.js"></script>
@@ -166,7 +167,7 @@
                                 <td><span data-bind="text: systemShockThreshold"></span></td>
                                 <td></td>
                                 <th>DEAD</th>
-                                <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></td>
+                                <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></span></td>
                             </tr>
                         </table>
                     </div>
@@ -238,7 +239,7 @@
                                 <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
                             </td>
                             <td>
-                                <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex"></input>
+                                <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex" />
                             </td>
                             <td>
                                 <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />

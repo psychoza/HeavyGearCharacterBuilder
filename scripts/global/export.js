@@ -185,21 +185,23 @@ var Export = (function(){
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
-//        //Physical Status
-//        var phyStatus = new Widget.Grid({align:'center'});
-//        phyStatus.addWidget(new Widget.Text('STR'),0,0);
-//        phyStatus.addWidget(new Widget.Text('HEA'),0,1);
-//        phyStatus.addWidget(new Widget.Text('STA'),0,2);
-//        phyStatus.addWidget(new Widget.Text('UD '),0,3);
-//        phyStatus.addWidget(new Widget.Text('AD '),0,4);
-//        phyStatus.addWidget(new Widget.Text(character.strength),1,0);
-//        phyStatus.addWidget(new Widget.Text(character.health),1,1);
-//        phyStatus.addWidget(new Widget.Text(character.stamina),1,2);
-//        phyStatus.addWidget(new Widget.Text(character.unarmedDamage),1,3);
-//        phyStatus.addWidget(new Widget.Text(character.armedDamage),1,4);
-//        ui.addWidget(emptyRow);
-//        ui.addWidget(emptyRow);
-//
+        //Physical Status
+        var phyStatus = new Widget.Grid({border:{top:false},rows:[,{border:{top:true}}],columns:[,{align:'center'},{align:'center'},{align:'center'}]});
+        phyStatus.addWidget(new Widget.Text('Injury'),0,0);
+        phyStatus.addWidget(new Widget.Text('Score'),0,1);
+        phyStatus.addWidget(new Widget.Text('Armor'),0,2);
+        phyStatus.addWidget(new Widget.Text('Penalty'),0,3);
+        for(var i = 0; i<character.physicalStatuses.length; i++) {
+            var status = character.physicalStatuses[i];
+            phyStatus.addWidget(new Widget.Text(status.injuryName),i+1,0);
+            phyStatus.addWidget(new Widget.Text(status.score),i+1,1);
+            phyStatus.addWidget(new Widget.Text(status.armor),i+1,2);
+            phyStatus.addWidget(new Widget.Text(status.penalty),i+1,3);
+        }
+        ui.addWidget(phyStatus);
+        ui.addWidget(emptyRow);
+        ui.addWidget(emptyRow);
+
 //
 //        //Movement
 //
