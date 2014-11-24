@@ -202,11 +202,22 @@ var Export = (function(){
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
-//
-//        //Movement
-//
-//        ui.addWidget(emptyRow);
-//        ui.addWidget(emptyRow);
+        //Movement
+        var movement = new Widget.Grid({border:{top:false},rows:[,{border:{top:true}}],columns:[,{align:'center'},{align:'center'},{align:'center'}]});
+        movement.addWidget(new Widget.Text(''),0,0);
+        movement.addWidget(new Widget.Text('Speed'),0,1);
+        movement.addWidget(new Widget.Text('Attack Mod'),0,2);
+        movement.addWidget(new Widget.Text('Defense Mod'),0,3);
+        for(var i = 0; i<character.movement.length; i++) {
+            var m = character.movement[i];
+            movement.addWidget(new Widget.Text(m.name),i+1,0);
+            movement.addWidget(new Widget.Text(m.speed),i+1,1);
+            movement.addWidget(new Widget.Text(m.attackMod),i+1,2);
+            movement.addWidget(new Widget.Text(m.defenseMod),i+1,3);
+        }
+        ui.addWidget(movement);
+        ui.addWidget(emptyRow);
+        ui.addWidget(emptyRow);
 
         var txt = ui.render();
         return txt;

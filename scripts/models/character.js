@@ -34,12 +34,15 @@ var Models = Models || {};
         self.skills = [];
         self.equipment = [];
         self.physicalStatuses = [];
+        self.movement = [];
         if(Array.isArray(data.skills))
             data.skills.foreach(function(skill){ self.skills.push(new Models.Skill(skill)); });
         if(Array.isArray(data.equipment))
             data.equipment.foreach(function(item){self.equipment.push(new Models.Equipment(item)); });
         if(Array.isArray(data.physicalStatuses))
             data.physicalStatuses.foreach(function(status){ self.physicalStatuses.push(new Models.PhysicalStatus(status));});
+        if(Array.isArray(data.movement))
+            data.movement.foreach(function(movement){ self.movement.push(new Models.Movement(movement));});
         return self;
     };
 

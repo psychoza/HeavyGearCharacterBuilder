@@ -343,6 +343,12 @@
             modelPhysicalStatuses.push({ injuryName: 'Deep Wound', score: self.injuryThresholdDeep(), armor:self.armorRating() + '/' + self.helmetRating(), penalty:'-2' });
             modelPhysicalStatuses.push({ injuryName: 'Instant Death', score: self.injuryThresholdInstant(), armor:self.armorRating() + '/' + self.helmetRating(), penalty:'Dead' });
             modelPhysicalStatuses.push({ injuryName: 'System Shock', score: self.systemShockThreshold(), armor:'', penalty:'Dead' });
+            var movement = [];
+            movement.push({ name: 'Sprint', speed:self.movementSpeedSprint(), attackMod:'n/a', defenseMod:'+2' });
+            movement.push({ name: 'Run', speed:self.movementSpeedRun(), attackMod:'-3', defenseMod:'+2' });
+            movement.push({ name: 'Jog', speed:self.movementSpeedJog(), attackMod:'-2', defenseMod:'+1' });
+            movement.push({ name: 'Walk', speed:self.movementSpeedWalk(), attackMod:'-1', defenseMod:'0' });
+            movement.push({ name: 'Stationary', speed:0, attackMod:'0', defenseMod:'-1' });
 
             var modelData = {
                 uuid: self.uuid,
@@ -372,7 +378,8 @@
                 armedDamage: self.secondaryTraitArmedDamage(),
                 skills: modelSkills,
                 equipment: modelEquipment,
-                physicalStatuses: modelPhysicalStatuses
+                physicalStatuses: modelPhysicalStatuses,
+                movement: movement
             };
             return modelData;
         }
