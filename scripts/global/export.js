@@ -219,6 +219,63 @@ var Export = (function(){
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
+        //Weapons
+        var weapons = new Widget.Grid({align:'center', border:{top:false},rows:[,{border:{top:true}}],columns:[{align:'left'}]});
+        weapons.addWidget(new Widget.Text('Name'),0,0);
+        weapons.addWidget(new Widget.Text('Mass'),0,1);
+        weapons.addWidget(new Widget.Text('Accuracy'),0,2);
+        weapons.addWidget(new Widget.Text('Damage'),0,3);
+        weapons.addWidget(new Widget.Text('Range'),0,4);
+        weapons.addWidget(new Widget.Text('AmmoMax'),0,5);
+        weapons.addWidget(new Widget.Text('RateOfFire'),0,6);
+        weapons.addWidget(new Widget.Text('Radius'),0,7);
+        var charWeapons = character.equipment.where(function (data) { return data.type.toLowerCase().trim() === "weapon"; });
+        for(var i = 0; i<charWeapons.length; i++) {
+            var w = charWeapons[i];
+            weapons.addWidget(new Widget.Text(w.name),i+1,0);
+            weapons.addWidget(new Widget.Text(w.mass),i+1,1);
+            weapons.addWidget(new Widget.Text(w.accuracy),i+1,2);
+            weapons.addWidget(new Widget.Text(w.damage),i+1,3);
+            weapons.addWidget(new Widget.Text(w.range),i+1,4);
+            weapons.addWidget(new Widget.Text(w.ammoMax),i+1,5);
+            weapons.addWidget(new Widget.Text(w.rateOfFire),i+1,6);
+            weapons.addWidget(new Widget.Text(w.radius),i+1,7);
+        }
+        ui.addWidget(weapons);
+        ui.addWidget(emptyRow);
+        ui.addWidget(emptyRow);
+
+        //Armor
+        var armor = new Widget.Grid({align:'center', border:{top:false},rows:[,{border:{top:true}}],columns:[{align:'left'}]});
+        armor.addWidget(new Widget.Text('Name'),0,0);
+        armor.addWidget(new Widget.Text('Mass'),0,1);
+        armor.addWidget(new Widget.Text('Type'),0,2);
+        armor.addWidget(new Widget.Text('Armor'),0,3);
+        var charArmor = character.equipment.where(function (data) { return data.type.toLowerCase().trim() === "armor" || data.type.toLowerCase().trim() === "helmet"; });
+        for(var i = 0; i<charArmor.length; i++) {
+            var w = charArmor[i];
+            armor.addWidget(new Widget.Text(w.name),i+1,0);
+            armor.addWidget(new Widget.Text(w.mass),i+1,1);
+            armor.addWidget(new Widget.Text(w.type),i+1,2);
+            armor.addWidget(new Widget.Text(w.armor),i+1,3);
+        }
+        ui.addWidget(armor);
+        ui.addWidget(emptyRow);
+        ui.addWidget(emptyRow);
+
+        //Equipment
+        var equipment = new Widget.Grid({align:'center', border:{top:false},rows:[,{border:{top:true}}],columns:[{align:'left'}]});
+        equipment.addWidget(new Widget.Text('Name'),0,0);
+        equipment.addWidget(new Widget.Text('Mass'),0,1);
+        for(var i = 0; i<character.equipment.length; i++) {
+            var e = character.equipment[i];
+            equipment.addWidget(new Widget.Text(e.name),i+1,0);
+            equipment.addWidget(new Widget.Text(e.mass),i+1,1);
+        }
+        ui.addWidget(equipment);
+        ui.addWidget(emptyRow);
+        ui.addWidget(emptyRow);
+
         var txt = ui.render();
         return txt;
     };
