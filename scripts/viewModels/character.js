@@ -431,7 +431,9 @@
         self.debugme = function(){debugger;};
 
         self.exportToASCII = function(){
-            Export.characterToEcho(self.getModelData(),'someRandomFile.txt');
+            var d = new Date();
+            var dStr = d.getFullYear() + '-'+ d.getMonth() + '-' + d.getDay();
+            Export.characterToEcho(self.getModelData(),self.characterName() +' '+ dStr +'.txt');
         };
 
         self.standardSkills = ko.observableArray([
