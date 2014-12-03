@@ -39,7 +39,7 @@ var Export = (function(){
             });
     };
 
-    self.convertCharacterToASCII = function(character){
+    self.convertCharacterToASCII = function(character){ //This whole function is a mess and hard to understand.  Should create a templating system or something.
         var ui = new UIASCII();
         var emptyRow = new Widget.Text('');
 
@@ -198,7 +198,13 @@ var Export = (function(){
             phyStatus.addWidget(new Widget.Text(status.armor),i+1,2);
             phyStatus.addWidget(new Widget.Text(status.penalty),i+1,3);
         }
-        ui.addWidget(phyStatus);
+        var phyContainer = new Widget.VerticalContainer();
+        var phyHeader = new Widget.Text('Physical Status');
+        var phyWithBorder = new Widget.Border({left:false, right: false});
+        phyWithBorder.addWidget(phyStatus);
+        phyContainer.addTopWidget(phyHeader);
+        phyContainer.addBottomWidget(phyWithBorder);
+        ui.addWidget(phyContainer);
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
@@ -215,7 +221,13 @@ var Export = (function(){
             movement.addWidget(new Widget.Text(m.attackMod),i+1,2);
             movement.addWidget(new Widget.Text(m.defenseMod),i+1,3);
         }
-        ui.addWidget(movement);
+        var movementContainer = new Widget.VerticalContainer();
+        var movementHeader = new Widget.Text('Movement');
+        var movementWithBorder = new Widget.Border({left:false, right: false});
+        movementWithBorder.addWidget(movement);
+        movementContainer.addTopWidget(movementHeader);
+        movementContainer.addBottomWidget(movementWithBorder);
+        ui.addWidget(movementContainer);
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
@@ -241,7 +253,13 @@ var Export = (function(){
             weapons.addWidget(new Widget.Text(w.rateOfFire),i+1,6);
             weapons.addWidget(new Widget.Text(w.radius),i+1,7);
         }
-        ui.addWidget(weapons);
+        var wpnContainer = new Widget.VerticalContainer();
+        var wpnHeader = new Widget.Text('Weapons');
+        var wpnWithBorder = new Widget.Border({left:false, right: false});
+        wpnWithBorder.addWidget(weapons);
+        wpnContainer.addTopWidget(wpnHeader);
+        wpnContainer.addBottomWidget(wpnWithBorder);
+        ui.addWidget(wpnContainer);
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
@@ -259,7 +277,13 @@ var Export = (function(){
             armor.addWidget(new Widget.Text(w.type),i+1,2);
             armor.addWidget(new Widget.Text(w.armor),i+1,3);
         }
-        ui.addWidget(armor);
+        var armContainer = new Widget.VerticalContainer();
+        var armHeader = new Widget.Text('Armor');
+        var armWithBorder = new Widget.Border({left:false, right: false});
+        armWithBorder.addWidget(armor);
+        armContainer.addTopWidget(armHeader);
+        armContainer.addBottomWidget(armWithBorder);
+        ui.addWidget(armContainer);
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 
@@ -272,7 +296,13 @@ var Export = (function(){
             equipment.addWidget(new Widget.Text(e.name),i+1,0);
             equipment.addWidget(new Widget.Text(e.mass),i+1,1);
         }
-        ui.addWidget(equipment);
+        var eqContainer = new Widget.VerticalContainer();
+        var eqHeader = new Widget.Text('Equipment');
+        var eqWithBorder = new Widget.Border({left:false, right: false});
+        eqWithBorder.addWidget(equipment);
+        eqContainer.addTopWidget(eqHeader);
+        eqContainer.addBottomWidget(eqWithBorder);
+        ui.addWidget(eqContainer);
         ui.addWidget(emptyRow);
         ui.addWidget(emptyRow);
 

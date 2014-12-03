@@ -59,5 +59,12 @@ var CharacterList = (function(){
             self.selectedCharacter(charModels[0]);
     };
 
+    self.export = function(){
+        var d = new Date();
+        var dStr = d.getFullYear() + '-'+ d.getMonth() + '-' + d.getDay();
+        var character = self.selectedCharacter();
+        Export.characterToEcho(character, character.name +' '+ dStr +'.txt');
+    };
+
     return self;
 })();
