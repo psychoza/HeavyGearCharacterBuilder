@@ -12,11 +12,11 @@
 
     <!-- libraries -->
     <script src="scripts/jquery.min.js"></script>
-    <script src="scripts/jquery.tiptip.custom.js"></script>
     <script src="scripts/jquery-ui-1.11.4.min.js"></script>
-    <script src="scripts/tooltip.js"></script>
     <script src="scripts/jquery.autocomplete.min.js"></script>
+    <script src="scripts/jquery.tiptip.custom.js"></script>    
     <script src='scripts/knockout-3.1.0.js'></script>
+    <script src="scripts/tooltip.js"></script>
     <!-- globals -->
     <script src="scripts/global/prototypeString.js"></script>
     <script src="scripts/global/prototypeArray.js"></script>
@@ -63,7 +63,7 @@
                 <br/>
                 <br/>
                 <section>
-                    <div id="descriptionsDiv">
+                    <div id="descriptionsDiv left">
                         <div class ="left">
                             <label>Name</label>
                             <br/>
@@ -115,7 +115,7 @@
                 </section>
                 <section>
                     <div class="left">
-                        <div id="attributesDiv">                        
+                        <div id="attributesDiv left">                        
                             <h2>Attributes</h2>
                             CPs: <span data-bind="text: characterPoints"></span>
                             <table id="attributesTable">
@@ -150,7 +150,7 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="secondaryTraitsDiv">
+                        <div id="secondaryTraitsDiv left">
                             <h2>Secondary Traits</h2>
                             <table id="secondaryTraitsTable">               
                                 <tr>
@@ -170,7 +170,7 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="physicalStatusDiv">
+                        <div id="physicalStatusDiv left">
                             <h2>Physical Status</h2>
                             <table id="physicalStatusTable">
                                 <tr>
@@ -211,7 +211,7 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="movementSpeedDiv">
+                        <div id="movementSpeedDiv left">
                             <h2>Movement</h2>
                             <table id="movementSpeedTable">
                                 <tr>
@@ -253,24 +253,27 @@
                             </table>
                         </div>
                     </div>
-                    <div id="skillsDiv">
+                    <div id="skillsDiv left">
                         <h2>Skills</h2>
                         SPs: <span data-bind="text: skillPoints"></span>
                         <table>
                             <tr>
                                 <th>
-                                    NAME
+                                    <span data-bind="tooltip: 'This is the name of the skill you wish to add.'">NAME</span>
                                 </th>
                                 <th>
-                                    CPLX
+                                    <span data-bind="tooltip: 'A complex skill doubles the cost of each level.'">CPLX</span>
                                 </th>
                                 <th>
-                                    LVL
+                                    <span data-bind="tooltip: 'The level represents how many dice you will be rolling when using this skill.'">LVL</span>
                                 </th>
                                 <th>
-                                    +/-
+                                    <span data-bind="tooltip: 'This attribute directly coincides with the characters attributes. The value will affect whatever value is rolled when using the skill.'">ATTR</span>
                                 </th>
-                                <th>                    
+                                <th>
+                                    <span data-bind="tooltip: 'Add or remove a skill from your character.'">
+                                        +/-
+                                    </span>
                                 </th>
                             </tr>
                             <tr>
@@ -313,10 +316,10 @@
                             <!-- /ko -->
                         </table>
                     </div>
-                </section>
+                </section>            
                 <section>
                     <div class="left">
-                        <div id="weaponsDiv">
+                        <div id="weaponsDiv left">
                             <h2>Weapons</h2>
                             <table>
                                 <tr>
@@ -410,7 +413,7 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="armorDiv">
+                        <div id="armorDiv left">
                             <h2>Armor</h2>
                             <table>
                                 <tr>
@@ -468,7 +471,7 @@
                             </table>
                         </div>
                     </div>
-                    <div id="equipmentDiv">
+                    <div id="equipmentDiv left">
                             <h2>Equipment</h2>
                             <table>
                                 <tr>
@@ -525,7 +528,9 @@
                                 </tr>
                             </table>
                     </div>
+
                 </section>
+            
             </div>            
         </div>
     </div>
