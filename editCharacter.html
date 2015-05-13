@@ -52,18 +52,8 @@
                 <h6 data-bind="text: versionNumber"></h6>
             </header>
             <div class="center">
-                <nav>
-                    <div id="buttons">
-                        <a href='tests.html'><input type="button" value="TEST RUNNER"/></a>
-                        <a href="characterList.html"><input type="button" value="Character List"/></a>
-                        <input type="button" value="Save to local storage" data-bind="click: saveToLocalStorage" />
-                        <input type="button" value="Export to text file" data-bind="click: exportToASCII" />
-                    </div>
-                </nav>
-                <br/>
-                <br/>
                 <section>
-                    <div id="descriptionsDiv left">
+                    <div class="descriptionsDiv left">
                         <div class ="left">
                             <label>Name</label>
                             <br/>
@@ -73,6 +63,11 @@
                             <label>Profession</label>
                             <br/>
                             <input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class="buttons">                            
+                            <a href="characterList.html"><img src='images/home.png' data-bind="tooltip: 'Character list'" /></a>
+                            <img src='images/save.png' data-bind="tooltip: 'Save to local storage', click: saveToLocalStorage" />
+                            <img src='images/sheet.png' data-bind="tooltip: 'Export to text file', click: exportToASCII" />
                         </div>
                         <div class="clear"></div>
                         <div class ="left">
@@ -115,42 +110,72 @@
                 </section>
                 <section>
                     <div class="left">
-                        <div id="attributesDiv left">                        
-                            <h2>Attributes</h2>
-                            CPs: <span data-bind="text: characterPoints"></span>
-                            <table id="attributesTable">
-                                <tr>
-                                    <th>AGI</th>
-                                    <th>APP</th>
-                                    <th>BLD</th>
-                                    <th>CRE</th>
-                                    <th>FIT</th>
-                                </tr>
-                                <tr>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
-                                </tr>
-                                <tr>
-                                    <th>INF</th>
-                                    <th>KNO</th>
-                                    <th>PER</th>
-                                    <th>PSY</th>
-                                    <th>WIL</th>
-                                </tr>
-                                <tr>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
-                                    <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
-                                </tr>
-                            </table>
+                        <div class="attributesDiv left">                            
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Agility'">AGI</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Appearance'">APP</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" />
+                            </div>                            
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Build'">BLD</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Creativity'">CRE</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Fitness'">FIT</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Influence'">INF</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Knowledge'">KNO</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>                            
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Perception'">PER</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Psyche'">PSY</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+                            <div class ="left">
+                                <label data-bind="tooltip: 'Willpower'">WIL</label>
+                                <br/>
+                                <input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" />
+                            </div>
+                            <div class="clear"></div>
+
+                            <span data-bind="tooltip: 'Character Points are the amount of points spent into your attribute scores.'">CPs:</span>&nbsp;<span data-bind="text: characterPoints"></span><br/>
                         </div>
                         <div class="clear"></div>
-                        <div id="secondaryTraitsDiv left">
+                        <div class="secondaryTraitsDiv left">
                             <h2>Secondary Traits</h2>
                             <table id="secondaryTraitsTable">               
                                 <tr>
@@ -170,7 +195,7 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="physicalStatusDiv left">
+                        <div class="physicalStatusDiv left">
                             <h2>Physical Status</h2>
                             <table id="physicalStatusTable">
                                 <tr>
@@ -211,7 +236,8 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="movementSpeedDiv left">
+                        <!--
+                        <div class="movementSpeedDiv left">
                             <h2>Movement</h2>
                             <table id="movementSpeedTable">
                                 <tr>
@@ -252,8 +278,9 @@
                                 </tr>
                             </table>
                         </div>
+                        -->
                     </div>
-                    <div id="skillsDiv left">
+                    <div class="skillsDiv left">
                         <h2>Skills</h2>
                         SPs: <span data-bind="text: skillPoints"></span>
                         <table>
@@ -319,7 +346,7 @@
                 </section>            
                 <section>
                     <div class="left">
-                        <div id="weaponsDiv left">
+                        <div class="weaponsDiv left">
                             <h2>Weapons</h2>
                             <table>
                                 <tr>
@@ -413,7 +440,7 @@
                             </table>
                         </div>
                         <div class="clear"></div>
-                        <div id="armorDiv left">
+                        <div class="armorDiv left">
                             <h2>Armor</h2>
                             <table>
                                 <tr>
@@ -471,71 +498,70 @@
                             </table>
                         </div>
                     </div>
-                    <div id="equipmentDiv left">
-                            <h2>Equipment</h2>
-                            <table>
-                                <tr>
-                                    <th>
-                                        NAME
-                                    </th>
-                                    <th>
-                                        MASS (kg)
-                                    </th>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input class="stringInput" id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
-                                    </td>
-                                    <td>
-                                        <input class="numericInput" id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                        <img src='images/plus.png' data-bind="click: insertEquipment" />
-                                    </td>
-                                </tr>
-                                <!-- ko foreach: equipment -->
-                                <tr>
-                                    <td class="stringColumn">
-                                        <span data-bind="text: name"></span>
-                                    </td>
-                                    <td>
-                                        <span data-bind="text: mass"></span>
-                                    </td>
-                                    <td>
-                                        <span data-bind="text: quantity"></span>
-                                        <img src='images/arrow_up.png' data-bind="click: $root.increaseQuantity" />
-                                        <img src='images/arrow_down.png' data-bind="click: $root.decreaseQuantity" />
-                                    </td>
-                                    <td>
-                                        <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
-                                    </td>
-                                </tr>
-                                <!-- /ko -->
-                                <tr>
-                                    <td class="stringColumn">
-                                        <span data-bind="text: 'TOTAL'"></span>
-                                    </td>
-                                    <td>
-                                        <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
-                                    </td>
-                                </tr>
-                            </table>
+                    <div class="equipmentDiv left">
+                        <h2>Equipment</h2>
+                        <table>
+                            <tr>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    MASS (kg)
+                                </th>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="stringInput" id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
+                                </td>
+                                <td>
+                                    <input class="numericInput" id="inputEquipmentMass" type="text" data-bind="value: inputEquipmentMass" />
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertEquipment" />
+                                </td>
+                            </tr>
+                            <!-- ko foreach: equipment -->
+                            <tr>
+                                <td class="stringColumn">
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: mass"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: quantity"></span>
+                                    <img src='images/arrow_up.png' data-bind="click: $root.increaseQuantity" />
+                                    <img src='images/arrow_down.png' data-bind="click: $root.decreaseQuantity" />
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <tr>
+                                <td class="stringColumn">
+                                    <span data-bind="text: 'TOTAL'"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-
-                </section>
-            
+                </section>            
             </div>            
         </div>
     </div>
 
     <footer>        
+        <a href='tests.html'><img style="margin: 5 5 5 5;" src='images/refresh.png' data-bind="tooltip: 'Test runner'" /></a>
     </footer>
 
     <script>

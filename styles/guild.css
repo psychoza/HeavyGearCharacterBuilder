@@ -169,7 +169,7 @@ footer {
 	text-align: center;
     width: 30px;
 }
-#descriptionsDiv label {	
+.descriptionsDiv label {	
 	display: inline-block;  
   color: #ddd;
   font-size: 1.1em;
@@ -178,36 +178,59 @@ footer {
   margin: 0 0 0 0;
   text-shadow: 0px 0px  2px #000;
 }
-#descriptionsDiv input[type="text"] {  
+.descriptionsDiv input[type="text"] {  
   padding: 0 0 0 5;
   margin: 2 0 2 20;
 }
-#descriptionsDiv div {  
+.descriptionsDiv div {  
   margin: 2 2 2 2;
 }
-#buttons {
-	float: left;
+
+.attributesDiv label {  
+  display: inline-block;  
+  color: #ddd;
+  font-size: 1.1em;
+  font-family: 'Oswald', sans-serif;
+  padding: 2 0 2 0;
+  margin: 0 0 0 0;
+  text-align: center;
+  text-shadow: 0px 0px  2px #000;
+  width: 30px;
+
 }
-#descriptionsDiv, 
-#attributesDiv, 
-#equipmentDiv, 
-#secondaryTraitsDiv,
-#physicalStatusDiv,
-#skillsDiv,
-#movementSpeedDiv,
-#weaponsDiv,
-#armorDiv
+.attributesDiv input[type="text"] {  
+  padding: 0 0 0 5;
+  margin: 2 0 2 0;
+}
+.attributesDiv div {  
+  margin: 2 2 2 2;
+}
+
+#buttons {
+	float: right;
+  padding: 2 2 2 2;
+  margin: 2 2 2 2; 
+}
+.descriptionsDiv, 
+.attributesDiv, 
+.equipmentDiv, 
+.secondaryTraitsDiv,
+.physicalStatusDiv,
+.skillsDiv,
+.movementSpeedDiv,
+.weaponsDiv,
+.armorDiv
 {
 	border: 2px solid #222;
 	border-radius: 5px;	
 	padding-left: 5px;
 	margin: 5px;
 }
-#attributesTable {
+.attributesTable {
 	width: 200px;	
 }
 
-#secondaryTraitsTable {
+.secondaryTraitsTable {
 	width: 200px;	
 }
 .leftColumn {	
