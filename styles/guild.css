@@ -8,50 +8,53 @@ html {
 body {
 	width: 100%;
 	height: 100%;
-	background-color: #222;
-	color: #FEEB0B;
+	background-color: #e6e6e6;
+	color: #29517b;
 	font-size: 85%;
-	text-transform: uppercase;
+	/*text-transform: uppercase;*/
 }
 span, td, th {
-    font-size: 0.9em;
-	color: #FEEB0B;	
+  font-size: 0.9em;
+	color: #29517b;	
 }
 h1 {
 	color: #E1562D;
+  letter-spacing: 2px;
 	text-align: center;
 	font-size: 1.5em;
 	font-family: gearhead;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
-	text-shadow: 0px 0px  6px #FEEB0B,
-				-1px -1px 0 #FEEB0B,  
-    			1px -1px 0 #FEEB0B,
-    			-1px 1px 0 #FEEB0B,
-     			1px 1px 0 #FEEB0B;
+	text-shadow: 0px 0px  6px #29517b,
+				-1px -1px 0 #29517b,  
+    			1px -1px 0 #29517b,
+    			-1px 1px 0 #29517b,
+     			1px 1px 0 #29517b;
 
 }
 h2 {
+  color: #e6e6e6;
+  letter-spacing: 2px;
 	text-align: left;
 	font-size: 1em;
 	font-family: gearhead;	
 	padding: 2px;
 	margin: 2px;	
-	text-shadow: 0px 0px  6px #000,
-				-1px -1px 0 #000,  
-    			1px -1px 0 #000,
-    			-1px 1px 0 #000,
-     			1px 1px 0 #000;
+	text-shadow: 0px 0px 6px #29517b,
+				-1px -1px 0 #29517b,  
+    			1px -1px 0 #29517b,
+    			-1px 1px 0 #29517b,
+     			1px 1px 0 #29517b;
 }
 h3 {
-	color:#5B9BD5;
+	color: #5B9BD5;
 	text-align:left;
 	font-size: 0.75em;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 }
 h6 {
-	color: #FEEB0B;
+	color: #29517b;
 	text-align: center;
 	font-size: 0.75em;
 	font-family: 'Oswald', sans-serif;
@@ -60,7 +63,7 @@ h6 {
 	text-shadow: 0px 0px  6px #E1562D;
 }
 th {
-	border-bottom: solid 1px #FEEB0B;
+	border-bottom: solid 1px #29517b;
 }
 table, th, td {
 	text-align: center;
@@ -71,45 +74,46 @@ table, th, td {
 }
 
 input[type="text"] {
-	color: #FEEB0B;
+	color: #29517b;
 	background-color: transparent;
 	border: none;
-  	border-bottom: solid 1px #666;
+  	border-bottom: solid 1px #ccc;
   	transition: border 0.3s;
 	font-size: 0.9em;
 }
 
 input[type="text"]:focus,
 input[type="text"].focus {
-  border-bottom: solid 1px #ccc;
+  border-bottom: solid 1px #666;
 }
 
 input[type="button"] {
 	background-color: transparent;
-	border-color: #E1562D;
+	border-color: #29517b;
 	border-radius: 5px;
 	border-style: solid;
-	color: #FEEB0B;
+	color: #e6e6e6;
 	cursor: pointer;
 	font-family: gearhead;
+  letter-spacing: 2px;
 	padding: 2px;
 	margin: 3px;
-	text-shadow: 0px 0px  6px #000,
-				-1px -1px 0 #000,  
-    			1px -1px 0 #000,
-    			-1px 1px 0 #000,
-     			1px 1px 0 #000;
+	text-shadow: 0px 0px 6px #29517b,
+				-1px -1px 0 #29517b,  
+    			1px -1px 0 #29517b,
+    			-1px 1px 0 #29517b,
+     			1px 1px 0 #29517b;
 }
 input[type="button"]:hover,
 input[type="button"].hover {
-	border-color: #FEEB0B;
-	color: #000;
-	cursor: pointer;
-	text-shadow: 0px 0px  6px #E1562D,
-				-1px -1px 0 #E1562D,  
-    			1px -1px 0 #E1562D,
-    			-1px 1px 0 #E1562D,
-     			1px 1px 0 #E1562D;
+	border-color: #29517b;
+	color: #e6e6e6;
+	cursor: pointer;  
+  text-shadow: 0px 0px 12px #000,
+        -1px -1px 0 #000,  
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000;
 }
 
 header {
@@ -128,7 +132,7 @@ footer {
 /*----------------------------*/
 /*------->>> CLASS <<<--------*/
 /*----------------------------*/
-.leftBorder {
+/* .leftBorder {
     background-image: url('../images/cautionLeft.png');
     background-repeat: repeat-y;
     background-position: left;    
@@ -143,6 +147,15 @@ footer {
     background-position: right;    
     height: 100%;
     position: relative;
+}*/
+.clear {
+  clear: both;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
 }
 .attributeInput {	
 	text-align: center;
@@ -157,8 +170,20 @@ footer {
     width: 30px;
 }
 #descriptionsDiv label {	
-	display: inline-block;
-    width: 150px;
+	display: inline-block;  
+  color: #ddd;
+  font-size: 1.1em;
+  font-family: 'Oswald', sans-serif;
+  padding: 2 0 2 0;
+  margin: 0 0 0 0;
+  text-shadow: 0px 0px  2px #000;
+}
+#descriptionsDiv input[type="text"] {  
+  padding: 0 0 0 5;
+  margin: 2 0 2 20;
+}
+#descriptionsDiv div {  
+  margin: 2 2 2 2;
 }
 #buttons {
 	float: left;
@@ -201,8 +226,8 @@ footer {
 }
 
 .center {    
-	background-color: #777;
-	border: 1px solid #FEEB0B;
+	background-color: #eee;
+	border: 1px solid #29517b;
 	border-radius: 15px;
 	-moz-border-radius: 15px;
 	font-size: 100%;	
@@ -214,7 +239,7 @@ footer {
     min-height: 85%;
     max-height: 85%;
     max-width: 90%;
-    box-shadow: 5px 5px 15px #E1562D;
+    box-shadow: 5px 5px 15px #333;
 }
 
 .stringColumn {

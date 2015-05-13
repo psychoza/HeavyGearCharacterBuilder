@@ -5,13 +5,16 @@
     <meta name="author" content="Jesse Hutchison" />
     <meta name="coauthor" content="Sean Carnes">
     <meta name="keywords" content="heavy, gear, character, builder">
-    <meta name="description" content="A web toll using the 2nd edition rule book from 1997 to generate a character">
+    <meta name="description" content="A web tool using the 2nd edition rule book from 1997 to generate a character">
     <link rel="stylesheet" type="text/css" href="styles/master.css">
     <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
     <!-- libraries -->
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/jquery.tiptip.custom.js"></script>
+    <script src="scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="scripts/tooltip.js"></script>
     <script src="scripts/jquery.autocomplete.min.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
     <!-- globals -->
@@ -47,11 +50,6 @@
                 <h1>Heavy Gear</h1>
                 <h1 data-bind="click: debugme">Character Builder</h1>
                 <h6 data-bind="text: versionNumber"></h6>
-                <!--<div style="margin: auto !important; clear: both; display: block;">
-                    <a href="https://github.com/psychoza/HeavyGearCharacterBuilder">
-                        <input type="image" src="images/github.png" alt="Github" width="25px" height="25px">
-                    </a>
-                </div>-->
             </header>
             <div class="center">
                 <nav>
@@ -66,366 +64,409 @@
                 <br/>
                 <section>
                     <div id="descriptionsDiv">
-                        <h2>Character Details</h2>
-                            <label>Name:</label><input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" /><br />
-                            <label>Profession:</label><input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" /><br />
-                            <label>Rank:</label><input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" /><br />
-                            <label>Nationality:</label><input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" /><br />
-                            <label>Unit:</label><input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" /><br />
-                            <label>Experience:</label><input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" /><br />
-                            <label>Currency:</label><input type="text" data-bind="value: currency, valueUpdate:'afterkeydown'" /><br />
-                            <label>Currency On Hand:</label><input type="text" data-bind="value: currencyOnHand, valueUpdate:'afterkeydown'" /><br />
-                            <label>Emergency Dice:</label><input type="text" data-bind="value: emergencyDice, valueUpdate:'afterkeydown'" /><br />
+                        <div class ="left">
+                            <label>Name</label>
+                            <br/>
+                            <input type="text" data-bind="value: characterName, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class ="left">
+                            <label>Profession</label>
+                            <br/>
+                            <input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class="clear"></div>
+                        <div class ="left">
+                            <label>Rank</label>
+                            <br/>
+                            <input type="text" data-bind="value: characterRank, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class ="left">
+                            <label>Nationality</label>
+                            <br/>
+                            <input type="text" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class ="left">
+                            <label>Unit</label>
+                            <br/>                                
+                            <input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class="clear"></div>
+                        <div class ="left">
+                            <label>Experience</label>
+                            <br/>
+                            <input type="text" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class ="left">
+                            <label>Currency</label>
+                            <br/>
+                            <input type="text" data-bind="value: currency, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class ="left">
+                            <label>Currency On Hand</label>
+                            <br/>
+                            <input type="text" data-bind="value: currencyOnHand, valueUpdate:'afterkeydown'" />
+                        </div>
+                        <div class ="left">
+                            <label>Emergency Dice</label>
+                            <br/>
+                            <input type="text" data-bind="value: emergencyDice, valueUpdate:'afterkeydown'" />
+                        </div>
                     </div>
                 </section>
                 <section>
-                    <div id="attributesDiv">
-                        <h2>Attributes</h2>
-                        CPs: <span data-bind="text: characterPoints"></span>
-                        <table id="attributesTable">
-                            <tr>
-                                <th>AGI</th>
-                                <th>APP</th>
-                                <th>BLD</th>
-                                <th>CRE</th>
-                                <th>FIT</th>
-                            </tr>
-                            <tr>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
-                            </tr>
-                            <tr>
-                                <th>INF</th>
-                                <th>KNO</th>
-                                <th>PER</th>
-                                <th>PSY</th>
-                                <th>WIL</th>
-                            </tr>
-                            <tr>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
-                                <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
-                            </tr>
-                        </table>
+                    <div class="left">
+                        <div id="attributesDiv">                        
+                            <h2>Attributes</h2>
+                            CPs: <span data-bind="text: characterPoints"></span>
+                            <table id="attributesTable">
+                                <tr>
+                                    <th>AGI</th>
+                                    <th>APP</th>
+                                    <th>BLD</th>
+                                    <th>CRE</th>
+                                    <th>FIT</th>
+                                </tr>
+                                <tr>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" /></td>
+                                </tr>
+                                <tr>
+                                    <th>INF</th>
+                                    <th>KNO</th>
+                                    <th>PER</th>
+                                    <th>PSY</th>
+                                    <th>WIL</th>
+                                </tr>
+                                <tr>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" /></td>
+                                    <td><input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="secondaryTraitsDiv">
+                            <h2>Secondary Traits</h2>
+                            <table id="secondaryTraitsTable">               
+                                <tr>
+                                    <th>STR</th>
+                                    <th>HEA</th>
+                                    <th>STA</th>
+                                    <th>UD</th>
+                                    <th>AD</th>
+                                </tr>
+                                <tr>
+                                    <td><span data-bind="text: secondaryTraitStrength"></span></td>
+                                    <td><span data-bind="text: secondaryTraitHealth"></span></td>
+                                    <td><span data-bind="text: secondaryTraitStamina"></span></td>
+                                    <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
+                                    <td><span data-bind="text: secondaryTraitArmedDamage"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="physicalStatusDiv">
+                            <h2>Physical Status</h2>
+                            <table id="physicalStatusTable">
+                                <tr>
+                                    <th>INJURY</th>
+                                    <th>SCORE</th>
+                                    <th>ARMOR</th>
+                                    <th>PENALTY</th>
+                                    <th>#</th>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">FLESH WOUND</th>
+                                    <td><span data-bind="text: injuryThresholdFlesh"></span></td>
+                                    <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
+                                    <th>-1</th>
+                                    <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">DEEP WOUND</th>
+                                    <td><span data-bind="text: injuryThresholdDeep"></span></td>
+                                    <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
+                                    <th>-2</th>
+                                    <td><input class="attributeInput" type="text" data-bind="value: injuryCountDeep, valueUpdate:'afterkeydown'" /></td>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">INSTANT DEATH</th>
+                                    <td><span data-bind="text: injuryThresholdInstant"></span></td>
+                                    <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
+                                    <th>DEAD</th>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">SYSTEM SHOCK</th>
+                                    <td><span data-bind="text: systemShockThreshold"></span></td>
+                                    <td></td>
+                                    <th>DEAD</th>
+                                    <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="movementSpeedDiv">
+                            <h2>Movement</h2>
+                            <table id="movementSpeedTable">
+                                <tr>
+                                    <th></th>
+                                    <th>SPEED (m/round)</th>
+                                    <th>ATTACK MOD</th>
+                                    <th>DEFENCE MOD</th>                    
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">SPRINT</th>
+                                    <td><span data-bind="text: movementSpeedSprint"></span></td>
+                                    <td>n/a</td>
+                                    <td>+2</td>                    
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">RUN</th>
+                                    <td><span data-bind="text: movementSpeedRun"></span></td>
+                                    <td>-3</td>
+                                    <td>+2</td>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">JOG</th>
+                                    <td><span data-bind="text: movementSpeedJog"></span></td>
+                                    <td>-2</td>
+                                    <td>+1</td>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">WALK</th>
+                                    <td><span data-bind="text: movementSpeedWalk"></span></td>
+                                    <td>-1</td>
+                                    <td>+0</td>
+                                </tr>
+                                <tr>
+                                    <th class="stringColumn">STATIONARY</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>-1</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div id="secondaryTraitsDiv">
-                        <h2>Secondary Traits</h2>
-                        <table id="secondaryTraitsTable">               
-                            <tr>
-                                <th>STR</th>
-                                <th>HEA</th>
-                                <th>STA</th>
-                                <th>UD</th>
-                                <th>AD</th>
-                            </tr>
-                            <tr>
-                                <td><span data-bind="text: secondaryTraitStrength"></span></td>
-                                <td><span data-bind="text: secondaryTraitHealth"></span></td>
-                                <td><span data-bind="text: secondaryTraitStamina"></span></td>
-                                <td><span data-bind="text: secondaryTraitUnarmedDamage"></span></td>
-                                <td><span data-bind="text: secondaryTraitArmedDamage"></span></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="physicalStatusDiv">
-                        <h2>Physical Status</h2>
-                        <table id="physicalStatusTable">
-                            <tr>
-                                <th>INJURY</th>
-                                <th>SCORE</th>
-                                <th>ARMOR</th>
-                                <th>PENALTY</th>
-                                <th>#</th>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">FLESH WOUND</th>
-                                <td><span data-bind="text: injuryThresholdFlesh"></span></td>
-                                <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
-                                <th>-1</th>
-                                <td><input class="attributeInput" type="text" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">DEEP WOUND</th>
-                                <td><span data-bind="text: injuryThresholdDeep"></span></td>
-                                <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
-                                <th>-2</th>
-                                <td><input class="attributeInput" type="text" data-bind="value: injuryCountDeep, valueUpdate:'afterkeydown'" /></td>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">INSTANT DEATH</th>
-                                <td><span data-bind="text: injuryThresholdInstant"></span></td>
-                                <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
-                                <th>DEAD</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th class="stringColumn">SYSTEM SHOCK</th>
-                                <td><span data-bind="text: systemShockThreshold"></span></td>
-                                <td></td>
-                                <th>DEAD</th>
-                                <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></span></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div id="movementSpeedDiv">
-                    <h2>Movement</h2>
-                    <table id="movementSpeedTable">
-                        <tr>
-                            <th></th>
-                            <th>SPEED (m/round)</th>
-                            <th>ATTACK MOD</th>
-                            <th>DEFENCE MOD</th>                    
-                        </tr>
-                        <tr>
-                            <th class="stringColumn">SPRINT</th>
-                            <td><span data-bind="text: movementSpeedSprint"></span></td>
-                            <td>n/a</td>
-                            <td>+2</td>                    
-                        </tr>
-                        <tr>
-                            <th class="stringColumn">RUN</th>
-                            <td><span data-bind="text: movementSpeedRun"></span></td>
-                            <td>-3</td>
-                            <td>+2</td>
-                        </tr>
-                        <tr>
-                            <th class="stringColumn">JOG</th>
-                            <td><span data-bind="text: movementSpeedJog"></span></td>
-                            <td>-2</td>
-                            <td>+1</td>
-                        </tr>
-                        <tr>
-                            <th class="stringColumn">WALK</th>
-                            <td><span data-bind="text: movementSpeedWalk"></span></td>
-                            <td>-1</td>
-                            <td>+0</td>
-                        </tr>
-                        <tr>
-                            <th class="stringColumn">STATIONARY</th>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>-1</td>
-                        </tr>
-                    </table>
-                    </div>
-                </section>
-                <section>
                     <div id="skillsDiv">
-                    <h2>Skills</h2>
-                    SPs: <span data-bind="text: skillPoints"></span>
-                    <table>
-                        <tr>
-                            <th>
-                                NAME
-                            </th>
-                            <th>
-                                CPLX
-                            </th>
-                            <th>
-                                LVL
-                            </th>
-                            <th>
-                                +/-
-                            </th>
-                            <th>                    
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
-                            </td>
-                            <td>
-                                <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex" />
-                            </td>
-                            <td>
-                                <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
-                            </td>
-                            <td>
-                                <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
-                            </td>
-                            <td>
-                                <img src='images/plus.png' data-bind="click: insertSkill" />
-                            </td>
-                        </tr>
-                        <!-- ko foreach: skills -->
-                        <tr>
-                            <td class="stringColumn">
-                                <span data-bind="text: name"></span>
-                            </td>
-                            <td>
-                                <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
-                            </td>
-                            <td>
-                                <span data-bind="text: level"></span>
-                                <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
-                                <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
-                            </td>
-                            <td>
-                                <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
-                            </td>
-                            <td>
-                                <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
-                            </td>
-                        </tr>
-                        <!-- /ko -->
-                    </table>
+                        <h2>Skills</h2>
+                        SPs: <span data-bind="text: skillPoints"></span>
+                        <table>
+                            <tr>
+                                <th>
+                                    NAME
+                                </th>
+                                <th>
+                                    CPLX
+                                </th>
+                                <th>
+                                    LVL
+                                </th>
+                                <th>
+                                    +/-
+                                </th>
+                                <th>                    
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="stringInput" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
+                                </td>
+                                <td>
+                                    <input id="inputComplex" type="checkbox" data-bind="checked: inputComplex" />
+                                </td>
+                                <td>
+                                    <input class="numericInput" id="inputLevel" type="text" data-bind="value: inputLevel" />
+                                </td>
+                                <td>
+                                    <select id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
+                                </td>
+                                <td>
+                                    <img src='images/plus.png' data-bind="click: insertSkill" />
+                                </td>
+                            </tr>
+                            <!-- ko foreach: skills -->
+                            <tr>
+                                <td class="stringColumn">
+                                    <span data-bind="text: name"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: level"></span>
+                                    <img src='images/arrow_up.png' data-bind="click: $root.incrementSkill" />
+                                    <img src='images/arrow_down.png' data-bind="click: $root.decrementSkill" />
+                                </td>
+                                <td>
+                                    <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
+                                </td>
+                                <td>
+                                    <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                        </table>
                     </div>
                 </section>
                 <section>
-                    <div id="weaponsDiv">
-                        <h2>Weapons</h2>
-                        <table>
-                            <tr>
-                                <th>
-                                    NAME
-                                </th>
-                                <th>
-                                    MASS (kg)
-                                </th>
-                                <th>
-                                    ACC
-                                </th>
-                                <th>
-                                    DAM
-                                </th>
-                                <th>
-                                    RANGE
-                                </th>
-                                <th>
-                                    AMMO
-                                </th>
-                                <th>
-                                    ROF
-                                </th>
-                                <th>
-                                    RADIUS
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input class="stringInput" id="inputWeaponName" type="text" data-bind="value: inputWeaponName" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponMass" type="text" data-bind="value: inputWeaponMass" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponAccuracy" type="text" data-bind="value: inputWeaponAccuracy" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponDamage" type="text" data-bind="value: inputWeaponDamage" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponRange" type="text" data-bind="value: inputWeaponRange" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponAmmo" type="text" data-bind="value: inputWeaponAmmo" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponRateOfFire" type="text" data-bind="value: inputWeaponRateOfFire" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputWeaponRadius" type="text" data-bind="value: inputWeaponRadius" />
-                                </td>
-                                <td>
-                                    <img src='images/plus.png' data-bind="click: insertWeapon" />
-                                </td>
-                            </tr>
-                            <!-- ko foreach: weapons -->
-                            <tr>
-                                <td class="stringColumn">
-                                    <span data-bind="text: name"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: mass"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: accuracy"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: damage"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: range + '/' + mediumRange + '/' + longRange + '/' + extremeRange"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: ammoMax"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: rateOfFire"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: radius"></span>
-                                </td>
-                                <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
-                                </td>
-                            </tr>
-                            <!-- /ko -->
-                        </table>
-                    </div>
-                    <div id="armorDiv">
-                        <h2>Armor</h2>
-                        <table>
-                            <tr>
-                                <th>
-                                    NAME
-                                </th>
-                                <th>
-                                    MASS (kg)
-                                </th>
-                                <th>
-                                    TYPE
-                                </th>
-                                <th>
-                                    ARMOR
-                                </th>
-                                <th>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input class="stringInput" id="inputArmorName" type="text" data-bind="value: inputArmorName" />
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputArmorMass" type="text" data-bind="value: inputArmorMass" />
-                                </td>
-                                <td>
-                                    <select id="inputArmorType" data-bind="options: ['Armor', 'Helmet'], value: inputArmorType"></select>
-                                </td>
-                                <td>
-                                    <input class="numericInput" id="inputArmor" type="text" data-bind="value: inputArmor" />
-                                </td>
-                                <td>
-                                    <img src='images/plus.png' data-bind="click: insertArmor" />
-                                </td>
-                            </tr>
-                            <!-- ko foreach: armor -->
-                            <tr>
-                                <td class="stringColumn">
-                                    <span data-bind="text: name"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: mass"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: type"></span>
-                                </td>
-                                <td>
-                                    <span data-bind="text: armor"></span>
-                                </td>
-                                <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
-                                </td>
-                            </tr>
-                            <!-- /ko -->
-                        </table>
+                    <div class="left">
+                        <div id="weaponsDiv">
+                            <h2>Weapons</h2>
+                            <table>
+                                <tr>
+                                    <th>
+                                        NAME
+                                    </th>
+                                    <th>
+                                        MASS (kg)
+                                    </th>
+                                    <th>
+                                        ACC
+                                    </th>
+                                    <th>
+                                        DAM
+                                    </th>
+                                    <th>
+                                        RANGE
+                                    </th>
+                                    <th>
+                                        AMMO
+                                    </th>
+                                    <th>
+                                        ROF
+                                    </th>
+                                    <th>
+                                        RADIUS
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="stringInput" id="inputWeaponName" type="text" data-bind="value: inputWeaponName" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponMass" type="text" data-bind="value: inputWeaponMass" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponAccuracy" type="text" data-bind="value: inputWeaponAccuracy" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponDamage" type="text" data-bind="value: inputWeaponDamage" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponRange" type="text" data-bind="value: inputWeaponRange" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponAmmo" type="text" data-bind="value: inputWeaponAmmo" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponRateOfFire" type="text" data-bind="value: inputWeaponRateOfFire" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputWeaponRadius" type="text" data-bind="value: inputWeaponRadius" />
+                                    </td>
+                                    <td>
+                                        <img src='images/plus.png' data-bind="click: insertWeapon" />
+                                    </td>
+                                </tr>
+                                <!-- ko foreach: weapons -->
+                                <tr>
+                                    <td class="stringColumn">
+                                        <span data-bind="text: name"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: mass"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: accuracy"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: damage"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: range + '/' + mediumRange + '/' + longRange + '/' + extremeRange"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: ammoMax"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: rateOfFire"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: radius"></span>
+                                    </td>
+                                    <td>
+                                        <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                            </table>
+                        </div>
+                        <div class="clear"></div>
+                        <div id="armorDiv">
+                            <h2>Armor</h2>
+                            <table>
+                                <tr>
+                                    <th>
+                                        NAME
+                                    </th>
+                                    <th>
+                                        MASS (kg)
+                                    </th>
+                                    <th>
+                                        TYPE
+                                    </th>
+                                    <th>
+                                        ARMOR
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="stringInput" id="inputArmorName" type="text" data-bind="value: inputArmorName" />
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputArmorMass" type="text" data-bind="value: inputArmorMass" />
+                                    </td>
+                                    <td>
+                                        <select id="inputArmorType" data-bind="options: ['Armor', 'Helmet'], value: inputArmorType"></select>
+                                    </td>
+                                    <td>
+                                        <input class="numericInput" id="inputArmor" type="text" data-bind="value: inputArmor" />
+                                    </td>
+                                    <td>
+                                        <img src='images/plus.png' data-bind="click: insertArmor" />
+                                    </td>
+                                </tr>
+                                <!-- ko foreach: armor -->
+                                <tr>
+                                    <td class="stringColumn">
+                                        <span data-bind="text: name"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: mass"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: type"></span>
+                                    </td>
+                                    <td>
+                                        <span data-bind="text: armor"></span>
+                                    </td>
+                                    <td>
+                                        <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                            </table>
+                        </div>
                     </div>
                     <div id="equipmentDiv">
                             <h2>Equipment</h2>
