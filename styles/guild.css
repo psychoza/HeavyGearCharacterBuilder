@@ -169,6 +169,11 @@ footer {
 	text-align: center;
   width: 30px;
 }
+/*.descriptionsDiv {
+  background-image: url('../images/HG/testPilot.png') !important;  
+  background-repeat: no-repeat;
+  background-position: right top;
+}*/
 .descriptionsDiv label {	
 	display: inline-block;  
   color: #ddd;
@@ -273,9 +278,9 @@ footer {
 
 .center {    
 	background-color: #eee;
-  background-image: url('../images/HG/grizzly.png') !important;  
+  background-image: url('../images/HG/grizzly.png') !important;
   background-repeat: no-repeat;
-  background-position: right;
+  background-position: right bottom;
   /*background-position: 100% 80px; */
 	border: 1px solid #29517b;
 	border-radius: 15px;
