@@ -167,7 +167,7 @@ footer {
 }
 .numericInput {	
 	text-align: center;
-    width: 30px;
+  width: 30px;
 }
 .descriptionsDiv label {	
 	display: inline-block;  
@@ -206,6 +206,29 @@ footer {
   margin: 2 2 2 2;
 }
 
+.secondaryTraitsDiv label {  
+  display: inline-block;  
+  color: #ddd;
+  font-size: 1.1em;
+  font-family: 'Oswald', sans-serif;
+  padding: 2 0 2 0;
+  margin: 0 0 0 0;
+  text-align: center;
+  text-shadow: 0px 0px  2px #000;
+  width: 30px;
+
+}
+.secondaryTraitsDiv span {  
+  padding: 0 0 0 5;
+  margin: 2 0 2 5;
+  text-align: center;
+  width: 30px;
+}
+.secondaryTraitsDiv div {  
+  margin: 2 2 2 2;
+}
+
+
 #buttons {
 	float: right;
   padding: 2 2 2 2;
@@ -220,9 +243,10 @@ footer {
 .movementSpeedDiv,
 .weaponsDiv,
 .armorDiv
-{
+{  
+  background-color: rgba(238, 238, 238, 0.9);
 	border: 2px solid #222;
-	border-radius: 5px;	
+	border-radius: 5px;
 	padding-left: 5px;
 	margin: 5px;
 }
@@ -249,6 +273,10 @@ footer {
 
 .center {    
 	background-color: #eee;
+  background-image: url('../images/HG/grizzly.png') !important;  
+  background-repeat: no-repeat;
+  background-position: right;
+  /*background-position: 100% 80px; */
 	border: 1px solid #29517b;
 	border-radius: 15px;
 	-moz-border-radius: 15px;
