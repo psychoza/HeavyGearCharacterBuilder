@@ -14,7 +14,7 @@
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/jquery-ui-1.11.4.min.js"></script>
     <script src="scripts/jquery.autocomplete.min.js"></script>
-    <script src="scripts/jquery.tiptip.custom.js"></script>    
+    <script src="scripts/jquery.tiptip.custom.js"></script>
     <script src='scripts/knockout-3.1.0.js'></script>
     <script src="scripts/tooltip.js"></script>
     <!-- globals -->
@@ -48,7 +48,7 @@
         <div class="leftBorder" id="leftBorder">
             <header>
                 <h1>Heavy Gear</h1>
-                <h1 data-bind="click: debugme">Character Builder</h1>
+                <h1>Character Builder</h1>
                 <h6 data-bind="text: versionNumber"></h6>
             </header>
             <div class="center">
@@ -65,7 +65,7 @@
                             <br/>
                             <input type="text" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" />
                         </div>
-                        <div class="buttons">                            
+                        <div class="buttons">
                             <a href="characterList.html"><img src='images/home.png' data-bind="tooltip: 'Character list'" /></a>
                             <img src='images/save.png' data-bind="tooltip: 'Save to local storage', click: saveToLocalStorage" />
                             <img src='images/sheet.png' data-bind="tooltip: 'Export to text file', click: exportToASCII" />
@@ -83,7 +83,7 @@
                         </div>
                         <div class ="left">
                             <label>Unit</label>
-                            <br/>                                
+                            <br/>
                             <input type="text" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" />
                         </div>
                         <div class="clear"></div>
@@ -106,74 +106,74 @@
                             <label>Emergency Dice</label>
                             <br/>
                             <input type="text" data-bind="value: emergencyDice, valueUpdate:'afterkeydown'" />
-                        </div>                        
-                    </div>  
+                        </div>
+                    </div>
                     <div class="clear"></div>
                     <div class="left">
-                        <div class="attributesDiv left">                            
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Agility'">AGI</label>
+                        <div class="attributesDiv left">
+                            <div class ="left" data-bind="tooltip: 'Agility'">
+                                <label>AGI</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Appearance'">APP</label>
+                            <div class ="left" data-bind="tooltip: 'Appearance'">
+                                <label>APP</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" />
-                            </div>                            
+                            </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Build'">BLD</label>
+                            <div class ="left" data-bind="tooltip: 'Build'">
+                                <label>BLD</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Creativity'">CRE</label>
+                            <div class ="left" data-bind="tooltip: 'Creativity'">
+                                <label>CRE</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Fitness'">FIT</label>
+                            <div class ="left" data-bind="tooltip: 'Fitness'">
+                                <label>FIT</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Influence'">INF</label>
+                            <div class ="left" data-bind="tooltip: 'Influence'">
+                                <label>INF</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Knowledge'">KNO</label>
+                            <div class ="left" data-bind="tooltip: 'Knowledge'">
+                                <label>KNO</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" />
                             </div>
-                            <div class="clear"></div>                            
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Perception'">PER</label>
+                            <div class="clear"></div>
+                            <div class ="left" data-bind="tooltip: 'Perception'">
+                                <label>PER</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Psyche'">PSY</label>
+                            <div class ="left" data-bind="tooltip: 'Psyche'">
+                                <label>PSY</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
-                            <div class ="left">
-                                <label data-bind="tooltip: 'Willpower'">WIL</label>
+                            <div class ="left" data-bind="tooltip: 'Willpower'">
+                                <label>WIL</label>
                                 <br/>
                                 <input class="attributeInput" type="text" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" />
                             </div>
                             <div class="clear"></div>
 
                             <span data-bind="tooltip: 'Character Points are the amount of points spent into your attribute scores.'">CPs:</span>&nbsp;<span data-bind="text: characterPoints"></span><br/>
-                        </div>                            
+                        </div>
                         <div class="clear"></div>
                     </div>
                     <div class="left">
@@ -220,43 +220,37 @@
                             </div>
                             <div class="clear"></div>
                             <div class="secondaryTraitsDiv left">
-                                <div class ="left">
-                                    <label data-bind="tooltip: 'Strength'">STR</label>
+                                <div class ="left" data-bind="tooltip: 'Strength<br/>' + 'Max Lift: ' + maximumCapacity() + 'kg'">
+                                    <label>STR</label>
                                     <br/>
                                     <span data-bind="text: secondaryTraitStrength"></span>
                                 </div>
                                 <div class="clear"></div>
-                                <div class ="left">
-                                    <label data-bind="tooltip: 'Strength'">HEA</label>
+                                <div class ="left"  data-bind="tooltip: 'Health'"">
+                                    <label>HEA</label>
                                     <br/>
                                     <span data-bind="text: secondaryTraitHealth"></span>
                                 </div>
                                 <div class="clear"></div>
-                                <div class ="left">
-                                    <label data-bind="tooltip: 'Strength'">STA</label>
+                                <div class ="left" data-bind="tooltip: 'Stamina'">
+                                    <label>STA</label>
                                     <br/>
                                     <span data-bind="text: secondaryTraitStamina"></span>
                                 </div>
                                 <div class="clear"></div>
-                                <div class ="left">
-                                    <label data-bind="tooltip: 'Strength'">STR</label>
-                                    <br/>
-                                    <span data-bind="text: secondaryTraitStrength"></span>
-                                </div>
-                                <div class="clear"></div>
-                                <div class ="left">
-                                    <label data-bind="tooltip: 'Strength'">UD</label>
+                                <div class ="left" data-bind="tooltip: 'Unarmed Damage<br/>This modifier applies to damage done while not wielding a weapon.'">
+                                    <label>UD</label>
                                     <br/>
                                     <span data-bind="text: secondaryTraitUnarmedDamage"></span>
                                 </div>
                                 <div class="clear"></div>
-                                <div class ="left">
-                                    <label data-bind="tooltip: 'Strength'">AD</label>
+                                <div class ="left" data-bind="tooltip: 'Armed Damage<br/>This modifier applies to damage done while wielding a weapon.'">
+                                    <label>AD</label>
                                     <br/>
                                     <span data-bind="text: secondaryTraitArmedDamage"></span>
                                 </div>
                                 <div class="clear"></div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="skillsDiv left">
                             <h2>Skills</h2>
@@ -315,7 +309,7 @@
                                         <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
                                     </td>
                                     <td>
-                                        <img src='images/minus.png' data-bind="click: $root.removeSkill" />                                    
+                                        <img src='images/minus.png' data-bind="click: $root.removeSkill" />
                                     </td>
                                 </tr>
                                 <!-- /ko -->
@@ -412,7 +406,7 @@
                                     <span data-bind="text: radius"></span>
                                 </td>
                                 <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
+                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
                                 </td>
                             </tr>
                             <!-- /ko -->
@@ -470,7 +464,7 @@
                                     <span data-bind="text: armor"></span>
                                 </td>
                                 <td>
-                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />                                    
+                                    <img src='images/minus.png' data-bind="click: $root.removeEquipment" />
                                 </td>
                             </tr>
                             <!-- /ko -->
@@ -535,11 +529,11 @@
                     </table>
                 </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
 
-    <footer>        
+    <footer>
         <a href='tests.html'><img style="margin: 5 5 5 5;" src='images/refresh.png' data-bind="tooltip: 'Test runner'" /></a>
     </footer>
 
