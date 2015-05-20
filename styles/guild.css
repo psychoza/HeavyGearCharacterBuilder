@@ -1,6 +1,10 @@
 /*----------------------------*/
 /*------->>> GLOBAL <<<-------*/
 /*----------------------------*/
+@font-face {
+	font-family: gearhead;
+	src: url('gearhead.ttf');
+}
 html {
 	height: 100%;
 	width: 100%;
@@ -340,7 +344,7 @@ a {
     -webkit-border-radius: 2px;
     border-radius: 2px;
     background-color: #ccc;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(#333));
+    background-image: gradient(linear, 0 0, 0 100%, from(transparent), to(#333));
     color: #fff;
     -webkit-text-shadow: 0 0 2px #333;
     text-shadow: 0 0 2px #333;
