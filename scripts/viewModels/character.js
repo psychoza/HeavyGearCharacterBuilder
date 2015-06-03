@@ -2,15 +2,14 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.5')
+        self.versionNumber = ko.observable('v 1.0.6')
         self.uuid = UUID.generate();
 
-        /* UI Needed Items */        
         self.inputSkillName = ko.observable('');
         self.inputLevel = ko.observable(0);
         self.inputAttributes = ko.observableArray(['Agility','Appearance','Build','Creativity','Fitness','Influence','Knowledge','Perception','Psyche','Willpower']);
         self.inputAttribute = ko.observable();
-        self.inputComplex = ko.observable(false);        
+        self.inputComplex = ko.observable(false);
 
         self.inputEquipmentName = ko.observable('');
         self.inputEquipmentMass = ko.observable(0);
@@ -29,7 +28,6 @@
         self.inputArmorMass = ko.observable(0);
         self.inputArmor = ko.observable(0);
 
-        /* Descriptions */
         self.characterName = ko.observable('');
         self.characterProfession = ko.observable('');
         self.characterRank = ko.observable('');
@@ -40,7 +38,6 @@
         self.currencyOnHand = ko.observable(0);
         self.emergencyDice = ko.observable(0);
 
-        /* Attributes */
         self.attributeAgility = ko.observable(-1);
         self.attributeAppearance = ko.observable(-1);
         self.attributeBuild = ko.observable(-1);
@@ -55,7 +52,7 @@
         var calculateCharacterPoints = function(attribute){
             if (attribute < -1)
                 return  ((parseInt(attribute) + 1) * (parseInt(attribute) + 1)) * (-1);
-            else    
+            else
                 return (parseInt(attribute) + 1) * (parseInt(attribute) + 1);
         };
 
@@ -71,7 +68,7 @@
                 var perception = calculateCharacterPoints(self.attributePerception());
                 var psyche = calculateCharacterPoints(self.attributePsyche());
                 var willpower = calculateCharacterPoints(self.attributeWillpower());
-                return agility + appearance + build + creativity + fitness + influence + knowledge + perception + psyche + willpower;                
+                return agility + appearance + build + creativity + fitness + influence + knowledge + perception + psyche + willpower;
             }
         });
 
@@ -79,7 +76,7 @@
 
         var calculateSkillPoints = function(skill){
             var value = parseInt(skill.level()) * parseInt(skill.level());
-            
+
             if (skill.isComplex)
                 value = value * 2;
 
@@ -89,8 +86,8 @@
         self.skillPoints = ko.computed({
             read: function(){
                 var total = 0;
-                
-                for (i = 0; i < self.skills().length; i++) { 
+
+                for (i = 0; i < self.skills().length; i++) {
                    total += calculateSkillPoints(self.skills()[i]);
                 }
 
@@ -99,6 +96,7 @@
         });
 
         self.equipment = ko.observableArray();
+
         self.weapons = ko.computed({
             read: function(){
                 return self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "weapon"; });
@@ -110,23 +108,25 @@
             }
         });
 
-        /* Secondary Traits */
         self.secondaryTraitStrength = ko.computed({
             read: function() { return Math.floor((parseInt(self.attributeBuild()) + parseInt(self.attributeFitness())) / 2 );}
         });
+
         self.secondaryTraitHealth = ko.computed({
             read: function() { return Math.round((parseInt(self.attributeFitness()) + parseInt(self.attributePsyche()) + parseInt(self.attributeWillpower())) / 3 );}
         });
+
         self.secondaryTraitStamina = ko.computed({
-            read: function() { 
+            read: function() {
                 var value = (5 * (parseInt(self.attributeBuild()) + parseInt(self.secondaryTraitHealth())) + 25);
 
                 if (value < 10)
                     return 10;
                 else
                     return value;
-            }            
+            }
         });
+
         self.secondaryTraitUnarmedDamage = ko.computed({
             read: function() {
                 var handToHandSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "hand-to-hand"; }).firstOrNull();
@@ -137,8 +137,9 @@
                     return 1;
                 else
                     return value;
-            }            
+            }
         });
+
         self.secondaryTraitArmedDamage = ko.computed({
             read: function() {
                 var meleeSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "melee"; }).firstOrNull();
@@ -152,26 +153,55 @@
             }
         });
 
-        /* Physical Status */
+        self.maximumCapacity = ko.computed({
+            read: function() {
+                var capacities = [
+                  {value: -6, capacity: 9.9},
+                  {value: -5, capacity: 10},
+                  {value: -4, capacity: 25},
+                  {value: -3, capacity: 40},
+                  {value: -2, capacity: 50},
+                  {value: -1, capacity: 60},
+                  {value: 0, capacity: 70},
+                  {value: 1, capacity: 80},
+                  {value: 2, capacity: 95},
+                  {value: 3, capacity: 115},
+                  {value: 4, capacity: 140},
+                  {value: 5, capacity: 180},
+                ];
+
+                var max = capacities.where(function (capacity) { return capacity.value === self.secondaryTraitStrength(); });
+                if (max)
+                    return max[0].capacity;
+
+                return null;
+            }
+        });
+
         self.injuryThresholdFlesh = ko.computed({
-            read: function() {                
+            read: function() {
                 return Math.round(self.secondaryTraitStamina() / 2);
             }
         });
+
         self.injuryCountFlesh = ko.observable(0);
+
         self.injuryThresholdDeep = ko.computed({
-            read: function() {                
+            read: function() {
                 return self.secondaryTraitStamina();
             }
         });
+
         self.injuryCountDeep = ko.observable(0);
+
         self.injuryThresholdInstant = ko.computed({
-            read: function() {                
+            read: function() {
                 return self.secondaryTraitStamina() * 2;
             }
         });
+
         self.systemShockThreshold = ko.computed({
-            read: function() {                            
+            read: function() {
                 var value = (5 + parseInt(self.secondaryTraitHealth()));
 
                 if (value < 1)
@@ -180,20 +210,22 @@
                     return value;
             }
         });
+
         self.armorRating = ko.computed({
-            read: function() {                
+            read: function() {
                 var armorArray = self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "armor"; });
-                armorArray.sort(function(left, right) { return parseInt(left.armor) == parseInt(right.armor) ? 0 : (parseInt(left.armor) > parseInt(right.armor) ? -1 : 1) });                
+                armorArray.sort(function(left, right) { return parseInt(left.armor) == parseInt(right.armor) ? 0 : (parseInt(left.armor) > parseInt(right.armor) ? -1 : 1) });
                 if (armorArray.length > 0)
                     return armorArray[0].armor;
                 else
                     return 0;
             }
         });
+
         self.helmetRating = ko.computed({
-            read: function() {                            
+            read: function() {
                 var helmetArray = self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "helmet"; });
-                helmetArray.sort(function(left, right) { return parseInt(left.armor) == parseInt(right.armor) ? 0 : (parseInt(left.armor) > parseInt(right.armor) ? -1 : 1) });                
+                helmetArray.sort(function(left, right) { return parseInt(left.armor) == parseInt(right.armor) ? 0 : (parseInt(left.armor) > parseInt(right.armor) ? -1 : 1) });
                 if (helmetArray.length > 0)
                     return helmetArray[0].armor;
                 else
@@ -201,7 +233,6 @@
             }
         });
 
-        /* Movement Speed */
         self.movementSpeedSprint = ko.computed({
             read: function() {
                 var athleticsSkill = self.skills().where(function (data) { return data.name.toLowerCase().trim() === "athletics"; }).firstOrNull();
@@ -211,23 +242,22 @@
             }
         });
         self.movementSpeedRun = ko.computed({
-            read: function() {                
+            read: function() {
                 return Math.round(self.movementSpeedSprint() * 0.6666666);
             }
         });
         self.movementSpeedJog = ko.computed({
-            read: function() {                
+            read: function() {
                 return Math.round(self.movementSpeedSprint() * 0.5);
             }
         });
         self.movementSpeedWalk = ko.computed({
-            read: function() {                
+            read: function() {
                 return Math.round(self.movementSpeedSprint() * 0.3333333);
             }
         });
 
-        /* Character Functions */
-        self.incrementSkill = function(incomingSkill){            
+        self.incrementSkill = function(incomingSkill){
             incomingSkill.level(parseInt(incomingSkill.level()) + 1);
         };
 
@@ -276,7 +306,7 @@
             self.skills.sort(function(left, right) { return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
         }
 
-        self.insertSkill = function(){            
+        self.insertSkill = function(){
             self.skills.push(new skillObject(self.inputSkillName(), self.inputLevel(), self.inputAttribute(), self.inputComplex()));
             self.sortSkills();
             self.inputSkillName('');
@@ -317,8 +347,8 @@
                 });
             if(Array.isArray(data.equipment))
                 data.equipment.foreach(function(equipment){
-                    self.equipment.push(new equipmentObject(equipment.name, equipment.type, 
-                        equipment.mass, equipment.accuracy, equipment.damage, equipment.range, 
+                    self.equipment.push(new equipmentObject(equipment.name, equipment.type,
+                        equipment.mass, equipment.accuracy, equipment.damage, equipment.range,
                         equipment.ammoMax, equipment.rateOfFire, equipment.radius, equipment.armor, equipment.quantity));
                 });
             if(data.currency) self.currency(data.currency);
@@ -334,8 +364,8 @@
             });
             var modelEquipment = [];
             self.equipment().foreach(function(equipment){
-                modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass, 
-                    accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax, 
+                modelEquipment.push({name: equipment.name, type: equipment.type, mass: equipment.mass,
+                    accuracy: equipment.accuracy, damage: equipment.damage, range: equipment.range, ammoMax: equipment.ammoMax,
                     rateOfFire: equipment.rateOfFire, radius: equipment.radius, armor: equipment.armor, quantity: equipment.quantity()});
             });
             var modelPhysicalStatuses = [];
@@ -396,7 +426,7 @@
             self.equipment.sort(function(left, right) { return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
         }
 
-        self.insertWeapon = function(){            
+        self.insertWeapon = function(){
             self.equipment.push(new equipmentObject(self.inputWeaponName(), 'Weapon', self.inputWeaponMass(), self.inputWeaponAccuracy(),self.inputWeaponDamage(),self.inputWeaponRange(),self.inputWeaponAmmo(),self.inputWeaponRateOfFire(),self.inputWeaponRadius()));
 
             self.sortEquipment();
@@ -419,7 +449,7 @@
             self.inputArmor(0);
         };
 
-        self.insertEquipment = function(){            
+        self.insertEquipment = function(){
             self.equipment.push(new equipmentObject(self.inputEquipmentName(), 'Other', self.inputEquipmentMass()));
             self.sortEquipment();
             self.inputEquipmentName('');
@@ -441,8 +471,6 @@
         self.decreaseQuantity = function(incomingEquipment){
             incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
         };
-
-        self.debugme = function(){debugger;};
 
         self.exportToASCII = function(){
             var d = new Date();
@@ -538,96 +566,96 @@
 
         self.skillsSuggestions = ko.observableArray([
             "Acrobatics",
-            "Aircraft Pilot", 
-            "Animal Handling", 
-            "Archery", 
-            "Athletics", 
-            "Bureaucracy", 
-            "Business", 
-            "Camouflage", 
-            "Combat Sense", 
-            "Communications", 
-            "Computer", 
-            "Cooking", 
-            "Craft (jewelry)", 
-            "Craft (metalwork)", 
-            "Craft (woodcraft)", 
-            "Craft (weaving)", 
-            "Dance", 
-            "Demolition", 
-            "Disguise", 
-            "Dodge", 
-            "Drive", 
-            "Earth Sciences", 
-            "Electronic Design", 
-            "Electronic Warfare", 
-            "Electronics", 
-            "Etiquette", 
-            "First Aid", 
-            "Foreign Language ", 
-            "Forgery", 
-            "Forward Observing", 
-            "G-Handling", 
-            "Gambling", 
-            "Gunnery (air)", 
-            "Gunnery (ground)", 
-            "Gunnery (heavy gear)", 
-            "Gunnery (naval)", 
-            "Gunnery (space)", 
-            "Haggling", 
-            "Hand-to-Hand", 
-            "Heavy Gear Architecture", 
-            "Heavy Gear Pilot", 
-            "Heavy Weapons", 
-            "Human Perception", 
-            "Interrogation", 
-            "Intimidate", 
-            "Investigation", 
-            "Law", 
-            "Leadership", 
-            "Life Sciences", 
-            "Literature", 
-            "Mechanical Design", 
-            "Mechanics", 
-            "Medicine", 
-            "Melee", 
-            "Music", 
-            "Naval Pilot", 
-            "Navigation (air)", 
-            "Navigation (land)", 
-            "Navigation (sea)", 
-            "Navigation (space)", 
-            "Notice", 
-            "Parachuting", 
-            "Physical Sciences", 
-            "Psychology", 
-            "Riding", 
-            "Security", 
-            "Sleight-of-Hand", 
-            "Small Arms", 
-            "Sniping", 
-            "Social Sciences", 
-            "Space Pilot", 
-            "Stealth", 
-            "Streetwise", 
-            "Strider Pilot", 
-            "Survival", 
-            "Swimming", 
-            "Tactics", 
-            "Teaching", 
-            "Theatrics", 
-            "Throwing", 
-            "Tinker", 
-            "Visual Art", 
+            "Aircraft Pilot",
+            "Animal Handling",
+            "Archery",
+            "Athletics",
+            "Bureaucracy",
+            "Business",
+            "Camouflage",
+            "Combat Sense",
+            "Communications",
+            "Computer",
+            "Cooking",
+            "Craft (jewelry)",
+            "Craft (metalwork)",
+            "Craft (woodcraft)",
+            "Craft (weaving)",
+            "Dance",
+            "Demolition",
+            "Disguise",
+            "Dodge",
+            "Drive",
+            "Earth Sciences",
+            "Electronic Design",
+            "Electronic Warfare",
+            "Electronics",
+            "Etiquette",
+            "First Aid",
+            "Foreign Language ",
+            "Forgery",
+            "Forward Observing",
+            "G-Handling",
+            "Gambling",
+            "Gunnery (air)",
+            "Gunnery (ground)",
+            "Gunnery (heavy gear)",
+            "Gunnery (naval)",
+            "Gunnery (space)",
+            "Haggling",
+            "Hand-to-Hand",
+            "Heavy Gear Architecture",
+            "Heavy Gear Pilot",
+            "Heavy Weapons",
+            "Human Perception",
+            "Interrogation",
+            "Intimidate",
+            "Investigation",
+            "Law",
+            "Leadership",
+            "Life Sciences",
+            "Literature",
+            "Mechanical Design",
+            "Mechanics",
+            "Medicine",
+            "Melee",
+            "Music",
+            "Naval Pilot",
+            "Navigation (air)",
+            "Navigation (land)",
+            "Navigation (sea)",
+            "Navigation (space)",
+            "Notice",
+            "Parachuting",
+            "Physical Sciences",
+            "Psychology",
+            "Riding",
+            "Security",
+            "Sleight-of-Hand",
+            "Small Arms",
+            "Sniping",
+            "Social Sciences",
+            "Space Pilot",
+            "Stealth",
+            "Streetwise",
+            "Strider Pilot",
+            "Survival",
+            "Swimming",
+            "Tactics",
+            "Teaching",
+            "Theatrics",
+            "Throwing",
+            "Tinker",
+            "Visual Art",
             "Zero-G"
         ]);
 
         self.selectedSuggestion = ko.observable(null);
-        self.selectedSuggestion.subscribe(function () { 
-            self.tesing(); 
+        self.selectedSuggestion.subscribe(function () {
+            self.setSelectedSkill();
         });
 
-        self.tesing = function() {
+        self.setSelectedSkill = function() {
             if (self.selectedSuggestion())
             {
                 var skill = self.standardSkills().where(function (data) { return data.name.toLowerCase().trim() === self.selectedSuggestion().toLowerCase().trim(); });
@@ -647,9 +675,9 @@
 
 var skillObject = function(incomingName, incomingLevel, affectingAttribute, isComplex) {
     var self = this;
-    
+
     self.name = incomingName;
-    self.level = ko.observable(incomingLevel);    
+    self.level = ko.observable(incomingLevel);
     self.bonus = affectingAttribute;
     self.isComplex = isComplex;
 
@@ -658,7 +686,7 @@ var skillObject = function(incomingName, incomingLevel, affectingAttribute, isCo
 
 var equipmentObject = function(incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange, incomingAmmoMax, incomingRateOfFire, incomingRadius, incomingArmor, incomingQuantity) {
     var self = this;
-    
+
     self.name = incomingName;
 
     if(incomingType)

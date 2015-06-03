@@ -6,7 +6,7 @@ describe('character - ', function () {
 	it('must exist - ', function(){
 		expect(character !== undefined).toBe(true);
 	});
-    
+
 	describe('required properties -', function(){
 		beforeEach(function() {
 	        character = new CharacterBuilder.Character();
@@ -74,15 +74,22 @@ describe('character - ', function () {
 		it('must have secondaryTraitStrength', function(){
 		    expect(character.secondaryTraitStrength !== undefined).toBe(true);
 		    expect(character.secondaryTraitStrength() === -1).toBe(true);
-		    character.attributeBuild(1);		    
+		    character.attributeBuild(1);
 		    expect(character.secondaryTraitStrength() === 0).toBe(true);
 		    character.attributeFitness(2);
 		    expect(character.secondaryTraitStrength() === 1).toBe(true);
 		    character.attributeBuild(2);
 		    expect(character.secondaryTraitStrength() === 2).toBe(true);
 		});
+    it('must have maximumCapacity', function(){
+		    expect(character.maximumCapacity !== undefined).toBe(true);
+		    expect(character.maximumCapacity()).toBe(60);
+		    character.attributeFitness(2);
+		    character.attributeBuild(2);
+		    expect(character.maximumCapacity()).toBe(95);
+		});
 		it('must have secondaryTraitHealth', function(){
-		    expect(character.secondaryTraitHealth !== undefined).toBe(true);		    
+		    expect(character.secondaryTraitHealth !== undefined).toBe(true);
 		    expect(character.secondaryTraitHealth() === -1).toBe(true);
 		    character.attributeFitness(2);
 		    expect(character.secondaryTraitHealth() === 0).toBe(true);
@@ -94,9 +101,9 @@ describe('character - ', function () {
 		    character.attributePsyche(0);
 		    character.attributeWillpower(0);
 		    expect(character.secondaryTraitHealth() === 1).toBe(true);
-		});		
+		});
 		it('must have secondaryTraitStamina', function(){
-		    expect(character.secondaryTraitStamina !== undefined).toBe(true);		    
+		    expect(character.secondaryTraitStamina !== undefined).toBe(true);
 		    expect(character.secondaryTraitStamina() === 15).toBe(true);
 			character.attributeBuild(0);
 			character.attributeFitness(2);
@@ -107,7 +114,7 @@ describe('character - ', function () {
 		    expect(character.secondaryTraitStamina() == 35).toBe(true);
 		});
 		it('must have secondaryTraitUnarmedDamage', function(){
-		    expect(character.secondaryTraitUnarmedDamage !== undefined).toBe(true);		    
+		    expect(character.secondaryTraitUnarmedDamage !== undefined).toBe(true);
 		    expect(character.secondaryTraitUnarmedDamage() === 1).toBe(true);
 			character.attributeBuild(0);
 			character.attributeFitness(0);
@@ -119,7 +126,7 @@ describe('character - ', function () {
             expect(typeof(character.saveToLocalStorage)).toEqual("function");
         });
 		it('must have secondaryTraitArmedDamage', function(){
-		    expect(character.secondaryTraitArmedDamage !== undefined).toBe(true);		    
+		    expect(character.secondaryTraitArmedDamage !== undefined).toBe(true);
 		    expect(character.secondaryTraitArmedDamage() === 1).toBe(true);
 			character.attributeBuild(0);
 			character.attributeFitness(0);
@@ -128,48 +135,48 @@ describe('character - ', function () {
 			expect(character.secondaryTraitArmedDamage() === 5).toBe(true);
 		});
 		it('must have injuryThresholdFlesh', function(){
-		    expect(character.injuryThresholdFlesh !== undefined).toBe(true);		    
+		    expect(character.injuryThresholdFlesh !== undefined).toBe(true);
 		    expect(character.injuryThresholdFlesh() === 8).toBe(true);
 		    character.attributeBuild(0);
 			character.attributeFitness(2);
 		    expect(character.injuryThresholdFlesh() == 13).toBe(true);
 		});
 		it('must have injuryCountFlesh', function(){
-		    expect(character.injuryCountFlesh !== undefined).toBe(true);		    
+		    expect(character.injuryCountFlesh !== undefined).toBe(true);
 		    expect(character.injuryCountFlesh() === 0).toBe(true);
 		});
 		it('must have injuryThresholdDeep', function(){
-		    expect(character.injuryThresholdDeep !== undefined).toBe(true);		    
+		    expect(character.injuryThresholdDeep !== undefined).toBe(true);
 		    expect(character.injuryThresholdDeep() === 15).toBe(true);
 		    character.attributeBuild(0);
 			character.attributeFitness(2);
 		    expect(character.injuryThresholdDeep() == 25).toBe(true);
 		});
 		it('must have injuryCountDeep', function(){
-		    expect(character.injuryCountDeep !== undefined).toBe(true);		    
+		    expect(character.injuryCountDeep !== undefined).toBe(true);
 		    expect(character.injuryCountDeep() === 0).toBe(true);
 		});
 		it('must have injuryThresholdInstant', function(){
-		    expect(character.injuryThresholdInstant !== undefined).toBe(true);		    
+		    expect(character.injuryThresholdInstant !== undefined).toBe(true);
 		    expect(character.injuryThresholdInstant() === 30).toBe(true);
 		    character.attributeBuild(0);
 			character.attributeFitness(2);
 		    expect(character.injuryThresholdInstant() == 50).toBe(true);
 		});
 		it('must have systemShockThreshold', function(){
-		    expect(character.systemShockThreshold !== undefined).toBe(true);		    
+		    expect(character.systemShockThreshold !== undefined).toBe(true);
 		    expect(character.systemShockThreshold() === 4).toBe(true);
 		    character.attributeFitness(2);
 		    expect(character.systemShockThreshold() == 5).toBe(true);
 		    character.attributePsyche(2);
 		    expect(character.systemShockThreshold() == 6).toBe(true);
-		    character.attributeFitness(-5);		    
+		    character.attributeFitness(-5);
 		    character.attributePsyche(-5);
 		    character.attributeWillpower(-5);
 		    expect(character.systemShockThreshold() == 1).toBe(true);
 		});
 		it('must have movementSpeedSprint', function(){
-			expect(character.movementSpeedSprint !== undefined).toBe(true);		    
+			expect(character.movementSpeedSprint !== undefined).toBe(true);
 		    expect(character.movementSpeedSprint() === 20).toBe(true);
 		    character.attributeFitness(0);
 		    expect(character.movementSpeedSprint() === 25).toBe(true);
@@ -246,7 +253,7 @@ describe('character - ', function () {
 
 		it('- must be able to insert skills', function(){
 			expect(character.insertSkill !== undefined).toBe(true);
-        	expect(typeof (character.insertSkill)).toEqual('function');        	
+        	expect(typeof (character.insertSkill)).toEqual('function');
 		});
 
 		it('- must be able to remove skills', function(){
@@ -719,11 +726,11 @@ describe('character - ', function () {
 
 		it('must exist', function(){
 			expect(character.armorRating).not.toBe(undefined);
-        	expect(typeof (character.armorRating)).toEqual('function');        	
+        	expect(typeof (character.armorRating)).toEqual('function');
 		});
 
 		it('must return armor value', function(){
-			expect(character.armorRating()).toEqual(20);			
+			expect(character.armorRating()).toEqual(20);
 		});
 
 		it('must return the greatest armor value', function(){
@@ -740,7 +747,7 @@ describe('character - ', function () {
 
 		it('must exist', function(){
 			expect(character.helmetRating).not.toBe(undefined);
-        	expect(typeof (character.helmetRating)).toEqual('function');        	
+        	expect(typeof (character.helmetRating)).toEqual('function');
 		});
 
 		it('must return armor value', function(){
@@ -755,12 +762,12 @@ describe('character - ', function () {
 
 	describe('character points - ', function() {
 		beforeEach(function() {
-	        character = new CharacterBuilder.Character();	        
+	        character = new CharacterBuilder.Character();
 	    });
 
 		it('must exist', function(){
 			expect(character.characterPoints).not.toBe(undefined);
-        	expect(typeof (character.characterPoints)).toEqual('function');        	
+        	expect(typeof (character.characterPoints)).toEqual('function');
 		});
 
 		it('must equal 0 when all attributes are -1', function(){
@@ -778,24 +785,24 @@ describe('character - ', function () {
 		});
 
 		it('must equal -1 when an attribute is -2', function(){
-			character.attributeInfluence(-2);			
+			character.attributeInfluence(-2);
     		expect(character.characterPoints()).toEqual(-1);
 		});
 
 		it('must equal -4 when an attribute is -3', function(){
-			character.attributeInfluence(-3);			
+			character.attributeInfluence(-3);
     		expect(character.characterPoints()).toEqual(-4);
 		});
 	});
 
 	describe('skill points - ', function() {
 		beforeEach(function() {
-	        character = new CharacterBuilder.Character();	        
+	        character = new CharacterBuilder.Character();
 	    });
 
 		it('must exist', function(){
 			expect(character.skillPoints).not.toBe(undefined);
-        	expect(typeof (character.skillPoints)).toEqual('function');        	
+        	expect(typeof (character.skillPoints)).toEqual('function');
 		});
 
 		it('must equal 0 when all skills are 0 or there are none', function(){
@@ -815,7 +822,7 @@ describe('character - ', function () {
 		it('must equal 8 when a skill is level 2 and complex', function(){
 			character.skills.push(new skillObject("Stealth", 2, 'agility', true));
     		expect(character.skillPoints()).toEqual(8);
-		});		
+		});
 	});
 });
 
@@ -843,11 +850,11 @@ describe('skillsObject', function () {
 describe('equipmentObject', function () {
     var character = new window.CharacterBuilder.Character();
 
-    describe('- equipment object', function() {    	
+    describe('- equipment object', function() {
         var randomItem = new equipmentObject("item", 'Weapon', 1, 1, 22, 50, 30, 1, 1);
         it('- must be an equipmentObject', function () {
             expect(equipmentObject).toBeDefined();
-            expect(randomItem.name).toBeDefined();            
+            expect(randomItem.name).toBeDefined();
             expect(randomItem.name).toBe("item");
             expect(randomItem.type).toBeDefined();
             expect(randomItem.type).toBe('Weapon');
