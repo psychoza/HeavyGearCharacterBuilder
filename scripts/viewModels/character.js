@@ -2,7 +2,7 @@
     cb.Character = function() {
         var self = this;
 
-        self.versionNumber = ko.observable('v 1.0.6')
+        self.versionNumber = ko.observable('v 1.1.0')
         self.uuid = UUID.generate();
 
         self.inputSkillName = ko.observable('');
@@ -421,6 +421,8 @@
         self.loadFromLocalStorage = function(uuid){
             self.loadFromData(LocalStorage.getCharacter(uuid));
         };
+
+        self.goToMainPage = function() { window.location = "characterList.html"; };
 
         self.sortEquipment = function() {
             self.equipment.sort(function(left, right) { return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1) });
