@@ -44,6 +44,7 @@ body {
 
 .navbar i {
   color: #ff9482;
+  padding-right: 20px;
 }
 .navbar i:hover {
   color: #fff;
