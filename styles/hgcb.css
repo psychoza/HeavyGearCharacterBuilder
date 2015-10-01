@@ -20,11 +20,16 @@ body {
     align-items: center;
 }
 
-/*body {
-  background-image: url('../images/HG/grizzly.png');
+.grizzlyImage {
+  background-color: transparent;
+  background-image: url('http://tageverything.org/za/images/HG/grizzly.png');
   background-repeat: no-repeat;
   background-position: right bottom;
-}*/
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
 
 .panel {
   background-color: rgba(255, 255, 255, 0.9);
