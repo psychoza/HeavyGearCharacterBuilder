@@ -24,14 +24,15 @@
       <div id="navbar" class="navbar-collapse collapse pull-right">
         <ul class="nav navbar-nav vertical-align">
           <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: saveToLocalStorage"></i>&nbsp;&nbsp;</li>
-          <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage'""></i>&nbsp;&nbsp;</li>
+          <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage' "></i>&nbsp;&nbsp;</li>
           <li id="exportButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
           <li id="characterList" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <!-- ko foreach: characters -->
               <li><a data-bind="text: name, click: $root.editCharacter"></a></li>
               <!-- /ko -->
+              <li role="separator" class="divider"></li>
               <li><a data-bind="click: $root.createNewCharacter">New Character</a></li>
             </ul>
           </li>
@@ -648,6 +649,7 @@
           ko.applyBindings(character, $('#characterSheet').get(0));
           ko.applyBindings(character, $('#saveButton').get(0));
           ko.applyBindings(character, $('#exportButton').get(0));
+          ko.applyBindings(character, $('#deleteButton').get(0));
           Title.watchCharacterName(character.characterName);
           ko.applyBindings(Title, $('#title').get(0));
       });

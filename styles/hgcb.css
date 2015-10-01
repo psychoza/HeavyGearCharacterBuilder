@@ -1,3 +1,8 @@
+@font-face {
+	font-family: Gearhead;
+	src: url('gearhead.ttf');
+}
+
 .navbar-inverse {
   background-image: -webkit-linear-gradient(top, #000 0%, #000 100%);
   background-image:      -o-linear-gradient(top, #000 0%, #000 100%);
@@ -23,4 +28,49 @@ body {
 
 .panel {
   background-color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar .navbar-brand {
+  color: #ff2a05;
+  font-weight: bold;
+  font-size: 1.8em;
+  font-family: Gearhead,Helvetica,Arial,sans-serif;
+}
+
+.navbar .dropdown .dropdown-toggle {
+  color: #ff2a05;
+  font-size: 16px;
+}
+
+.navbar i {
+  color: #ff9482;
+}
+.navbar i:hover {
+  color: #fff;
+}
+
+.form-control:focus {
+  border-color: #ff2a05;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 42, 5, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 42, 5, .6);
+}
+
+.panel-default {
+
+}
+.panel-default > .panel-heading {
+  color: #ff2a05;
+  background-color: #3e3e3e;
+
+}
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+
+}
+.panel-default > .panel-heading .badge {
+  color: #ff2a05;
+
+}
+.panel-default > .panel-footer + .panel-collapse > .panel-body {
+
 }
