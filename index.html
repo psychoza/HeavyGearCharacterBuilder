@@ -23,8 +23,8 @@
     <div class="container">
       <div id="navbar" class="navbar-collapse collapse pull-right">
         <ul class="nav navbar-nav vertical-align">
-          <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: saveToLocalStorage"></i></li>
-          <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage' "></i></li>
+          <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: $root.saveCharacter"></i></li>
+          <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage', click: $root.removeCharacter "></i></li>
           <li id="exportButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
           <li id="characterList" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters<span class="caret"></span></a>
@@ -636,22 +636,24 @@
 
   <script>
       $(function(){
-          CharacterList.fetchCharacters();
-          ko.applyBindings(CharacterList, $('#characterList').get(0));
-          var character = new window.CharacterBuilder.Character();
-          var urlParams = GetQueryParams(window.location.href);
-          if(urlParams.loadFromUUID)
-              character.loadFromLocalStorage(urlParams.loadFromUUID);
-          $('#inputSkillName').devbridgeAutocomplete({
-              lookup: character.skillsSuggestions(),
-              onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
-          });
-          ko.applyBindings(character, $('#characterSheet').get(0));
-          ko.applyBindings(character, $('#saveButton').get(0));
-          ko.applyBindings(character, $('#exportButton').get(0));
-          ko.applyBindings(character, $('#deleteButton').get(0));
-          Title.watchCharacterName(character.characterName);
-          ko.applyBindings(Title, $('#title').get(0));
+        CharacterList.Character = new window.CharacterBuilder.Character();
+        CharacterList.fetchCharacters();
+        ko.applyBindings(CharacterList, $('#characterList').get(0));
+        var character = CharacterList.Character;
+        var urlParams = GetQueryParams(window.location.href);
+        if(urlParams.loadFromUUID)
+            character.loadFromLocalStorage(urlParams.loadFromUUID);
+
+        $('#inputSkillName').devbridgeAutocomplete({
+            lookup: character.skillsSuggestions(),
+            onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
+        });
+        ko.applyBindings(character, $('#characterSheet').get(0));
+        ko.applyBindings(CharacterList, $('#saveButton').get(0));
+        ko.applyBindings(character, $('#exportButton').get(0));
+        ko.applyBindings(CharacterList, $('#deleteButton').get(0));
+        Title.watchCharacterName(character.characterName);
+        ko.applyBindings(Title, $('#title').get(0));
       });
   </script>
 </body>

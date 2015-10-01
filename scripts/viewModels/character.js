@@ -673,6 +673,47 @@
             }
         }
 
+        self.createNewCharacter = function() {
+          self.uuid = UUID.generate();
+          self.inputSkillName('');
+          self.inputLevel(0);
+          self.inputAttribute();
+          self.inputComplex(false);
+          self.inputEquipmentName('');
+          self.inputEquipmentMass(0);
+          self.inputWeaponName('');
+          self.inputWeaponMass(0);
+          self.inputWeaponAccuracy(0);
+          self.inputWeaponDamage(0);
+          self.inputWeaponRange(0);
+          self.inputWeaponAmmo(0);
+          self.inputWeaponRateOfFire(0);
+          self.inputWeaponRadius(0);
+          self.inputArmorName('')
+          self.inputArmorType('Armor');
+          self.inputArmorMass(0);
+          self.inputArmor(0);
+          self.characterName('');
+          self.characterProfession('');
+          self.characterRank('');
+          self.characterNationality('');
+          self.characterUnit('');
+          self.characterExperience(0);
+          self.currency(0);
+          self.currencyOnHand(0);
+          self.emergencyDice(0);
+          self.attributeAgility(-1);
+          self.attributeAppearance(-1);
+          self.attributeBuild(-1);
+          self.attributeCreativity(-1);
+          self.attributeFitness(-1);
+          self.attributeInfluence(-1);
+          self.attributeKnowledge(-1);
+          self.attributePerception(-1);
+          self.attributePsyche(-1);
+          self.attributeWillpower(-1);
+        };
+
         return this;
     };
 })(window.CharacterBuilder = window.CharacterBuilder || {});

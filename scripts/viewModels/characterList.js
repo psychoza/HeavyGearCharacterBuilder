@@ -18,10 +18,12 @@ var CharacterList = (function(){
     });
 
     self.createNewCharacter = function(){
-        window.location = 'index.html';
+        self.Character.createNewCharacter();
     };
 
-    self.removeCharacter = function(characterToRemove){
+    self.removeCharacter = function(){
+        var characterToRemove = self.selectedCharacter();
+
         var c = self.characters();
         c.remove(characterToRemove);
         self.characters(c);
@@ -40,23 +42,31 @@ var CharacterList = (function(){
         if(found)
             charactersRaw.splice(index,1);
         window.localStorage.setItem(CharacterLocalStorage, JSON.stringify(charactersRaw));
+        self.Character.createNewCharacter();
     };
+
+     self.saveCharacter = function(){
+       var character = new Models.Character(self.Character.getModelData());
+       self.Character.saveToLocalStorage();
+       self.refreshCharacters();
+     };
 
     self.editCharacter = function(character){
-      window.location = 'index.html?loadFromUUID='+character.uuid;
-    };
-
-    self.showCharacter = function(character){
+        self.Character.loadFromLocalStorage(character.uuid);
         self.selectedCharacter(character);
     };
 
+    self.refreshCharacters = function() {
+      var charJSON = window.localStorage.getItem(CharacterLocalStorage);
+      var charRaw = charJSON==undefined ? []: JSON.parse(charJSON);
+      var charModels = charRaw.select(function(data){ return new Models.Character(data); });
+      self.characters(charModels);
+    }
+
     self.fetchCharacters = function(){
-        var charJSON = window.localStorage.getItem(CharacterLocalStorage);
-        var charRaw = charJSON==undefined ? []: JSON.parse(charJSON);
-        var charModels = charRaw.select(function(data){ return new Models.Character(data); });
-        self.characters(charModels);
-        if(charModels.length>0)
-            self.selectedCharacter(charModels[0]);
+        self.refreshCharacters();
+        if(self.characters().length>0)
+            self.selectedCharacter(self.characters()[0]);
     };
 
     self.export = function(){

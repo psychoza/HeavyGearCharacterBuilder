@@ -8,10 +8,6 @@ describe('characterList - ', function(){
             expect(typeof(CharacterList.createNewCharacter)).toEqual("function");
         });
 
-        it('has showCharacter', function(){
-            expect(typeof(CharacterList.showCharacter)).toEqual("function");
-        });
-
         it('has list of characters', function(){
             expect(ko.isObservable(CharacterList.characters)).toEqual(true);
             expect(Array.isArray(CharacterList.characters())).toEqual(true);
@@ -32,38 +28,6 @@ describe('characterList - ', function(){
         it('has editCharacter', function(){
             expect(typeof(CharacterList.editCharacter)).toEqual("function");
         })
-    });
-
-    describe('editCharacter - ', function(){
-        var navSpy;
-        beforeEach(function(){
-            navSpy = spyOn(window,'Redirect').and.callFake(function(){});
-        });
-
-        it('navigates to edit w/ correct uuid', function(){
-            //Arrange
-            var fakeChar = {uuid:'stuff'};
-
-            //Act
-            CharacterList.editCharacter(fakeChar);
-
-            //Assert
-            expect(navSpy).toHaveBeenCalledWith('editCharacter.html?loadFromUUID='+fakeChar.uuid);
-        });
-    });
-
-    describe('createNewCharacter - ', function(){
-        var navSpy;
-        beforeEach(function(){
-            navSpy = spyOn(window,'Redirect').and.callFake(function(){});
-        });
-        it('navigates to editCharacter.html', function(){
-            //Arrange/Act
-            CharacterList.createNewCharacter();
-
-            //Assert
-            expect(navSpy).toHaveBeenCalledWith('editCharacter.html');
-        });
     });
 
     describe('fetchCharacters - ', function(){
@@ -96,19 +60,6 @@ describe('characterList - ', function(){
         });
     });
 
-    describe('showCharacter - ', function(){
-        it('puts selected character in selectedCharacter', function(){
-            //Arrange
-            CharacterList.selectedCharacter(null);
-            var dummyChar = new Models.Character();
-
-            //Act
-            CharacterList.showCharacter(dummyChar);
-
-            //Assert
-            expect(CharacterList.selectedCharacter()).toEqual(dummyChar);
-        });
-    });
 
     describe('removeCharacter - ', function(){
         it('can remove a character', function(){
