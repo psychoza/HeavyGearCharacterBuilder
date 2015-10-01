@@ -60,10 +60,15 @@ body {
 .panel-default {
 
 }
-.panel-default > .panel-heading {
-  color: #ff2a05;
-  background-color: #3e3e3e;
 
+.panel-default > .panel-heading {
+  color: #fff;
+  background-image: -webkit-linear-gradient(top,#747474 0,#3e3e3e 100%);
+  background-image: -o-linear-gradient(top,#747474 0,#3e3e3e 100%);
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#747474),to(#3e3e3e));
+  background-image: linear-gradient(to bottom,#747474 0,#3e3e3e 100%);
+  filter:progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff747474', endColorstr='#ff3e3e3e', GradientType=0);
+  background-repeat: repeat-x;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
 
