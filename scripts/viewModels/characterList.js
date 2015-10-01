@@ -18,7 +18,7 @@ var CharacterList = (function(){
     });
 
     self.createNewCharacter = function(){
-        Redirect('editCharacter.html');
+        window.location = 'index.html';
     };
 
     self.removeCharacter = function(characterToRemove){
@@ -43,7 +43,7 @@ var CharacterList = (function(){
     };
 
     self.editCharacter = function(character){
-        Redirect('editCharacter.html?loadFromUUID='+character.uuid);
+      window.location = 'index.html?loadFromUUID='+character.uuid;
     };
 
     self.showCharacter = function(character){

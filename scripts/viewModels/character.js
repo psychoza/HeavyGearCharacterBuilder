@@ -416,6 +416,8 @@
 
         self.saveToLocalStorage = function(){
             LocalStorage.saveCharacter(self.getModelData());
+            if (!self.characterName().trim().length === 0)
+              window.location = 'index.html?loadFromUUID='+self.uuid;
         };
 
         self.loadFromLocalStorage = function(uuid){

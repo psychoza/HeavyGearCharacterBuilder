@@ -1,59 +1,656 @@
-<!DOCTYPE>
-<html style="height: 100%;">
+<!DOCTYPE=html>
+<html lang="en"><head>
 <head>
-    <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
-    <meta name="author" content="Jesse Hutchison" />
-    <meta name="coauthor" content="Sean Carnes">
-    <meta name="keywords" content="heavy, gear, character, builder">
-    <meta name="description" content="A web toll using the 2nd edition rule book from 1997 to generate a character">
-    <link rel="stylesheet" type="text/css" href="styles/reset.css">
-    <link rel="stylesheet" type="text/css" href="styles/guild.css">
-    <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
-    <link rel="icon" type="image/png" href="images/favicon.png" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <title id="title" data-bind="text: text">Heavy Gear Character Builder</title>
+  <meta name="author" content="Jesse Hutchison" />
+  <meta name="coauthor" content="Sean Carnes">
+  <meta name="keywords" content="heavy, gear, character, builder">
+  <meta name="description" content="A web tool using the 2nd edition rule book from 1997 to generate a character">
+
+  <link rel="icon" href="images/favicon.png" />
+  <link href="styles/bootstrap.min.css" rel="stylesheet">
+  <link href="styles/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="styles/master.css" rel="stylesheet" >
+  <link href="http://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
 </head>
-<body style="height: 100%;">
-    <div class="rightBorder" id="rightBorder">
-        <div class="leftBorder" id="leftBorder">
-            <h1>Heavy Gear</h1>    
-            <h1>Character Builder</h1>
-            <h6 data-bind="text: versionNumber"></h6>
-            <br/>
-            <div class="center">
-                <br/>                
-                <a href='characterList.html'><h2><img src='images/HG/gear.png' width="18" height="18" />&nbsp;Character List</h2></a><br />
-            </div>
-        </div>
+<body role=document>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div id="navbar" class="navbar-collapse collapse pull-right">
+        <ul class="nav navbar-nav vertical-align">
+          <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: saveToLocalStorage"></i>&nbsp;&nbsp;</li>
+          <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage'""></i>&nbsp;&nbsp;</li>
+          <li id="exportButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
+          <li id="characterList" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <!-- ko foreach: characters -->
+              <li><a data-bind="text: name, click: $root.editCharacter"></a></li>
+              <!-- /ko -->
+              <li><a data-bind="click: $root.createNewCharacter">New Character</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand" data-bind="text: 'Heavy Gear Character Builder ' + versionNumber()">Heavy Gear Character Builder</span>
+      </div>
     </div>
-    <style>
-    a.expand {
-    transition:all .8s; 
-    -moz-transition:all .8s; /* FIREFOX */
-    -webkit-transition:all .8s; /* SAFARI and CHROME */
-    -o-transition:all .8s; /* OPERA */
+  </nav>
+  <div class="container" role="main" id="characterSheet">
+    <div class="row" id="details">
+      <div class="col-sm-12">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-target="#collapseDetails" class="collapsed">
+              <h3 class="panel-title">
+                  Character Details
+              </h3>
+            </div>
+            <div id="collapseDetails" class="panel-body panel-collapse collapse in">
+              <div class="row">
+                <div class="col-sm-8">
+                  <label>Name</label>
+                  <br/>
+                  <input type="text" class="form-control" data-bind="value: characterName, valueUpdate:'afterkeydown'">
+                </div>
+                <div class="col-sm-4">
+                  <label>Profession</label>
+                  <br/>
+                  <input type="text" class="form-control" data-bind="value: characterProfession, valueUpdate:'afterkeydown'" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>Rank</label>
+                  <br/>
+                  <input type="text" class="form-control" data-bind="value: characterRank, valueUpdate:'afterkeydown'" />
+                </div>
+                <div class="col-sm-4">
+                  <label>Nationality</label>
+                  <br/>
+                  <input type="text" class="form-control" data-bind="value: characterNationality, valueUpdate:'afterkeydown'" />
+                </div>
+                <div class="col-sm-4">
+                  <label>Unit</label>
+                  <br/>
+                  <input type="text" class="form-control" data-bind="value: characterUnit, valueUpdate:'afterkeydown'" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <label>Experience</label>
+                  <br/>
+                  <input type="number" class="form-control" data-bind="value: characterExperience, valueUpdate:'afterkeydown'" />
+                </div>
+                <div class="col-sm-3">
+                  <label>Currency</label>
+                  <br/>
+                  <input type="number" class="form-control" data-bind="value: currency, valueUpdate:'afterkeydown'" />
+                </div>
+                <div class="col-sm-3">
+                  <label>Currency On Hand</label>
+                  <br/>
+                  <input type="number" class="form-control" data-bind="value: currencyOnHand, valueUpdate:'afterkeydown'" />
+                </div>
+                <div class="col-sm-3">
+                  <label>Emergency Dice</label>
+                  <br/>
+                  <input type="number" class="form-control" data-bind="value: emergencyDice, valueUpdate:'afterkeydown'" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="attributesAndSecondary">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-target="#collapseAttributes" class="collapsed">
+            <h3 class="panel-title pull-left">Attributes</h3>
+            <span class="pull-right text-right" data-bind="text: characterPoints"></span>&nbsp;<span class="pull-right text-right" data-bind="tooltip: 'Character Points are the amount of points spent into your attribute scores.'">CPs:</span>
+          </div>
+          <div id="collapseAttributes" class="panel-body panel-collapse collapse in">
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-2">
+                <label>AGI</label>
+                <br/>
+                <input class="form-control" type="number" data-bind="value: attributeAgility, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>APP</label>
+                <br/>
+                <input class="form-control" type="number" data-bind="value: attributeAppearance, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>BLD</label>
+                <br/>
+                <input class="form-control"  type="number" data-bind="value: attributeBuild, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>CRE</label>
+                <br/>
+                <input class="form-control"  type="number" data-bind="value: attributeCreativity, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>FIT</label>
+                <br/>
+                <input class="form-control"  type="number" data-bind="value: attributeFitness, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-2">
+                <label>INF</label>
+                <br/>
+                <input class="form-control" type="number" data-bind="value: attributeInfluence, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>KNO</label>
+                <br/>
+                <input class="form-control" type="number" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>PER</label>
+                <br/>
+                <input class="form-control"  type="number" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>PSY</label>
+                <br/>
+                <input class="form-control"  type="number" data-bind="value: attributePsyche, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-2">
+                <label>WIL</label>
+                <br/>
+                <input class="form-control"  type="number" data-bind="value: attributeWillpower, valueUpdate:'afterkeydown'" />
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseSecondary" class="collapsed">
+            <h3 class="panel-title">Secondary Traits</h3>
+          </div>
+          <div id="collapseSecondary" class="panel-body panel-collapse collapse in">
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-2">
+                <label>STR</label>
+                <br/>
+                <span data-bind="text: secondaryTraitStrength"></span>
+                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
+              </div>
+              <div class="col-sm-2">
+                <label>HEA</label>
+                <br/>
+                <span data-bind="text: secondaryTraitHealth"></span>
+                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
+              </div>
+              <div class="col-sm-2">
+                <label>STA</label>
+                <br/>
+                <span data-bind="text: secondaryTraitStamina"></span>
+                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
+              </div>
+              <div class="col-sm-2">
+                <label>UD</label>
+                <br/>
+                <span data-bind="text: secondaryTraitUnarmedDamage"></span>
+                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
+              </div>
+              <div class="col-sm-2">
+                <label>AD</label>
+                <br/>
+                <span data-bind="text: secondaryTraitArmedDamage">Test</span>
+                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="physicalStatus">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseStatus" class="collapsed">
+            <h3 class="panel-title">Physical Status</h3>
+          </div>
+          <div  id="collapseStatus" class="panel-body panel-collapse collapse in">
+            <table id="physicalStatusTable" class="table table-condensed">
+              <thead>
+                <tr>
+                    <th>INJURY</th>
+                    <th>SCORE</th>
+                    <th>ARMOR</th>
+                    <th>PENALTY</th>
+                    <th>#</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <th class="stringColumn">FLESH WOUND</th>
+                    <td><span data-bind="text: injuryThresholdFlesh"></span></td>
+                    <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
+                    <th>-1</th>
+                    <td><input class="form-control" type="number" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th class="stringColumn">DEEP WOUND</th>
+                    <td><span data-bind="text: injuryThresholdDeep"></span></td>
+                    <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
+                    <th>-2</th>
+                    <td><input class="form-control" type="number" data-bind="value: injuryCountDeep, valueUpdate:'afterkeydown'" /></td>
+                </tr>
+                <tr>
+                    <th class="stringColumn">INSTANT DEATH</th>
+                    <td><span data-bind="text: injuryThresholdInstant"></span></td>
+                    <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
+                    <th>DEAD</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class="stringColumn">SYSTEM SHOCK</th>
+                    <td><span data-bind="text: systemShockThreshold"></span></td>
+                    <td></td>
+                    <th>DEAD</th>
+                    <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="skills">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseSkills" class="collapsed">
+            <h3 class="panel-title pull-left">Skills</h3>
+            <span class="pull-right text-right" data-bind="text: skillPoints"></span>&nbsp;<span class="pull-right text-right" data-bind="tooltip: 'Skill Points are the amount of points spent into your skill levels.'">SPs:</span>
+          </div>
+          <div id="collapseSkills" class="panel-body panel-collapse collapse in">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                    <th>
+                        <span data-bind="tooltip: 'This is the name of the skill you wish to add.'">NAME</span>
+                    </th>
+                    <th>
+                        <span data-bind="tooltip: 'A complex skill doubles the cost of each level.'">CPLX</span>
+                    </th>
+                    <th>
+                        <span data-bind="tooltip: 'The level represents how many dice you will be rolling when using this skill.'">LVL</span>
+                    </th>
+                    <th>
+                        <span data-bind="tooltip: 'This attribute directly coincides with the characters attributes. The value will affect whatever value is rolled when using the skill.'">ATTR</span>
+                    </th>
+                    <th>
+                        <span data-bind="tooltip: 'Add or remove a skill from your character.'">
+                            +/-
+                        </span>
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>
+                        <input class="form-control" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputComplex" type="checkbox" data-bind="checked: inputComplex" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputLevel" type="number" data-bind="value: inputLevel" />
+                    </td>
+                    <td>
+                        <select class="form-control" id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
+                    </td>
+                    <td>
+                      <i class="fa fa-plus" data-bind="tooltip: 'Add weapon to your inventory', click: insertSkill"></i>
+                    </td>
+                </tr>
+                <!-- ko foreach: skills -->
+                <tr>
+                    <td>
+                        <span data-bind="text: name"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: isComplex ? 'Yes' : 'No'"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: level"></span>
+                        <i class="fa fa-arrow-up" data-bind="click: $root.incrementSkill"></i>
+                        <i class="fa fa-arrow-down" data-bind="click: $root.decrementSkill"></i>
+                    </td>
+                    <td>
+                        <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
+                    </td>
+                    <td>
+                      <i class="fa fa-minus" data-bind="tooltip: 'Remove skill', click: $root.removeSkill"></i>
+                    </td>
+                </tr>
+                <!-- /ko -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="weapons">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseWeapons" class="collapsed">
+            <h3 class="panel-title">Weapons</h3>
+          </div>
+          <div id="collapseWeapons" class="panel-body panel-collapse collapse in">
+            <table  class="table table-condensed">
+              <thead>
+                <tr>
+                    <th>
+                        NAME
+                    </th>
+                    <th>
+                        MASS (kg)
+                    </th>
+                    <th>
+                        ACC
+                    </th>
+                    <th>
+                        DAM
+                    </th>
+                    <th>
+                        RANGE
+                    </th>
+                    <th>
+                        AMMO
+                    </th>
+                    <th>
+                        ROF
+                    </th>
+                    <th>
+                        RADIUS
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>
+                        <input class="form-control" id="inputWeaponName" type="text" data-bind="value: inputWeaponName" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponMass" type="number" data-bind="value: inputWeaponMass" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponAccuracy" type="number" data-bind="value: inputWeaponAccuracy" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponDamage" type="number" data-bind="value: inputWeaponDamage" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponRange" type="number" data-bind="value: inputWeaponRange" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponAmmo" type="number" data-bind="value: inputWeaponAmmo" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponRateOfFire" type="number" data-bind="value: inputWeaponRateOfFire" />
+                    </td>
+                    <td>
+                        <input class="form-control" id="inputWeaponRadius" type="number" data-bind="value: inputWeaponRadius" />
+                    </td>
+                    <td>
+                        <i class="fa fa-plus" data-bind="tooltip: 'Add weapon to your inventory', click: insertWeapon"></i>
+                    </td>
+                </tr>
+                <!-- ko foreach: weapons -->
+                <tr>
+                    <td>
+                        <span data-bind="text: name"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: mass"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: accuracy"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: damage"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: range + '/' + mediumRange + '/' + longRange + '/' + extremeRange"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: ammoMax"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: rateOfFire"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: radius"></span>
+                    </td>
+                    <td>
+                        <i class="fa fa-minus" data-bind="tooltip: 'Remove weapon from your inventory', click: $root.removeEquipment"></i>
+                    </td>
+                </tr>
+                <!-- /ko -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="armorAndEquipment">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseArmor" class="collapsed">
+            <h3 class="panel-title">Armor</h3>
+          </div>
+          <div id="collapseArmor" class="panel-body panel-collapse collapse in">
+            <table class="table table-condensed">
+                <thead>
+                  <tr>
+                      <th>
+                          NAME
+                      </th>
+                      <th>
+                          MASS (kg)
+                      </th>
+                      <th>
+                          TYPE
+                      </th>
+                      <th>
+                          ARMOR
+                      </th>
+                      <th>
+                      </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td>
+                          <input class="form-control"  id="inputArmorName" type="text" data-bind="value: inputArmorName" />
+                      </td>
+                      <td>
+                          <input class="form-control" id="inputArmorMass" type="number" data-bind="value: inputArmorMass" />
+                      </td>
+                      <td>
+                          <select id="inputArmorType" class="form-control" data-bind="options: ['Armor', 'Helmet'], value: inputArmorType"></select>
+                      </td>
+                      <td>
+                          <input class="form-control" id="inputArmor" type="text" data-bind="value: inputArmor" />
+                      </td>
+                      <td>
+                        <i class="fa fa-plus" data-bind="tooltip: 'Add armor to your inventory', click: insertArmor"></i>
+                      </td>
+                  </tr>
+                  <!-- ko foreach: armor -->
+                  <tr>
+                      <td>
+                          <span data-bind="text: name"></span>
+                      </td>
+                      <td>
+                          <span data-bind="text: mass"></span>
+                      </td>
+                      <td>
+                          <span data-bind="text: type"></span>
+                      </td>
+                      <td>
+                          <span data-bind="text: armor"></span>
+                      </td>
+                      <td>
+                        <i class="fa fa-minus" data-bind="tooltip: 'Remove armor from your inventory', click: $root.removeEquipment"></i>
+                      </td>
+                  </tr>
+                  <!-- /ko -->
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseEquipment" class="collapsed">
+            <h3 class="panel-title">Equipment</h3>
+          </div>
+          <div id="collapseEquipment" class="panel-body panel-collapse collapse in">
+            <table class="table table-condensed">
+                <thead>
+                  <tr>
+                      <th>
+                          NAME
+                      </th>
+                      <th>
+                          MASS (kg)
+                      </th>
+                      <th>
+                          #
+                      </th>
+                      <th>
+                        +/-
+                      </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td>
+                          <input class="form-control" id="inputEquipmentName" type="text" data-bind="value: inputEquipmentName" />
+                      </td>
+                      <td>
+                          <input class="form-control text-right" id="inputEquipmentMass" type="number" data-bind="value: inputEquipmentMass" />
+                      </td>
+                      <td>
+                      </td>
+                      <td>
+                          <i class="fa fa-plus" data-bind="tooltip: 'Add equipment to your inventory', click: insertEquipment"></i>
+                      </td>
+                  </tr>
+                  <!-- ko foreach: equipment -->
+                  <tr>
+                      <td>
+                          <span data-bind="text: name"></span>
+                      </td>
+                      <td class="text-right">
+                          <span data-bind="text: mass"></span>
+                      </td>
+                      <td class="text-right">
+                          <span data-bind="text: quantity"></span>
+                          <i class="fa fa-arrow-up" data-bind="click: $root.increaseQuantity"></i>
+                          <i class="fa fa-arrow-down" data-bind="click: $root.decreaseQuantity"></i>
+                      </td>
+                      <td>
+                          <i class="fa fa-minus" data-bind="tooltip: 'Remove equipment from your inventory', click: $root.removeEquipment"></i>
+                      </td>
+                  </tr>
+                  <!-- /ko -->
+                  <tr>
+                      <td>
+                          <span data-bind="text: 'TOTAL'"></span>
+                      </td>
+                      <td class="text-right">
+                          <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
+                      </td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- libraries -->
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery-ui-1.11.4.min.js"></script>
+  <script src="scripts/jquery.autocomplete.min.js"></script>
+  <script src="scripts/jquery.tiptip.custom.js"></script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <script src='scripts/knockout-3.1.0.js'></script>
+  <script src="scripts/tooltip.js"></script>
+  <!-- globals -->
+  <script src="scripts/global/prototypeString.js"></script>
+  <script src="scripts/global/prototypeArray.js"></script>
+  <script src="scripts/global/config.js"></script>
+  <script src="scripts/global/getQueryParams.js"></script>
+  <script src="scripts/global/uuid.js"></script>
+  <script src="scripts/global/localStorage.js"></script>
+  <script src="scripts/global/export.js"></script>
+  <!-- models -->
+  <script src="scripts/models/equipment.js"></script>
+  <script src='scripts/models/skill.js'></script>
+  <script src="scripts/models/movement.js"></script>
+  <script src="scripts/models/physicalStatus.js"></script>
+  <script src='scripts/models/character.js'></script>
+  <!-- viewModels -->
+  <script src="scripts/viewModels/widgets/base.js"></script>
+  <script src="scripts/viewModels/widgets/text.js"></script>
+  <script src="scripts/viewModels/widgets/border.js"></script>
+  <script src="scripts/viewModels/widgets/grid.js"></script>
+  <script src="scripts/viewModels/widgets/horizontalContainer.js"></script>
+  <script src="scripts/viewModels/widgets/verticalContainer.js"></script>
+  <script src='scripts/viewModels/character.js'></script>
+  <script src='scripts/viewModels/characterList.js'></script>
+  <script src="scripts/viewModels/title.js"></script>
+  <script src="scripts/viewModels/uiASCII.js"></script>
 
-    color: #fff;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 2em;
-    width: 250px; /* 2x WIDTH HERE */
-    height: 250px;  /* 2x HEIGHT HERE */
-
-    transform: scale(0.80);
-    -webkit-transform: scale(0.80);
-    -moz-transform: scale(0.80);
-    -o-transform: scale(0.80);
-    -ms-transform: scale(0.80);
-}
-
-a.expand:hover {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-}
-    </style>
+  <script>
+      $(function(){
+          CharacterList.fetchCharacters();
+          ko.applyBindings(CharacterList, $('#characterList').get(0));
+          var character = new window.CharacterBuilder.Character();
+          var urlParams = GetQueryParams(window.location.href);
+          if(urlParams.loadFromUUID)
+              character.loadFromLocalStorage(urlParams.loadFromUUID);
+          $('#inputSkillName').devbridgeAutocomplete({
+              lookup: character.skillsSuggestions(),
+              onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
+          });
+          ko.applyBindings(character, $('#characterSheet').get(0));
+          ko.applyBindings(character, $('#saveButton').get(0));
+          ko.applyBindings(character, $('#exportButton').get(0));
+          Title.watchCharacterName(character.characterName);
+          ko.applyBindings(Title, $('#title').get(0));
+      });
+  </script>
 </body>
 </html>
