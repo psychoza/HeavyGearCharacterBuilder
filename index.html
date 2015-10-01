@@ -304,7 +304,7 @@
                     <th>
                         <span data-bind="tooltip: 'This attribute directly coincides with the characters attributes. The value will affect whatever value is rolled when using the skill.'">ATTR</span>
                     </th>
-                    <th>
+                    <th class="text-right">
                         <span data-bind="tooltip: 'Add or remove a skill from your character.'">
                             +/-
                         </span>
@@ -325,7 +325,7 @@
                     <td>
                         <select class="form-control" id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
                     </td>
-                    <td>
+                    <td class="text-right vertical-align">
                       <i class="fa fa-plus" data-bind="tooltip: 'Add weapon to your inventory', click: insertSkill"></i>
                     </td>
                 </tr>
@@ -345,7 +345,7 @@
                     <td>
                         <span data-bind="text: $parent.attributeSelector($data.bonus) + '&nbsp;&nbsp;&nbsp;(' + $data.bonus.substring(0,3).toUpperCase() + ')'"></span>
                     </td>
-                    <td>
+                    <td class="text-right">
                       <i class="fa fa-minus" data-bind="tooltip: 'Remove skill', click: $root.removeSkill"></i>
                     </td>
                 </tr>
@@ -390,7 +390,8 @@
                     <th>
                         RADIUS
                     </th>
-                    <th>
+                    <th class="text-right">
+                      +/-
                     </th>
                 </tr>
               </thead>
@@ -420,7 +421,7 @@
                     <td>
                         <input class="form-control" id="inputWeaponRadius" type="number" data-bind="value: inputWeaponRadius" />
                     </td>
-                    <td>
+                    <td class="text-right vertical-align">
                         <i class="fa fa-plus" data-bind="tooltip: 'Add weapon to your inventory', click: insertWeapon"></i>
                     </td>
                 </tr>
@@ -450,7 +451,7 @@
                     <td>
                         <span data-bind="text: radius"></span>
                     </td>
-                    <td>
+                    <td class="text-right">
                         <i class="fa fa-minus" data-bind="tooltip: 'Remove weapon from your inventory', click: $root.removeEquipment"></i>
                     </td>
                 </tr>
@@ -483,7 +484,8 @@
                       <th>
                           ARMOR
                       </th>
-                      <th>
+                      <th class="text-right">
+                        +/-
                       </th>
                   </tr>
                 </thead>
@@ -501,7 +503,7 @@
                       <td>
                           <input class="form-control" id="inputArmor" type="text" data-bind="value: inputArmor" />
                       </td>
-                      <td>
+                      <td class="text-right vertical-align">
                         <i class="fa fa-plus" data-bind="tooltip: 'Add armor to your inventory', click: insertArmor"></i>
                       </td>
                   </tr>
@@ -519,7 +521,7 @@
                       <td>
                           <span data-bind="text: armor"></span>
                       </td>
-                      <td>
+                      <td class="text-right vertical-align">
                         <i class="fa fa-minus" data-bind="tooltip: 'Remove armor from your inventory', click: $root.removeEquipment"></i>
                       </td>
                   </tr>
@@ -547,7 +549,7 @@
                       <th>
                           #
                       </th>
-                      <th>
+                      <th class="text-right">
                         +/-
                       </th>
                   </tr>
@@ -562,7 +564,7 @@
                       </td>
                       <td>
                       </td>
-                      <td>
+                      <td class="text-right vertical-align">
                           <i class="fa fa-plus" data-bind="tooltip: 'Add equipment to your inventory', click: insertEquipment"></i>
                       </td>
                   </tr>
@@ -579,7 +581,7 @@
                           <i class="fa fa-arrow-up" data-bind="click: $root.increaseQuantity"></i>
                           <i class="fa fa-arrow-down" data-bind="click: $root.decreaseQuantity"></i>
                       </td>
-                      <td>
+                      <td class="text-right vertical-align">
                           <i class="fa fa-minus" data-bind="tooltip: 'Remove equipment from your inventory', click: $root.removeEquipment"></i>
                       </td>
                   </tr>

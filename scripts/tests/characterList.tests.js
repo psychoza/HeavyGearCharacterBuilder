@@ -60,7 +60,6 @@ describe('characterList - ', function(){
         });
     });
 
-
     describe('removeCharacter - ', function(){
         it('can remove a character', function(){
             //Arrange
