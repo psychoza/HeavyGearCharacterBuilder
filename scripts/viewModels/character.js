@@ -712,6 +712,8 @@
           self.attributePerception(-1);
           self.attributePsyche(-1);
           self.attributeWillpower(-1);
+          self.equipment([]);
+          self.skills([]);
         };
 
         return this;
