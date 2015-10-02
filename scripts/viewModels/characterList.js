@@ -52,8 +52,9 @@ var CharacterList = (function(){
      };
 
     self.editCharacter = function(character){
-        self.Character.loadFromLocalStorage(character.uuid);
-        self.selectedCharacter(character);
+      self.Character.createNewCharacter();
+      self.Character.loadFromLocalStorage(character.uuid);
+      self.selectedCharacter(character);
     };
 
     self.refreshCharacters = function() {
