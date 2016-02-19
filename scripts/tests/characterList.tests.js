@@ -61,6 +61,8 @@ describe('characterList - ', function(){
     });
 
     describe('removeCharacter - ', function(){
+        CharacterList.Character = new window.CharacterBuilder.Character();
+
         it('can remove a character', function(){
             //Arrange
             var charModels = [
