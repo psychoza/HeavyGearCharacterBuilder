@@ -195,27 +195,27 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Strength represents your raw physical strength.'">STR</label>
+                <label data-bind="tooltip: 'Strength represents your raw physical strength. The formula is BLD plus FIT, divided by 2, rounding down.'">STR</label>
                 <br/>
                 <span data-bind="text: secondaryTraitStrength"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Health represents your physical well-being and resistance to disease.'">HEA</label>
+                <label data-bind="tooltip: 'Health represents your physical well-being and resistance to disease. The formula is FIT plus PSY plus WIL, divided by 3, rounding down.'">HEA</label>
                 <br/>
                 <span data-bind="text: secondaryTraitHealth"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Stamina represents your physical endurance.'">STA</label>
+                <label data-bind="tooltip: 'Stamina represents your physical endurance. The formula is BLD plus HEA, multiplied by 5, plus 25 with a minimum of 10.'">STA</label>
                 <br/>
                 <span data-bind="text: secondaryTraitStamina"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Unarmed damage represents the base damage multiplier in hand-to-hand combat.'">UD</label>
+                <label data-bind="tooltip: 'Unarmed damage represents the base damage multiplier in hand-to-hand combat. The formula is 3 plus hand-to-hand skill level plus STR plus BLD with a minimum of 1.'">UD</label>
                 <br/>
                 <span data-bind="text: secondaryTraitUnarmedDamage"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Armed damage repesents the base damage multiplier in melee combat.'">AD</label>
+                <label data-bind="tooltip: 'Armed damage repesents the base damage multiplier in melee combat. The formula is 3 plus melee skill level plus STR plus BLD with a minimum of 1.'">AD</label>
                 <br/>
                 <span data-bind="text: secondaryTraitArmedDamage"></span>
               </div>
