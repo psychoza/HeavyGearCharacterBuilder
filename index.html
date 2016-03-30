@@ -195,34 +195,29 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-2">
-                <label>STR</label>
+                <label data-bind="tooltip: 'Strength represents your raw physical strength.'">STR</label>
                 <br/>
                 <span data-bind="text: secondaryTraitStrength"></span>
-                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
               </div>
               <div class="col-sm-2">
-                <label>HEA</label>
+                <label data-bind="tooltip: 'Health represents your physical well-being and resistance to disease.'">HEA</label>
                 <br/>
                 <span data-bind="text: secondaryTraitHealth"></span>
-                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
               </div>
               <div class="col-sm-2">
-                <label>STA</label>
+                <label data-bind="tooltip: 'Stamina represents your physical endurance.'">STA</label>
                 <br/>
                 <span data-bind="text: secondaryTraitStamina"></span>
-                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
               </div>
               <div class="col-sm-2">
-                <label>UD</label>
+                <label data-bind="tooltip: 'Unarmed damage represents the base damage multiplier in hand-to-hand combat.'">UD</label>
                 <br/>
                 <span data-bind="text: secondaryTraitUnarmedDamage"></span>
-                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
               </div>
               <div class="col-sm-2">
-                <label>AD</label>
+                <label data-bind="tooltip: 'Armed damage repesents the base damage multiplier in melee combat.'">AD</label>
                 <br/>
-                <span data-bind="text: secondaryTraitArmedDamage">Test</span>
-                <!-- This doesn't work with knockout, need Angular for {{}} inserting instead of spans. -->
+                <span data-bind="text: secondaryTraitArmedDamage"></span>
               </div>
               <div class="col-sm-1"></div>
             </div>
