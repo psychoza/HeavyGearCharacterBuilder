@@ -13,6 +13,8 @@
 body {
   padding-top: 70px;
   padding-bottom: 30px;
+	/*cursor: url(../images/crosshair.png),auto !important;*/
+	/*cursor:crosshair;*/
 }
 
 .vertical-align {
@@ -51,9 +53,9 @@ body {
   color: #ff9482;
   padding-right: 20px;
 }
-.navbar i:hover {
+/*.navbar i:hover {
   color: #fff;
-}
+}*/
 
 .form-control:focus {
   border-color: #ff2a05;

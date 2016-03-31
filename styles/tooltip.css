@@ -32,7 +32,12 @@
     background-image: gradient(linear, 0 0, 0 100%, from(transparent), to(#333));
     color: #000;
     -webkit-text-shadow: 0 0 2px #333;
-    font-size: 0.9em;
+    font-family:sans-serif;
+    -webkit-text-size-adjust:100%;
+    -ms-text-size-adjust:100%;
+    font-style: normal;
+    font-family: inherit;
+    font-weight: 500;
 }
 
 #tiptip_arrow, #tiptip_arrow_inner {

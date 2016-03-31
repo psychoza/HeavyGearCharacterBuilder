@@ -167,7 +167,7 @@
                 <input class="form-control" type="number" data-bind="value: attributeKnowledge, valueUpdate:'afterkeydown'" />
               </div>
               <div class="col-sm-2">
-                <labe data-bind="tooltip: 'Perception represents your alertness and ability to discern details.'">PER</label>
+                <label data-bind="tooltip: 'Perception represents your alertness and ability to discern details.'">PER</label>
                 <br/>
                 <input class="form-control"  type="number" data-bind="value: attributePerception, valueUpdate:'afterkeydown'" />
               </div>
@@ -195,27 +195,27 @@
             <div class="row">
               <div class="col-sm-1"></div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Strength represents your raw physical strength. The formula is BLD plus FIT, divided by 2, rounding down.'">STR</label>
+                <label data-bind="tooltip: 'Strength represents your raw physical strength. The formula is (BLD &plus; FIT) &divide; 2, rounding down.'">STR</label>
                 <br/>
                 <span data-bind="text: secondaryTraitStrength"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Health represents your physical well-being and resistance to disease. The formula is FIT plus PSY plus WIL, divided by 3, rounding down.'">HEA</label>
+                <label data-bind="tooltip: 'Health represents your physical well-being and resistance to disease. The formula is (FIT &plus; PSY &plus; WIL) &divide; 3, rounding off.'">HEA</label>
                 <br/>
                 <span data-bind="text: secondaryTraitHealth"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Stamina represents your physical endurance. The formula is BLD plus HEA, multiplied by 5, plus 25 with a minimum of 10.'">STA</label>
+                <label data-bind="tooltip: 'Stamina represents your physical endurance. The formula is ( [BLD &plus; HEA] &times; 5) &plus; 25 with a minimum of 10.'">STA</label>
                 <br/>
                 <span data-bind="text: secondaryTraitStamina"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Unarmed damage represents the base damage multiplier in hand-to-hand combat. The formula is 3 plus hand-to-hand skill level plus STR plus BLD with a minimum of 1.'">UD</label>
+                <label data-bind="tooltip: 'Unarmed damage represents the base damage multiplier in hand-to-hand combat. The formula is 3 &plus; hand-to-hand skill level &plus; STR &plus; BLD with a minimum of 1.'">UD</label>
                 <br/>
                 <span data-bind="text: secondaryTraitUnarmedDamage"></span>
               </div>
               <div class="col-sm-2">
-                <label data-bind="tooltip: 'Armed damage repesents the base damage multiplier in melee combat. The formula is 3 plus melee skill level plus STR plus BLD with a minimum of 1.'">AD</label>
+                <label data-bind="tooltip: 'Armed damage repesents the base damage multiplier in melee combat. The formula is 3 &plus; melee skill level &plus; STR &plus; BLD with a minimum of 1.'">AD</label>
                 <br/>
                 <span data-bind="text: secondaryTraitArmedDamage"></span>
               </div>
@@ -247,29 +247,76 @@
                     <th class="stringColumn">FLESH WOUND</th>
                     <td><span data-bind="text: injuryThresholdFlesh"></span></td>
                     <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
-                    <th>-1</th>
+                    <td>-1</td>
                     <td><input class="form-control" type="number" data-bind="value: injuryCountFlesh, valueUpdate:'afterkeydown'" /></td>
                 </tr>
                 <tr>
                     <th class="stringColumn">DEEP WOUND</th>
                     <td><span data-bind="text: injuryThresholdDeep"></span></td>
                     <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
-                    <th>-2</th>
+                    <td>-2</td>
                     <td><input class="form-control" type="number" data-bind="value: injuryCountDeep, valueUpdate:'afterkeydown'" /></td>
                 </tr>
                 <tr>
                     <th class="stringColumn">INSTANT DEATH</th>
                     <td><span data-bind="text: injuryThresholdInstant"></span></td>
                     <td><span data-bind="text: armorRating() + '/' + helmetRating()"></span></td>
-                    <th>DEAD</th>
+                    <td>DEAD</td>
                     <td></td>
                 </tr>
                 <tr>
                     <th class="stringColumn">SYSTEM SHOCK</th>
                     <td><span data-bind="text: systemShockThreshold"></span></td>
                     <td></td>
-                    <th>DEAD</th>
+                    <td>DEAD</td>
                     <td><span data-bind="text: parseInt(injuryCountDeep()) * 2 + parseInt(injuryCountFlesh())"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="movement">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading"  data-toggle="collapse" data-target="#collapseMovement" class="collapsed">
+            <h3 class="panel-title">Movement</h3>
+          </div>
+          <div  id="collapseMovement" class="panel-body panel-collapse collapse in">
+            <table id="movementTable" class="table table-condensed">
+              <thead>
+                <tr>
+                    <th>TYPE</th>
+                    <th>DISTNACE</th>
+                    <th>ATT</th>
+                    <th>DEF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <th class="stringColumn">WALK</th>
+                    <td><span data-bind="text: movementSpeedWalk"></span> m</td>
+                    <td>-1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th class="stringColumn">JOG</th>
+                    <td><span data-bind="text: movementSpeedJog"></span> m</td>
+                    <td>-2</td>
+                    <td>+1</td>
+                </tr>
+                <tr>
+                    <th class="stringColumn">RUN</th>
+                    <td><span data-bind="text: movementSpeedRun"></span> m</td>
+                    <td>-3</td>
+                    <td>+2</td>
+                </tr>
+                <tr>
+                    <th class="stringColumn">SPRINT</th>
+                    <td><span data-bind="text: movementSpeedSprint"></span> m</td>
+                    <td>N/A</td>
+                    <td>+2</td>
                 </tr>
               </tbody>
             </table>
@@ -310,19 +357,19 @@
               <tbody>
                 <tr>
                     <td>
-                        <input class="form-control" id="inputSkillName" type="text" data-bind="value: inputSkillName" />
+                        <input class="form-control" id="inputSkillName" type="text" data-bind="value: inputSkillName, tooltip: 'The generic available skills are as follows:<br/><br/>Acrobatics &#149; Aircraft Pilot &#149; Animal Handling &#149; Archery &#149; Athletics &#149; Bureaucracy &#149; Business &#149; Camouflage &#149; Combat Sense &#149; Communications &#149; Computer &#149; Cooking &#149; Craft (jewelry) &#149; Craft (metalwork) &#149; Craft (woodcraft) &#149; Craft (weaving) &#149; Dance &#149; Demolition &#149; Disguise &#149; Dodge &#149; Drive &#149; Earth Sciences &#149; Electronic Design &#149; Electronic Warfare &#149; Electronics &#149; Etiquette &#149; First Aid &#149; Foreign Language &#149; Forgery &#149; Forward Observing &#149; G-Handling &#149; Gambling &#149; Gunnery (air) &#149; Gunnery (ground) &#149; Gunnery (heavy gear) &#149; Gunnery (naval) &#149; Gunnery (space) &#149; Haggling &#149; Hand-to-Hand &#149; Heavy Gear Architecture &#149; Heavy Gear Pilot &#149; Heavy Weapons &#149; Human Perception &#149; Interrogation &#149; Intimidate &#149; Investigation &#149; Law &#149; Leadership &#149; Life Sciences &#149; Literature &#149; Mechanical Design &#149; Mechanics &#149; Medicine &#149; Melee &#149; Music &#149; Naval Pilot &#149; Navigation (air) &#149; Navigation (land) &#149; Navigation (sea) &#149; Navigation (space) &#149; Notice &#149; Parachuting &#149; Physical Sciences &#149; Psychology &#149; Riding &#149; Security &#149; Sleight-of-Hand &#149; Small Arms &#149; Sniping &#149; Social Sciences &#149; Space Pilot &#149; Stealth &#149; Streetwise &#149; Strider Pilot &#149; Survival &#149; Swimming &#149; Tactics &#149; Teaching &#149; Theatrics &#149; Throwing &#149; Tinker &#149; Visual Art &#149; Zero-G.<br/><br/>If you do not see a skill that fits your character, talk to your Game Master and you can add probably get it added to your character sheet.'" />
                     </td>
                     <td>
-                        <input class="form-control" id="inputComplex" type="checkbox" data-bind="checked: inputComplex" />
+                        <input class="form-control" id="inputComplex" type="checkbox" data-bind="checked: inputComplex, tooltip: 'A complex skill costs twice as many skill points to learn.'" />
                     </td>
                     <td>
-                        <input class="form-control" id="inputLevel" type="number" data-bind="value: inputLevel" />
+                        <input class="form-control" id="inputLevel" type="number" data-bind="value: inputLevel, tooltip: 'The level of a skill determines how many dice you can roll when using that skill.'" />
                     </td>
                     <td>
-                        <select class="form-control" id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute"></select>
+                        <select class="form-control" id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute, tooltip: 'The attribute associated to a skill determines what attribute provides a bonus to the skills rolls.'"></select>
                     </td>
                     <td class="text-right vertical-align">
-                      <i class="fa fa-plus" data-bind="tooltip: 'Add weapon to your inventory', click: insertSkill"></i>
+                      <i class="fa fa-plus" data-bind="tooltip: 'Adds the skill to your known skills list.', click: insertSkill"></i>
                     </td>
                 </tr>
                 <!-- ko foreach: skills -->
@@ -587,8 +634,16 @@
                           <span data-bind="text: 'TOTAL'"></span>
                       </td>
                       <td class="text-right">
-                          <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span>
+                          <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span> kgs
                       </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      MAXIMUM CAPACITY
+                    </td>
+                    <td class="text-right">
+                      <span data-bind="text: maximumCapacity, tooltip: 'The maximum capacity is determined by your STR attribute'"></span> kgs
+                    </td>
                   </tr>
                 </tbody>
             </table>
@@ -643,8 +698,7 @@
             character.loadFromLocalStorage(urlParams.loadFromUUID);
 
         $('#inputSkillName').devbridgeAutocomplete({
-            lookup: character.skillsSuggestions(),
-            onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
+            lookup: character.skillsSuggestions(),             onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
         });
         ko.applyBindings(character, $('#characterSheet').get(0));
         ko.applyBindings(CharacterList, $('#saveButton').get(0));

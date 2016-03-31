@@ -2,8 +2,15 @@
   border: 1px solid #ccc;
   background: #fff;
   overflow: auto;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 14px;
+  /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+  /*font-size: 14px;*/
+  /*font-family:sans-serif;*/
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  font-style: normal;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
 }
 .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; line-height: 1.42857143;}
 .autocomplete-selected { background: #ddd;}
