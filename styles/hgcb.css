@@ -11,7 +11,7 @@
 }
 
 body {
-  padding-top: 70px;
+  padding-top: 52px;
   padding-bottom: 30px;
 	/*cursor: url(../images/crosshair.png),auto !important;*/
 	/*cursor:crosshair;*/
@@ -24,7 +24,8 @@ body {
 
 .grizzlyImage {
   background-color: transparent;
-  background-image: url('http://tageverything.org/za/images/HG/grizzly.png');
+  /*background-image: url('http://tageverything.org/za/images/HG/grizzly.png');*/
+	background-image: url('http://tageverything.org/za/images/sniper.jpg');
   background-repeat: no-repeat;
   background-position: right bottom;
   position: fixed;
