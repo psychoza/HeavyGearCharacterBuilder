@@ -6,6 +6,7 @@ var Models = Models || {};
         data=data||{};
 
         self.name = data.name || '';
+        self.description = data.description || '';
         self.experience = data.experience || '0';
         self.profession = data.profession || '';
         self.uuid = data.uuid || null;

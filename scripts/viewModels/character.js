@@ -29,6 +29,7 @@
         self.inputArmor = ko.observable(0);
 
         self.characterName = ko.observable('');
+        self.characterDescription = ko.observable('');
         self.characterProfession = ko.observable('');
         self.characterRank = ko.observable('');
         self.characterNationality = ko.observable('');
@@ -326,6 +327,7 @@
         {
             if(data.uuid) self.uuid = data.uuid;
             if(data.name) self.characterName(data.name);
+            if(data.description) self.characterDescription(data.description);
             if(data.experience) self.characterExperience(data.experience);
             if(data.profession) self.characterProfession(data.profession);
             if(data.rank) self.characterRank(data.rank);
@@ -383,6 +385,7 @@
             var modelData = {
                 uuid: self.uuid,
                 name: self.characterName(),
+                description: self.characterDescription(),
                 experience: self.characterExperience(),
                 profession: self.characterProfession(),
                 rank: self.characterRank(),
@@ -476,7 +479,7 @@
             incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
         };
 
-        self.exportToASCII = function(){            
+        self.exportToASCII = function(){
             var d = new Date();
             var dStr = d.getFullYear() + '-'+ d.getMonth() + '-' + d.getDay();
             Export.characterToEcho(self.getModelData(),self.characterName() +' '+ dStr +'.txt');
@@ -731,6 +734,7 @@
           self.inputArmorMass(0);
           self.inputArmor(0);
           self.characterName('');
+          self.characterDescription('');
           self.characterProfession('');
           self.characterRank('');
           self.characterNationality('');
