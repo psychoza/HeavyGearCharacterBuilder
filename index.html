@@ -29,7 +29,7 @@
         <ul id="navigationBar" class="nav navbar-nav vertical-align">
           <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: $root.saveCharacter"></i></li>
           <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage', click: $root.removeCharacter "></i></li>
-          <li id="exportButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
+          <li id="exportButton" style="display:none"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
           <li id="exportJsonButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to JSON file', click: exportToJson"></i></li>
           <a href="" download="hgu_character.json" id="file-save-link" style="display:none">Hidden download link</a>
           <li id="button-load"><i class="fa fa-upload fa-2x" data-bind="tooltip: 'Import from JSON file'"></i></li>
