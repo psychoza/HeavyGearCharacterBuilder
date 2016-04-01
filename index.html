@@ -527,7 +527,7 @@
                       <th>
                           MASS (kg)
                       </th>
-                      <th>
+                      <th width="120px">
                           TYPE
                       </th>
                       <th>
@@ -544,13 +544,13 @@
                           <input class="form-control"  id="inputArmorName" type="text" data-bind="value: inputArmorName" />
                       </td>
                       <td>
-                          <input class="form-control" id="inputArmorMass" type="number" data-bind="value: inputArmorMass" />
+                          <input class="form-control text-right" id="inputArmorMass" type="number" data-bind="value: inputArmorMass" />
                       </td>
                       <td>
                           <select id="inputArmorType" class="form-control" data-bind="options: ['Armor', 'Helmet'], value: inputArmorType"></select>
                       </td>
                       <td>
-                          <input class="form-control" id="inputArmor" type="text" data-bind="value: inputArmor" />
+                          <input class="form-control text-right" id="inputArmor" type="text" data-bind="value: inputArmor" />
                       </td>
                       <td class="text-right vertical-align">
                         <i class="fa fa-plus" data-bind="tooltip: 'Add armor to your inventory', click: insertArmor"></i>
@@ -561,13 +561,13 @@
                       <td>
                           <span data-bind="text: name"></span>
                       </td>
-                      <td>
+                      <td class="text-right">
                           <span data-bind="text: mass"></span>
                       </td>
                       <td>
                           <span data-bind="text: type"></span>
                       </td>
-                      <td>
+                      <td class="text-right">
                           <span data-bind="text: armor"></span>
                       </td>
                       <td class="text-right vertical-align">
@@ -595,8 +595,8 @@
                       <th>
                           MASS (kg)
                       </th>
-                      <th>
-                          #
+                      <th class="text-center">
+                          QTY
                       </th>
                       <th class="text-right">
                         +/-
@@ -623,9 +623,9 @@
                           <span data-bind="text: name"></span>
                       </td>
                       <td class="text-right">
-                          <span data-bind="text: mass"></span>
+                          <span data-bind="text: mass"></span> kgs
                       </td>
-                      <td class="text-right">
+                      <td class="text-right" width="80px">
                           <span data-bind="text: quantity"></span>
                           <i class="fa fa-arrow-up" data-bind="click: $root.increaseQuantity"></i>
                           <i class="fa fa-arrow-down" data-bind="click: $root.decreaseQuantity"></i>
