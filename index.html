@@ -23,10 +23,16 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div id="navbar" class="navbar-collapse collapse pull-right">
-        <ul class="nav navbar-nav vertical-align">
+        <form style="display:none" id="file-load-form">
+            <input type="file" id="file-load" name="files[]" multiple class="form-control" style="display:none" />
+        </form>
+        <ul id="navigationBar" class="nav navbar-nav vertical-align">
           <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: $root.saveCharacter"></i></li>
           <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage', click: $root.removeCharacter "></i></li>
           <li id="exportButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
+          <li id="exportJsonButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to JSON file', click: exportToJson"></i></li>
+          <a href="" download="hgu_character.json" id="file-save-link" style="display:none">Hidden download link</a>
+          <li id="button-load"><i class="fa fa-upload fa-2x" data-bind="tooltip: 'Import from JSON file'"></i></li>
           <li id="characterList" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -289,8 +295,8 @@
                 <tr>
                     <th>TYPE</th>
                     <th>DISTNACE</th>
-                    <th data-bind="tooltip: ">ATT</th>
-                    <th>DEF</th>
+                    <th data-bind="tooltip: 'Attack modifiers'">ATT</th>
+                    <th data-bind="tooltip: 'Defense modifiers'">DEF</th>
                 </tr>
               </thead>
               <tbody>
@@ -659,7 +665,7 @@
   <script src="scripts/jquery.autocomplete.min.js"></script>
   <script src="scripts/jquery.tiptip.custom.js"></script>
   <script src="scripts/bootstrap.min.js"></script>
-  <script src='scripts/knockout-3.1.0.js'></script>
+  <script src='scripts/knockout-3.4.0.js'></script>
   <script src="scripts/tooltip.js"></script>
   <!-- globals -->
   <script src="scripts/global/prototypeString.js"></script>
@@ -698,15 +704,24 @@
             character.loadFromLocalStorage(urlParams.loadFromUUID);
 
         $('#inputSkillName').devbridgeAutocomplete({
-            lookup: character.skillsSuggestions(),             onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
+            lookup: character.skillsSuggestions(), onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
         });
         ko.applyBindings(character, $('#characterSheet').get(0));
         ko.applyBindings(CharacterList, $('#saveButton').get(0));
         ko.applyBindings(character, $('#exportButton').get(0));
+        ko.applyBindings(character, $('#exportJsonButton').get(0));
         ko.applyBindings(CharacterList, $('#deleteButton').get(0));
+        ko.applyBindings(character, $('#button-load').get(0));
+
         Title.watchCharacterName(character.characterName);
         ko.applyBindings(Title, $('#title').get(0));
       });
+
+      $(document).ready(function () {
+          $("#button-load").click(function () { $("#file-load").click(); });
+          $("#file-load").change(CharacterList.Character.importFromJson);
+      });
+
   </script>
 </body>
 </html>

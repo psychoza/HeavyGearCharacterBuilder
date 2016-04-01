@@ -476,11 +476,48 @@
             incomingEquipment.quantity(parseInt(incomingEquipment.quantity()) - 1);
         };
 
-        self.exportToASCII = function(){
+        self.exportToASCII = function(){            
             var d = new Date();
             var dStr = d.getFullYear() + '-'+ d.getMonth() + '-' + d.getDay();
             Export.characterToEcho(self.getModelData(),self.characterName() +' '+ dStr +'.txt');
         };
+
+        self.exportToJson = function(){
+          var str = JSON.stringify(self.getModelData(), null, "  ");
+          var parts = [str];
+          var blob = new Blob(parts, { type: 'application/json' });
+          var url = URL.createObjectURL(blob);
+
+          var a = $("#file-save-link")[0];
+          a.href = url;
+          a.download = "hgu_character.json";
+          a.click();
+
+          setTimeout(function () { URL.revokeObjectURL(url); }, 500);
+        };
+
+        function ui_save_file() {
+
+        }
+        self.importFromJson = function(evt) {
+            // ui_clear_all();
+
+            var files = evt.target.files;
+
+            for (var i = 0, f; f = files[i]; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function (reader) {
+                    var data = JSON.parse(this.result);
+                    self.loadFromData(data);
+                };
+
+                reader.readAsText(f);
+            }
+
+            // Reset file input
+            $("#file-load-form")[0].reset();
+        }
 
         self.standardSkills = ko.observableArray([
             new skillObject("Acrobatics", 0, 'Agility', false),

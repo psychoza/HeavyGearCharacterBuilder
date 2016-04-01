@@ -4,10 +4,10 @@
 }
 
 .navbar-inverse {
-  background-image: -webkit-linear-gradient(top, #000 0%, #000 100%);
+  /*background-image: -webkit-linear-gradient(top, #000 0%, #000 100%);
   background-image:      -o-linear-gradient(top, #000 0%, #000 100%);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000));
-  background-image:         linear-gradient(to bottom, #000 0%, #000 100%);
+  background-image:         linear-gradient(to bottom, #000 0%, #000 100%);*/
 }
 
 body {
@@ -27,7 +27,7 @@ body {
   /*background-image: url('http://tageverything.org/za/images/HG/grizzly.png');*/
 	background-image: url('http://tageverything.org/za/images/sniper.jpg');
   background-repeat: no-repeat;
-  background-position: right bottom;
+  background-position: center top;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -58,6 +58,22 @@ body {
   color: #fff;
 }*/
 
+.navbar {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+	background-image: rgba(255, 255, 255, 0.9);
+}
+.navbar {
+	background-color: rgba(255, 255, 255, 0.9) !important;
+	background-image: rgba(255, 255, 255, 0.9);
+	}
+.navbar-inverse {
+	background-color: rgba(255, 255, 255, 0.9) !important;
+	background-image: rgba(255, 255, 255, 0.9);
+	}
+	.navbar-fixed-top {
+		background-color: rgba(255, 255, 255, 0.9) !important;
+		background-image: rgba(255, 255, 255, 0.9);
+	}
 .form-control:focus {
   border-color: #ff2a05;
   outline: 0;
