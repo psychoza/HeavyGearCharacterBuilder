@@ -11,12 +11,8 @@
   <meta name="keywords" content="heavy, gear, character, builder">
   <meta name="description" content="A web tool using the 2nd edition rule book from 1997 to generate a character">
 
-  <link rel="icon" href="images/favicon.png" />
-  <link href="styles/bootstrap.min.css" rel="stylesheet">
-  <link href="styles/bootstrap-theme.min.css" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="icon" href="images/favicon.png" />  
   <link href="styles/master.css" rel="stylesheet" >
-  <link href="http://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
 </head>
 <body role=document>
   <div class="grizzlyImage"></div>
@@ -735,6 +731,16 @@
           $("#file-load").change(CharacterList.Character.importFromJson);
       });
 
+      var confirmOnPageExit = function (e) {
+        e = e || window.event;
+        var message = 'You are attemption to either leave or reload the page. Any unsaved changes to your character will be lost.';
+        if (e)
+        {
+          e.returnValue = message;
+        }
+        return message;
+      };
+
+      window.onbeforeunload = confirmOnPageExit;
+      //window.onbeforeunload = null;
   </script>
-</body>
-</html>
