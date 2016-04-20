@@ -769,10 +769,10 @@
                         self.inputArmorMass(equip.mass);
                         self.inputArmor(equip.armorRating);
                         break;
-                      case "other":
+                      //case "other":                        
+                      default:
                         self.inputEquipmentName(equip.name);
                         self.inputEquipmentMass(equip.mass);
-                      default:
                         break;
                     }
                 }
