@@ -100,12 +100,16 @@
 
         self.weapons = ko.computed({
             read: function(){
-                return self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "weapon"; });
+                return self.equipment().where(function (data) {
+                  return data.type.toLowerCase().trim() === "weapon";
+                });
             }
         });
         self.armor = ko.computed({
             read: function(){
-                return self.equipment().where(function (data) { return data.type.toLowerCase().trim() === "armor" || data.type.toLowerCase().trim() === "helmet"; });
+                return self.equipment().where(function (data) {
+                  return data.type.toLowerCase().trim() === "armor" || data.type.toLowerCase().trim() === "helmet";
+                });
             }
         });
 
@@ -457,7 +461,16 @@
         };
 
         self.insertEquipment = function(){
-            self.equipment.push(new equipmentObject(self.inputEquipmentName(), 'Other', self.inputEquipmentMass()));
+            //check if equipment exists in standardEquipment list
+            var equips = self.standardEquipment().where(function (data) { return data.name.toLowerCase().trim() === self.selectedEquipmentSuggestion().toLowerCase().trim(); });
+            if(equips) {
+              var equip = equips[0];
+              self.equipment.push(equip);
+            }
+            else {
+              self.equipment.push(new equipmentObject(self.inputEquipmentName(), 'Other', self.inputEquipmentMass()));
+            }
+
             self.sortEquipment();
             self.inputEquipmentName('');
             self.inputEquipmentMass(0);
@@ -502,6 +515,7 @@
         function ui_save_file() {
 
         }
+
         self.importFromJson = function(evt) {
             // ui_clear_all();
 
@@ -520,6 +534,241 @@
 
             // Reset file input
             $("#file-load-form")[0].reset();
+        }
+
+        self.standardEquipment = ko.observableArray([
+            /*
+                incomingName,
+                incomingType, //Weapon Armor Other
+                incomingMass,
+                incomingAccuracy,
+                incomingDamage,
+                incomingRange,
+                incomingAmmoMax,
+                incomingRateOfFire,
+                incomingRadius,
+                incomingArmor,
+                incomingQuantity
+             */
+            new equipmentObject("Knife","Weapon",0.5,0,(self.secondaryTraitArmedDamage() + 7),(self.secondaryTraitStrength() + 10),0,0,0,0,1),
+            new equipmentObject("Machete","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 10),0,0,0,0,0,1),
+            new equipmentObject("Sword","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 12),0,0,0,0,0,1),
+            new equipmentObject("Hatchet","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 10),0,0,0,0,0,1),
+            new equipmentObject("Club/Truncheon","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 5),0,0,0,0,0,1),
+            new equipmentObject("Staff","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 7),0,0,0,0,0,1),
+            new equipmentObject("Spear","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 10),(self.secondaryTraitStrength() + 20),0,0,0,0,1),
+            new equipmentObject("Chainsaw","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 20),0,0,0,0,0,1),
+            new equipmentObject("Vibroknife","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 9),0,30,0,0,0,1),
+            new equipmentObject("Vibroknife Clip","Ammo",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Vibromachete","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 15),0,20,0,0,0,1),
+            new equipmentObject("Vibromachete Clip","Ammo",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Vibrosword","Weapon",1.5,0,(self.secondaryTraitArmedDamage() + 20),0,10,0,0,0,1),
+            new equipmentObject("Vibrosword Clip","Ammo",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Light Bow","Weapon",0.5,0,7,5,0,1,0,0,1),
+            new equipmentObject("Medium Bow","Weapon",1,0,10,6,0,2,0,0,1),
+            new equipmentObject("Heavy Bow","Weapon",3,0,15,7,0,0,2,0,1),
+            new equipmentObject("Arrow","Ammo",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("6mm Pistol","Weapon",0.5,0,10,4,30,0,0,0,1),
+            new equipmentObject("6mm Pistol Clip","Ammo",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("9mm Pistol","Weapon",0.8,0,15,5,20,0,0,0,1),
+            new equipmentObject("9mm Pistol Clip","Ammo",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("11mm Pistol","Weapon",1.3,0,20,5,0,0,0,1),
+            new equipmentObject("11mm Pistol Clip","Ammo",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("13mm Pistol","Weapon",2,0,25,5,0,8,0,0,1),
+            new equipmentObject("13mm Pistol Clip","Ammo",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("6mm Machine Pistol","Weapon",0.6,0,10,4,30,1,0,0,1),
+            new equipmentObject("6mm Machine Pistol Clip","Ammo",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("9mm Machine Pistol","Weapon",1,0,15,5,20,1,0,0,1),
+            new equipmentObject("9mm Machine Pistol Clip","Ammo",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("9mm Submachinegun","Weapon",2,0,15,10,50,2,0,0,1),
+            new equipmentObject("9mm Submachinegun Clip","Ammo",0.6,0,0,0,0,0,0,0,1),
+            new equipmentObject("11mm Submachinegun","Weapon",3,0,20,10,30,2,0,0,1),
+            new equipmentObject("11mm Submachinegun Clip","Ammo",0.6,0,0,0,0,0,0,0,1),
+            new equipmentObject("13mm Submachinegun","Weapon",4,0,25,10,30,2,0,0,1),
+            new equipmentObject("13mm Submachinegun Clip","Ammo",0.6,0,0,0,0,0,0,0,1),
+            new equipmentObject("7mm Rifle","Weapon",3,0,22,50,20,0,0,0,1),
+            new equipmentObject("7mm Rifle Clip","Ammo",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("7mm Assault Rifle","Weapon",3,0,22,50,30,1,0,0,1),
+            new equipmentObject("7mm Assault Rifle Clip","Ammo",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("9mm Heavy Rifle","Weapon",4,0,30,60,10,0,0,0,1),
+            new equipmentObject("9mm Heavy Rifle Clip","Ammo",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("15mm Sniper Rifle","Weapon",10,1,40,100,10,0,0,0,1),
+            new equipmentObject("15mm Sniper Rifle Clip","Ammo",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Concussion Grenade","Weapon",0.1,0,30,0,10,0,9,0,1),
+            new equipmentObject("Fragmentation Grenade","Weapon",0.1,0,26,0,10,0,8,0,1),
+            new equipmentObject("Incendiary Grenade","Weapon",0.1,0,24,0,10,0,8,0,1),
+            new equipmentObject("Flash Grenade","Weapon",0.1,0,8,0,10,0,3,0,1),
+            new equipmentObject("Tear Gas Grenade","Weapon",0.1,0,5,0,10,0,2,0,1),
+            new equipmentObject("Nerve Gas Grenade","Weapon",0.1,0,5,0,10,0,2,0,1),
+            new equipmentObject("24mm Anti-HG Rifle","Weapon",15,0,5,150,3,0,0,0,1),
+            new equipmentObject("24mm Anti-HG Rifle Clip","Ammo",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("9mm Chaingun","Weapon",10,0,5,50,50,4,0,0,1),
+            new equipmentObject("9mm Chaingun Belt","Ammo",3,0,0,0,0,0,0,0,1),
+            new equipmentObject("9mm Light Machinegun","Weapon",8,0,5,100,50,2,0,0,1),
+            new equipmentObject("9mm Light Machinegun Belt","Ammo",3,0,0,0,0,0,0,0,1),
+            new equipmentObject("37mm Grenade Rifle","Weapon",6,0,5,50,4,0,0,0,1),
+            new equipmentObject("37mm Grenade Rifle Clip","Ammo",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("62mm Light Mortar","Weapon",2,0,5,150,1,0,15,0,1),
+            new equipmentObject("62mm Light Mortar Shell","Ammo",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("50mm Rocket Launcher","Weapon",0.5,0,5,50,1,0,5,0,1),
+            new equipmentObject("50mm Rocket","Ammo",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Sniper Laser","Weapon",3,0,5,200,12,0,0,0,1),
+            new equipmentObject("Sniper Laser Backpack","Ammo",4,0,0,0,0,0,0,0,1),
+            new equipmentObject("Light Helmet","Helmet",1,0,0,0,0,0,0,5,1),
+            new equipmentObject("Helmet","Helmet",2,0,0,0,0,0,0,10,1),
+            new equipmentObject("Light Flak Vest","Armor",1,0,0,0,0,0,0,15,1),
+            new equipmentObject("Light Flak Suit","Armor",2,0,0,0,0,0,0,20,1),
+            new equipmentObject("Medium Flak Vest","Armor",3,0,0,0,0,0,0,25,1),
+            new equipmentObject("Medium Flak Suit","Armor",4,0,0,0,0,0,0,30,1),
+            new equipmentObject("Heavy Flak Vest","Armor",6,0,0,0,0,0,0,35,1),
+            new equipmentObject("Heavy Flak Suit","Armor",8,0,0,0,0,0,0,40,1),
+            new equipmentObject("Turtleshell","Armor",10,0,0,0,0,0,0,60,1),
+            new equipmentObject("Aircraft Pilot Helmet","Headgear",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Audio Receiver","Electronics",0.01,0,0,0,0,0,0,0,1),
+            new equipmentObject("Audio Recorder","Electronics",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Bartender Glove","Gloves",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Binoculars","Ocular",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Cap","Headgear",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Cellular Phone","Electronics",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Summer, Designer Suit","Clothes",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Summer, Lower Class","Clothes",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Summer, Medium Class","Clothes",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Summer, Upper Class","Clothes",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Summer, Shoes, Designer","Clothes",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Summer, Shoes, Normal","Clothes",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter, Boots","Clothes",1.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter, Boots, Designer","Clothes",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter, Designer Suit","Clothes",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter, Lower Class","Clothes",1.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter, Medium Class","Clothes",1.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter, Upper Class","Clothes",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Spikes and Crabs","Climbing Gear",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Compressed-air Hammer","Climbing Gear",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Propellant for Hammer","Climbing Gear",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Ice Axe","Climbing Gear",0.8,0,0,0,0,0,0,0,1),
+            new equipmentObject("Spiked Climbing Boots","Climbing Gear",1.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Oxygen Mask","Climbing Gear",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Climbing Helmet","Climbing Gear",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Small Backpack","Backpack",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Large Backpack","Backpack",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Combat Helmet","Headgear",0.7,0,0,0,0,0,0,0,1),
+            new equipmentObject("Communications Headset","Electronics",0.03,0,0,0,0,0,0,0,1),
+            new equipmentObject("Communications Rig","Electronics",2.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Cutting Torch","Tools",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Cutting Torch Refill","Ammo",0.6,0,0,0,0,0,0,0,1),
+            new equipmentObject("Data Disks (box of 10)","Electronics",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Demolition Specialist Helmet","Headgear",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Desert Suit, Cooler","Desert Suit",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Desert Suit, Water Reclamation","Desert Suit",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Diving Suit","Clothes",10,0,0,0,0,0,0,0,1),
+            new equipmentObject("Drugs, Medical","Medical",0.01,0,0,0,0,0,0,0,1),
+            new equipmentObject("Electronics Tool Kit","Electronics",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Fire Suit","Clothes",6,0,0,0,0,0,0,0,1),
+            new equipmentObject("First Aid Kit","Medical",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("Flashlight","Tools",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Flare","Flare",0.05,0,0,0,0,0,0,0,1),
+            new equipmentObject("Radio Flare","Flare",0.06,0,0,0,0,0,0,0,1),
+            new equipmentObject("Smoke Flare","Flare",0.06,0,0,0,0,0,0,0,1),
+            new equipmentObject("Gas Mask","Tools",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Gas Mask Filter","Ammo",0.05,0,0,0,0,0,0,0,1),
+            new equipmentObject("Gear Pilot Helmet","Headgear",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Geiger Counter","Tools",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Stylish Goggles","Ocular",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Hat, Felt","Headgear",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Information Pad","Supplies",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Journalist VR Rig","Electronics",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Mechanical Tool Kit","Tools",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Medical Belt/Scanner","Medical",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Medical Kit","Medical",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("MemCompass","Tools",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Metal Detector","Tools",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("Military Communicator","Electronics",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("Military Throat/Ear Comm Set","Electronics",0.02,0,0,0,0,0,0,0,1),
+            new equipmentObject("NBC Suit","Clothes",12,0,0,0,0,0,0,0,1),
+            new equipmentObject("Nightvision Goggles","Ocular",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Personal Assistant","Electronics",0.7,0,0,0,0,0,0,0,1),
+            new equipmentObject("Personal Communicator","Electronics",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("Personal Computer","Electronics",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Personal CAD Mainframe","Electronics",2.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Prospecting Tubes (3)","Supplies",0.6,0,0,0,0,0,0,0,1),
+            new equipmentObject("Rope (50m)","Supplies",0.3,0,0,0,0,0,0,0,1),
+            new equipmentObject("Scrambling Device","Electronics",0.01,0,0,0,0,0,0,0,1),
+            new equipmentObject("Sleeping Bag","Survival",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Stealth Helmet","Headgear",0.8,0,0,0,0,0,0,0,1),
+            new equipmentObject("Strider Crew Helmet","Headgear",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Surgical Field Kit","Medical",4,0,0,0,0,0,0,0,1),
+            new equipmentObject("Survival Kit","Survival",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Bedroll","Survival Kit",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Canteen (one liter)","Survival Kit",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Canteen (two liter)","Survival Kit",0.2,0,0,0,0,0,0,0,1),
+            new equipmentObject("Compass","Survival Kit",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Fishing Gear","Survival Kit",0.05,0,0,0,0,0,0,0,1),
+            new equipmentObject("Lighter","Survival Kit",0.05,0,0,0,0,0,0,0,1),
+            new equipmentObject("Ration Pack (10)","Survival Kit",0.1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Survival Knife","Survival Kit",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Tech Rig","Electronics",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("2-Man Tent","Tent",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("5-Man Tent","Tent",2,0,0,0,0,0,0,0,1),
+            new equipmentObject("12-Man Tent","Tent",5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Thermal Goggles","Ocular",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Throat/Ear Comm Set","Electronics",0.01,0,0,0,0,0,0,0,1),
+            new equipmentObject("Tracers and Bugs (150 each)","Supplies",0.001,0,0,0,0,0,0,0,1),
+            new equipmentObject("Tray Data System","Electronics",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Trid Display","Electronics",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Trideo Receiver","Electronics",1,0,0,0,0,0,0,0,1),
+            new equipmentObject("Trideo Recorder","Electronics",3,0,0,0,0,0,0,0,1),
+            new equipmentObject("Vacuum Suit","Clothes",10,0,0,0,0,0,0,0,1),
+            new equipmentObject("Video Receiver","Electronics",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Video Recorder","Electronics",0.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Watch","Supplies",0.05,0,0,0,0,0,0,0,1),
+            new equipmentObject("Water Condenser","Supplies",2.5,0,0,0,0,0,0,0,1),
+            new equipmentObject("Winter Suit","Clothes",6,0,0,0,0,0,0,0,1)
+        ]);
+
+        self.equipmentSuggestions = ko.computed( function() {
+            return self.standardEquipment().map(function(e) { return e.name; });
+        });
+
+        self.selectedEquipmentSuggestion = ko.observable(null);
+        self.selectedEquipmentSuggestion.subscribe(function () {
+            self.setSelectedEquipment();
+        });
+
+        self.setSelectedEquipment = function() {
+            if (self.selectedEquipmentSuggestion())
+            {
+                var equips = self.standardEquipment().where(function (data) { return data.name.toLowerCase().trim() === self.selectedEquipmentSuggestion().toLowerCase().trim(); });
+                if (equips)
+                {
+                    var equip = equips[0];
+                    self.inputEquipmentName(equip.name);
+                    self.inputEquipmentMass(equip.mass);
+
+                    switch(equip.type.toLowerCase())
+                    {
+                      case "weapon":
+                        self.inputWeaponName(equip.name);
+                        self.inputWeaponMass(equip.mass);
+                        self.inputWeaponAccuracy(equip.accuracy);
+                        self.inputWeaponDamage(equip.damage);
+                        self.inputWeaponRange(equip.range);
+                        self.inputWeaponAmmo(equip.ammoMax);
+                        self.inputWeaponRateOfFire(equip.rateOfFire);
+                        self.inputWeaponRadius(equip.radius);
+                        break;
+                      case "armor":
+                      case "helmet":
+                        self.inputArmorName(equip.name)
+                        self.inputArmorType(equip.type);
+                        self.inputArmorMass(equip.mass);
+                        self.inputArmor(equip.armorRating);
+                        break;
+                      case "other":
+                      default:
+                        break;
+                    }
+                }
+            }
         }
 
         self.standardSkills = ko.observableArray([
@@ -608,91 +857,10 @@
             new skillObject("Zero-G", 0, 'Agility', false)
         ]);
 
-        self.skillsSuggestions = ko.observableArray([
-            "Acrobatics",
-            "Aircraft Pilot",
-            "Animal Handling",
-            "Archery",
-            "Athletics",
-            "Bureaucracy",
-            "Business",
-            "Camouflage",
-            "Combat Sense",
-            "Communications",
-            "Computer",
-            "Cooking",
-            "Craft (jewelry)",
-            "Craft (metalwork)",
-            "Craft (woodcraft)",
-            "Craft (weaving)",
-            "Dance",
-            "Demolition",
-            "Disguise",
-            "Dodge",
-            "Drive",
-            "Earth Sciences",
-            "Electronic Design",
-            "Electronic Warfare",
-            "Electronics",
-            "Etiquette",
-            "First Aid",
-            "Foreign Language ",
-            "Forgery",
-            "Forward Observing",
-            "G-Handling",
-            "Gambling",
-            "Gunnery (air)",
-            "Gunnery (ground)",
-            "Gunnery (heavy gear)",
-            "Gunnery (naval)",
-            "Gunnery (space)",
-            "Haggling",
-            "Hand-to-Hand",
-            "Heavy Gear Architecture",
-            "Heavy Gear Pilot",
-            "Heavy Weapons",
-            "Human Perception",
-            "Interrogation",
-            "Intimidate",
-            "Investigation",
-            "Law",
-            "Leadership",
-            "Life Sciences",
-            "Literature",
-            "Mechanical Design",
-            "Mechanics",
-            "Medicine",
-            "Melee",
-            "Music",
-            "Naval Pilot",
-            "Navigation (air)",
-            "Navigation (land)",
-            "Navigation (sea)",
-            "Navigation (space)",
-            "Notice",
-            "Parachuting",
-            "Physical Sciences",
-            "Psychology",
-            "Riding",
-            "Security",
-            "Sleight-of-Hand",
-            "Small Arms",
-            "Sniping",
-            "Social Sciences",
-            "Space Pilot",
-            "Stealth",
-            "Streetwise",
-            "Strider Pilot",
-            "Survival",
-            "Swimming",
-            "Tactics",
-            "Teaching",
-            "Theatrics",
-            "Throwing",
-            "Tinker",
-            "Visual Art",
-            "Zero-G"
-        ]);
+        self.skillsSuggestions = ko.computed(function() {
+            return self.standardSkills().map(function(s) { return s.name; });
+        });
+
 
         self.selectedSuggestion = ko.observable(null);
         self.selectedSuggestion.subscribe(function () {

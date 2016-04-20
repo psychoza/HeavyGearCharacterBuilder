@@ -1,5 +1,5 @@
-<!DOCTYPE=html>
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -715,6 +715,11 @@
         $('#inputSkillName').devbridgeAutocomplete({
             lookup: character.skillsSuggestions(), onSelect: function (suggestion) { character.selectedSuggestion(suggestion.value); }
         });
+
+        $('#inputEquipmentName').devbridgeAutocomplete({
+            lookup: character.equipmentSuggestions(), onSelect: function(suggestion) { character.selectedEquipmentSuggestion(suggestion.value); }
+        });
+
         ko.applyBindings(character, $('#characterSheet').get(0));
         ko.applyBindings(CharacterList, $('#saveButton').get(0));
         ko.applyBindings(character, $('#exportButton').get(0));
