@@ -726,7 +726,15 @@
         ]);
 
         self.equipmentSuggestions = ko.computed( function() {
-            return self.standardEquipment().map(function(e) { return e.name; });
+            return self.standardEquipment().where(function(eq){return eq.type.toLowerCase() !== "weapon" && eq.type.toLowerCase() !== "armor" && eq.type.toLowerCase() !== "helmet";}).map(function(e) { return e.name; });
+        });
+
+        self.weaponSuggestions = ko.computed( function() {
+            return self.standardEquipment().where(function(eq){return eq.type.toLowerCase() === "weapon";}).map(function(e) { return e.name; });
+        });
+
+        self.armorSuggestions = ko.computed( function() {
+            return self.standardEquipment().where(function(eq){return eq.type.toLowerCase() === "armor" || eq.type.toLowerCase() === "helmet";}).map(function(e) { return e.name; });
         });
 
         self.selectedEquipmentSuggestion = ko.observable(null);
@@ -741,8 +749,6 @@
                 if (equips)
                 {
                     var equip = equips[0];
-                    self.inputEquipmentName(equip.name);
-                    self.inputEquipmentMass(equip.mass);
 
                     switch(equip.type.toLowerCase())
                     {
@@ -764,6 +770,8 @@
                         self.inputArmor(equip.armorRating);
                         break;
                       case "other":
+                        self.inputEquipmentName(equip.name);
+                        self.inputEquipmentMass(equip.mass);
                       default:
                         break;
                     }
