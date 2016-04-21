@@ -594,8 +594,9 @@ describe('character - ', function () {
 		it('can load equipment', function(){
             //Arrange
             var uuid = character.uuid;
+
             var gunEquipment =  new equipmentObject("gun", 'Weapon', 1, 1, 22, 50, 30, 1, 1);
-            var armorEquipment = new equipmentObject("armor", "Armor", 2, 0, 0, 0, 0, 0, 0, 20);
+            var armorEquipment = new equipmentObject("armor", "Armor", 2, 0, 0, 0, 0, 0, 0, 0, 20);
             character.equipment.push(gunEquipment);
             character.equipment.push(armorEquipment);
             character.saveToLocalStorage();
@@ -721,7 +722,7 @@ describe('character - ', function () {
 	describe('armor rating - ', function() {
 		beforeEach(function() {
 	        character = new CharacterBuilder.Character();
-	        character.equipment.push(new equipmentObject("Light Armor", "Armor", 2, 0, 0, 0, 0, 0, 0, 20));
+	        character.equipment.push(new equipmentObject("Light Armor", "Armor", 2, 0, 0, 0, 0, 0, 0, 0, 20));
 	    });
 
 		it('must exist', function(){
@@ -734,7 +735,7 @@ describe('character - ', function () {
 		});
 
 		it('must return the greatest armor value', function(){
-			character.equipment.push(new equipmentObject("Medium Armor", "Armor", 2, 0, 0, 0, 0, 0, 0, 30));
+			character.equipment.push(new equipmentObject("Medium Armor", "Armor", 2, 0, 0, 0, 0, 0, 0, 0, 30));
     		expect(character.armorRating()).toEqual(30);
 		});
 	});
@@ -742,7 +743,7 @@ describe('character - ', function () {
 	describe('helmet rating - ', function() {
 		beforeEach(function() {
 	        character = new CharacterBuilder.Character();
-	        character.equipment.push(new equipmentObject("Helmet", "Helmet", 2, 0, 0, 0, 0, 0, 0, 10));
+	        character.equipment.push(new equipmentObject("Helmet", "Helmet", 2, 0, 0, 0, 0, 0, 0, 0, 10));
 	    });
 
 		it('must exist', function(){
@@ -755,7 +756,7 @@ describe('character - ', function () {
 		});
 
 		it('must return the greatest armor value', function(){
-			character.equipment.push(new equipmentObject("Heavy Helmet", "Helmet", 2, 0, 0, 0, 0, 0, 0, 15));
+			character.equipment.push(new equipmentObject("Heavy Helmet", "Helmet", 2, 0, 0, 0, 0, 0, 0, 0, 15));
     		expect(character.helmetRating()).toEqual(15);
 		});
 	});
@@ -849,9 +850,11 @@ describe('skillsObject', function () {
 
 describe('equipmentObject', function () {
     var character = new window.CharacterBuilder.Character();
-
+    /*incomingName, incomingType, incomingMass, incomingAccuracy, incomingDamage, incomingRange,
+    incomingAmmoMax, incomingRateOfFire, incomingRadius, incomingSecRadius, incomingArmor,
+    incomingQuantity, incomingMinPrice, incomingMinRange  */
     describe('- equipment object', function() {
-        var randomItem = new equipmentObject("item", 'Weapon', 1, 1, 22, 50, 30, 1, 1);
+        var randomItem = new equipmentObject("item", "Weapon", 1, 1, 22, 50, 30, 1, 1, 1, 0, 0, 100, 25);
         it('- must be an equipmentObject', function () {
             expect(equipmentObject).toBeDefined();
             expect(randomItem.name).toBeDefined();
@@ -878,10 +881,16 @@ describe('equipmentObject', function () {
             expect(randomItem.rateOfFire).toBe(1);
             expect(randomItem.radius).toBeDefined();
             expect(randomItem.radius).toBe(1);
+            expect(randomItem.secondaryRadius).toBeDefined();
+            expect(randomItem.secondaryRadius).toBe(1);
             expect(randomItem.armor).toBeDefined();
             expect(randomItem.armor).toBe(0);
             expect(randomItem.quantity).toBeDefined();
             expect(randomItem.quantity()).toBe(1);
+            expect(randomItem.minimumPrice).toBeDefined();
+            expect(randomItem.minimumPrice).toBe(100);
+            expect(randomItem.minimumRange).toBeDefined();
+            expect(randomItem.minimumRange).toBe(25);
         });
     });
 });
