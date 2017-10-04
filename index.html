@@ -443,7 +443,7 @@
             <h3 class="panel-title">Weapons</h3>
           </div>
           <div id="collapseWeapons" class="panel-body panel-collapse collapse in">
-            <table  class="table table-condensed">
+            <table  class="table table-condensed table-striped">
               <thead>
                 <tr>
                     <th>
@@ -549,7 +549,7 @@
             <h3 class="panel-title">Armor</h3>
           </div>
           <div id="collapseArmor" class="panel-body panel-collapse collapse in">
-            <table class="table table-condensed">
+            <table class="table table-condensed table-striped">
                 <thead>
                   <tr>
                       <th>
@@ -617,7 +617,7 @@
             <h3 class="panel-title">Equipment</h3>
           </div>
           <div id="collapseEquipment" class="panel-body panel-collapse collapse in">
-            <table class="table table-condensed">
+            <table class="table table-condensed table-striped">
                 <thead>
                   <tr>
                       <th>
@@ -673,6 +673,7 @@
                       <td class="text-right">
                           <span data-bind="text: $root.equipment().sum(function(item){ return parseFloat(item.mass * item.quantity());})"></span> kgs
                       </td>
+                      <td colspan=2></td>
                   </tr>
                   <tr>
                     <td>
@@ -681,6 +682,7 @@
                     <td class="text-right">
                       <span data-bind="text: maximumCapacity, tooltip: 'The maximum capacity is determined by your STR attribute'"></span> kgs
                     </td>
+                    <td colspan=2></td>
                   </tr>
                 </tbody>
             </table>
