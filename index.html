@@ -11,8 +11,10 @@
   <meta name="keywords" content="heavy, gear, character, builder">
   <meta name="description" content="A web tool using the 2nd edition rule book from 1997 to generate a character">
 
-  <link rel="icon" href="images/favicon.png" />
+  <link rel="icon" href="images/favicon.png" />  
   <link href="styles/master.css" rel="stylesheet" >
+  <script src="https://use.fontawesome.com/0f4e84810d.js"></script>
+  
 </head>
 <body role=document>
   <div class="grizzlyImage"></div>
@@ -23,22 +25,38 @@
             <input type="file" id="file-load" name="files[]" multiple class="form-control" style="display:none" />
         </form>
         <ul id="navigationBar" class="nav navbar-nav vertical-align">
-          <li id="saveButton"><i class="fa fa-floppy-o fa-2x" data-bind="tooltip: 'Save to local storage', click: $root.saveCharacter"></i></li>
-          <li id="deleteButton"><i class="fa fa-trash-o fa-2x" data-bind="tooltip: 'Delete from local storage', click: $root.removeCharacter "></i></li>
-          <li id="exportButton"><i class="fa fa-print fa-2x" data-bind="tooltip: 'Export to text file', click: exportToASCII"></i></li>
-          <li id="exportJsonButton"><i class="fa fa-download fa-2x" data-bind="tooltip: 'Export to JSON file', click: exportToJson"></i></li>
-          <a href="" download="hgu_character.json" id="file-save-link" style="display:none">Hidden download link</a>
-          <li id="button-load"><i class="fa fa-upload fa-2x" data-bind="tooltip: 'Import from JSON file'"></i></li>
+          
+          <li id="actionList">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="actionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Actions
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="actionsDropdown">
+                  <li id="saveButton"><a href="#" data-bind="click: $root.saveCharacter"><i class="fa fa-floppy-o fa-lg"></i>Save</a></li>
+                  <li id="deleteButton" data-bind="css: {disabled : !isSelectedCharacterVisible()}"><a href="#" data-bind="click: $root.removeCharacter"><i class="fa fa-trash-o fa-lg"></i>Delete</a></li>
+                  <li id="exportButton"><a href="#" data-bind="click: $root.exportToASCII"><i class="fa fa-print fa-lg"></i>Export to ASCII</a></li>
+                  <li id="exportJsonButton"><a href="#" data-bind="click: $root.exportToJson"><i class="fa fa-download fa-lg"></i>Export to JSON</a></li>
+                  <a href="" download="hgu_character.json" id="file-save-link" style="display:none">Hidden download link</a>
+                  <li id="button-load"><a href="#" data-bind="click: $root.exportToJson"><i class="fa fa-upload fa-lg"></i>Import from JSON</a></li>
+                  </ul>
+              </div>
+          </li>          
           <li id="characterList" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <!-- ko foreach: characters -->
-              <li><a data-bind="text: name, click: $root.editCharacter"></a></li>
-              <!-- /ko -->
-              <li role="separator" class="divider"></li>
-              <li><a data-bind="click: $root.createNewCharacter">New Character</a></li>
-            </ul>
-          </li>
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="charactersDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Characters
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="charactersDropdown">
+                  <!-- ko foreach: characters -->
+                  <li><a data-bind="click: $root.editCharacter"><i class="fa fa-id-card-o fa-lg"></i><span data-bind="text: name"></span></a></li>
+                  <!-- /ko -->
+                  <li role="separator" class="divider"></li>
+                  <li><a data-bind="click: $root.createNewCharacter"><i class="fa fa-user-plus fa-lg"></i>New Character</a></li>
+                </ul>
+              </div>
+            </li>
         </ul>
       </div>
       <div class="navbar-header">
@@ -347,14 +365,14 @@
             <span class="pull-right text-right" data-bind="text: skillPoints"></span>&nbsp;<span class="pull-right text-right" data-bind="tooltip: 'Skill Points are the amount of points spent into your skill levels.'">SPs:</span>
           </div>
           <div id="collapseSkills" class="panel-body panel-collapse collapse in">
-            <table class="table table-condensed">
+            <table class="table table-condensed table-striped">
               <thead>
                 <tr>
                     <th>
                         <span data-bind="tooltip: 'This is the name of the skill you wish to add.'">NAME</span>
                     </th>
                     <th>
-                        <span data-bind="tooltip: 'A complex skill doubles the cost of each level.'">CPLX</span>
+                        <span data-bind="tooltip: 'A complex skill doubles the cost of each level.'">COMPLX</span>
                     </th>
                     <th>
                         <span data-bind="tooltip: 'The level represents how many dice you will be rolling when using this skill.'">LVL</span>
@@ -371,17 +389,21 @@
               </thead>
               <tbody>
                 <tr>
-                    <td>
-                        <input class="form-control" id="inputSkillName" type="text" data-bind="value: inputSkillName, tooltip: 'The generic available skills are as follows:<br/><br/>Acrobatics &#149; Aircraft Pilot &#149; Animal Handling &#149; Archery &#149; Athletics &#149; Bureaucracy &#149; Business &#149; Camouflage &#149; Combat Sense &#149; Communications &#149; Computer &#149; Cooking &#149; Craft (jewelry) &#149; Craft (metalwork) &#149; Craft (woodcraft) &#149; Craft (weaving) &#149; Dance &#149; Demolition &#149; Disguise &#149; Dodge &#149; Drive &#149; Earth Sciences &#149; Electronic Design &#149; Electronic Warfare &#149; Electronics &#149; Etiquette &#149; First Aid &#149; Foreign Language &#149; Forgery &#149; Forward Observing &#149; G-Handling &#149; Gambling &#149; Gunnery (air) &#149; Gunnery (ground) &#149; Gunnery (heavy gear) &#149; Gunnery (naval) &#149; Gunnery (space) &#149; Haggling &#149; Hand-to-Hand &#149; Heavy Gear Architecture &#149; Heavy Gear Pilot &#149; Heavy Weapons &#149; Human Perception &#149; Interrogation &#149; Intimidate &#149; Investigation &#149; Law &#149; Leadership &#149; Life Sciences &#149; Literature &#149; Mechanical Design &#149; Mechanics &#149; Medicine &#149; Melee &#149; Music &#149; Naval Pilot &#149; Navigation (air) &#149; Navigation (land) &#149; Navigation (sea) &#149; Navigation (space) &#149; Notice &#149; Parachuting &#149; Physical Sciences &#149; Psychology &#149; Riding &#149; Security &#149; Sleight-of-Hand &#149; Small Arms &#149; Sniping &#149; Social Sciences &#149; Space Pilot &#149; Stealth &#149; Streetwise &#149; Strider Pilot &#149; Survival &#149; Swimming &#149; Tactics &#149; Teaching &#149; Theatrics &#149; Throwing &#149; Tinker &#149; Visual Art &#149; Zero-G.<br/><br/>If you do not see a skill that fits your character, talk to your Game Master and you can add probably get it added to your character sheet.'" />
+                    <td>                        
+                        <select class="form-control" id="inputSkillName" data-bind="options: standardSkills,  optionsText: 'name', value: selectedSuggestion, optionsCaption: 'Choose a skill'"></select>
                     </td>
                     <td>
-                        <input class="form-control" id="inputComplex" type="checkbox" data-bind="checked: inputComplex, tooltip: 'A complex skill costs twice as many skill points to learn.'" />
+                      <label data-bind="text: selectedSuggestion() ? selectedSuggestion().isComplex ? 'Yes' : 'No' : ''"></label>
                     </td>
                     <td>
                         <input class="form-control" id="inputLevel" type="number" data-bind="value: inputLevel, tooltip: 'The level of a skill determines how many dice you can roll when using that skill.'" />
                     </td>
                     <td>
-                        <select class="form-control" id="inputAttribute" data-bind="options: inputAttributes, value: inputAttribute, tooltip: 'The attribute associated to a skill determines what attribute provides a bonus to the skills rolls.'"></select>
+                      <!-- ko if: selectedSuggestion()-->
+                        <!-- ko if: selectedSuggestion().bonus -->
+                          <label data-bind="text: attributeSelector(selectedSuggestion().bonus) + '&nbsp;&nbsp;&nbsp;(' + selectedSuggestion().bonus.substring(0,3).toUpperCase() + ')'"></label>
+                        <!-- /ko -->
+                      <!-- /ko -->
                     </td>
                     <td class="text-right vertical-align">
                       <i class="fa fa-plus" data-bind="tooltip: 'Adds the skill to your known skills list.', click: insertSkill"></i>
@@ -729,6 +751,7 @@
         });
 
         ko.applyBindings(character, $('#characterSheet').get(0));
+
         ko.applyBindings(CharacterList, $('#saveButton').get(0));
         ko.applyBindings(character, $('#exportButton').get(0));
         ko.applyBindings(character, $('#exportJsonButton').get(0));

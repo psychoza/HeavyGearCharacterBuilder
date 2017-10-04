@@ -50,6 +50,11 @@
         self.attributePsyche = ko.observable(-1);
         self.attributeWillpower = ko.observable(-1);
 
+        self.selectedSuggestion = ko.observable(null);
+        self.selectedSuggestion.subscribe(function () {
+            self.setSelectedSkill();
+        });
+
         var calculateCharacterPoints = function(attribute){
             if (attribute < -1)
                 return  ((parseInt(attribute) + 1) * (parseInt(attribute) + 1)) * (-1);
@@ -313,10 +318,9 @@
 
         self.insertSkill = function(){
             self.skills.push(new skillObject(self.inputSkillName(), self.inputLevel(), self.inputAttribute(), self.inputComplex()));
-            self.sortSkills();
-            self.inputSkillName('');
+            self.sortSkills();            
             self.inputLevel(0);
-            self.inputComplex(false);
+            self.selectedSuggestion(null);
         };
 
         self.removeSkill = function(incomingSkill){
@@ -870,22 +874,16 @@
             return self.standardSkills().map(function(s) { return s.name; });
         });
 
-
-        self.selectedSuggestion = ko.observable(null);
-        self.selectedSuggestion.subscribe(function () {
-            self.setSelectedSkill();
-        });
-
         self.setSelectedSkill = function() {
             if (self.selectedSuggestion())
             {
-                var skill = self.standardSkills().where(function (data) { return data.name.toLowerCase().trim() === self.selectedSuggestion().toLowerCase().trim(); });
+                var skill = self.selectedSuggestion();
                 if (skill)
                 {
-                    self.inputSkillName(skill[0].name);
-                    self.inputLevel(skill[0].level());
-                    self.inputAttribute(skill[0].bonus);
-                    self.inputComplex(skill[0].isComplex);
+                    self.inputSkillName(skill.name);
+                    self.inputLevel(skill.level());
+                    self.inputAttribute(skill.bonus);
+                    self.inputComplex(skill.isComplex);
                 }
             }
         }
